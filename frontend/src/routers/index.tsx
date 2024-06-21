@@ -1,18 +1,17 @@
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { withLoginRequire } from "@hocs/withLoginRequire";
-import { Spinner } from "@atoms/index";
+import ProfilePage from "@pages/ProfilePage";
+import Navigation from "@organisms/Navigation";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
   return (
     <>
-      <div>
-        <Routes>
-          {/* <Route path="/requests/bubble" element={<BubbleRequestsPage />} /> */}
-        </Routes>
-        <Spinner />
-      </div>
+      <Routes>
+        <Route path="/profile" element={<ProfilePage />} />
+      </Routes>
+      <Navigation />
     </>
   );
 };

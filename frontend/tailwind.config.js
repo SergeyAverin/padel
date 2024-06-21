@@ -6,11 +6,11 @@ export default {
   ],
   theme: {
     colors: {
-      bg: '#0E161E',
+      bg: '#151515',
       fg: '#ffffff',
-      primary: '#222E3A',
+      primary: '#100E0E',
       secondary: '#252D3A',
-      highlight: '#68C0FF',
+      highlight: '#97E7E1',
       grey: '#62707D',
       error: '#F54747'
     }
