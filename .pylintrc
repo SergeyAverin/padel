@@ -1,0 +1,16 @@
+[MASTER]
+disable=
+    E0611, # no-name-in-module
+    E0401, # import-error
+    E1101, # no-member
+    C0115, # missing-class-docstring
+    C0114, # missing-module-docstring
+    C0116, # missing-function-docstring
+    E0402, # relative-beyond-top-level
+    
+    W0611, # unused-import
+    W0107,  #unnecessary-pass
+    W0246, # useless-parent-delegation
+    W0707, # raise-missing-from
+    E0213, # no-self-argument
+    W0621, # redefined-outer-name

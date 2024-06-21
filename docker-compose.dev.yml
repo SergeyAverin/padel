@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  # clicker_backend:
+  #   build:
+  #     context: backend
+  #     dockerfile: Dockerfile
+  #   container_name: clicker_backend
+  #   restart: always
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #   ports:
+  #     - 8080:8080
+  #   env_file:
+  #     - .env.dev
+
+  padel_frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile.dev
+    container_name: padel_frontend
+    restart: always
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.dev
