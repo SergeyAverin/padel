@@ -3,12 +3,12 @@ from logging import getLogger
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config.api_settings import api_setting
-from core.config.logger_settings import clear_logs
 from core.middleware.access_logging import access_logging_middleware
 from core.middleware.catch_exceptions import catch_exceptions_middleware
+from core.config.logger_settings import clear_logs
+from core.config.api_settings import api_setting
 from account.router import profile_router
-
+from database import init_db
 
 app = FastAPI()
 
@@ -17,7 +17,7 @@ if api_setting.api_is_debug:
 
 logger = getLogger(__name__)
 
-app.middleware('http')(catch_exceptions_middleware)
+# app.middleware('http')(catch_exceptions_middleware)
 app.middleware('http')(access_logging_middleware)
 app.add_middleware(
     CORSMiddleware,
@@ -36,5 +36,6 @@ async def startup_event():
     ''' Запуск приложения. '''
     logger.info('Server start http://%s:%s',
                 api_setting.api_host, api_setting.api_port)
+    init_db(app)
 
 app.add_event_handler("startup", startup_event)
