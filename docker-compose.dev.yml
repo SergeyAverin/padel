@@ -1,18 +1,18 @@
 version: '3.1'
 
 services:
-  # clicker_backend:
-  #   build:
-  #     context: backend
-  #     dockerfile: Dockerfile
-  #   container_name: clicker_backend
-  #   restart: always
-  #   volumes:
-  #     - ./backend:/usr/src/app
-  #   ports:
-  #     - 8080:8080
-  #   env_file:
-  #     - .env.dev
+  padel_backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: padel_backend
+    restart: always
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 8080:8080
+    env_file:
+      - .env.dev
 
   padel_frontend:
     build:
@@ -26,3 +26,23 @@ services:
       - 3000:3000
     env_file:
       - .env.dev
+
+  padel_db:
+    image: postgres
+    container_name: padel_db
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.dev
+
+  padel_pgadmin4:
+    image: dpage/pgadmin4
+    container_name: padel_pgadmin4
+    ports:
+      - 5050:80
+    env_file:
+      - .env.dev
+    depends_on:
+      - padel_db
+      
