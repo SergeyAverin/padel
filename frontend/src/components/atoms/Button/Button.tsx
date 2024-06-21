@@ -30,20 +30,16 @@ export const Button: React.FC<IButtonProps> = ({
       className={classNames(
         "w-full",
         "h-full",
-        "p-3 rounded-md select-none cursor-pointer text-center font-montserrat",
+        "p-3 rounded-md select-none cursor-pointer text-center font-montserrat font-bold",
         "flex items-center justify-center",
         {
           /** Стили для кнопок заполненных цветом */
           "bg-highlight": variant == ButtonVariant.FULL_HIGHLIGHT,
           "text-fg":
             variant == ButtonVariant.FULL_HIGHLIGHT || ButtonVariant.DANGER,
-          "hover:bg-[#5255F9]": variant == ButtonVariant.FULL_HIGHLIGHT,
-          "active:bg-[#3A3DBB]": variant == ButtonVariant.FULL_HIGHLIGHT,
           "text-primary ": variant == ButtonVariant.FULL_HIGHLIGHT,
 
           "bg-[#F54747]": variant == ButtonVariant.DANGER,
-          "hover:bg-[#F54747]": variant == ButtonVariant.DANGER,
-          "active:bg-[#F54747]": variant == ButtonVariant.DANGER,
 
           /** Стили для  не заполненных кнопок */
           "border-2 border-indigo-500 ": variant == ButtonVariant.OUTLINED,
