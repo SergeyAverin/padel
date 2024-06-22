@@ -5,6 +5,7 @@ import ProfilePage from "@pages/ProfilePage";
 import Navigation from "@organisms/Navigation";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import UserInfo from "@organisms/UserInfo";
+import UserStats from "@organisms/UserStats";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -17,6 +18,7 @@ const MainRouter: React.FC = () => {
       <Button variant={ButtonVariant.OUTLINED}>Test</Button>
       <Input name="sd" value={"asdf"} />
       <UserInfo />
+      <UserStats />
     </>
   );
 };
