@@ -18,7 +18,7 @@ function App() {
   //   }
   // });
   return (
-    <div className="text-fg bg-bg mt-[80px]">
+    <div className="text-fg bg-bg mt-[25px]">
       <Provider store={store}>
         <BrowserRouter>
           <MainRouter />
