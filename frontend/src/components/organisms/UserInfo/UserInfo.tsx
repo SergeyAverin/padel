@@ -4,7 +4,7 @@ import TestPhoto from "@assets/TestPhoto.png";
 import UserLvl from "@molecules/UserLvl";
 
 export const UserInfo: React.FC = () => {
-  const [isMore, setIsMore] = useState(true);
+  const [isMore, setIsMore] = useState(false);
   return (
     <>
       <div className="flex justify-between">
