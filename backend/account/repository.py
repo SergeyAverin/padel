@@ -20,8 +20,17 @@ class UserRepository:
                 username=user.username
             )
 
-    def create_user(self):
-        pass
+    async def create_user(self, user_data: UserDTO) -> UserDTO:
+        user = User(
+            age=user_data.age,
+            email=user_data.email,
+            first_name=user_data.first_name,
+            last_name=user_data.last_name,
+            telegram_user_id=user_data.telegram_user_id,
+            username=user_data.username
+        )
+        await user.save()
+        return user_data
 
     def update_user_by_id(self):
         pass

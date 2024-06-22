@@ -4,7 +4,7 @@ from account.service import user_service
 from account.schemas import UserDTO
 
 
-profile_router = APIRouter()
+profile_router = APIRouter(prefix='/user')
 
 
 @profile_router.get('/{telegram_user_id}')
@@ -12,4 +12,10 @@ async def get_user(telegram_user_id: str) -> UserDTO:
     user = await user_service.get_user_by_telegram_user_id(telegram_id=telegram_user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
+@profile_router.post('/')
+async def create_user(user_data: UserDTO):
+    user = await user_service.create_user(user_data)
     return user
