@@ -14,8 +14,8 @@ class UserService:
         user = await self.user_repository.get_user_by_telegram_user_id(telegram_id)
         return user
 
-    def update_user_by_user_id(self):
-        pass
+    async def update_user_by_user_id(self, telegram_user_id: str, new_user_data: UserDTO):
+        return await self.user_repository.update_user_by_id(telegram_user_id, new_user_data)
 
 
 user_service = UserService(UserRepository())
