@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { withLoginRequire } from "@hocs/withLoginRequire";
 import ProfilePage from "@pages/ProfilePage";
 import Navigation from "@organisms/Navigation";
-import { Button, ButtonVariant } from "@atoms/index";
+import { Button, ButtonVariant, Input } from "@atoms/index";
+import UserInfo from "@organisms/UserInfo";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -14,6 +15,8 @@ const MainRouter: React.FC = () => {
       </Routes>
       <Navigation />
       <Button variant={ButtonVariant.OUTLINED}>Test</Button>
+      <Input name="sd" value={"asdf"} />
+      <UserInfo />
     </>
   );
 };
