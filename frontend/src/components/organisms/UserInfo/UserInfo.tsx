@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TestPhoto from "@assets/TestPhoto.png";
 import UserLvl from "@molecules/UserLvl";
 
 export const UserInfo: React.FC = () => {
+  const [isMore, setIsMore] = useState(true);
   return (
     <div className="flex justify-between">
       <div className="flex">
@@ -13,9 +14,44 @@ export const UserInfo: React.FC = () => {
         <div className="ml-[20px]">
           <div className="text-[24px] font-bold">UserName</div>
           <div className="text-[20px] font-medium">Sergey Averin</div>
+          {!isMore && (
+            <div
+              className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+              onClick={() => setIsMore(true)}
+            >
+              Show more
+            </div>
+          )}
+          {isMore && (
+            <div>
+              <div
+                className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+                onClick={() => setIsMore(false)}
+              >
+                Close
+              </div>
+              <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
+              <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
+              <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
+              <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
+            </div>
+          )}
         </div>
       </div>
       <UserLvl lvl={8.4} />
+    </div>
+  );
+};
+interface IInfo {
+  infoKey: string;
+  infoValue: string;
+}
+
+export const Info: React.FC<IInfo> = ({ infoKey, infoValue }) => {
+  return (
+    <div className="text-[8px] mt-[8px]">
+      <span className="font-bold">{infoKey}</span>
+      <span className="ml-[5px]">{infoValue}</span>
     </div>
   );
 };
