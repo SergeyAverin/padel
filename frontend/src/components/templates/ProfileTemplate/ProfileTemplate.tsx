@@ -17,13 +17,13 @@ export const ProfileTemplate: React.FC = () => {
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Padel info:</Heading>
         <div className="mt-[8px]">
-          <PadelInfo />
+          <UserStats />
         </div>
       </div>
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Stats:</Heading>
         <div className="mt-[8px]">
-          <UserStats />
+          <PadelInfo />
         </div>
       </div>
     </div>
