@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 
 import MainRouter from "./routers";
-import { store } from "@redux/store.ts";
 
 /** Путь к API */
 // const API_URL = import.meta.env.VITE_API_URL;
@@ -19,11 +17,9 @@ function App() {
   // });
   return (
     <div className="text-fg bg-bg mt-[25px]">
-      <Provider store={store}>
-        <BrowserRouter>
-          <MainRouter />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <MainRouter />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,51 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 
 import TestPhoto from "@assets/TestPhoto.png";
 import UserLvl from "@molecules/UserLvl";
+import UserStore from "../../../store/user";
 
-export const UserInfo: React.FC = () => {
+export const UserInfo: React.FC = observer(() => {
   const [isMore, setIsMore] = useState(false);
+  useEffect(() => {
+    UserStore.getUserInfo("3");
+  }, []);
   return (
     <>
-      <div className="flex justify-between">
-        <div className="flex">
-          <div className="w-[100px] h-[100px]">
-            <img src={TestPhoto} className="rounded-full" />
-          </div>
-          <div className="ml-[20px]">
-            <div className="text-[24px] font-bold">UserName</div>
-            <div className="text-[20px] font-medium">Sergey Averin</div>
-            {!isMore && (
-              <div
-                className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                onClick={() => setIsMore(true)}
-              >
-                Show more
+      {UserStore.user && (
+        <div>
+          <div className="flex justify-between">
+            <div className="flex">
+              <div className="w-[100px] h-[100px]">
+                <img src={TestPhoto} className="rounded-full" />
               </div>
-            )}
-            {isMore && (
-              <div
-                className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                onClick={() => setIsMore(false)}
-              >
-                Close
+              <div className="ml-[20px]">
+                <div className="text-[24px] font-bold">
+                  {UserStore.user.username}
+                </div>
+                <div className="text-[20px] font-medium">
+                  {UserStore.user.first_name} {UserStore.user.last_name}
+                </div>
+                {!isMore && (
+                  <div
+                    className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+                    onClick={() => setIsMore(true)}
+                  >
+                    Show more
+                  </div>
+                )}
+                {isMore && (
+                  <div
+                    className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+                    onClick={() => setIsMore(false)}
+                  >
+                    Close
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+            <UserLvl lvl={8.4} />
           </div>
-        </div>
-        <UserLvl lvl={8.4} />
-      </div>
-      {isMore && (
-        <div className="mt-[25px]">
-          <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
-          <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
-          <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
-          <Info infoValue="sergey.averin.003@gmail.com" infoKey="email" />
+          {isMore && (
+            <div className="mt-[25px]">
+              <Info infoValue={UserStore.user.email} infoKey="email" />
+              <Info infoValue={UserStore.user.age} infoKey="age" />
+            </div>
+          )}
         </div>
       )}
     </>
   );
-};
+});
 interface IInfo {
   infoKey: string;
   infoValue: string;
