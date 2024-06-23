@@ -45,4 +45,14 @@ services:
       - .env.dev
     depends_on:
       - padel_db
-      
+
+  padel_bot:
+    build: backend
+    container_name: padel_bot
+    command: python3 start_bot.py
+    volumes:
+      - ./backend:/usr/src/app
+    depends_on:
+      - padel_frontend
+    env_file:
+      - .env.dev

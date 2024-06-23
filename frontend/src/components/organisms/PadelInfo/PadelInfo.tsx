@@ -1,6 +1,6 @@
 import React from "react";
 
-import HandIcon from "@assets/HandIcon.svg?react";
+import HandIcon from "@assets/LeftHandIcon.svg?react";
 import BothIcon from "@assets/BothIcon.svg?react";
 
 export const PadelInfo: React.FC = () => {
