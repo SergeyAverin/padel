@@ -27,5 +27,9 @@ class UserService:
         user.hand = new_hand
         return await self.user_repository.update_user_by_id(user.telegram_user_id, user)
 
+    async def change_position(self, user: UserDTO, new_position: Position) -> UserDTO:
+        user.position = new_position
+        return await self.user_repository.update_user_by_id(user.telegram_user_id, user)
+
 
 user_service = UserService(UserRepository())
