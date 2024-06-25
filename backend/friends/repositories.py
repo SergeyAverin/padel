@@ -17,7 +17,10 @@ class FriendRequestRepository:
             recipient_user=recipient_user
         )
         await friend_request.save()
-        logger.debug('create requset')
+        return friend_request
+
+    async def get_friend_request_by_id(friend_request_id: int) -> None | FriendRequest:
+        return await FriendRequest.get_or_none(id=friend_request_id)
 
     async def get_friends_requests_by_user(self, telegram_user_id: str):
         friend_requests = await FriendRequest.filter(

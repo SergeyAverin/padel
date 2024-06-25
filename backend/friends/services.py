@@ -7,7 +7,7 @@ class FriendRequestService:
         self.friend_repository = FriendRepository()
 
     async def create_friend_request(self, sender_user_id: str, recipient_user_id: str):
-        await self.friend_request_repository.create_friend_request(sender_user_id, recipient_user_id)
+        return await self.friend_request_repository.create_friend_request(sender_user_id, recipient_user_id)
 
     def accept_friend_request(self):
         # friend_repository.add_friend()
