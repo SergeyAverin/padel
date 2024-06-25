@@ -8,21 +8,11 @@ logger = getLogger()
 
 
 class UserRepository:
-    async def get_user_by_telegram_user_id(self, user_id: str) -> UserDTO | None:
+    async def get_user_by_telegram_user_id(self, user_id: str) -> User | None:
         user = await User.get_or_none(telegram_user_id=user_id)
-        if user:
-            return UserDTO(
-                age=user.age,
-                email=user.email,
-                first_name=user.first_name,
-                last_name=user.last_name,
-                telegram_user_id=user.telegram_user_id,
-                username=user.username,
-                hand=user.hand.value,
-                position=user.position.value
-            )
+        return user
 
-    async def create_user(self, user_data: UserDTO) -> UserDTO:
+    async def create_user(self, user_data: UserDTO) -> User:
         user = User(
             age=user_data.age,
             email=user_data.email,
@@ -34,7 +24,7 @@ class UserRepository:
             position=user_data.position.value
         )
         await user.save()
-        return user_data
+        return user
 
     async def update_user_by_id(self, telegram_user_id: str, new_user_data: UserDTO):
         old_user = await User.get_or_none(telegram_user_id=telegram_user_id)

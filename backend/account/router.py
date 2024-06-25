@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from account.service import user_service
 from account.schemas import UserDTO
-from account.models import Hand, Position
+from account.models import Hand, Position, User
 
 
 profile_router = APIRouter(prefix='/user', tags=['user'])

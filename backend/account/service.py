@@ -2,7 +2,7 @@ from logging import getLogger
 
 from account.repository import UserRepository
 from account.schemas import UserDTO
-from account.models import Hand, Position
+from account.models import Hand, Position, User
 
 
 logger = getLogger()
@@ -12,11 +12,11 @@ class UserService:
     def __init__(self, user_repository: UserRepository) -> None:
         self.user_repository = user_repository
 
-    async def create_user(self, user_data: UserDTO) -> UserDTO:
+    async def create_user(self, user_data: UserDTO) -> User:
         user = await self.user_repository.create_user(user_data)
         return user
 
-    async def get_user_by_telegram_user_id(self, telegram_id: str) -> UserDTO | None:
+    async def get_user_by_telegram_user_id(self, telegram_id: str) -> User | None:
         user = await self.user_repository.get_user_by_telegram_user_id(telegram_id)
         return user
 
