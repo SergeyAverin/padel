@@ -16,7 +16,7 @@ TORTOISE_ORM = {
         "default": DB_PATH
     },
     "apps": {
-        "contact": {
+        "models": {
             "models": MODELS,
             "default_connection": "default",
         },

@@ -30,6 +30,9 @@ class User(Model):
     position = fields.CharEnumField(Position, default=Position.BOTH)
     hand = fields.CharEnumField(Hand, default=Hand.RIGHT_HAND)
 
+    friends: fields.ManyToManyRelation["User"] = fields.ManyToManyField(
+        'models.User', on_delete=fields.CASCADE, through="user_friends")
+
     def __str__(self):
         return self.first_name
 
