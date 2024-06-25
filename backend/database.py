@@ -8,6 +8,7 @@ DB_PATH = f"postgres://{data_base_setting.postgres_user}:{data_base_setting.post
 
 MODELS = [
     "account.models",
+    "friends.models",
     "aerich.models"
 ]
 

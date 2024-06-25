@@ -8,6 +8,7 @@ from core.middleware.catch_exceptions import catch_exceptions_middleware
 from core.config.logger_settings import clear_logs
 from core.config.api_settings import api_setting
 from account.router import profile_router
+from friends.routes import friend_router
 from database import init_db
 
 app = FastAPI()
@@ -30,6 +31,7 @@ app.add_middleware(
 
 api_router = APIRouter(prefix='/api/v1.0')
 api_router.include_router(profile_router)
+api_router.include_router(friend_router)
 app.include_router(api_router)
 
 
