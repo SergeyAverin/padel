@@ -28,8 +28,9 @@ class FriendRequestRepository:
         )
         return friend_requests
 
-    def delete_friend_request(self):
-        pass
+    async def delete_friend_request(self, friend_request_id: int):
+        friend_request = await self.get_friend_request_by_id(friend_request_id)
+        await friend_request.delete()
 
 
 class FriendRepository:

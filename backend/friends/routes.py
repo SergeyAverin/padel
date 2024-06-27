@@ -28,25 +28,31 @@ async def get_user_friends(user_id: str):
     return await user.friends.all()
 
 
-@friend_router.get('/friend_requests/{friend_requests_id}/accept')
+@friend_router.post('/friend_requests/{friend_requests_id}/accept')
 async def accept_friend_request(friend_requests_id: int):
-    friend_request = await friend_request_service.accept_friend_request(friend_requests_id)
-    return {}
+    await friend_request_service.accept_friend_request(friend_requests_id)
+    return {'message': 'ok'}
 
 
-@friend_router.get('/friend_requests/{friend_requests_id}/reject')
+@friend_router.post('/friend_requests/{friend_requests_id}/reject')
 async def reject_friend_request(friend_requests_id: int):
-    friend_request = await friend_request_service.reject_friend_request(friend_requests_id)
-    return {}
+    await friend_request_service.reject_friend_request(friend_requests_id)
+    return {'message': 'ok'}
 
 
-@friend_router.post('/user/{user_id}/friend', tags=['user', 'Friend'])
+@friend_router.post('/friend_requests/{friend_requests_id}/cancel')
+async def cancel_friend_request(friend_requests_id: int):
+    await friend_request_service.cancel_friend_request(friend_requests_id)
+    return {'message': 'ok'}
+
+
+@friend_router.post('/user/{user_id}/friend', tags=['user', 'friend'])
 async def add_friend(user_id: str, recipient_id: str = Body()):
     await friend_service.add_user_friend(user_id, recipient_id)
     return {'message': 'ok'}
 
 
-@friend_router.delete('/user/{user_id}/friend', tags=['user', 'Friend'])
+@friend_router.delete('/user/{user_id}/friend', tags=['user', 'friend'])
 async def remove_friend(user_id: str, recipient_id: str = Body()):
     await friend_service.remove_user_friend(user_id, recipient_id)
     return {'message': 'ok'}
