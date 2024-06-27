@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Body
 
-from friends.services import friend_request_service
+from friends.services import friend_request_service, friend_service
 from account.service import user_service
 
 
@@ -26,3 +26,21 @@ async def create_friend_request(recipient_user_id: str = Body()):
 async def get_user_friends(user_id: str):
     user = await user_service.get_user_by_telegram_user_id(user_id)
     return await user.friends.all()
+
+
+@friend_router.get('/friend_requests/{friend_requests_id}/accept')
+async def accept_friend_request(friend_requests_id: int):
+    friend_request = await friend_request_service.accept_friend_request(friend_requests_id)
+    return {}
+
+
+@friend_router.post('/user/{user_id}/friend', tags=['user', 'Friend'])
+async def add_friend(user_id: str, recipient_id: str = Body()):
+    await friend_service.add_user_friend(user_id, recipient_id)
+    return {'message': 'ok'}
+
+
+@friend_router.delete('/user/{user_id}/friend', tags=['user', 'Friend'])
+async def remove_friend(user_id: str, recipient_id: str = Body()):
+    await friend_service.remove_user_friend(user_id, recipient_id)
+    return {'message': 'ok'}

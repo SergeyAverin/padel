@@ -1,4 +1,9 @@
+from logging import getLogger
+
 from friends.repositories import FriendRepository, FriendRequestRepository
+from account.service import user_service
+
+logger = getLogger()
 
 
 class FriendRequestService:
@@ -9,7 +14,9 @@ class FriendRequestService:
     async def create_friend_request(self, sender_user_id: str, recipient_user_id: str):
         return await self.friend_request_repository.create_friend_request(sender_user_id, recipient_user_id)
 
-    def accept_friend_request(self):
+    async def accept_friend_request(self, friend_request_id: int):
+        friend_request = await self.friend_request_repository.get_friend_request_by_id(friend_request_id)
+
         # friend_repository.add_friend()
         # friend_request_repository.delete_friend_request()
         pass
@@ -27,13 +34,15 @@ class FriendRequestService:
 
 
 class FriendService:
-    def remove_user_friend(self):
-        # friend_repository.remove_friend()
-        pass
+    def __init__(self) -> None:
+        self.friend_repository = FriendRepository()
 
-    def add_user_friend(self):
-        # friend_repository.add_friend()
-        pass
+    async def remove_user_friend(self, sender_user_id: str, recipient_user_id: str):
+        await self.friend_repository.remove_friend(sender_user_id, recipient_user_id)
+
+    async def add_user_friend(self, sender_user_id: str, recipient_user_id: str):
+        await self.friend_repository.add_friend(sender_user_id, recipient_user_id)
 
 
 friend_request_service = FriendRequestService()
+friend_service = FriendService()

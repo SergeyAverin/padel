@@ -19,7 +19,7 @@ class FriendRequestRepository:
         await friend_request.save()
         return friend_request
 
-    async def get_friend_request_by_id(friend_request_id: int) -> None | FriendRequest:
+    async def get_friend_request_by_id(self, friend_request_id: int) -> None | FriendRequest:
         return await FriendRequest.get_or_none(id=friend_request_id)
 
     async def get_friends_requests_by_user(self, telegram_user_id: str):
@@ -33,8 +33,20 @@ class FriendRequestRepository:
 
 
 class FriendRepository:
-    def add_friend(self):
-        pass
+    async def add_friend(self0, sender_user_id: str, recipient_user_id: str):
+        sender_user = await user_service.get_user_by_telegram_user_id(sender_user_id)
+        recipient_user = await user_service.get_user_by_telegram_user_id(recipient_user_id)
 
-    def remove_friend(self):
-        pass
+        await sender_user.friends.add(recipient_user)
+        await recipient_user.friends.add(sender_user)
+
+        await sender_user.save()
+
+    async def remove_friend(self, sender_user_id: str, recipient_user_id: str):
+        sender_user = await user_service.get_user_by_telegram_user_id(sender_user_id)
+        recipient_user = await user_service.get_user_by_telegram_user_id(recipient_user_id)
+
+        await sender_user.friends.remove(recipient_user)
+        await recipient_user.friends.remove(sender_user)
+
+        await sender_user.save()
