@@ -10,8 +10,8 @@ class ClubService:
     async def create_club(self,  club_data: CreateClubDTO, owner: User):
         return await self.club_repository.create_club(club_data, owner)
 
-    def get_club_by_id(self):
-        pass
+    async def get_club_by_id(self, club_id: int):
+        return await self.club_repository.get_club_by_id(club_id)
 
     def filter_by_city(self):
         pass

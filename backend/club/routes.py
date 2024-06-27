@@ -13,3 +13,9 @@ async def create_club(club_data: CreateClubDTO):
     user = await user_service.get_user_by_telegram_user_id('123')
     club = await club_service.create_club(club_data, user)
     return club
+
+
+@club_routes.get('/{club_id}')
+async def get_club_by_id(club_id: int):
+    club = await club_service.get_club_by_id(club_id)
+    return club

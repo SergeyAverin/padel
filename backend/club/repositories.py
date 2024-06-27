@@ -14,8 +14,8 @@ class ClubRepository:
         await club.save()
         return club
 
-    def get_club_by_id(self):
-        pass
+    async def get_club_by_id(self, club_id: int):
+        return await Club.get_or_none(id=club_id)
 
     def delete_club_by_id(self):
         pass
