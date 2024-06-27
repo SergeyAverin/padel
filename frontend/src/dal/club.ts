@@ -15,5 +15,10 @@ export const getUserByBookmark = async () => {
   return club;
 };
 
-// addClubInUserBookmarks
-// removeClubFromUserBookmark
+export const addClubInUserBookmarks = async (clubId: string) => {
+  await axios.post(API_URL + "/club/bookmarks", clubId);
+};
+
+export const removeClubFromUserBookmark = async (clubId: string) => {
+  await axios.delete(API_URL + "/club/bookmarks", { data: clubId });
+};
