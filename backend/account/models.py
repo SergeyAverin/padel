@@ -4,6 +4,8 @@ from tortoise import fields
 from tortoise.models import Model
 from tortoise.contrib.pydantic import pydantic_model_creator
 
+from club.models import Club
+
 
 class Position(str, Enum):
     LEFT = "left"
@@ -33,8 +35,9 @@ class User(Model):
     friends: fields.ManyToManyRelation["User"] = fields.ManyToManyField(
         'models.User', on_delete=fields.CASCADE, through="user_friends")
 
+    clubs = fields.ManyToManyField(
+        'models.Club', on_delete=fields.CASCADE, through="clubs_bookmarks")
     # matches
-    # bookmarked clubs
 
     def __str__(self):
         return self.first_name
