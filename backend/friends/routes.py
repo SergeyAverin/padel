@@ -4,7 +4,7 @@ from friends.services import friend_request_service, friend_service
 from account.service import user_service
 
 
-friend_router = APIRouter(tags=['Friend'])
+friend_router = APIRouter(tags=['friend'])
 
 
 @friend_router.get('/friend_requests')
@@ -31,6 +31,12 @@ async def get_user_friends(user_id: str):
 @friend_router.get('/friend_requests/{friend_requests_id}/accept')
 async def accept_friend_request(friend_requests_id: int):
     friend_request = await friend_request_service.accept_friend_request(friend_requests_id)
+    return {}
+
+
+@friend_router.get('/friend_requests/{friend_requests_id}/reject')
+async def reject_friend_request(friend_requests_id: int):
+    friend_request = await friend_request_service.reject_friend_request(friend_requests_id)
     return {}
 
 
