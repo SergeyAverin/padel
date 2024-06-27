@@ -11,6 +11,9 @@ class MatchRepository:
     def get_match_by_club(self):
         pass
 
+    def get_match_by_friends(self):
+        pass
+
     def delete_match_by_id(self):
         pass
 

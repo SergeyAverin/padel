@@ -33,6 +33,9 @@ class User(Model):
     friends: fields.ManyToManyRelation["User"] = fields.ManyToManyField(
         'models.User', on_delete=fields.CASCADE, through="user_friends")
 
+    # matches
+    # bookmarked clubs
+
     def __str__(self):
         return self.first_name
 
