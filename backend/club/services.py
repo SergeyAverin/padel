@@ -1,7 +1,14 @@
+from account.models import User
+from club.schemas import CreateClubDTO
+from club.repositories import ClubRepository
+
 
 class ClubService:
-    def create_club(self):
-        pass
+    def __init__(self) -> None:
+        self.club_repository = ClubRepository()
+
+    async def create_club(self,  club_data: CreateClubDTO, owner: User):
+        return await self.club_repository.create_club(club_data, owner)
 
     def get_club_by_id(self):
         pass
@@ -33,3 +40,6 @@ class ClubPhotosService:
 
     def remove_photo(self):
         pass
+
+
+club_service = ClubService()

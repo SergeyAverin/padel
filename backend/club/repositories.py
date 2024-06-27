@@ -1,6 +1,18 @@
+from club.schemas import CreateClubDTO
+from club.models import Club
+from account.models import User
+
+
 class ClubRepository:
-    def create_club(self):
-        pass
+    async def create_club(self, club_data: CreateClubDTO, owner: User):
+        club = Club()
+        club.name = club_data.name
+        club.address = club_data.address
+        club.registration_address = club_data.registration_address
+        club.city = club_data.city
+        club.owner = owner
+        await club.save()
+        return club
 
     def get_club_by_id(self):
         pass
