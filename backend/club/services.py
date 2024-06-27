@@ -1,6 +1,6 @@
 from account.models import User
 from club.schemas import CreateClubDTO
-from club.repositories import ClubRepository
+from club.repositories import ClubRepository, ClubBookmarkRepository
 
 
 class ClubService:
@@ -21,14 +21,17 @@ class ClubService:
 
 
 class ClubBookmarkService:
-    def get_bookmarked_clubs(self):
-        pass
+    def __init__(self) -> None:
+        self.club_bookmark_repository = ClubBookmarkRepository()
 
-    def add_in_bookmark_club(self):
-        pass
+    async def get_bookmarked_clubs(self, user_id: str):
+        return await self.club_bookmark_repository.get_bookmarked_clubs(user_id)
 
-    def remove_in_bookmark_club(self):
-        pass
+    async def add_in_bookmark_club(self, user_id: str, club_id: int):
+        await self.club_bookmark_repository.add_in_bookmark_club(user_id, club_id)
+
+    async def remove_in_bookmark_club(self,  user_id: str, club_id: int):
+        await self.club_bookmark_repository.remove_in_bookmark_club(user_id, club_id)
 
 
 class ClubPhotosService:
@@ -43,3 +46,4 @@ class ClubPhotosService:
 
 
 club_service = ClubService()
+club_bookmark_service = ClubBookmarkService()

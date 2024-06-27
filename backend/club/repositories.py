@@ -1,6 +1,12 @@
+from logging import getLogger
+
 from club.schemas import CreateClubDTO
 from club.models import Club
 from account.models import User
+from account.service import user_service
+
+
+logger = getLogger()
 
 
 class ClubRepository:
@@ -31,11 +37,25 @@ class ClubRepository:
 
 
 class ClubBookmarkRepository:
-    def get_bookmarked_clubs(self):
-        pass
+    def __init__(self) -> None:
+        self.club_repository = ClubRepository()
 
-    def add_in_bookmark_club(self):
-        pass
+    async def get_bookmarked_clubs(self, user_id: str):
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        return await user.clubs.all()
 
-    def remove_in_bookmark_club(self):
-        pass
+    async def add_in_bookmark_club(self, user_id: str, club_id: int):
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        club = await self.club_repository.get_club_by_id(club_id)
+
+        await user.clubs.add(club)
+
+        await user.save()
+
+    async def remove_in_bookmark_club(self, user_id: str, club_id: int):
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        club = await self.club_repository.get_club_by_id(club_id)
+
+        await user.clubs.remove(club)
+
+        await user.save()
