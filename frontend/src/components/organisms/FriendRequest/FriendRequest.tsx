@@ -1,15 +1,14 @@
 import React from "react";
 
-import TestPhoto from "@assets/TestPhoto.png";
 import { Button, ButtonVariant } from "@atoms/index";
+
+import UserPhoto from "@molecules/UserPhoto";
 
 export const FriendRequest: React.FC = () => {
   return (
     <div className="bg-primary p-5 rounded-2xl">
       <div className="flex">
-        <div>
-          <img src={TestPhoto} className="rounded-full w-[72px] h-[72px]" />
-        </div>
+        <UserPhoto />
         <div className="ml-5">
           <div className="text-[16px] font-bold">Username</div>
           <div className="text-[16px] font-medium">Sergey averin</div>

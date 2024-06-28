@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import TestPhoto from "@assets/TestPhoto.png";
 import UserLvl from "@molecules/UserLvl";
 import UserStore from "../../../store/user";
+import UserPhoto from "@molecules/UserPhoto";
 
 export const UserInfo: React.FC = observer(() => {
   const [isMore, setIsMore] = useState(false);
@@ -17,7 +18,7 @@ export const UserInfo: React.FC = observer(() => {
           <div className="flex justify-between">
             <div className="flex">
               <div className="w-[100px] h-[100px]">
-                <img src={TestPhoto} className="rounded-full" />
+                <UserPhoto />
               </div>
               <div className="ml-[20px]">
                 <div className="text-[24px] font-bold">

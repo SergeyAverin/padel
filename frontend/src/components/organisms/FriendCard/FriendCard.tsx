@@ -3,15 +3,15 @@ import React from "react";
 import TestPhoto from "@assets/TestPhoto.png";
 import { Button, ButtonVariant } from "@atoms/index";
 import Tag from "@molecules/Tag";
+import UserPhoto from "@molecules/UserPhoto";
 
 export const FriendCard: React.FC = () => {
   return (
     <div className="bg-primary p-5 rounded-xl">
       <div className="flex justify-between">
         <div className="flex">
-          <div>
-            <img src={TestPhoto} className="rounded-full w-[72px] h-[72px]" />
-          </div>
+          <UserPhoto />
+
           <div className="ml-5">
             <div className="text-[16px] font-bold">Username</div>
             <div className="text-[16px] font-medium">Sergey averin</div>
