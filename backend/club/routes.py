@@ -30,7 +30,7 @@ async def add_club_in_bookmark(club_id: int = Body()):
 @club_routes.delete('/bookmarks', tags=['bookmark'])
 async def remove_club_in_bookmark(club_id: int = Body()):
     await club_bookmark_service.remove_in_bookmark_club('123', club_id)
-
+    # ToDo: возвращать текущий статус закладки
     return {'message': 'ok'}
 
 

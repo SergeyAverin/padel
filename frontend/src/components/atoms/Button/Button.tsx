@@ -30,7 +30,7 @@ export const Button: React.FC<IButtonProps> = ({
       className={classNames(
         "w-full",
         "h-full",
-        "p-3 rounded-md select-none cursor-pointer text-center font-montserrat font-bold",
+        "p-3 rounded-3xl select-none cursor-pointer text-center font-montserrat font-bold",
         "flex items-center justify-center",
         {
           /** Стили для кнопок заполненных цветом */
