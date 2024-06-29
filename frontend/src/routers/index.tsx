@@ -6,6 +6,7 @@ import Navigation from "@organisms/Navigation";
 import EditProfilePage from "@pages/EditProfilePage";
 import FriendCard from "@organisms/FriendCard";
 import FriendRequest from "@organisms/FriendRequest";
+import FriendsPage from "@pages/FriendsPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -13,9 +14,11 @@ const MainRouter: React.FC = () => {
     <>
       <FriendCard />
       <FriendRequest />
+
       <Routes>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
+        <Route path="/friends" element={<FriendsPage />} />
       </Routes>
       <Navigation />
     </>
