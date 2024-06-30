@@ -1,4 +1,4 @@
-import FriendRequestsStore from "../../../../store/friendRequests";
+import FriendRequestsStore from "@store/friendRequests";
 
 export const useCreateFriendRequest = (userId: string) => {
   const onCreateFriendRequest = () => {

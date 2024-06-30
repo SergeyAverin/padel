@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { IFriendRequest } from "../types/friendRequest";
+import { IFriendRequest } from "@schemas/friendRequest";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

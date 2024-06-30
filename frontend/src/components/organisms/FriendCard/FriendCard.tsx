@@ -4,7 +4,7 @@ import TestPhoto from "@assets/TestPhoto.png";
 import { Button, ButtonVariant } from "@atoms/index";
 import Tag from "@molecules/Tag";
 import UserPhoto from "@molecules/UserPhoto";
-import { IUser } from "../../../types/user";
+import { IUser } from "@schemas/user";
 
 interface IFriendCardProps {
   user: IUser;

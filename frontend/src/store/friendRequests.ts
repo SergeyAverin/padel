@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getFriendRequests, createFriendRequest } from "../dal/friendRequest";
-import { IFriendRequest } from "src/types/friendRequest";
+import { getFriendRequests, createFriendRequest } from "@dal/friendRequest";
+import { IFriendRequest } from "@schemas/friendRequest";
 
 class FriendRequestsStore {
   isLoading = false;

@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserInfo } from "../dal/user";
-import { IUser } from "../types/user";
+import { getUserInfo } from "@dal/user";
+import { IUser } from "@schemas/user";
 
 class UserStore {
   isLoading = false;

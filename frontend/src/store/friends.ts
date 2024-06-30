@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserFriends } from "../dal/friends";
-import { IUser } from "src/types/user";
+import { getUserFriends } from "@dal/friends";
+import { IUser } from "@schemas/user";
 
 class FriendStore {
   isLoading = false;
