@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import FriendCard from "@organisms/FriendCard";
+import FriendCard from "@organisms/friends/FriendCard";
 import FriendStore from "@store/friends";
 import FriendRequestsStore from "@store/friendRequests";
-import FriendRequest from "@organisms/FriendRequest";
+import FriendRequest from "@organisms/friends/FriendRequest";
 
 export const FriendsPage: React.FC = observer(() => {
   useEffect(() => {

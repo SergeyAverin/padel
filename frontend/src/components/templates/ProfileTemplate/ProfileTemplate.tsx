@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
-import UserInfo from "@organisms/UserInfo";
-import UserStats from "@organisms/UserStats";
-import PadelInfo from "@organisms/PadelInfo";
+import UserInfo from "@organisms/account/UserInfo";
+import UserStats from "@organisms/account/UserStats";
+import PadelInfo from "@organisms/account/PadelInfo";
 import { Link } from "react-router-dom";
 
 export const ProfileTemplate: React.FC = () => {

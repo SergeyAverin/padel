@@ -1,6 +1,6 @@
-import EditProfileForm from "@organisms/EditProfileForm";
-import SelectHand from "@organisms/SelectHand";
-import SelectPosition from "@organisms/SelectPosition";
+import EditProfileForm from "@organisms/account/EditProfileForm";
+import SelectHand from "@organisms/account/SelectHand";
+import SelectPosition from "@organisms/account/SelectPosition";
 import React from "react";
 
 export const EditProfileTemplate: React.FC = () => {
