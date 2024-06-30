@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserInfo, changeHand } from "@dal/user";
-import { Hand, IUser } from "@schemas/user";
+import { getUserInfo, changeHand, changePosition } from "@dal/user";
+import { Hand, IUser, Position } from "@schemas/user";
 
 class UserStore {
   isLoading = false;
@@ -19,6 +19,9 @@ class UserStore {
   }
   async changeHand(hand: Hand) {
     await changeHand("3", hand);
+  }
+  async changePosition(position: Position) {
+    await changePosition("3", position);
   }
 }
 
