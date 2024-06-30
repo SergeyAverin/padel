@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import TestPhoto from "@assets/TestPhoto.png";
+import { useLoadUserInfo } from "./hooks/useLoadUserInfo";
 import UserLvl from "@molecules/UserLvl";
-import UserStore from "../../../store/user";
 import UserPhoto from "@molecules/UserPhoto";
+import UserStore from "@store/user";
 
 export const UserInfo: React.FC = observer(() => {
   const [isMore, setIsMore] = useState(false);
-  useEffect(() => {
-    UserStore.getUserInfo("3");
-  }, []);
+  useLoadUserInfo();
+
   return (
     <>
       {UserStore.user && (
