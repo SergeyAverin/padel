@@ -3,7 +3,8 @@ import React from "react";
 import { Button, ButtonVariant } from "@atoms/index";
 
 import UserPhoto from "@molecules/UserPhoto";
-import { AcceptFriendRequest } from "@molecules/AcceptFriendRequest/AcceptFriendRequest";
+import AcceptFriendRequest from "@molecules/AcceptFriendRequest";
+import RejectFriendRequest from "@molecules/RejectFriendRequest";
 
 interface IFriendRequestProps {
   friendRequestId: number;
@@ -26,7 +27,7 @@ export const FriendRequest: React.FC<IFriendRequestProps> = ({
           <AcceptFriendRequest userId={friendRequestId} />
         </div>
         <div className="w-[140px] ml-3">
-          <Button variant={ButtonVariant.OUTLINED}>Reject</Button>
+          <RejectFriendRequest userId={friendRequestId} />
         </div>
       </div>
     </div>
