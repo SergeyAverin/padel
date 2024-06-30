@@ -26,6 +26,7 @@ class FriendRequestRepository:
         friend_requests = await FriendRequest.filter(
             sender_user__telegram_user_id=telegram_user_id
         )
+        # ToDo: добавить то где получатель
         return friend_requests
 
     async def delete_friend_request(self, friend_request_id: int):
@@ -34,7 +35,7 @@ class FriendRequestRepository:
 
 
 class FriendRepository:
-    async def add_friend(self0, sender_user_id: str, recipient_user_id: str):
+    async def add_friend(self, sender_user_id: str, recipient_user_id: str):
         sender_user = await user_service.get_user_by_telegram_user_id(sender_user_id)
         recipient_user = await user_service.get_user_by_telegram_user_id(recipient_user_id)
 

@@ -50,6 +50,22 @@ class FriendService:
     async def add_user_friend(self, sender_user_id: str, recipient_user_id: str):
         await self.friend_repository.add_friend(sender_user_id, recipient_user_id)
 
+    async def get_user_friends(self, user_id: str):
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        user_friends = await user.friends.all()
+        return user_friends
+
+    async def get_user_relation_status(self, from_user_id: str, to_user_id: str):
+        user_friends = await self.get_user_friends(from_user_id)
+        status = 'no_friend'
+        for friend in user_friends:
+            logger.debug('to_user_id')
+            logger.debug(to_user_id)
+            logger.debug(friend.telegram_user_id)
+            if friend.telegram_user_id == to_user_id:
+                status = 'friend'
+        return status
+
 
 friend_request_service = FriendRequestService()
 friend_service = FriendService()

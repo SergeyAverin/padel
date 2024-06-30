@@ -24,8 +24,14 @@ async def create_friend_request(recipient_user_id: str = Body()):
 
 @friend_router.get('/friends/{user_id}')
 async def get_user_friends(user_id: str):
-    user = await user_service.get_user_by_telegram_user_id(user_id)
-    return await user.friends.all()
+    user_friends = await friend_service.get_user_friends()
+    return user_friends
+
+
+@friend_router.get('/friend/{first_user_id}/{second_user_id}')
+async def get_user_relation_status(first_user_id: str, second_user_id: str):
+    status = await friend_service.get_user_relation_status(first_user_id, second_user_id)
+    return status
 
 
 @friend_router.post('/friend_requests/{friend_requests_id}/accept')
