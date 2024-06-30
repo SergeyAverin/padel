@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useLoadUserInfo } from "./hooks/useLoadUserInfo";
-import UserLvl from "@molecules/UserLvl";
-import UserPhoto from "@molecules/UserPhoto";
+import UserLvl from "@molecules/account/UserLvl";
+import UserPhoto from "@molecules/account/UserPhoto";
 import UserStore from "@store/user";
 
 export const UserInfo: React.FC = observer(() => {

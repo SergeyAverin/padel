@@ -1,4 +1,4 @@
-import Stat from "@molecules/Stat";
+import Stat from "@molecules/account/Stat";
 import React from "react";
 
 export const UserStats: React.FC = () => {

@@ -5,7 +5,7 @@ import ProfilePage from "@pages/ProfilePage";
 import Navigation from "@organisms/Navigation";
 import EditProfilePage from "@pages/EditProfilePage";
 import FriendsPage from "@pages/FriendsPage";
-import CreateFriendRequest from "@molecules/CreateFriendRequest";
+import CreateFriendRequest from "@molecules/friends/CreateFriendRequest";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {

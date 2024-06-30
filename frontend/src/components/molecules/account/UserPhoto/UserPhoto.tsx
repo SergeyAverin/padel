@@ -1,7 +1,7 @@
 import React from "react";
 
 import TestPhoto from "@assets/TestPhoto.png";
-import UserLvl from "@molecules/UserLvl";
+import UserLvl from "@molecules/account/UserLvl";
 
 export const UserPhoto: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 
-import UserPhoto from "@molecules/UserPhoto";
-import AcceptFriendRequest from "@molecules/AcceptFriendRequest";
-import RejectFriendRequest from "@molecules/RejectFriendRequest";
+import UserPhoto from "@molecules/account/UserPhoto";
+import AcceptFriendRequest from "@molecules/friends/AcceptFriendRequest";
+import RejectFriendRequest from "@molecules/friends/RejectFriendRequest";
 
 interface IFriendRequestProps {
   friendRequestId: number;

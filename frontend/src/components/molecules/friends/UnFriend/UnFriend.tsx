@@ -12,7 +12,7 @@ export const UnFriend: React.FC<IUnFriendProps> = ({ friendId }) => {
 
   return (
     <Button variant={ButtonVariant.OUTLINED} onClick={onUnFriend}>
-      Cancel
+      Unfriend
     </Button>
   );
 };

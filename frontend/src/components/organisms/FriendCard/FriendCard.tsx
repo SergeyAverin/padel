@@ -1,9 +1,9 @@
 import React from "react";
 
-import Tag from "@molecules/Tag";
-import UserPhoto from "@molecules/UserPhoto";
+import Tag from "@molecules/friends/Tag";
+import UserPhoto from "@molecules/account/UserPhoto";
 import { IUser } from "@schemas/user";
-import UnFriend from "@molecules/UnFriend";
+import UnFriend from "@molecules/friends/UnFriend";
 
 interface IFriendCardProps {
   user: IUser;
