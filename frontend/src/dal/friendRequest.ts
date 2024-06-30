@@ -15,3 +15,24 @@ export const createFriendRequest = async (userId: string) => {
   const friendRequests = (await response.data) as IFriendRequest;
   return friendRequests;
 };
+
+export const acceptFriendRequest = async (friendRequestId: number) => {
+  await axios.post(
+    API_URL + `/friend_requests/${friendRequestId}/accept`,
+    friendRequestId
+  );
+};
+
+export const rejectFriendRequest = async (friendRequestId: number) => {
+  await axios.post(
+    API_URL + `/friend_requests/${friendRequestId}/reject`,
+    friendRequestId
+  );
+};
+
+export const cancelFriendRequest = async (friendRequestId: number) => {
+  await axios.post(
+    API_URL + `/friend_requests/${friendRequestId}/cancel`,
+    friendRequestId
+  );
+};

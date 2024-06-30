@@ -16,8 +16,8 @@ export const FriendsPage: React.FC = observer(() => {
       {FriendStore.friends.map((user) => (
         <FriendCard user={user} />
       ))}
-      {FriendRequestsStore.friendRequests.map((user) => (
-        <FriendRequest />
+      {FriendRequestsStore.friendRequests.map((friendRequest) => (
+        <FriendRequest friendRequestId={friendRequest.id} />
       ))}
     </div>
   );

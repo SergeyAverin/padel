@@ -3,8 +3,15 @@ import React from "react";
 import { Button, ButtonVariant } from "@atoms/index";
 
 import UserPhoto from "@molecules/UserPhoto";
+import { AcceptFriendRequest } from "@molecules/AcceptFriendRequest/AcceptFriendRequest";
 
-export const FriendRequest: React.FC = () => {
+interface IFriendRequestProps {
+  friendRequestId: number;
+}
+
+export const FriendRequest: React.FC<IFriendRequestProps> = ({
+  friendRequestId,
+}) => {
   return (
     <div className="bg-primary p-5 rounded-2xl">
       <div className="flex">
@@ -16,7 +23,7 @@ export const FriendRequest: React.FC = () => {
       </div>
       <div className="flex mt-5">
         <div className="w-[140px]">
-          <Button variant={ButtonVariant.FULL_HIGHLIGHT}>Accept</Button>
+          <AcceptFriendRequest userId={friendRequestId} />
         </div>
         <div className="w-[140px] ml-3">
           <Button variant={ButtonVariant.OUTLINED}>Reject</Button>
