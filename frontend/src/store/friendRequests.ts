@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getFriendRequests } from "../dal/friendRequest";
+import { getFriendRequests, createFriendRequest } from "../dal/friendRequest";
 import { IFriendRequest } from "src/types/friendRequest";
 
 class FriendRequestsStore {
@@ -17,6 +17,10 @@ class FriendRequestsStore {
       this.friendRequests = await getFriendRequests();
       this.isLoading = false;
     });
+  }
+  async createFriendRequest(userId: string) {
+    const friendRequest = await createFriendRequest(userId);
+    this.friendRequests.push(friendRequest);
   }
 }
 
