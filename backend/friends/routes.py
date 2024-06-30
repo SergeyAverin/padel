@@ -52,13 +52,13 @@ async def cancel_friend_request(friend_requests_id: int):
     return {'message': 'ok'}
 
 
-@friend_router.post('/user/{user_id}/friend', tags=['user', 'friend'])
-async def add_friend(user_id: str, recipient_id: str = Body()):
-    await friend_service.add_user_friend(user_id, recipient_id)
-    return {'message': 'ok'}
+# @friend_router.post('/user/{user_id}/friend', tags=['user', 'friend'])
+# async def add_friend(user_id: str, recipient_id: str = Body()):
+#     await friend_service.add_user_friend(user_id, recipient_id)
+#     return {'message': 'ok'}
 
 
-@friend_router.delete('/user/{user_id}/friend', tags=['user', 'friend'])
-async def remove_friend(user_id: str, recipient_id: str = Body()):
-    await friend_service.remove_user_friend(user_id, recipient_id)
+@friend_router.delete('/user/friend/{recipient_id}', tags=['user', 'friend'])
+async def remove_friend(recipient_id: str):
+    await friend_service.remove_user_friend('321', recipient_id)
     return {'message': 'ok'}

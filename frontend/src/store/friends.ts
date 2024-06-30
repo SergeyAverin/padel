@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserFriends } from "@dal/friends";
+import { getUserFriends, unUserFriends } from "@dal/friends";
 import { IUser } from "@schemas/user";
 
 class FriendStore {
@@ -11,12 +11,22 @@ class FriendStore {
     makeAutoObservable(this);
   }
 
+  private removeFriend(friendId: string) {
+    this.friends = this.friends.filter(
+      (friend) => friend.telegram_user_id !== friendId
+    );
+  }
+
   async getFriends(FriendId: string) {
     this.isLoading = true;
     runInAction(async () => {
       this.friends = await getUserFriends(FriendId);
       this.isLoading = false;
     });
+  }
+  async unFriends(FriendId: string) {
+    await unUserFriends(FriendId);
+    this.removeFriend(FriendId);
   }
 }
 

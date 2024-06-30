@@ -1,10 +1,9 @@
 import React from "react";
 
-import TestPhoto from "@assets/TestPhoto.png";
-import { Button, ButtonVariant } from "@atoms/index";
 import Tag from "@molecules/Tag";
 import UserPhoto from "@molecules/UserPhoto";
 import { IUser } from "@schemas/user";
+import UnFriend from "@molecules/UnFriend";
 
 interface IFriendCardProps {
   user: IUser;
@@ -25,7 +24,7 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
           </div>
         </div>
         <div className="w-[140px]">
-          <Button variant={ButtonVariant.OUTLINED}>Unfrind</Button>
+          <UnFriend friendId={user.telegram_user_id} />
         </div>
       </div>
       <div className="mt-5 flex items-center flex-wrap">

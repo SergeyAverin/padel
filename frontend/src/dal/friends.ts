@@ -8,3 +8,7 @@ export const getUserFriends = async (userId: string) => {
   const friends = (await response.data) as Array<IUser>;
   return friends;
 };
+
+export const unUserFriends = async (userId: string) => {
+  await axios.delete(API_URL + `/user/friend/${userId}`);
+};
