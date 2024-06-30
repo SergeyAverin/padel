@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Button, ButtonVariant } from "@atoms/index";
-
 import UserPhoto from "@molecules/UserPhoto";
 import AcceptFriendRequest from "@molecules/AcceptFriendRequest";
 import RejectFriendRequest from "@molecules/RejectFriendRequest";
