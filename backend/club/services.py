@@ -1,6 +1,11 @@
+from logging import getLogger
+
 from account.models import User
 from club.schemas import CreateClubDTO
 from club.repositories import ClubRepository, ClubBookmarkRepository
+
+
+logger = getLogger()
 
 
 class ClubService:
@@ -32,6 +37,14 @@ class ClubBookmarkService:
 
     async def remove_in_bookmark_club(self,  user_id: str, club_id: int):
         await self.club_bookmark_repository.remove_in_bookmark_club(user_id, club_id)
+
+    async def is_bookmarked_club(self, user_id: str, club_id: int):
+        is_bookmark = False
+        clubs = await self.club_bookmark_repository.get_bookmarked_clubs(user_id)
+        for club in clubs:
+            if club.id == club_id:
+                is_bookmark = True
+        return is_bookmark
 
 
 class ClubPhotosService:

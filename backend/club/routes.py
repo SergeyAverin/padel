@@ -41,6 +41,12 @@ async def remove_club_in_bookmark(club_id: int = Body()):
     return {'message': 'ok'}
 
 
+@club_routes.get('/{club_id}/is_bookmark')
+async def get_bookmarked_clubs(club_id: int):
+    is_bookmark = await club_bookmark_service.is_bookmarked_club('123', club_id)
+    return {'is_bookmark': is_bookmark}
+
+
 @club_routes.get('/{club_id}')
 async def get_club_by_id(club_id: int):
     club = await club_service.get_club_by_id(club_id)
