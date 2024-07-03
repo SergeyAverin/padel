@@ -8,6 +8,7 @@ import Club from "@organisms/clubs/Club";
 export const ClubsTemplate: React.FC = observer(() => {
   useEffect(() => {
     ClubStore.getClubs();
+    ClubStore.getBookedClubs();
   }, []);
 
   return (

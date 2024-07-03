@@ -8,6 +8,12 @@ export const getClubById = async (clubId: string) => {
   return club;
 };
 
+export const getIsClubBookmarked = async (clubId: number) => {
+  const clubResponse = await axios.get(API_URL + `/club/${clubId}/is_bookmark`);
+  const data = await clubResponse.data;
+  return data.is_bookmark;
+};
+
 export const getClubs = async () => {
   const clubResponse = await axios.get(API_URL + "/club/clubs");
   const club = await clubResponse.data;
