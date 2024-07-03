@@ -11,16 +11,26 @@ interface IBookmark {
 }
 
 export const Bookmark: React.FC<IBookmark> = observer(({ clubId }) => {
-  useEffect(() => {
-    ClubStore.getIsBookmark(clubId);
-  }, []);
+  const addBookmark = () => {
+    ClubStore.addBookmark(clubId);
+  };
+  const removeBookmark = () => {
+    ClubStore.removeBookmark(clubId);
+  };
+  const onClick = () => {
+    if (ClubStore.bookmarks.get(clubId)) {
+      removeBookmark();
+    } else {
+      addBookmark();
+    }
+  };
   return (
-    <>
+    <div onClick={onClick}>
       {ClubStore.bookmarks.get(clubId) ? (
         <BookmarkOnIcon />
       ) : (
         <BookmarkOffIcon />
       )}
-    </>
+    </div>
   );
 });

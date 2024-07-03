@@ -1,6 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getClubs, getClubsByBookmark, getIsClubBookmarked } from "@dal/club";
+import {
+  getClubs,
+  getClubsByBookmark,
+  getIsClubBookmarked,
+  addClubInUserBookmarks,
+  removeClubFromUserBookmark,
+} from "@dal/club";
 import { IClub } from "@schemas/club";
 
 class ClubStore {
@@ -29,6 +35,16 @@ class ClubStore {
   async getIsBookmark(clubId: number) {
     const isBookmark = await getIsClubBookmarked(clubId);
     this.bookmarks.set(clubId, isBookmark);
+  }
+  async addBookmark(clubId: number) {
+    await addClubInUserBookmarks(clubId);
+    this.bookmarks.set(clubId, true);
+    this.getBookedClubs();
+  }
+  async removeBookmark(clubId: number) {
+    await removeClubFromUserBookmark(clubId);
+    this.bookmarks.set(clubId, false);
+    this.getBookedClubs();
   }
 }
 

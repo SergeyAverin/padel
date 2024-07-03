@@ -28,10 +28,10 @@ export const getClubsByBookmark = async () => {
   return club;
 };
 
-export const addClubInUserBookmarks = async (clubId: string) => {
+export const addClubInUserBookmarks = async (clubId: number) => {
   await axios.post(API_URL + "/club/bookmarks", clubId);
 };
 
-export const removeClubFromUserBookmark = async (clubId: string) => {
+export const removeClubFromUserBookmark = async (clubId: number) => {
   await axios.delete(API_URL + "/club/bookmarks", { data: clubId });
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Button, ButtonVariant } from "@atoms/index";
@@ -12,6 +12,9 @@ interface IClubProps {
 }
 
 export const Club: React.FC<IClubProps> = observer(({ club }) => {
+  useEffect(() => {
+    ClubStore.getIsBookmark(club.id);
+  }, []);
   return (
     <div className="rounded-2xl p-4 bg-primary">
       <h2 className="text-[16px] font-bold">{club.name}</h2>
