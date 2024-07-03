@@ -14,10 +14,13 @@ export const FriendsPage: React.FC = observer(() => {
   return (
     <div className="p-3">
       {FriendStore.friends.map((user) => (
-        <FriendCard user={user} />
+        <FriendCard user={user} key={user.telegram_user_id} />
       ))}
       {FriendRequestsStore.friendRequests.map((friendRequest) => (
-        <FriendRequest friendRequestId={friendRequest.id} />
+        <FriendRequest
+          friendRequestId={friendRequest.id}
+          key={friendRequest.id}
+        />
       ))}
     </div>
   );

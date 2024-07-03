@@ -11,7 +11,7 @@ export const Navigation: React.FC = () => {
   return (
     <div className="bg-primary p-5 flex items-center justify-center fixed bottom-0 left-0 w-full">
       <div className="w-full flex justify-around items-end">
-        <NavigationButton href="/" icon={<ClubIcon />} text="profile" />
+        <NavigationButton href="/clubs" icon={<ClubIcon />} text="profile" />
         <NavigationButton href="/" icon={<MatchIcon />} text="profile" />
         <NavigationButton
           href="/friends"

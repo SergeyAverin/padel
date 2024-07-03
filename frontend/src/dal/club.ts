@@ -7,9 +7,16 @@ export const getClubById = async (clubId: string) => {
   const club = await clubResponse.data;
   return club;
 };
+
+export const getClubs = async () => {
+  const clubResponse = await axios.get(API_URL + "/club/clubs");
+  const club = await clubResponse.data;
+  return club;
+};
+
 // createClub
 
-export const getUserByBookmark = async () => {
+export const getClubsByBookmark = async () => {
   const clubResponse = await axios.get(API_URL + "/club/bookmarks");
   const club = await clubResponse.data;
   return club;

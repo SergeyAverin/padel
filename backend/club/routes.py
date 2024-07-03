@@ -2,10 +2,17 @@ from fastapi import APIRouter, Body
 
 from club.schemas import CreateClubDTO
 from club.services import club_service, club_bookmark_service
+from club.models import Club
 from account.service import user_service
 
 
 club_routes = APIRouter(tags=['club'], prefix='/club')
+
+
+# ToDo: удалить этот route
+@club_routes.get('/clubs')
+async def get_all_clubs():
+    return await Club.all()
 
 
 @club_routes.post('/')
