@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Button, ButtonVariant } from "@atoms/index";
-import AddressIcon from "@assets/AddressIcon.svg?react";
+import Bookmark from "@molecules/clubs/Bookmark";
 import { IClub } from "@schemas/club";
 import ClubStore from "@store/club";
-import Bookmark from "@molecules/clubs/Bookmark";
+
+import AddressIcon from "@assets/AddressIcon.svg?react";
 
 interface IClubProps {
   club: IClub;
