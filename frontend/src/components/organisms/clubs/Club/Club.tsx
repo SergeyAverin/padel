@@ -7,6 +7,7 @@ import { IClub } from "@schemas/club";
 import ClubStore from "@store/club";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
+import { Link } from "react-router-dom";
 
 interface IClubProps {
   club: IClub;
@@ -29,7 +30,9 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
         </div>
       </div>
       <div className="mt-5">
-        <Button variant={ButtonVariant.OUTLINED}>Show more</Button>
+        <Link to={`/clubs/${club.id}`}>
+          <Button variant={ButtonVariant.OUTLINED}>Show more</Button>
+        </Link>
       </div>
     </div>
   );

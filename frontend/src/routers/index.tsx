@@ -17,7 +17,7 @@ const MainRouter: React.FC = () => {
         <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
-        <Route path="/club/:clubId" element={<ClubPage />} />
+        <Route path="/clubs/:clubId" element={<ClubPage />} />
       </Routes>
       <Navigation />
     </>
