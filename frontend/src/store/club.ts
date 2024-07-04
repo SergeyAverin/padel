@@ -6,6 +6,7 @@ import {
   getIsClubBookmarked,
   addClubInUserBookmarks,
   removeClubFromUserBookmark,
+  getClubById,
 } from "@dal/club";
 import { IClub } from "@schemas/club";
 
@@ -14,6 +15,8 @@ class ClubStore {
   clubs: Array<IClub> = [];
   bookmarkedClubs: Array<IClub> = [];
   bookmarks: Map<number, boolean> = new Map();
+  openedClub: IClub | null = null;
+  isLoadingOpenedClub: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -45,6 +48,13 @@ class ClubStore {
     await removeClubFromUserBookmark(clubId);
     this.bookmarks.set(clubId, false);
     this.getBookedClubs();
+  }
+  async openClub(clubId: string) {
+    this.isLoadingOpenedClub = true;
+    runInAction(async () => {
+      this.openedClub = await getClubById(clubId);
+      this.isLoadingOpenedClub = false;
+    });
   }
 }
 
