@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Heading, HeadingVariant } from "@atoms/index";
+import Match from "@organisms/matches/Match";
 import ClubStore from "@store/club";
 import MatchStore from "@store/match";
 
@@ -26,7 +27,9 @@ export const ClubTemplate: React.FC = observer(() => {
       </div>
       <div>
         {MatchStore.matches.map((match) => (
-          <div>{match.id}</div>
+          <div key={match.id} className="mt-5">
+            <Match />
+          </div>
         ))}
       </div>
     </div>

@@ -7,6 +7,7 @@ import UserInfo from "@organisms/account/UserInfo";
 import UserStats from "@organisms/account/UserStats";
 import PadelInfo from "@organisms/account/PadelInfo";
 import MatchStore from "@store/match";
+import Match from "@organisms/matches/Match";
 
 export const ProfileTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -39,7 +40,9 @@ export const ProfileTemplate: React.FC = observer(() => {
           <Heading variant={HeadingVariant.H2}>Matches:</Heading>
         </div>
         {MatchStore.matches.map((match) => (
-          <div>{match.id}</div>
+          <div key={match.id} className="mt-5">
+            <Match />
+          </div>
         ))}
       </div>
     </div>
