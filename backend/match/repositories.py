@@ -23,8 +23,8 @@ class MatchRepository:
     async def get_match_by_user(self, user_id: str):
         return await Match.filter(owner__telegram_user_id=user_id)
 
-    def get_match_by_club(self):
-        pass
+    async def get_match_by_club(self, club_id: str):
+        return await Match.filter(club_id=club_id)
 
     def get_match_by_friends(self):
         pass

@@ -19,6 +19,11 @@ async def get_match(match_id: str):
     return await match_service.get_match_by_id(match_id)
 
 
-@match_router.get('/user/{match_id}/match', tags=['user'])
-async def get_match_by_user_id(match_id: str):
-    return await match_service.get_match_by_user(match_id)
+@match_router.get('/user/{user_id}/matches', tags=['user'])
+async def get_match_by_user_id(user_id: str):
+    return await match_service.get_match_by_user(user_id)
+
+
+@match_router.get('/club/{club_id}/matches', tags=['club'])
+async def get_match_by_club_id(club_id: int):
+    return await match_service.get_match_by_club(club_id)
