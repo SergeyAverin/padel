@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
 import UserInfo from "@organisms/account/UserInfo";
 import UserStats from "@organisms/account/UserStats";
 import PadelInfo from "@organisms/account/PadelInfo";
-import { Link } from "react-router-dom";
+import MatchStore from "@store/match";
 
-export const ProfileTemplate: React.FC = () => {
+export const ProfileTemplate: React.FC = observer(() => {
+  useEffect(() => {
+    MatchStore.getUserInfo("3");
+  }, []);
   return (
     <div className="p-2">
       <UserInfo />
@@ -20,15 +25,23 @@ export const ProfileTemplate: React.FC = () => {
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Padel info:</Heading>
         <div className="mt-[8px]">
-          <UserStats />
+          <PadelInfo />
         </div>
       </div>
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Stats:</Heading>
         <div className="mt-[8px]">
-          <PadelInfo />
+          <UserStats />
         </div>
+      </div>
+      <div>
+        <div className="mt-5">
+          <Heading variant={HeadingVariant.H2}>Matches:</Heading>
+        </div>
+        {MatchStore.matches.map((match) => (
+          <div>{match.id}</div>
+        ))}
       </div>
     </div>
   );
-};
+});
