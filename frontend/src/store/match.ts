@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getMatchByUserId } from "@dal/match";
+import { getMatchByClubId, getMatchByUserId } from "@dal/match";
 import { IMatch } from "@schemas/match";
 
 class MatchStore {
@@ -10,10 +10,17 @@ class MatchStore {
   constructor() {
     makeAutoObservable(this);
   }
-  async getUserInfo(userId: string) {
+  async loadUserMatches(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
       this.matches = await getMatchByUserId(userId);
+      this.isLoading = false;
+    });
+  }
+  async loadClubMatches(clubId: number) {
+    this.isLoading = true;
+    runInAction(async () => {
+      this.matches = await getMatchByClubId(clubId);
       this.isLoading = false;
     });
   }

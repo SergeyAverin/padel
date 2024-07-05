@@ -10,7 +10,7 @@ import MatchStore from "@store/match";
 
 export const ProfileTemplate: React.FC = observer(() => {
   useEffect(() => {
-    MatchStore.getUserInfo("3");
+    MatchStore.loadUserMatches("3");
   }, []);
   return (
     <div className="p-2">
