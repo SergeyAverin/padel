@@ -1,12 +1,22 @@
+from match.schemas import MatchCreateDTO
+from match.repositories import MatchRepository
+from club.services import club_service
+from account.models import User
+
+
 class MatchService:
+    def __init__(self) -> None:
+        self.match_repository = MatchRepository()
+
     def start_match(self):
         pass
 
     def end_match(self):
         pass
 
-    def create_match(self):
-        pass
+    async def create_match(self,  match_create_data: MatchCreateDTO, user: User):
+        club = await club_service.get_club_by_id(match_create_data.club_id)
+        return await self.match_repository.create_match(match_create_data, club, user)
 
     def get_match_by_id(self):
         pass
@@ -30,3 +40,6 @@ class MatchPlayersService:
 
     def change_user_order(self):
         pass
+
+
+match_service = MatchService()

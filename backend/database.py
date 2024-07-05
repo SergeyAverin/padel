@@ -10,6 +10,7 @@ MODELS = [
     "account.models",
     "friends.models",
     "club.models",
+    'match.models',
     "aerich.models"
 ]
 

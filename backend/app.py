@@ -10,6 +10,7 @@ from core.config.api_settings import api_setting
 from account.router import profile_router
 from friends.routes import friend_router
 from club.routes import club_routes
+from match.routes import match_router
 from database import init_db
 
 app = FastAPI()
@@ -34,6 +35,7 @@ api_router = APIRouter(prefix='/api/v1.0')
 api_router.include_router(profile_router)
 api_router.include_router(friend_router)
 api_router.include_router(club_routes)
+api_router.include_router(match_router)
 app.include_router(api_router)
 
 

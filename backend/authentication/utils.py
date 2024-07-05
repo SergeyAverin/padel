@@ -12,7 +12,7 @@ logger = getLogger()
 
 def encode_jwt(
     payload: dict,
-    private_key: str = '123',
+    private_key: str = '3',
     algorithm: str = 'HS256',
     expire_minutes: int = 1440
 ) -> str:
@@ -41,7 +41,7 @@ def encode_jwt(
 
 def decode_jwt(
     jwt_token: Union[str, bytes],
-    public_key: str = '123',
+    public_key: str = '3',
     algorithm: str = 'HS256'
 ) -> Dict[str, Any]:
     ''' 

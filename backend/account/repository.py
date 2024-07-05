@@ -14,12 +14,12 @@ class UserRepository:
 
     async def create_user(self, user_data: UserDTO) -> User:
         user = User(
-            age=user_data.age,
-            email=user_data.email,
+            username=user_data.username,
             first_name=user_data.first_name,
             last_name=user_data.last_name,
+            email=user_data.email,
             telegram_user_id=user_data.telegram_user_id,
-            username=user_data.username,
+            age=user_data.age,
             hand=user_data.hand.value,
             position=user_data.position.value
         )

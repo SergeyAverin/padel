@@ -17,33 +17,33 @@ async def get_all_clubs():
 
 @club_routes.post('/')
 async def create_club(club_data: CreateClubDTO):
-    user = await user_service.get_user_by_telegram_user_id('123')
+    user = await user_service.get_user_by_telegram_user_id('3')
     club = await club_service.create_club(club_data, user)
     return club
 
 
 @club_routes.get('/bookmarks', tags=['bookmark'])
 async def get_user_bookmarks():
-    clubs = await club_bookmark_service.get_bookmarked_clubs('123')
+    clubs = await club_bookmark_service.get_bookmarked_clubs('3')
     return clubs
 
 
 @club_routes.post('/bookmarks', tags=['bookmark'])
 async def add_club_in_bookmark(club_id: int = Body()):
-    await club_bookmark_service.add_in_bookmark_club('123', club_id)
+    await club_bookmark_service.add_in_bookmark_club('3', club_id)
     return {'message': 'ok'}
 
 
 @club_routes.delete('/bookmarks', tags=['bookmark'])
 async def remove_club_in_bookmark(club_id: int = Body()):
-    await club_bookmark_service.remove_in_bookmark_club('123', club_id)
+    await club_bookmark_service.remove_in_bookmark_club('3', club_id)
     # ToDo: возвращать текущий статус закладки
     return {'message': 'ok'}
 
 
 @club_routes.get('/{club_id}/is_bookmark')
 async def get_bookmarked_clubs(club_id: int):
-    is_bookmark = await club_bookmark_service.is_bookmarked_club('123', club_id)
+    is_bookmark = await club_bookmark_service.is_bookmarked_club('3', club_id)
     return {'is_bookmark': is_bookmark}
 
 
