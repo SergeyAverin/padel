@@ -17,3 +17,8 @@ async def create_match(match_create_data: MatchCreateDTO = Body()):
 @match_router.get('/matches/{match_id}')
 async def get_match(match_id: str):
     return await match_service.get_match_by_id(match_id)
+
+
+@match_router.get('/user/{match_id}/match', tags=['user'])
+async def get_match_by_user_id(match_id: str):
+    return await match_service.get_match_by_user(match_id)

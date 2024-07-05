@@ -21,8 +21,8 @@ class MatchService:
     async def get_match_by_id(self, match_id: str):
         return await self.match_repository.get_match_by_id(match_id)
 
-    def get_match_by_user(self):
-        pass
+    async def get_match_by_user(self, user_id: str):
+        return await self.match_repository.get_match_by_user(user_id)
 
     def get_match_by_club(self):
         pass
