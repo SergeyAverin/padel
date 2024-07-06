@@ -1,11 +1,24 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserInfo, changeHand, changePosition, updateUser } from "@dal/user";
-import { Hand, IUpdateUserData, IUser, Position } from "@schemas/user";
+import {
+  getUserInfo,
+  changeHand,
+  changePosition,
+  updateUser,
+  getStats,
+} from "@dal/user";
+import {
+  Hand,
+  IUpdateUserData,
+  IUser,
+  IUserStats,
+  Position,
+} from "@schemas/user";
 
 class UserStore {
   isLoading = false;
   user: IUser | null = null;
+  stats: IUserStats | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,6 +39,9 @@ class UserStore {
   async updateUser(userId: string, data: IUpdateUserData) {
     await updateUser(userId, data);
     await this.getUserInfo(userId);
+  }
+  async getStats() {
+    this.stats = await getStats();
   }
 }
 

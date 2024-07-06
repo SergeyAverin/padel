@@ -1,12 +1,22 @@
-import Stat from "@molecules/account/Stat";
-import React from "react";
+import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
-export const UserStats: React.FC = () => {
+import Stat from "@molecules/account/Stat";
+import UserStore from "@store/user";
+
+export const UserStats: React.FC = observer(() => {
+  useEffect(() => {
+    UserStore.getStats();
+  }, []);
   return (
-    <div className="bg-primary p-5 rounded-md flex justify-around items-start">
-      <Stat count={0} text="Friends" />
-      <Stat count={0} text="Match" />
-      <Stat count={0} text="Clubs" />
-    </div>
+    <>
+      {UserStore.stats && (
+        <div className="bg-primary p-5 rounded-md flex justify-around items-start">
+          <Stat count={UserStore.stats.friends_count} text="Friends" />
+          <Stat count={UserStore.stats.matches_count} text="Match" />
+          <Stat count={UserStore.stats.clubs_count} text="Clubs" />
+        </div>
+      )}
+    </>
   );
-};
+});

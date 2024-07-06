@@ -9,12 +9,16 @@ export interface IUser {
   position: Position;
 }
 
+export interface IUserStats {
+  clubs_count: number;
+  matches_count: number;
+  friends_count: number;
+}
+
 export interface IUpdateUserData {
-  first_name: string;
-  last_name: string;
-  username: string;
-  age: number;
-  email: string;
+  clubs_count: number;
+  friends_count: number;
+  matches_count: number;
 }
 
 export enum Hand {

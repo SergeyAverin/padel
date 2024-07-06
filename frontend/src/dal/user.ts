@@ -19,6 +19,11 @@ export const changePosition = async (userId: string, position: Position) => {
 };
 
 export const updateUser = async (userId: string, data: IUpdateUserData) => {
-  console.log(data);
   await axios.patch(API_URL + `/user/${userId}`, data);
+};
+
+export const getStats = async () => {
+  const res = await axios.get(API_URL + `/user/stats/3`);
+  const stats = await res.data;
+  return stats;
 };

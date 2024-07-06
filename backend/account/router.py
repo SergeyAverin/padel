@@ -11,7 +11,7 @@ from friends.services import friend_service
 profile_router = APIRouter(prefix='/user', tags=['user'])
 
 
-@profile_router.get('/stats')
+@profile_router.get('/stats/{telegram_user_id}')
 async def get_stats(telegram_user_id: str):
     clubs = await club_bookmark_service.get_bookmarked_clubs(telegram_user_id)
     friends = await friend_service.get_user_friends(telegram_user_id)
