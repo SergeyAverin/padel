@@ -7,3 +7,9 @@ export const getTags = async () => {
   const tags = await res.data;
   return tags;
 };
+
+export const getFriendTags = async (userId: string) => {
+  const res = await axios.get(API_URL + `/tags/friends/${userId}`);
+  const tags = await res.data;
+  return tags;
+};
