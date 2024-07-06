@@ -9,3 +9,4 @@ export { Input } from "./Input/Input";
 export { Icon } from "./Icon/Icon";
 export { Toggle } from "./Toggle/Toggle";
 export { Form } from "./Form/Form";
+export { TabsLink } from "./TabsLink/TabsLink";
