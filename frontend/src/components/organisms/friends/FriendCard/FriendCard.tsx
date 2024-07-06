@@ -28,22 +28,22 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
         </div>
       </div>
       <div className="mt-5 flex items-center flex-wrap">
-        <div className="mr-3">
+        <div className="mr-1">
           <Tag />
         </div>
-        <div className="mr-3 mt-1">
+        <div className="mr-1 mt-1">
           <Tag />
         </div>
-        <div className="mr-3 mt-1">
+        <div className="mr-1 mt-1">
           <Tag />
         </div>
-        <div className="mr-3 mt-1">
+        <div className="mr-1 mt-1">
           <Tag />
         </div>
-        <div className="mr-3 mt-1">
+        <div className="mr-1 mt-1">
           <Tag />
         </div>
-        <div className="mr-3 first-line:mt-1">
+        <div className="mr-1 first-line:mt-1">
           <Tag />
         </div>
       </div>

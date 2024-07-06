@@ -8,7 +8,7 @@ import FriendRequest from "@organisms/friends/FriendRequest";
 
 export const FriendsPage: React.FC = observer(() => {
   useEffect(() => {
-    FriendStore.getFriends("321");
+    FriendStore.getFriends("3");
     FriendRequestsStore.getFriendRequests();
   }, []);
   return (

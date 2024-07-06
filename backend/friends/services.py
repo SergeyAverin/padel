@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from friends.repositories import FriendRepository, FriendRequestRepository
+from friends.repositories import FriendRepository, FriendRequestRepository, TagRepository
 from account.service import user_service
 
 logger = getLogger()
@@ -65,30 +65,34 @@ class FriendService:
 
 
 class TagsService:
-    def get_user_tags(self):
+    def __init__(self) -> None:
+        self.tag_repository = TagRepository()
+
+    async def get_user_tags(self, user_id: str):
         ''' Дает теги которые принадлежат пользователю. '''
-        pass
+        return await self.tag_repository.get_user_tags(user_id)
 
-    def get_friend_tags(self):
+    async def get_friend_tags(self):
         ''' Дает теги повешенные пользователю. '''
-        pass
+        return await self.tag_repository.get_friend_tags()
 
-    def create_tag(self):
+    async def create_tag(self):
         ''' Создает тег. '''
-        pass
+        return await self.tag_repository.create_tag()
 
-    def remove_tag(self):
+    async def remove_tag(self):
         ''' Удаляет тег. '''
-        pass
+        return await self.tag_repository.remove_tag()
 
-    def add_tag_on_friend(self):
+    async def add_tag_on_friend(self):
         ''' Добавляет тег на друга. '''
-        pass
+        return await self.tag_repository.add_tag_on_friend()
 
-    def remove_tag_from_friend(self):
+    async def remove_tag_from_friend(self):
         ''' Удаляет тег с друга. '''
-        pass
+        return await self.tag_repository.remove_tag_from_friend()
 
 
 friend_request_service = FriendRequestService()
 friend_service = FriendService()
+tags_service = TagsService()

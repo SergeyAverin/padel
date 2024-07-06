@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Body
 
-from friends.services import friend_request_service, friend_service
+from friends.services import friend_request_service, friend_service, tags_service
 from account.service import user_service
 
 
@@ -62,3 +62,9 @@ async def cancel_friend_request(friend_requests_id: int):
 async def remove_friend(recipient_id: str):
     await friend_service.remove_user_friend('321', recipient_id)
     return {'message': 'ok'}
+
+
+@friend_router.get('/tags', tags=['tags'])
+async def get_tags():
+    tags = await tags_service.get_user_tags('3')
+    return tags

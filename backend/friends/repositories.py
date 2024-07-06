@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from friends.models import FriendRequest
+from friends.models import FriendRequest, Tag
 from account.models import User
 from account.service import user_service
 
@@ -12,6 +12,8 @@ class FriendRequestRepository:
     async def create_friend_request(self, sender_user_id: str, recipient_user_id: str):
         sender_user = await user_service.get_user_by_telegram_user_id(sender_user_id)
         recipient_user = await user_service.get_user_by_telegram_user_id(recipient_user_id)
+        logger.debug(sender_user)
+        logger.debug(recipient_user)
         friend_request = FriendRequest(
             sender_user=sender_user,
             recipient_user=recipient_user
@@ -55,9 +57,9 @@ class FriendRepository:
 
 
 class TagRepository:
-    def get_user_tags(self):
+    async def get_user_tags(self, user_id: str):
         ''' Дает теги которые принадлежат пользователю. '''
-        pass
+        return await Tag.filter(tag_owner__id=user_id)
 
     def get_friend_tags(self):
         ''' Дает теги повешенные пользователю. '''
