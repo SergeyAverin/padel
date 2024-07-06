@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
 import Tag from "@molecules/friends/Tag";
 import UserPhoto from "@molecules/account/UserPhoto";
@@ -11,7 +12,7 @@ interface IFriendCardProps {
   user: IUser;
 }
 
-export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
+export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
   useEffect(() => {
     TagStore.getFriendTags(user.telegram_user_id);
   }, []);
@@ -36,13 +37,18 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
         {TagStore.friendsWithTags.has(user.telegram_user_id) &&
           TagStore.friendsWithTags.get(user.telegram_user_id)?.map((tag) => (
             <div className="mr-1" key={tag.id}>
-              <Tag text={tag.name} isAdd={false} />
+              <Tag
+                text={tag.name}
+                isAdd={false}
+                id={tag.id}
+                userId={user.telegram_user_id}
+              />
             </div>
           ))}
       </div>
       <div className="mt-5 ">
-        <AddTag />
+        <AddTag userId={user.telegram_user_id} />
       </div>
     </div>
   );
-};
+});

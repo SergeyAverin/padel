@@ -13,3 +13,12 @@ export const getFriendTags = async (userId: string) => {
   const tags = await res.data;
   return tags;
 };
+
+export const addTag = async (userId: string, tagId: number) => {
+  await axios.post(API_URL + `/tags/friends/${userId}`, tagId);
+};
+export const removeTag = async (userId: string, tagId: number) => {
+  await axios.delete(API_URL + `/tags/friends/${userId}`, {
+    data: tagId,
+  });
+};

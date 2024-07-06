@@ -1,14 +1,27 @@
+import TagStore from "@store/tags";
+
 interface ITagProps {
   text: string;
+  id: number;
   isAdd: boolean;
+  userId?: string | null;
 }
 
-export const Tag: React.FC<ITagProps> = ({ text, isAdd = false }) => {
+export const Tag: React.FC<ITagProps> = ({
+  text,
+  isAdd = false,
+  id,
+  userId,
+}) => {
   const addTag = () => {
-    alert("add");
+    if (userId) {
+      TagStore.addTag(userId, id);
+    }
   };
   const removeTag = () => {
-    alert("remove");
+    if (userId) {
+      TagStore.removeTag(userId, id);
+    }
   };
   const deleteTag = () => {
     alert("del");
