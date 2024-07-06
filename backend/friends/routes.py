@@ -68,3 +68,9 @@ async def remove_friend(recipient_id: str):
 async def get_tags():
     tags = await tags_service.get_user_tags('3')
     return tags
+
+
+@friend_router.post('/tags', tags=['tags'])
+async def create_tag(tag_name: str = Body()):
+    tags = await tags_service.create_tag(tag_name, '3')
+    return tags

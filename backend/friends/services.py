@@ -76,9 +76,9 @@ class TagsService:
         ''' Дает теги повешенные пользователю. '''
         return await self.tag_repository.get_friend_tags()
 
-    async def create_tag(self):
+    async def create_tag(self, tag_name: str, user_id: str):
         ''' Создает тег. '''
-        return await self.tag_repository.create_tag()
+        return await self.tag_repository.create_tag(tag_name, user_id)
 
     async def remove_tag(self):
         ''' Удаляет тег. '''
