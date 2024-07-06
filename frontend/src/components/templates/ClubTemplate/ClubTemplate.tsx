@@ -7,6 +7,7 @@ import ClubStore from "@store/club";
 import MatchStore from "@store/match";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
+import Tabs from "@molecules/Tabs";
 
 export const ClubTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -14,6 +15,34 @@ export const ClubTemplate: React.FC = observer(() => {
       MatchStore.loadClubMatches(ClubStore.openedClub?.id);
     }
   }, [ClubStore.openedClub]);
+  const tabs = [
+    {
+      to: "#match",
+      text: "match",
+      content: (
+        <div>
+          {" "}
+          <div>
+            {MatchStore.matches.map((match) => (
+              <div key={match.id} className="mt-5">
+                <Match />
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+    {
+      to: "#booking",
+      text: "Booking",
+      content: <div>booking</div>,
+    },
+    {
+      to: "#photos",
+      text: "Photos",
+      content: <div>photos</div>,
+    },
+  ];
   return (
     <div className="p-5">
       <Heading variant={HeadingVariant.H1}>
@@ -25,13 +54,8 @@ export const ClubTemplate: React.FC = observer(() => {
           {ClubStore.openedClub?.address}
         </div>
       </div>
-      <div>
-        {MatchStore.matches.map((match) => (
-          <div key={match.id} className="mt-5">
-            <Match />
-          </div>
-        ))}
-      </div>
+
+      <Tabs subTab={tabs} />
     </div>
   );
 });

@@ -19,17 +19,17 @@ export const Tabs: React.FC<ITabsProps> = ({ subTab }) => {
 
   return (
     <>
-      <div className="flex ">
+      <div className="flex  items-end">
         {subTab.map((tab) => (
           <div onClick={() => onChangeTab(tab)}>
             <TabsLink key={tab.to} isActive={tab.to == activeTab.to}>
-              {tab.content}
+              {tab.text}
             </TabsLink>
           </div>
         ))}
         <div className="border-b-2 border-fg w-full"></div>
       </div>
-      {activeTab.content}
+      <div className="mt-5">{activeTab.content}</div>
     </>
   );
 };

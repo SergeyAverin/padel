@@ -8,21 +8,13 @@ import UserStats from "@organisms/account/UserStats";
 import PadelInfo from "@organisms/account/PadelInfo";
 import MatchStore from "@store/match";
 import Match from "@organisms/matches/Match";
-import Tabs from "@molecules/Tabs";
 
 export const ProfileTemplate: React.FC = observer(() => {
   useEffect(() => {
     MatchStore.loadUserMatches("3");
   }, []);
-  const tabs = [
-    { to: "#a", text: "a", content: <div>a</div> },
-    { to: "#b", text: "b", content: <div>b</div> },
-    { to: "#z", text: "z", content: <div>z</div> },
-  ];
   return (
     <div className="p-2">
-      <Tabs subTab={tabs} />
-
       <UserInfo />
       <div className="mt-[30px]">
         <div className="w-[250px]">

@@ -5,5 +5,6 @@ import ClubTemplate from "@templates/ClubTemplate";
 
 export const ClubPage: React.FC = () => {
   useLoadingClubById();
+
   return <ClubTemplate />;
 };
