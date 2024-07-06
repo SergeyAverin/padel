@@ -52,3 +52,29 @@ class FriendRepository:
         await recipient_user.friends.remove(sender_user)
 
         await sender_user.save()
+
+
+class TagRepository:
+    def get_user_tags(self):
+        ''' Дает теги которые принадлежат пользователю. '''
+        pass
+
+    def get_friend_tags(self):
+        ''' Дает теги повешенные пользователю. '''
+        pass
+
+    def create_tag(self):
+        ''' Создает тег. '''
+        pass
+
+    def remove_tag(self):
+        ''' Удаляет тег. '''
+        pass
+
+    def add_tag_on_friend(self):
+        ''' Добавляет тег на друга. '''
+        pass
+
+    def remove_tag_from_friend(self):
+        ''' Удаляет тег с друга. '''
+        pass
