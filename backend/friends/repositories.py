@@ -88,10 +88,14 @@ class TagRepository:
         user_tags = await self.get_friend_tags(user_id)
         tag = await Tag.get_or_none(id=tag_id)
         if tag not in user_tags:
-            logger.debug('add tag in user')
             await tag.friends_with_tag.add(user)
             await tag.save()
 
-    def remove_tag_from_friend(self):
+    async def remove_tag_from_friend(self, user_id: str, tag_id: int):
         ''' Удаляет тег с друга. '''
-        pass
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        user_tags = await self.get_friend_tags(user_id)
+        tag = await Tag.get_or_none(id=tag_id)
+        if tag in user_tags:
+            await tag.friends_with_tag.remove(user)
+            await tag.save()
