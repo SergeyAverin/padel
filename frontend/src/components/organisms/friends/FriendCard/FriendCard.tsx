@@ -4,6 +4,7 @@ import Tag from "@molecules/friends/Tag";
 import UserPhoto from "@molecules/account/UserPhoto";
 import { IUser } from "@schemas/user";
 import UnFriend from "@molecules/friends/UnFriend";
+import AddTag from "@molecules/friends/AddTag";
 
 interface IFriendCardProps {
   user: IUser;
@@ -29,25 +30,27 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
       </div>
       <div className="mt-5 flex items-center flex-wrap">
         <div className="mr-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
         <div className="mr-1 mt-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
         <div className="mr-1 mt-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
         <div className="mr-1 mt-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
         <div className="mr-1 mt-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
         <div className="mr-1 first-line:mt-1">
-          <Tag />
+          <Tag text="tet" />
         </div>
       </div>
-      <div className="mt-5 select-none cursor-pointer">+ TAG</div>
+      <div className="mt-5 ">
+        <AddTag />
+      </div>
     </div>
   );
 };
