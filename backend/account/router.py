@@ -3,9 +3,24 @@ from fastapi import APIRouter, HTTPException, Body
 from account.service import user_service
 from account.schemas import UserDTO, UpdateUserDTO
 from account.models import Hand, Position, User
+from match.services import match_service
+from club.services import club_bookmark_service
+from friends.services import friend_service
 
 
 profile_router = APIRouter(prefix='/user', tags=['user'])
+
+
+@profile_router.get('/stats')
+async def get_stats(telegram_user_id: str):
+    clubs = await club_bookmark_service.get_bookmarked_clubs(telegram_user_id)
+    friends = await friend_service.get_user_friends(telegram_user_id)
+    matches = await match_service.get_match_by_user(telegram_user_id)
+    return {
+        'clubs_count': len(clubs),
+        'friends_count': len(friends),
+        'matches_count': len(matches),
+    }
 
 
 @profile_router.get('/{telegram_user_id}')
