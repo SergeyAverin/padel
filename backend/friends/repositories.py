@@ -74,9 +74,11 @@ class TagRepository:
         await tag.save()
         return tag
 
-    def remove_tag(self):
+    async def remove_tag(self, tag_id: int):
         ''' Удаляет тег. '''
-        pass
+        tag = await Tag.get_or_none(id=tag_id)
+        if tag:
+            await tag.delete()
 
     def add_tag_on_friend(self):
         ''' Добавляет тег на друга. '''

@@ -80,9 +80,9 @@ class TagsService:
         ''' Создает тег. '''
         return await self.tag_repository.create_tag(tag_name, user_id)
 
-    async def remove_tag(self):
+    async def remove_tag(self, tag_id: int):
         ''' Удаляет тег. '''
-        return await self.tag_repository.remove_tag()
+        await self.tag_repository.remove_tag(tag_id)
 
     async def add_tag_on_friend(self):
         ''' Добавляет тег на друга. '''

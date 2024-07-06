@@ -74,3 +74,8 @@ async def get_tags():
 async def create_tag(tag_name: str = Body()):
     tags = await tags_service.create_tag(tag_name, '3')
     return tags
+
+
+@friend_router.delete('/tags/{tag_id}', tags=['tags'])
+async def remove_tag(tag_id: int):
+    await tags_service.remove_tag(tag_id)
