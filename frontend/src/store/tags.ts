@@ -6,6 +6,7 @@ import {
   addTag,
   removeTag,
   deleteTag,
+  createTag,
 } from "@dal/tags";
 import { ITag } from "@schemas/tags";
 
@@ -33,6 +34,10 @@ class TagsStore {
   }
   async deleteTag(tagId: number) {
     await deleteTag(tagId);
+    await this.getTags();
+  }
+  async createTag(tagName: string) {
+    await createTag(tagName);
     await this.getTags();
   }
 }

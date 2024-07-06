@@ -27,3 +27,7 @@ export const removeTag = async (userId: string, tagId: number) => {
 export const deleteTag = async (tagId: number) => {
   await axios.delete(API_URL + `/tags/${tagId}`);
 };
+
+export const createTag = async (tagName: string) => {
+  await axios.post(API_URL + "/tags", tagName);
+};

@@ -15,7 +15,7 @@ interface IFriendCardProps {
 export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
   useEffect(() => {
     TagStore.getFriendTags(user.telegram_user_id);
-  }, []);
+  }, [TagStore.tags]);
   return (
     <div className="bg-primary p-5 rounded-xl">
       <div className="flex justify-between">
