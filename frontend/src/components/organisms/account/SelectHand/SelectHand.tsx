@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 
+import { useSetHand } from "./hook/useSetHand";
 import { Hand as HandEnum } from "@schemas/user";
-import UserStore from "@store/user";
 
 import LeftHandIcon from "@assets/LeftHandIcon.svg?react";
 import HandRightIcon from "@assets/RightHandIcon.svg?react";
 
 export const SelectHand: React.FC = () => {
-  const [hand, setHand] = useState(UserStore.user?.hand);
-  const onChangeHand = (hand: HandEnum) => {
-    setHand(hand);
-    UserStore.changeHand(hand);
-  };
+  const [hand, onChangeHand] = useSetHand();
   return (
     <div className="p-5 bg-primary rounded-xl mt-5">
       <div className="text-[24px]">Select hand:</div>

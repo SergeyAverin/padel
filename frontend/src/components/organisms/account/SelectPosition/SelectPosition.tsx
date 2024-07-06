@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
+
+import { useSetPosition } from "./hook/useSetPosition";
+import BothIcon from "@assets/BothIcon.svg?react";
+import { Position } from "@schemas/user";
 
 import LeftHandIcon from "@assets/LeftIcon.svg?react";
 import HandRightIcon from "@assets/RightIcon.svg?react";
-import BothIcon from "@assets/BothIcon.svg?react";
-import UserStore from "@store/user";
-import { Position } from "@schemas/user";
 
 export const SelectPosition: React.FC = () => {
-  const [position, sePosition] = useState(UserStore.user?.position);
-  const onChangePosition = (position: Position) => {
-    sePosition(position);
-    UserStore.changePosition(position);
-  };
+  const [position, onChangePosition] = useSetPosition();
   return (
     <div className="p-5 bg-primary rounded-xl mt-5">
       <div className="text-[24px]">Select position:</div>
