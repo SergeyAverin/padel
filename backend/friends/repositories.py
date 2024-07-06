@@ -82,9 +82,13 @@ class TagRepository:
         if tag:
             await tag.delete()
 
-    def add_tag_on_friend(self):
+    async def add_tag_on_friend(self, user_id: str, tag_id: int):
         ''' Добавляет тег на друга. '''
-        pass
+        user = await user_service.get_user_by_telegram_user_id(user_id)
+        tag = await Tag.get_or_none(id=tag_id)
+        await tag.friends_with_tag.add(user)
+        await tag.save()
+        logger.debug(tag.friends_with_tag)
 
     def remove_tag_from_friend(self):
         ''' Удаляет тег с друга. '''

@@ -84,9 +84,9 @@ class TagsService:
         ''' Удаляет тег. '''
         await self.tag_repository.remove_tag(tag_id)
 
-    async def add_tag_on_friend(self):
+    async def add_tag_on_friend(self, user_id: str, tag_id: int):
         ''' Добавляет тег на друга. '''
-        return await self.tag_repository.add_tag_on_friend()
+        await self.tag_repository.add_tag_on_friend(user_id, tag_id)
 
     async def remove_tag_from_friend(self):
         ''' Удаляет тег с друга. '''
