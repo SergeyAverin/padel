@@ -61,9 +61,11 @@ class TagRepository:
         ''' Дает теги которые принадлежат пользователю. '''
         return await Tag.filter(tag_owner__telegram_user_id=user_id)
 
-    def get_friend_tags(self):
+    async def get_friend_tags(self, friend_id: str):
         ''' Дает теги повешенные пользователю. '''
-        pass
+        return await Tag.filter(
+            friends_with_tag__telegram_user_id=friend_id
+        )
 
     async def create_tag(self, tag_name: str, user_id: str):
         ''' Создает тег. '''
