@@ -1,6 +1,12 @@
 import { makeAutoObservable } from "mobx";
 
-import { getTags, getFriendTags, addTag, removeTag } from "@dal/tags";
+import {
+  getTags,
+  getFriendTags,
+  addTag,
+  removeTag,
+  deleteTag,
+} from "@dal/tags";
 import { ITag } from "@schemas/tags";
 
 class TagsStore {
@@ -24,6 +30,10 @@ class TagsStore {
   async removeTag(userId: string, tagId: number) {
     await removeTag(userId, tagId);
     await this.getFriendTags(userId);
+  }
+  async deleteTag(tagId: number) {
+    await deleteTag(tagId);
+    await this.getTags();
   }
 }
 

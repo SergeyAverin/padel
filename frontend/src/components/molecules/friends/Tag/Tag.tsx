@@ -24,7 +24,7 @@ export const Tag: React.FC<ITagProps> = ({
     }
   };
   const deleteTag = () => {
-    alert("del");
+    TagStore.deleteTag(id);
   };
   return (
     <div className="bg-highlight p-1 font-bold rounded-full w-[80px] text-bg text-[12px] flex justify-between items-center pl-3 pr-3">
