@@ -13,3 +13,11 @@ class UserDTO(BaseModel):
 
     position: Position = Field(default=Position.BOTH.value)
     hand: Hand = Field(default=Hand.RIGHT_HAND.value)
+
+
+class UpdateUserDTO(BaseModel):
+    first_name: str
+    last_name: str
+    username: str
+    age: int
+    email: str

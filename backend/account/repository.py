@@ -1,7 +1,7 @@
 from logging import getLogger
 
 from account.models import User
-from account.schemas import UserDTO
+from account.schemas import UserDTO, UpdateUserDTO
 
 
 logger = getLogger()
@@ -26,24 +26,13 @@ class UserRepository:
         await user.save()
         return user
 
-    async def update_user_by_id(self, telegram_user_id: str, new_user_data: UserDTO):
+    async def update_user_by_id(self, telegram_user_id: str, new_user_data: UpdateUserDTO):
         old_user = await User.get_or_none(telegram_user_id=telegram_user_id)
         old_user.age = new_user_data.age
         old_user.email = new_user_data.email
         old_user.first_name = new_user_data.first_name
         old_user.last_name = new_user_data.last_name
-        old_user.telegram_user_id = new_user_data.telegram_user_id
         old_user.username = new_user_data.username
-        old_user.position = new_user_data.position.value
-        old_user.hand = new_user_data.hand.value
+
         await old_user.save()
-        return UserDTO(
-            age=old_user.age,
-            email=old_user.email,
-            first_name=old_user.first_name,
-            last_name=old_user.last_name,
-            telegram_user_id=old_user.telegram_user_id,
-            username=old_user.username,
-            hand=old_user.hand,
-            position=old_user.position
-        )
+        return old_user

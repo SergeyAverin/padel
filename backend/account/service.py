@@ -1,7 +1,7 @@
 from logging import getLogger
 
 from account.repository import UserRepository
-from account.schemas import UserDTO
+from account.schemas import UserDTO, UpdateUserDTO
 from account.models import Hand, Position, User
 
 
@@ -20,7 +20,7 @@ class UserService:
         user = await self.user_repository.get_user_by_telegram_user_id(telegram_id)
         return user
 
-    async def update_user_by_user_id(self, telegram_user_id: str, new_user_data: UserDTO):
+    async def update_user_by_user_id(self, telegram_user_id: str, new_user_data: UpdateUserDTO):
         return await self.user_repository.update_user_by_id(telegram_user_id, new_user_data)
 
     async def change_hand(self, user: UserDTO, new_hand: Hand) -> UserDTO:

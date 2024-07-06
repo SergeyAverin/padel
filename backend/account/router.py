@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Body
 
 from account.service import user_service
-from account.schemas import UserDTO
+from account.schemas import UserDTO, UpdateUserDTO
 from account.models import Hand, Position, User
 
 
@@ -17,7 +17,10 @@ async def get_user(telegram_user_id: str) -> UserDTO:
 
 
 @profile_router.patch('/{telegram_user_id}')
-async def update_user_by_telegram_user_id(telegram_user_id: str, new_user_data: UserDTO) -> UserDTO:
+async def update_user_by_telegram_user_id(
+    telegram_user_id: str,
+    new_user_data: UpdateUserDTO
+) -> UserDTO:
     user = await user_service.update_user_by_user_id(telegram_user_id, new_user_data)
     return user
 
