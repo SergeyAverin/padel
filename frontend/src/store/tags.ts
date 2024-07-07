@@ -12,10 +12,21 @@ import { ITag } from "@schemas/tags";
 
 class TagsStore {
   tags: Array<ITag> = [];
+  filterTags: Array<ITag> = [];
   friendsWithTags: Map<string, Array<ITag>> = new Map();
 
   constructor() {
     makeAutoObservable(this);
+  }
+  async addFilter(tag: ITag) {
+    if (this.filterTags.indexOf(tag) < 0) {
+      this.filterTags.push(tag);
+    }
+  }
+  async removeFilter(tag: ITag) {
+    this.filterTags = this.filterTags.filter(
+      (tagFilter) => tagFilter.id !== tag.id
+    );
   }
   async getTags() {
     this.tags = await getTags();
