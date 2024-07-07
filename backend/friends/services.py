@@ -31,8 +31,13 @@ class FriendRequestService:
     async def reject_friend_request(self, friend_request_id: int):
         await self.cancel_friend_request(friend_request_id)
 
-    async def get_friend_requests_by_user(self, user_id: str):
-        friend_requests = await self.friend_request_repository.get_friends_requests_by_user(
+    async def get_outer_friend_requests(self, user_id: str):
+        friend_requests = await self.friend_request_repository.get_outer_friend_requests(
+            user_id)
+        return friend_requests
+
+    async def get_inner_friend_requests(self, user_id: str):
+        friend_requests = await self.friend_request_repository.get_inner_friend_requests(
             user_id)
         return friend_requests
 

@@ -7,9 +7,15 @@ from account.service import user_service
 friend_router = APIRouter(tags=['friend'])
 
 
-@friend_router.get('/friend_requests')
-async def get_user_friend_request():
-    friend_request = await friend_request_service.get_friend_requests_by_user('string')
+@friend_router.get('/friend_requests/outer')
+async def get_outer_friend_requests():
+    friend_request = await friend_request_service.get_outer_friend_requests('string')
+    return friend_request
+
+
+@friend_router.get('/friend_requests/inner')
+async def get_inner_friend_requests():
+    friend_request = await friend_request_service.get_inner_friend_requests('string')
     return friend_request
 
 
