@@ -7,6 +7,7 @@ from match.schemas import MatchCreateDTO
 from club.models import Club
 from account.models import User
 from friends.services import friend_service
+from club.services import club_bookmark_service
 
 
 class MatchRepository:
@@ -32,6 +33,16 @@ class MatchRepository:
     async def get_match_by_friends(self, user_id: str):
         friends = await friend_service.get_user_friends(user_id)
         matches = await Match.filter(owner__id__in=[friend.id for friend in friends])
+
+        # matches = Match.filter(
+        #     Q(match_owner__in=friends) | Q(participants__in=friends)
+        # ).distinct()
+
+        return matches
+
+    async def get_matches_by_club_bookmarks(self, user_id: str):
+        bookmarks = await club_bookmark_service.get_bookmarked_clubs(user_id)
+        matches = await Match.filter(club__id__in=[bookmark.id for bookmark in bookmarks])
 
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
