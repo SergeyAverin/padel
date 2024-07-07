@@ -1,7 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  getFriendRequests,
+  getInnerFriendRequests,
+  getOuterFriendRequests,
   createFriendRequest,
   acceptFriendRequest,
   rejectFriendRequest,
@@ -12,26 +13,41 @@ import FriendStore from "@store/friends";
 
 class FriendRequestsStore {
   isLoading = false;
-  friendRequests: Array<IFriendRequest> = [];
+  friendRequestsInner: Array<IFriendRequest> = [];
+  friendRequestsOuter: Array<IFriendRequest> = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
   private removeFriendRequest(friendRequestId: number) {
-    this.friendRequests = this.friendRequests.filter(
+    this.friendRequestsInner = this.friendRequestsInner.filter(
+      (friendRequest) => friendRequest.id !== friendRequestId
+    );
+  }
+
+  private removeFriendRequestOuter(friendRequestId: number) {
+    this.friendRequestsOuter = this.friendRequestsOuter.filter(
       (friendRequest) => friendRequest.id !== friendRequestId
     );
   }
 
   private appendFriendRequest(friendRequest: IFriendRequest) {
-    this.friendRequests.push(friendRequest);
+    this.friendRequestsInner.push(friendRequest);
   }
 
-  async getFriendRequests() {
+  async getInnerFriendRequests() {
     this.isLoading = true;
     runInAction(async () => {
-      this.friendRequests = await getFriendRequests();
+      this.friendRequestsInner = await getInnerFriendRequests();
+      this.isLoading = false;
+    });
+  }
+
+  async getOuterFriendRequests() {
+    this.isLoading = true;
+    runInAction(async () => {
+      this.friendRequestsOuter = await getOuterFriendRequests();
       this.isLoading = false;
     });
   }
@@ -54,7 +70,7 @@ class FriendRequestsStore {
 
   async cancelFriendRequest(friendRequestId: number) {
     await cancelFriendRequest(friendRequestId);
-    this.removeFriendRequest(friendRequestId);
+    this.removeFriendRequestOuter(friendRequestId);
   }
 }
 

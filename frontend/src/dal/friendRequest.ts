@@ -4,8 +4,14 @@ import { IFriendRequest } from "@schemas/friendRequest";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const getFriendRequests = async () => {
-  const response = await axios.get(API_URL + "/friend_requests");
+export const getInnerFriendRequests = async () => {
+  const response = await axios.get(API_URL + "/friend_requests/inner");
+  const friendRequests = (await response.data) as Array<IFriendRequest>;
+  return friendRequests;
+};
+
+export const getOuterFriendRequests = async () => {
+  const response = await axios.get(API_URL + "/friend_requests/outer");
   const friendRequests = (await response.data) as Array<IFriendRequest>;
   return friendRequests;
 };

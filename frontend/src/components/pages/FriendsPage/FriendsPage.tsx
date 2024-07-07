@@ -1,42 +1,34 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import FriendCard from "@organisms/friends/FriendCard";
+import Tabs from "@molecules/Tabs";
+import InnerFriendRequestsTemplate from "@templates/InnerFriendRequestsTemplate";
+import OuterFriendRequestsTemplate from "@templates/OuterFriendRequestsTemplate";
+import FriendsTemplate from "@templates/FriendsTemplate";
 import FriendStore from "@store/friends";
 import FriendRequestsStore from "@store/friendRequests";
-import FriendRequest from "@organisms/friends/FriendRequest";
-import Tabs from "@molecules/Tabs";
 
 export const FriendsPage: React.FC = observer(() => {
   useEffect(() => {
     FriendStore.getFriends("3");
-    FriendRequestsStore.getFriendRequests();
+    FriendRequestsStore.getInnerFriendRequests();
+    FriendRequestsStore.getOuterFriendRequests();
   }, []);
   const tabs = [
     {
       to: "#friends",
       text: "Friends",
-      content: (
-        <div>
-          {FriendStore.friends.map((user) => (
-            <FriendCard user={user} key={user.telegram_user_id} />
-          ))}
-        </div>
-      ),
+      content: <FriendsTemplate />,
     },
     {
-      to: "#friendRequests",
-      text: "Friend requests",
-      content: (
-        <div>
-          {FriendRequestsStore.friendRequests.map((friendRequest) => (
-            <FriendRequest
-              friendRequestId={friendRequest.id}
-              key={friendRequest.id}
-            />
-          ))}
-        </div>
-      ),
+      to: "#innerFriendRequests",
+      text: "Inner requests",
+      content: <InnerFriendRequestsTemplate />,
+    },
+    {
+      to: "#outerFriendRequests",
+      text: "Outer requests",
+      content: <OuterFriendRequestsTemplate />,
     },
   ];
   return (

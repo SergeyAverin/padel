@@ -8,7 +8,7 @@ interface IFriendRequestProps {
   friendRequestId: number;
 }
 
-export const FriendRequest: React.FC<IFriendRequestProps> = ({
+export const FriendRequestInner: React.FC<IFriendRequestProps> = ({
   friendRequestId,
 }) => {
   return (

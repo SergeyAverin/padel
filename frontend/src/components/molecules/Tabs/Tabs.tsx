@@ -1,5 +1,7 @@
-import { TabsLink } from "@atoms/index";
 import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+
+import { TabsLink } from "@atoms/index";
 
 export interface Tab {
   to: string;
@@ -11,7 +13,7 @@ interface ITabsProps {
   subTab: Array<Tab>;
 }
 
-export const Tabs: React.FC<ITabsProps> = ({ subTab }) => {
+export const Tabs: React.FC<ITabsProps> = observer(({ subTab }) => {
   const [activeTab, setActiveTab] = useState(subTab[0]);
   const onChangeTab = (tab: Tab) => {
     setActiveTab(tab);
@@ -32,4 +34,4 @@ export const Tabs: React.FC<ITabsProps> = ({ subTab }) => {
       <div className="mt-5">{activeTab.content}</div>
     </>
   );
-};
+});

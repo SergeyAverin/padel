@@ -1,3 +1,5 @@
+from logging import getLogger
+
 from fastapi import APIRouter, Body
 
 from friends.services import friend_request_service, friend_service, tags_service
@@ -5,23 +7,24 @@ from account.service import user_service
 
 
 friend_router = APIRouter(tags=['friend'])
+logger = getLogger()
 
 
 @friend_router.get('/friend_requests/outer')
 async def get_outer_friend_requests():
-    friend_request = await friend_request_service.get_outer_friend_requests('string')
+    friend_request = await friend_request_service.get_outer_friend_requests('3')
     return friend_request
 
 
 @friend_router.get('/friend_requests/inner')
 async def get_inner_friend_requests():
-    friend_request = await friend_request_service.get_inner_friend_requests('string')
+    friend_request = await friend_request_service.get_inner_friend_requests('3')
     return friend_request
 
 
 @friend_router.post('/friend_requests')
 async def create_friend_request(recipient_user_id: str = Body()):
-    sender_user_id = 'string'
+    sender_user_id = '3'
     # ToDo: Защита от повторного создание
     # ToDo: Добавление в друзья если получатель тоже отправил запрос
     request = await friend_request_service.create_friend_request(sender_user_id, recipient_user_id)
