@@ -12,3 +12,9 @@ export const getMatchByClubId = async (clubId: number) => {
   const matches = await res.data;
   return matches;
 };
+
+export const getMatchesFromUserFriends = async (userId: number) => {
+  const res = await axios.get(API_URL + `/friends/${userId}/matches`);
+  const matches = await res.data;
+  return matches;
+};
