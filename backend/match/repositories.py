@@ -1,9 +1,12 @@
 from datetime import datetime
 
+# from tortoise.expressions import Q
+
 from match.models import Match, StatusEnum
 from match.schemas import MatchCreateDTO
 from club.models import Club
 from account.models import User
+from friends.services import friend_service
 
 
 class MatchRepository:
@@ -26,8 +29,15 @@ class MatchRepository:
     async def get_match_by_club(self, club_id: str):
         return await Match.filter(club_id=club_id)
 
-    def get_match_by_friends(self):
-        pass
+    async def get_match_by_friends(self, user_id: str):
+        friends = await friend_service.get_user_friends(user_id)
+        matches = await Match.filter(owner__id__in=[friend.id for friend in friends])
+
+        # matches = Match.filter(
+        #     Q(match_owner__in=friends) | Q(participants__in=friends)
+        # ).distinct()
+
+        return matches
 
     def delete_match_by_id(self):
         pass

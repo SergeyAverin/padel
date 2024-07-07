@@ -27,3 +27,8 @@ async def get_match_by_user_id(user_id: str):
 @match_router.get('/club/{club_id}/matches', tags=['club'])
 async def get_match_by_club_id(club_id: int):
     return await match_service.get_match_by_club(club_id)
+
+
+@match_router.get('/friends/{user_id}/matches', tags=['friends'])
+async def get_matches_by_user_friends(user_id: int):
+    return await match_service.get_match_by_friends(user_id)

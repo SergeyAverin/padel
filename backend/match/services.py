@@ -30,6 +30,9 @@ class MatchService:
     def delete_match_by_id(self):
         pass
 
+    async def get_match_by_friends(self, user_id: str):
+        return await self.match_repository.get_match_by_friends(user_id)
+
 
 class MatchPlayersService:
     def add_player_in_match(self):
