@@ -4,6 +4,7 @@ import {
   getMatchByClubId,
   getMatchByUserId,
   getMatchesFromUserFriends,
+  getMatchesFromBookmarkedClubs,
 } from "@dal/match";
 import { IMatch } from "@schemas/match";
 
@@ -11,6 +12,7 @@ class MatchStore {
   isLoading = false;
   matches: Array<IMatch> = [];
   matchesFromFriends: Array<IMatch> = [];
+  matchesFromBookmarks: Array<IMatch> = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -29,10 +31,17 @@ class MatchStore {
       this.isLoading = false;
     });
   }
-  async loadFriendsMatches(clubId: number) {
+  async loadFriendsMatches(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
-      this.matchesFromFriends = await getMatchesFromUserFriends(clubId);
+      this.matchesFromFriends = await getMatchesFromUserFriends(userId);
+      this.isLoading = false;
+    });
+  }
+  async loadMatchesFromBookmarkedClubs(userId: string) {
+    this.isLoading = true;
+    runInAction(async () => {
+      this.matchesFromBookmarks = await getMatchesFromBookmarkedClubs(userId);
       this.isLoading = false;
     });
   }
