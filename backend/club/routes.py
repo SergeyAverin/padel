@@ -11,8 +11,8 @@ club_routes = APIRouter(tags=['club'], prefix='/club')
 
 # ToDo: удалить этот route
 @club_routes.get('/clubs')
-async def get_all_clubs():
-    return await Club.all()
+async def get_all_clubs(name: str | None = None, city: str | None = None):
+    return await club_service.filter_club(name, city)
 
 
 @club_routes.post('/')

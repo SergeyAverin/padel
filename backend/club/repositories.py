@@ -1,5 +1,7 @@
 from logging import getLogger
 
+from tortoise.expressions import Q
+
 from club.schemas import CreateClubDTO
 from club.models import Club
 from account.models import User
@@ -34,6 +36,19 @@ class ClubRepository:
 
     def filter_by_name_substring(self):
         pass
+
+    async def filter_clubs(self, name=None, city=None):
+        query = Q()
+
+        if name:
+            query &= Q(name__icontains=name)
+        if city:
+            query &= Q(city__icontains=name)
+
+        if query:
+            return await Club.filter(query).all()
+        else:
+            return await Club.all()
 
 
 class ClubBookmarkRepository:

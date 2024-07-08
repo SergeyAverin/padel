@@ -27,6 +27,8 @@ class ClubService:
     def filter_by_name_substring(self):
         pass
 
+    async def filter_club(self, name=None, city=None):
+        return await self.club_repository.filter_clubs(name, city) 
 
 class ClubBookmarkService:
     def __init__(self) -> None:
