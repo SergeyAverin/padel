@@ -14,7 +14,6 @@ export const UploadPhotoForm: React.FC = observer(() => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (selectedFile) {
-      console.log(selectedFile);
       const formData = new FormData();
       formData.append("file", selectedFile);
       UserStore.uploadPhoto("3", formData);

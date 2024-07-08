@@ -29,7 +29,7 @@ export const getStats = async () => {
 };
 
 export const uploadPhoto = async (userId: string, photo: FormData) => {
-  axios.post(API_URL + `/user/${userId}/upload_photo`, photo, {
+  await axios.post(API_URL + `/user/${userId}/upload_photo`, photo, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
