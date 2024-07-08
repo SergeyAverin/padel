@@ -13,7 +13,10 @@ class ClubService:
         self.club_repository = ClubRepository()
 
     async def create_club(self,  club_data: CreateClubDTO, owner: User):
-        return await self.club_repository.create_club(club_data, owner)
+        club = await self.club_repository.create_club(club_data, owner)
+        club_bookmark_service.add_in_bookmark_club(
+            owner.telegram_user_id, club.id)
+        return club
 
     async def get_club_by_id(self, club_id: int):
         return await self.club_repository.get_club_by_id(club_id)

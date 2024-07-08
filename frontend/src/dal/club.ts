@@ -1,3 +1,4 @@
+import { ICreateClub } from "@schemas/club";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -20,7 +21,14 @@ export const getClubs = async () => {
   return club;
 };
 
-// createClub
+export const createClub = async (createClubData: ICreateClub) => {
+  const createClubResponse = await axios.post(
+    API_URL + "/club",
+    createClubData
+  );
+  const newClub = await createClubResponse.data;
+  return newClub;
+};
 
 export const getClubsByBookmark = async () => {
   const clubResponse = await axios.get(API_URL + "/club/bookmarks");

@@ -7,8 +7,9 @@ import {
   addClubInUserBookmarks,
   removeClubFromUserBookmark,
   getClubById,
+  createClub,
 } from "@dal/club";
-import { IClub } from "@schemas/club";
+import { IClub, ICreateClub } from "@schemas/club";
 
 class ClubStore {
   isLoading = false;
@@ -55,6 +56,11 @@ class ClubStore {
       this.openedClub = await getClubById(clubId);
       this.isLoadingOpenedClub = false;
     });
+  }
+  async createClub(createClubData: ICreateClub) {
+    const newClub = await createClub(createClubData);
+    this.bookmarkedClubs.push(newClub);
+    return newClub.id;
   }
 }
 
