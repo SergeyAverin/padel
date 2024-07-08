@@ -5,6 +5,7 @@ from tortoise.models import Model
 from tortoise.contrib.pydantic import pydantic_model_creator
 
 from club.models import Club
+from core.config.api_settings import api_setting
 
 
 class Position(str, Enum):
@@ -22,6 +23,8 @@ class User(Model):
     first_name = fields.CharField(max_length=255)
     last_name = fields.CharField(max_length=255)
     username = fields.CharField(max_length=255)
+    avatar = fields.CharField(
+        max_length=255, default=f"http://{api_setting.api_domain}/api/v1.0/user/image/default.png")
 
     age = fields.SmallIntField()
 

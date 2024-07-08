@@ -11,6 +11,8 @@ class UserDTO(BaseModel):
     email: str
     telegram_user_id: str
 
+    avatar: str
+
     position: Position = Field(default=Position.BOTH.value)
     hand: Hand = Field(default=Hand.RIGHT_HAND.value)
 

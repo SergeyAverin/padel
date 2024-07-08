@@ -1,5 +1,8 @@
 from logging import getLogger
 
+from fastapi import UploadFile
+
+
 from account.models import User
 from account.schemas import UserDTO, UpdateUserDTO
 
@@ -36,3 +39,10 @@ class UserRepository:
 
         await old_user.save()
         return old_user
+
+
+class UserPhotoRepository:
+    async def save_photo(self, user_id: str, content: UploadFile):
+        with open(f'upload/users/{user_id}_{content.filename}', "wb") as f:
+            contents = await content.read()
+            f.write(contents)

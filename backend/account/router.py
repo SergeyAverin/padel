@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException, Body, File, UploadFile
+from fastapi.responses import FileResponse
 
 from account.service import user_service
 from account.schemas import UserDTO, UpdateUserDTO
@@ -58,3 +59,14 @@ async def change_position(telegram_user_id: str, new_position: Position = Body()
     user = await user_service.get_user_by_telegram_user_id(telegram_user_id)
     new_user = await user_service.change_position(user, new_position)
     return new_user
+
+
+@profile_router.post('/{telegram_user_id}/upload_photo')
+async def upload_photo(telegram_user_id: str, file: UploadFile = File()):
+    await user_service.upload_user_photo(telegram_user_id, file)
+
+
+@profile_router.get("/image/{image_path:path}")
+async def get_image(image_path: str):
+    file_path = f"upload/users/{image_path}"
+    return FileResponse(file_path)
