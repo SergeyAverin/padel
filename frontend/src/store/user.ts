@@ -6,6 +6,7 @@ import {
   changePosition,
   updateUser,
   getStats,
+  uploadPhoto,
 } from "@dal/user";
 import {
   Hand,
@@ -42,6 +43,10 @@ class UserStore {
   }
   async getStats() {
     this.stats = await getStats();
+  }
+  async uploadPhoto(userId: string, photo: FormData) {
+    await uploadPhoto(userId, photo);
+    await this.getUserInfo(userId);
   }
 }
 

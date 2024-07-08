@@ -27,3 +27,11 @@ export const getStats = async () => {
   const stats = await res.data;
   return stats;
 };
+
+export const uploadPhoto = async (userId: string, photo: FormData) => {
+  axios.post(API_URL + `/user/${userId}/upload_photo`, photo, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
