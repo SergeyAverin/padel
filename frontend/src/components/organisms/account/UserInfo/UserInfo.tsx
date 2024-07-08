@@ -17,7 +17,7 @@ export const UserInfo: React.FC = observer(() => {
           <div className="flex justify-between">
             <div className="flex">
               <div className="w-[100px] h-[100px]">
-                <UserPhoto />
+                <UserPhoto avatar={UserStore.user.avatar} />
               </div>
               <div className="ml-[20px]">
                 <div className="text-[24px] font-bold">
@@ -59,7 +59,7 @@ export const UserInfo: React.FC = observer(() => {
 });
 interface IInfo {
   infoKey: string;
-  infoValue: string;
+  infoValue: string | number;
 }
 
 export const Info: React.FC<IInfo> = ({ infoKey, infoValue }) => {

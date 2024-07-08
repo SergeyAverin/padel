@@ -2,6 +2,7 @@ export interface IUser {
   first_name: string;
   last_name: string;
   username: string;
+  avatar: string;
   age: number;
   email: string;
   telegram_user_id: string;
