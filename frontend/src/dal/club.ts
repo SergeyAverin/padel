@@ -43,3 +43,7 @@ export const addClubInUserBookmarks = async (clubId: number) => {
 export const removeClubFromUserBookmark = async (clubId: number) => {
   await axios.delete(API_URL + "/club/bookmarks", { data: clubId });
 };
+
+export const deleteClub = async (clubId: number) => {
+  await axios.delete(API_URL + `/club/${clubId}`);
+};

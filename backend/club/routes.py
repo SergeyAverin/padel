@@ -51,3 +51,8 @@ async def get_bookmarked_clubs(club_id: int):
 async def get_club_by_id(club_id: int):
     club = await club_service.get_club_by_id(club_id)
     return club
+
+
+@club_routes.delete('/{club_id}')
+async def delete_club(club_id: int):
+    await club_service.delete_club(club_id)

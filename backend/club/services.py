@@ -27,8 +27,12 @@ class ClubService:
     def filter_by_name_substring(self):
         pass
 
+    async def delete_club(self, club_id: int):
+        return await self.club_repository.delete_club_by_id(club_id)
+
     async def filter_club(self, name=None, city=None):
-        return await self.club_repository.filter_clubs(name, city) 
+        return await self.club_repository.filter_clubs(name, city)
+
 
 class ClubBookmarkService:
     def __init__(self) -> None:

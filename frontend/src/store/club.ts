@@ -8,6 +8,7 @@ import {
   removeClubFromUserBookmark,
   getClubById,
   createClub,
+  deleteClub,
 } from "@dal/club";
 import { IClub, ICreateClub } from "@schemas/club";
 
@@ -61,6 +62,9 @@ class ClubStore {
     const newClub = await createClub(createClubData);
     this.bookmarkedClubs.push(newClub);
     return newClub.id;
+  }
+  async deleteClub(clubId: number) {
+    await deleteClub(clubId);
   }
 }
 

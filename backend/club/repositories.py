@@ -25,8 +25,9 @@ class ClubRepository:
     async def get_club_by_id(self, club_id: int):
         return await Club.get_or_none(id=club_id)
 
-    def delete_club_by_id(self):
-        pass
+    async def delete_club_by_id(self, club_id: str):
+        club = await self.get_club_by_id(club_id)
+        await club.delete()
 
     def edit_club_by_id(self):
         pass
