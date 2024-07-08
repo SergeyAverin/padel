@@ -10,6 +10,7 @@ import ClubPage from "@pages/ClubPage";
 import MatchPage from "@pages/MatchPage";
 import CreateMatchPage from "@pages/CreateMatchPage";
 import CreateClubPage from "@pages/CreateClubPage";
+import EditClubPage from "@pages/EditClubPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -24,6 +25,7 @@ const MainRouter: React.FC = () => {
         <Route path="/matches" element={<MatchPage />} />
         <Route path="/create/match" element={<CreateMatchPage />} />
         <Route path="/create/club" element={<CreateClubPage />} />
+        <Route path="/edit/club" element={<EditClubPage />} />
       </Routes>
       <Navigation />
     </>

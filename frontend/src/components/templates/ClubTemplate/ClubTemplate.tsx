@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Heading, HeadingVariant } from "@atoms/index";
+import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
 import Match from "@organisms/matches/Match";
 import ClubStore from "@store/club";
 import MatchStore from "@store/match";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import Tabs from "@molecules/Tabs";
+import { Link } from "react-router-dom";
 
 export const ClubTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -54,6 +55,12 @@ export const ClubTemplate: React.FC = observer(() => {
           {ClubStore.openedClub?.address}
         </div>
       </div>
+
+      <Link to={"/edit/club"}>
+        <div className="w-[150px] mt-5 mb-5">
+          <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
+        </div>
+      </Link>
 
       <Tabs subTab={tabs} />
     </div>
