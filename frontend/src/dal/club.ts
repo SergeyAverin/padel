@@ -47,3 +47,7 @@ export const removeClubFromUserBookmark = async (clubId: number) => {
 export const deleteClub = async (clubId: number) => {
   await axios.delete(API_URL + `/club/${clubId}`);
 };
+
+export const updateClub = async (clubId: number, data: ICreateClub) => {
+  await axios.patch(API_URL + `/club/${clubId}`, data);
+};

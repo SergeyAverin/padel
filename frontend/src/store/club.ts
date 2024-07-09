@@ -9,6 +9,7 @@ import {
   getClubById,
   createClub,
   deleteClub,
+  updateClub,
 } from "@dal/club";
 import { IClub, ICreateClub } from "@schemas/club";
 
@@ -65,6 +66,10 @@ class ClubStore {
   }
   async deleteClub(clubId: number) {
     await deleteClub(clubId);
+  }
+  async updateClub(clubId: number, data: ICreateClub) {
+    await updateClub(clubId, data);
+    await this.openClub(String(clubId));
   }
 }
 
