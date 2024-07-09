@@ -1,11 +1,13 @@
 from logging import getLogger
 
 from tortoise.expressions import Q
+from fastapi import UploadFile
 
 from club.schemas import CreateClubDTO
 from club.models import Club, ClubPhoto
 from account.models import User
 from account.service import user_service
+from core.config.api_settings import api_setting
 
 
 logger = getLogger()
@@ -89,4 +91,15 @@ class ClubBookmarkRepository:
 
 class ClubPhotoRepository:
     async def get_club_images(self, club_id: int):
-        return await ClubPhoto.filter(photo_club_id=club_id)
+        return await ClubPhoto.filter(photo_club__id=club_id)
+
+    async def add_club_image(self, club_id: int, file: UploadFile):
+        path = f"http://{api_setting.api_domain}/api/v1.0/club/image/{club_id}_{file.filename}"
+        image = ClubPhoto()
+        image.alt = 'image'
+        image.photo = path
+
+        club_repository = ClubRepository()
+        club = await club_repository.get_club_by_id(club_id)
+        image.photo_club = club
+        await image.save()

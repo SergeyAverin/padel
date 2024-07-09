@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, UploadFile, File
 
 from club.schemas import CreateClubDTO
 from club.services import club_service, club_bookmark_service, club_photo_service
@@ -66,3 +66,8 @@ async def update_club(club_id: int, new_club_data: CreateClubDTO = Body()):
 @club_routes.get('/{club_id}/images', tags=['Image'])
 async def get_club_images(club_id: int):
     return await club_photo_service.get_club_images(club_id)
+
+
+@club_routes.post('/{club_id}/images', tags=['Image'])
+async def add_club_images(club_id: int, photo: UploadFile = File()):
+    await club_photo_service.add_photo(club_id, photo)

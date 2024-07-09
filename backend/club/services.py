@@ -1,5 +1,7 @@
 from logging import getLogger
 
+from fastapi import UploadFile
+
 from account.models import User
 from club.schemas import CreateClubDTO
 from club.repositories import ClubRepository, ClubBookmarkRepository, ClubPhotoRepository
@@ -63,8 +65,8 @@ class ClubPhotosService:
     def __init__(self) -> None:
         self.club_photo_repository = ClubPhotoRepository()
 
-    def add_photo(self):
-        pass
+    async def add_photo(self, club_id: int, photo: UploadFile):
+        return await self.club_photo_repository.add_club_image(club_id, photo)
 
     async def get_club_images(self, club_id: int):
         return await self.club_photo_repository.get_club_images(club_id)
