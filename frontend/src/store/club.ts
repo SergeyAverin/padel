@@ -12,6 +12,7 @@ import {
   updateClub,
   loadClubPhoto,
   deletePhoto,
+  uploadPhoto,
 } from "@dal/club";
 import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 
@@ -79,6 +80,10 @@ class ClubStore {
   }
   async deletePhoto(clubId: number, photoId: number) {
     await deletePhoto(clubId, photoId);
+    await this.loadClubPhotos(clubId);
+  }
+  async uploadPhoto(clubId: number, photo: FormData) {
+    await uploadPhoto(clubId, photo);
     await this.loadClubPhotos(clubId);
   }
 }

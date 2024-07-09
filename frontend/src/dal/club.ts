@@ -61,3 +61,11 @@ export const loadClubPhoto = async (clubId: number) => {
 export const deletePhoto = async (clubId: number, photoId: number) => {
   await axios.delete(API_URL + `/club/${clubId}/images/${photoId}`);
 };
+
+export const uploadPhoto = async (clubId: number, photo: FormData) => {
+  await axios.post(API_URL + `/club/${clubId}/images`, photo, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
