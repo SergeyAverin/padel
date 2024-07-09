@@ -13,7 +13,8 @@ class Club(Model):
     # photos
 
 
-class ClubPhoto:
-    # alt
-    # photo
-    pass
+class ClubPhoto(Model):
+    photo = fields.CharField(max_length=150)
+    alt = fields.CharField(max_length=150)
+    photo_club = fields.ForeignKeyField(
+        'models.Club', related_name='club_photo')

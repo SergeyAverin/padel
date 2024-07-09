@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body
 
 from club.schemas import CreateClubDTO
-from club.services import club_service, club_bookmark_service
+from club.services import club_service, club_bookmark_service, club_photo_service
 from club.models import Club
 from account.service import user_service
 
@@ -61,3 +61,8 @@ async def delete_club(club_id: int):
 @club_routes.patch('/{club_id}')
 async def update_club(club_id: int, new_club_data: CreateClubDTO = Body()):
     return await club_service.update_club_by_id(club_id, new_club_data)
+
+
+@club_routes.get('/{club_id}/images', tags=['Image'])
+async def get_club_images(club_id: int):
+    return await club_photo_service.get_club_images(club_id)

@@ -2,7 +2,7 @@ from logging import getLogger
 
 from account.models import User
 from club.schemas import CreateClubDTO
-from club.repositories import ClubRepository, ClubBookmarkRepository
+from club.repositories import ClubRepository, ClubBookmarkRepository, ClubPhotoRepository
 
 
 logger = getLogger()
@@ -60,11 +60,14 @@ class ClubBookmarkService:
 
 
 class ClubPhotosService:
+    def __init__(self) -> None:
+        self.club_photo_repository = ClubPhotoRepository()
+
     def add_photo(self):
         pass
 
-    def get_club_photos(self):
-        pass
+    async def get_club_images(self, club_id: int):
+        return await self.club_photo_repository.get_club_images(club_id)
 
     def remove_photo(self):
         pass
@@ -72,3 +75,4 @@ class ClubPhotosService:
 
 club_service = ClubService()
 club_bookmark_service = ClubBookmarkService()
+club_photo_service = ClubPhotosService()

@@ -3,7 +3,7 @@ from logging import getLogger
 from tortoise.expressions import Q
 
 from club.schemas import CreateClubDTO
-from club.models import Club
+from club.models import Club, ClubPhoto
 from account.models import User
 from account.service import user_service
 
@@ -85,3 +85,8 @@ class ClubBookmarkRepository:
         await user.clubs.remove(club)
 
         await user.save()
+
+
+class ClubPhotoRepository:
+    async def get_club_images(self, club_id: int):
+        return await ClubPhoto.filter(photo_club_id=club_id)
