@@ -33,6 +33,9 @@ class ClubService:
     async def filter_club(self, name=None, city=None):
         return await self.club_repository.filter_clubs(name, city)
 
+    async def update_club_by_id(self, club_id: int, new_club_data: CreateClubDTO):
+        return await self.club_repository.update_club_by_id(club_id, new_club_data)
+
 
 class ClubBookmarkService:
     def __init__(self) -> None:

@@ -56,3 +56,8 @@ async def get_club_by_id(club_id: int):
 @club_routes.delete('/{club_id}')
 async def delete_club(club_id: int):
     await club_service.delete_club(club_id)
+
+
+@club_routes.patch('/{club_id}')
+async def update_club(club_id: int, new_club_data: CreateClubDTO = Body()):
+    return await club_service.update_club_by_id(club_id, new_club_data)

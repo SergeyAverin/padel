@@ -51,6 +51,16 @@ class ClubRepository:
         else:
             return await Club.all()
 
+    async def update_club_by_id(self, club_id: int, new_club_data: CreateClubDTO):
+        old_club = await Club.get_or_none(id=club_id)
+        old_club.name = new_club_data.name
+        old_club.city = new_club_data.city
+        old_club.address = new_club_data.address
+        old_club.registration_address = new_club_data.registration_address
+
+        await old_club.save()
+        return old_club
+
 
 class ClubBookmarkRepository:
     def __init__(self) -> None:
