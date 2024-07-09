@@ -103,3 +103,7 @@ class ClubPhotoRepository:
         club = await club_repository.get_club_by_id(club_id)
         image.photo_club = club
         await image.save()
+
+    async def remove_club_image(self, image_id: int):
+        photo = await ClubPhoto.get_or_none(id=image_id)
+        await photo.delete()

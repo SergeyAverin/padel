@@ -71,8 +71,8 @@ class ClubPhotosService:
     async def get_club_images(self, club_id: int):
         return await self.club_photo_repository.get_club_images(club_id)
 
-    def remove_photo(self):
-        pass
+    async def remove_photo(self, image_id: int):
+        await self.club_photo_repository.remove_club_image(image_id)
 
 
 club_service = ClubService()

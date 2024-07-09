@@ -71,3 +71,8 @@ async def get_club_images(club_id: int):
 @club_routes.post('/{club_id}/images', tags=['Image'])
 async def add_club_images(club_id: int, photo: UploadFile = File()):
     await club_photo_service.add_photo(club_id, photo)
+
+
+@club_routes.delete('/{club_id}/images/{image_id}', tags=['Image'])
+async def remove_club_images(club_id: int, image_id: int):
+    await club_photo_service.remove_photo(image_id)
