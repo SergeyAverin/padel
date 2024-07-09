@@ -51,3 +51,9 @@ export const deleteClub = async (clubId: number) => {
 export const updateClub = async (clubId: number, data: ICreateClub) => {
   await axios.patch(API_URL + `/club/${clubId}`, data);
 };
+
+export const loadClubPhoto = async (clubId: number) => {
+  const res = await axios.get(API_URL + `/club/${clubId}/images`);
+  const data = await res.data;
+  return data;
+};

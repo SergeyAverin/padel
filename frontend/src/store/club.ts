@@ -10,8 +10,9 @@ import {
   createClub,
   deleteClub,
   updateClub,
+  loadClubPhoto,
 } from "@dal/club";
-import { IClub, ICreateClub } from "@schemas/club";
+import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 
 class ClubStore {
   isLoading = false;
@@ -20,6 +21,7 @@ class ClubStore {
   bookmarks: Map<number, boolean> = new Map();
   openedClub: IClub | null = null;
   isLoadingOpenedClub: boolean = true;
+  clubPhotos: Array<IClubPhoto> = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -37,6 +39,9 @@ class ClubStore {
       this.bookmarkedClubs = await getClubsByBookmark();
       this.isLoading = false;
     });
+  }
+  async loadClubPhotos(clubId: number) {
+    this.clubPhotos = await loadClubPhoto(clubId);
   }
   async getIsBookmark(clubId: number) {
     const isBookmark = await getIsClubBookmarked(clubId);

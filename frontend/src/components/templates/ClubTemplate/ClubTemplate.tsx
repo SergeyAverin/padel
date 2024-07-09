@@ -9,11 +9,13 @@ import MatchStore from "@store/match";
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
+import ClubPhoto from "@organisms/clubs/ClubPhoto";
 
 export const ClubTemplate: React.FC = observer(() => {
   useEffect(() => {
     if (ClubStore.openedClub) {
       MatchStore.loadClubMatches(ClubStore.openedClub?.id);
+      ClubStore.loadClubPhotos(ClubStore.openedClub?.id);
     }
   }, [ClubStore.openedClub]);
   const tabs = [
@@ -41,7 +43,15 @@ export const ClubTemplate: React.FC = observer(() => {
     {
       to: "#photos",
       text: "Photos",
-      content: <div>photos</div>,
+      content: (
+        <div>
+          {ClubStore.clubPhotos.map((photo) => (
+            <div key={photo.id}>
+              <ClubPhoto photo={photo} />
+            </div>
+          ))}
+        </div>
+      ),
     },
   ];
   return (

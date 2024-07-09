@@ -12,3 +12,8 @@ export interface ICreateClub {
   registration_address: string;
   city: string;
 }
+
+export interface IClubPhoto {
+  photo: string;
+  id: number;
+}
