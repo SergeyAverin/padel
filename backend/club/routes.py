@@ -1,3 +1,4 @@
+from fastapi.responses import FileResponse
 from fastapi import APIRouter, Body, UploadFile, File
 
 from club.schemas import CreateClubDTO
@@ -76,3 +77,9 @@ async def add_club_images(club_id: int, photo: UploadFile = File()):
 @club_routes.delete('/{club_id}/images/{image_id}', tags=['Image'])
 async def remove_club_images(club_id: int, image_id: int):
     await club_photo_service.remove_photo(image_id)
+
+
+@club_routes.get("/image/{image_path:path}", tags=['Image'])
+async def get_image(image_path: str):
+    file_path = f"upload/clubs/{image_path}"
+    return FileResponse(file_path)
