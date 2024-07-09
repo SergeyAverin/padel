@@ -57,3 +57,7 @@ export const loadClubPhoto = async (clubId: number) => {
   const data = await res.data;
   return data;
 };
+
+export const deletePhoto = async (clubId: number, photoId: number) => {
+  await axios.delete(API_URL + `/club/${clubId}/images/${photoId}`);
+};
