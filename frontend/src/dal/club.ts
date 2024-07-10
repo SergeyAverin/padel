@@ -82,3 +82,11 @@ export const uploadPhoto = async (clubId: number, photo: FormData) => {
     },
   });
 };
+
+export const uploadAvatar = async (clubId: number, photo: FormData) => {
+  await axios.post(API_URL + `/club/image/${clubId}`, photo, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

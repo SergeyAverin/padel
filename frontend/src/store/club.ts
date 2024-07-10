@@ -13,6 +13,7 @@ import {
   loadClubPhoto,
   deletePhoto,
   uploadPhoto,
+  uploadAvatar,
 } from "@dal/club";
 import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 
@@ -85,6 +86,10 @@ class ClubStore {
   async uploadPhoto(clubId: number, photo: FormData) {
     await uploadPhoto(clubId, photo);
     await this.loadClubPhotos(clubId);
+  }
+  async uploadAvatar(clubId: number, photo: FormData) {
+    await uploadAvatar(clubId, photo);
+    await this.openClub(String(clubId));
   }
 }
 

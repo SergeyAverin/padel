@@ -4,6 +4,7 @@ export interface IClub {
   address: string;
   registration_address: string;
   city: string;
+  avatar: string;
 }
 
 export interface ICreateClub {

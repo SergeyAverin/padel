@@ -18,9 +18,14 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
     ClubStore.getIsBookmark(club.id);
   }, []);
   return (
-    <div className="rounded-2xl p-4 bg-primary">
-      <h2 className="text-[16px] font-bold">{club.name}</h2>
-      <div className="flex mt-5  justify-between">
+    <div className="rounded-2xl  bg-primary">
+      <div className="relative">
+        <img src={club.avatar} className="absolute" />
+        <h2 className="text-[16px] font-bold absolute top-[100%] left-0">
+          {club.name}
+        </h2>
+      </div>
+      <div className="flex  justify-between p-4 pt-[135px]">
         <div className="flex w-full  items-center">
           <AddressIcon />
           <div className="text-[12px] font-medium ml-3">{club.address}</div>
@@ -29,7 +34,7 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
           {ClubStore.bookmarks.has(club.id) && <Bookmark clubId={club.id} />}
         </div>
       </div>
-      <div className="mt-5">
+      <div className="p-3">
         <Link to={`/clubs/${club.id}`}>
           <Button variant={ButtonVariant.OUTLINED}>Show more</Button>
         </Link>
