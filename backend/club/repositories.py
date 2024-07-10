@@ -99,6 +99,15 @@ class ClubPhotoRepository:
         image.alt = 'image'
         image.photo = path
 
+        with open(f'upload/clubs/{club_id}_{file.filename}', "wb") as f:
+            contents = await file.read()
+            f.write(contents)
+
+        club_repository = ClubRepository()
+        club = await club_repository.get_club_by_id(club_id)
+        image.photo_club = club
+        await image.save()
+
     async def change_avatar(self, club_id: int, file: UploadFile):
         path = f"http://{api_setting.api_domain}/api/v1.0/club/image/{club_id}_{file.filename}"
         club = await Club.get_or_none(id=club_id)
