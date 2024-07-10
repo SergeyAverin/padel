@@ -22,14 +22,20 @@ export const ClubsTemplate: React.FC = observer(() => {
       <div className="p-3">
         <Heading variant={HeadingVariant.H2}>Clubs</Heading>
 
-        <div className="p-5" onClick={() => ClubFilterStore.toggleIsOpen()}>
+        <div className="p-5">
           <div className="flex items-center">
-            <FilterIcon />
+            <div>
+              <FilterIcon onClick={() => ClubFilterStore.toggleIsOpen()} />
+            </div>
             {ClubFilterStore.name != "" && (
-              <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
+              <div onClick={() => ClubFilterStore.changeName("")}>
+                <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
+              </div>
             )}
             {ClubFilterStore.city != "" && (
-              <Tag id={2} isAdd={false} text={ClubFilterStore.city} />
+              <div onClick={() => ClubFilterStore.changeCity("")}>
+                <Tag id={2} isAdd={false} text={ClubFilterStore.city} />
+              </div>
             )}
           </div>
         </div>
