@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
-
-import lottie, { AnimationItem } from "lottie-web";
+import { useAnimation } from "@hooks/useAnimation";
+import React from "react";
 
 interface IEmptyBannerProps {
   text?: string;
@@ -11,22 +10,7 @@ export const EmptyBanner: React.FC<IEmptyBannerProps> = ({
   text = "Empty",
   icon,
 }) => {
-  const container = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (container.current) {
-      const animation: AnimationItem = lottie.loadAnimation({
-        container: container.current, // the DOM element that will contain the animation
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        path: "/EmptyAnimation.json", // the path to the animation JSON
-      });
-
-      return () => {
-        animation.destroy(); // Clean up animation when component unmounts
-      };
-    }
-  }, []);
+  const container = useAnimation("/EmptyAnimation.json");
   return (
     <div className="flex justify-center items-center flex-col w-full">
       <div>
