@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import MainRouter from "./routers";
+import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
 
 /** Путь к API */
 // const API_URL = import.meta.env.VITE_API_URL;
@@ -20,6 +21,7 @@ function App() {
       <BrowserRouter>
         <MainRouter />
       </BrowserRouter>
+      <TutorialPortal />
     </div>
   );
 }
