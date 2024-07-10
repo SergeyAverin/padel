@@ -74,6 +74,9 @@ class ClubPhotosService:
     async def remove_photo(self, image_id: int):
         await self.club_photo_repository.remove_club_image(image_id)
 
+    async def change_avatar(self, club_id: int, file: UploadFile):
+        await self.club_photo_repository.change_avatar(club_id, file)
+
 
 club_service = ClubService()
 club_bookmark_service = ClubBookmarkService()

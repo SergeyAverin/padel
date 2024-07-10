@@ -1,12 +1,16 @@
 from tortoise.models import Model
 from tortoise import fields
 
+from core.config.api_settings import api_setting
+
 
 class Club(Model):
     name = fields.CharField(max_length=130)
     address = fields.CharField(max_length=130)
     registration_address = fields.CharField(max_length=130)
     city = fields.CharField(max_length=130)
+    avatar = fields.CharField(
+        max_length=255, default=f"http://{api_setting.api_domain}/api/v1.0/club/image/default.png")
 
     owner = fields.ForeignKeyField('models.User', related_name='club_owner')
 

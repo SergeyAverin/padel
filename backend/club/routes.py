@@ -83,3 +83,8 @@ async def remove_club_images(club_id: int, image_id: int):
 async def get_image(image_path: str):
     file_path = f"upload/clubs/{image_path}"
     return FileResponse(file_path)
+
+
+@club_routes.post("/image/{club_id}", tags=['Image'])
+async def change_avatar(club_id: str, photo: UploadFile = File()):
+    await club_photo_service.change_avatar(club_id, photo)
