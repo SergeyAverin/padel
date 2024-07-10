@@ -8,6 +8,7 @@ import Club from "@organisms/clubs/Club";
 
 import FilterIcon from "@assets/FilterIcon.svg?react";
 import ClubFilters from "@organisms/clubs/ClubFilters";
+import Tag from "@molecules/friends/Tag";
 
 export const ClubsTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -22,7 +23,15 @@ export const ClubsTemplate: React.FC = observer(() => {
         <Heading variant={HeadingVariant.H2}>Clubs</Heading>
 
         <div className="p-5" onClick={() => ClubFilterStore.toggleIsOpen()}>
-          <FilterIcon />
+          <div className="flex items-center">
+            <FilterIcon />
+            {ClubFilterStore.name != "" && (
+              <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
+            )}
+            {ClubFilterStore.city != "" && (
+              <Tag id={2} isAdd={false} text={ClubFilterStore.city} />
+            )}
+          </div>
         </div>
 
         {ClubStore.bookmarkedClubs.length > 0 && (
