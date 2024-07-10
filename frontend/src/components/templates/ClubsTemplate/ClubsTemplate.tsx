@@ -22,6 +22,21 @@ export const ClubsTemplate: React.FC = observer(() => {
       <div className="p-3">
         <Heading variant={HeadingVariant.H2}>Clubs</Heading>
 
+        {ClubStore.bookmarkedClubs.length > 0 && (
+          <>
+            <div className="mt-5">
+              <Heading variant={HeadingVariant.H2}>Bookmarked clubs</Heading>
+            </div>
+            <div className="grid grid-cols-2 gap-2 mt-5">
+              {ClubStore.bookmarkedClubs.map((club) => (
+                <Club club={club} key={club.id} />
+              ))}
+            </div>
+          </>
+        )}
+        <div className="mt-5">
+          <Heading variant={HeadingVariant.H2}>Search clubs</Heading>
+        </div>
         <div className="p-5">
           <div className="flex items-center">
             <div>
@@ -48,22 +63,6 @@ export const ClubsTemplate: React.FC = observer(() => {
               </div>
             )}
           </div>
-        </div>
-
-        {ClubStore.bookmarkedClubs.length > 0 && (
-          <>
-            <div className="mt-5">
-              <Heading variant={HeadingVariant.H2}>Bookmarked clubs</Heading>
-            </div>
-            <div className="grid grid-cols-2 gap-2 mt-5">
-              {ClubStore.bookmarkedClubs.map((club) => (
-                <Club club={club} key={club.id} />
-              ))}
-            </div>
-          </>
-        )}
-        <div className="mt-5">
-          <Heading variant={HeadingVariant.H2}>Search clubs</Heading>
         </div>
         <div className="grid grid-cols-2 gap-2 mt-5">
           {ClubStore.clubs.map((club) => (
