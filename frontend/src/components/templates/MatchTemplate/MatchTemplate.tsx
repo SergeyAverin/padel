@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import MatchStore from "@store/match";
 import { Heading, HeadingVariant } from "@atoms/index";
 import Match from "@organisms/matches/Match";
+import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 
 export const MatchTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -13,32 +14,43 @@ export const MatchTemplate: React.FC = observer(() => {
   }, []);
   return (
     <div className="p-5">
-      <div>
-        <Heading variant={HeadingVariant.H2}>Your match</Heading>
-        {MatchStore.matchesFromFriends.map((match) => (
-          <div className="mt-3" key={match.id}>
-            <Match />
+      {MatchStore.matchesFromFriends.length == 0 &&
+      MatchStore.matchesFromBookmarks.length == 0 &&
+      MatchStore.matches.length == 0 ? (
+        <>
+          <Heading variant={HeadingVariant.H2}>Matches not found</Heading>
+          <EmptyBanner />
+        </>
+      ) : (
+        <>
+          <div>
+            <Heading variant={HeadingVariant.H2}>Your match</Heading>
+            {MatchStore.matches.map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="mt-5">
-        <Heading variant={HeadingVariant.H2}>Match from friends</Heading>
-        {MatchStore.matchesFromFriends.map((match) => (
-          <div className="mt-3" key={match.id}>
-            <Match />
+          <div className="mt-5">
+            <Heading variant={HeadingVariant.H2}>Match from friends</Heading>
+            {MatchStore.matchesFromFriends.map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="mt-5">
-        <Heading variant={HeadingVariant.H2}>
-          Match from bookmarked clubs
-        </Heading>
-        {MatchStore.matchesFromBookmarks.map((match) => (
-          <div className="mt-3" key={match.id}>
-            <Match />
+          <div className="mt-5">
+            <Heading variant={HeadingVariant.H2}>
+              Match from bookmarked clubs
+            </Heading>
+            {MatchStore.matchesFromBookmarks.map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 });

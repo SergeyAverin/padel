@@ -9,6 +9,7 @@ import Club from "@organisms/clubs/Club";
 import FilterIcon from "@assets/FilterIcon.svg?react";
 import ClubFilters from "@organisms/clubs/ClubFilters";
 import Tag from "@molecules/friends/Tag";
+import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 
 export const ClubsTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -20,7 +21,7 @@ export const ClubsTemplate: React.FC = observer(() => {
     <>
       <ClubFilters />
       <div className="p-3">
-        <Heading variant={HeadingVariant.H2}>Clubs</Heading>
+        <Heading variant={HeadingVariant.H1}>Clubs</Heading>
 
         {ClubStore.bookmarkedClubs.length > 0 && (
           <>
@@ -64,6 +65,7 @@ export const ClubsTemplate: React.FC = observer(() => {
             )}
           </div>
         </div>
+        {ClubStore.clubs.length == 0 && <EmptyBanner text="Clubs not found" />}
         <div className="grid grid-cols-2 gap-2 mt-5">
           {ClubStore.clubs.map((club) => (
             <Club club={club} key={club.id} />
