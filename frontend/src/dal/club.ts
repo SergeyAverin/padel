@@ -1,5 +1,7 @@
-import { ICreateClub } from "@schemas/club";
 import axios from "axios";
+
+import { ICreateClub } from "@schemas/club";
+import ClubFiltersStore from "@store/clubFilter";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -16,7 +18,18 @@ export const getIsClubBookmarked = async (clubId: number) => {
 };
 
 export const getClubs = async () => {
-  const clubResponse = await axios.get(API_URL + "/club/clubs");
+  console.log(ClubFiltersStore.name);
+  let url = "/club/clubs";
+  let flag = true;
+  if (ClubFiltersStore.name != "") {
+    url += `${flag ? "?" : "&"}name=${ClubFiltersStore.name}`;
+    flag = false;
+  }
+  if (ClubFiltersStore.city != "") {
+    url += `${flag ? "?" : "&"}city=${ClubFiltersStore.city}`;
+    flag = false;
+  }
+  const clubResponse = await axios.get(API_URL + url);
   const club = await clubResponse.data;
   return club;
 };

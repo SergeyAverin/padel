@@ -28,12 +28,22 @@ export const ClubsTemplate: React.FC = observer(() => {
               <FilterIcon onClick={() => ClubFilterStore.toggleIsOpen()} />
             </div>
             {ClubFilterStore.name != "" && (
-              <div onClick={() => ClubFilterStore.changeName("")}>
+              <div
+                onClick={() => {
+                  ClubFilterStore.changeName("");
+                  ClubStore.getClubs();
+                }}
+              >
                 <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
               </div>
             )}
             {ClubFilterStore.city != "" && (
-              <div onClick={() => ClubFilterStore.changeCity("")}>
+              <div
+                onClick={() => {
+                  ClubFilterStore.changeCity("");
+                  ClubStore.getClubs();
+                }}
+              >
                 <Tag id={2} isAdd={false} text={ClubFilterStore.city} />
               </div>
             )}

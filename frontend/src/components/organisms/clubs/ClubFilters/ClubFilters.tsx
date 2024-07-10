@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
+import ClubStore from "@store/club";
 import ClubFilterStore from "@store/clubFilter";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 
 const ClubFiltersComponent: React.FC = observer(() => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    ClubStore.getClubs();
     ClubFilterStore.toggleIsOpen();
   };
   return (
