@@ -1,5 +1,7 @@
 import { Button, ButtonVariant } from "@atoms/index";
 import { useAnimation } from "@hooks/useAnimation";
+import SelectHand from "@organisms/account/SelectHand";
+import SelectPosition from "@organisms/account/SelectPosition";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -27,6 +29,22 @@ export const Tutorial: React.FC = () => {
     <Slide animation="/EmptyAnimation.json" text="1" />,
     <Slide animation="/EmptyAnimation.json" text="2" />,
     <Slide animation="/EmptyAnimation.json" text="3" />,
+    <div>
+      <Slide animation="/EmptyAnimation.json" text="select headn" />,
+      <div className="flex justify-center">
+        <div className="w-[280px text-center]">
+          <SelectHand />
+        </div>
+      </div>
+    </div>,
+    <div>
+      <Slide animation="/EmptyAnimation.json" text="select position" />,
+      <div className="flex justify-center">
+        <div className="w-[280px text-center]">
+          <SelectPosition />
+        </div>
+      </div>
+    </div>,
   ];
   const next = () => {
     if (step + 1 <= sliders.length) {
