@@ -2,7 +2,6 @@ from logging import getLogger
 
 from fastapi import UploadFile
 
-
 from account.models import User
 from account.schemas import UserDTO, UpdateUserDTO
 

@@ -1,5 +1,6 @@
-import LoadingBanner from "@organisms/LoadingBanner";
-import { useAuth } from "@hooks/useAuth";
+import { useEffect } from "react";
+import { useAuth } from "../hooks/useAuth";
+import AuthStore from "../store/auth";
 
 export function withLoginRequire(WrappedComponent: React.FC) {
   return function WithLoginRequire() {
@@ -10,15 +11,18 @@ export function withLoginRequire(WrappedComponent: React.FC) {
         userId = String(JSON.parse(session).tgWebAppData);
       }
     }
+    useEffect(() => {
+      console.log(AuthStore.isLogin);
+    }, [AuthStore.isLogin]);
 
     useAuth(userId);
 
     return (
       <>
         {window.Telegram.WebApp.initDataUnsafe.user && (
-          <>{localStorage.getItem("token") && <WrappedComponent />}</>
+          <>{AuthStore.isLogin && <WrappedComponent />}</>
         )}
-        <>{!localStorage.getItem("token") && <LoadingBanner />}</>
+        <>{!AuthStore.isLogin && <div>need auth</div>}</>
       </>
     );
   };

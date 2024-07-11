@@ -8,7 +8,7 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
     "first_name" VARCHAR(255) NOT NULL,
     "last_name" VARCHAR(255) NOT NULL,
     "username" VARCHAR(255) NOT NULL,
-    "avatar" VARCHAR(255) NOT NULL  DEFAULT 'http://localhost:8080/api/v1.0/user/users/default.png',
+    "avatar" VARCHAR(255) NOT NULL  DEFAULT 'http://averin.pagekite.me/api/v1.0/user/image/default.png',
     "age" SMALLINT NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "telegram_user_id" VARCHAR(255) NOT NULL,
@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS "club" (
     "address" VARCHAR(130) NOT NULL,
     "registration_address" VARCHAR(130) NOT NULL,
     "city" VARCHAR(130) NOT NULL,
+    "avatar" VARCHAR(255) NOT NULL  DEFAULT 'http://averin.pagekite.me/api/v1.0/club/image/default.png',
     "owner_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "friendrequest" (
@@ -35,12 +36,18 @@ CREATE TABLE IF NOT EXISTS "tag" (
     "name" VARCHAR(150) NOT NULL,
     "tag_owner_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
 );
+CREATE TABLE IF NOT EXISTS "clubphoto" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "photo" VARCHAR(150) NOT NULL,
+    "alt" VARCHAR(150) NOT NULL,
+    "photo_club_id" INT NOT NULL REFERENCES "club" ("id") ON DELETE CASCADE
+);
 CREATE TABLE IF NOT EXISTS "match" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "status" VARCHAR(11) NOT NULL  DEFAULT 'expectation',
     "start_at" DATE NOT NULL,
     "end_at" DATE NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-07-08T12:37:49.700699',
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-07-11T04:20:55.514828',
     "club_id" INT NOT NULL REFERENCES "club" ("id") ON DELETE CASCADE,
     "owner_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
 );

@@ -1,4 +1,3 @@
-from tortoise import Tortoise
 import asyncio
 import logging
 import sys
@@ -9,11 +8,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+import requests
 
 from core.config.bot_settings import bot_settings
-from account.schemas import UserDTO
+from core.config.api_settings import api_setting
+from account.schemas import UserDTO, Hand, Position
 from account.service import user_service
-from database import DB_PATH, MODELS
 
 logger = logging.getLogger()
 
@@ -24,17 +24,23 @@ bot = Bot(bot_settings.bot_token)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    user = await user_service.get_user_by_telegram_user_id(str(message.from_user.id))
-    if not user:
+    url = f'http://{api_setting.api_domain}/api/v1.0/user/{str(message.from_user.id)}'
+    res = requests.get(url)
+
+    if res.status_code == 404:
         user_data = UserDTO(
-            age=0,
-            email='',
-            first_name=message.from_user.first_name,
-            last_name=message.from_user.last_name,
+            first_name=str(message.from_user.first_name),
+            last_name=str(message.from_user.last_name),
             telegram_user_id=str(message.from_user.id),
-            username=message.from_user.username
+            username=message.from_user.username,
+            age=1,
+            email='',
+            hand=Hand.RIGHT_HAND,
+            position=Position.BOTH
         )
-        await user_service.create_user(user_data)
+        url = f'http://{api_setting.api_domain}/api/v1.0/user/'
+        data = user_data.model_dump()
+        requests.post(url, json=data)
 
     url = bot_settings.bot_web_app
     keyboard = InlineKeyboardBuilder()
@@ -46,24 +52,8 @@ async def command_start_handler(message: Message) -> None:
 
 
 async def main() -> None:
-    dp.loop.create_task(init_db())
     await dp.start_polling(bot)
 
-
-async def init_db():
-    await Tortoise.init(
-        db_url=DB_PATH,
-        modules={'models': MODELS}
-    )
-    await Tortoise.generate_schemas()
-
-
-async def on_startup(dp):
-    await init_db()
-
-
-async def on_shutdown(dp):
-    await Tortoise.close_connections()
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)

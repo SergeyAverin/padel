@@ -1,24 +1,20 @@
 from logging import getLogger
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-from repositories.user_repository import UserMongoDBRepository
-from services.user_service import UserService
-from utils.jwt_utils import decode_jwt
-from exceptions.app_exceptions import DocumentNotFound
-from schemas.user_schemas import UserDTO
+from account.service import user_service
+from authentication.utils import decode_jwt
+from account.schemas import UserDTO
 
 
 logger = getLogger()
 
-user_repository = UserMongoDBRepository()
-user_service = UserService(user_repository)
 
 http_bearer = HTTPBearer()
 
 
-def get_current_user(
+async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(http_bearer)
 ) -> UserDTO:
     ''' 
@@ -28,10 +24,7 @@ def get_current_user(
     Return:
      Авторизированные пользователь, в виде UserDTO
     '''
-    try:
-        token = credentials.credentials
-        payload = decode_jwt(token)
-        user = user_service.find_user_by_user_id(payload['sub'])
-        return user
-    except DocumentNotFound:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    token = credentials.credentials
+    payload = decode_jwt(token)
+    user = await user_service.get(payload['sub'])
+    return user
