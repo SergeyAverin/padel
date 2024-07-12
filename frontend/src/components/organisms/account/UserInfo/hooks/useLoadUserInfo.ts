@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import UserStore from "@store/user";
+import AuthStore from "@store/auth";
 
 export const useLoadUserInfo = () => {
   useEffect(() => {
-    UserStore.getUserInfo("3");
-  }, []);
+    if (AuthStore.authUser) {
+      UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
+    }
+  }, [AuthStore.authUser]);
 };

@@ -8,11 +8,11 @@ import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 export const FriendsTemplate: React.FC = () => {
   return (
     <div>
+      <FriendsFilter />
       {FriendStore.friends.length == 0 && (
         <EmptyBanner text="You have not friends" />
       )}
 
-      <FriendsFilter />
       <div>
         {FriendStore.friends.map((user) => (
           <FriendCard user={user} key={user.telegram_user_id} />

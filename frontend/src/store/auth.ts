@@ -1,10 +1,14 @@
 import { makeAutoObservable } from "mobx";
 
 import { login } from "@dal/auth";
+import { IUser } from "@schemas/user";
+import { getUserInfo } from "@dal/user";
 // import UserStore from "./user";
 
 class AuthStore {
   isLogin: boolean = false;
+  authUser: IUser | null = null;
+  token: string = "";
   constructor() {
     makeAutoObservable(this);
   }
@@ -16,6 +20,9 @@ class AuthStore {
   }
   async setAuth() {
     this.isLogin = true;
+  }
+  async acceptUser() {
+    this.authUser = await getUserInfo(Telegram.WebApp.initDataUnsafe.user.id);
   }
 }
 

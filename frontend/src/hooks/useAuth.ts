@@ -6,8 +6,10 @@ export const useAuth = (userId: string) => {
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       AuthStore.login(userId);
+      AuthStore.acceptUser();
     } else {
       AuthStore.setAuth();
+      AuthStore.acceptUser();
     }
   }, [userId]);
 };

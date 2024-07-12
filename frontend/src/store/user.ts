@@ -15,6 +15,7 @@ import {
   IUserStats,
   Position,
 } from "@schemas/user";
+import AuthStore from "@store/auth";
 
 class UserStore {
   isLoading = false;
@@ -32,10 +33,14 @@ class UserStore {
     });
   }
   async changeHand(hand: Hand) {
-    await changeHand("3", hand);
+    if (AuthStore.authUser) {
+      await changeHand(AuthStore.authUser.telegram_user_id, hand);
+    }
   }
   async changePosition(position: Position) {
-    await changePosition("3", position);
+    if (AuthStore.authUser) {
+      await changePosition(AuthStore.authUser.telegram_user_id, position);
+    }
   }
   async updateUser(userId: string, data: IUpdateUserData) {
     await updateUser(userId, data);

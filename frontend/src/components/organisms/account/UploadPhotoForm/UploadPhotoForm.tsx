@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { Button, ButtonVariant } from "@atoms/index";
 import UserStore from "@store/user";
+import AuthStore from "@store/auth";
 
 export const UploadPhotoForm: React.FC = observer(() => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -16,7 +17,9 @@ export const UploadPhotoForm: React.FC = observer(() => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("file", selectedFile);
-      UserStore.uploadPhoto("3", formData);
+      if (AuthStore.authUser) {
+        UserStore.uploadPhoto(AuthStore.authUser.telegram_user_id, formData);
+      }
     }
   };
   return (

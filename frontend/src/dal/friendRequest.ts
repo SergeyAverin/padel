@@ -5,19 +5,31 @@ import { IFriendRequest } from "@schemas/friendRequest";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const getInnerFriendRequests = async () => {
-  const response = await axios.get(API_URL + "/friend_requests/inner");
+  const response = await axios.get(API_URL + "/friend_requests/inner", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   const friendRequests = (await response.data) as Array<IFriendRequest>;
   return friendRequests;
 };
 
 export const getOuterFriendRequests = async () => {
-  const response = await axios.get(API_URL + "/friend_requests/outer");
+  const response = await axios.get(API_URL + "/friend_requests/outer", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   const friendRequests = (await response.data) as Array<IFriendRequest>;
   return friendRequests;
 };
 
 export const createFriendRequest = async (userId: string) => {
-  const response = await axios.post(API_URL + "/friend_requests", userId);
+  const response = await axios.post(API_URL + "/friend_requests", userId, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   const friendRequests = (await response.data) as IFriendRequest;
   return friendRequests;
 };
@@ -25,20 +37,35 @@ export const createFriendRequest = async (userId: string) => {
 export const acceptFriendRequest = async (friendRequestId: number) => {
   await axios.post(
     API_URL + `/friend_requests/${friendRequestId}/accept`,
-    friendRequestId
+    friendRequestId,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
   );
 };
 
 export const rejectFriendRequest = async (friendRequestId: number) => {
   await axios.post(
     API_URL + `/friend_requests/${friendRequestId}/reject`,
-    friendRequestId
+    friendRequestId,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
   );
 };
 
 export const cancelFriendRequest = async (friendRequestId: number) => {
   await axios.post(
     API_URL + `/friend_requests/${friendRequestId}/cancel`,
-    friendRequestId
+    friendRequestId,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
   );
 };

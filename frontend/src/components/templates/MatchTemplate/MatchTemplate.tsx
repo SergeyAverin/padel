@@ -5,13 +5,18 @@ import MatchStore from "@store/match";
 import { Heading, HeadingVariant } from "@atoms/index";
 import Match from "@organisms/matches/Match";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import AuthStore from "@store/auth";
 
 export const MatchTemplate: React.FC = observer(() => {
   useEffect(() => {
-    MatchStore.loadFriendsMatches("3");
-    MatchStore.loadUserMatches("3");
-    MatchStore.loadMatchesFromBookmarkedClubs("3");
-  }, []);
+    if (AuthStore.authUser) {
+      MatchStore.loadFriendsMatches(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadMatchesFromBookmarkedClubs(
+        AuthStore.authUser.telegram_user_id
+      );
+    }
+  }, [AuthStore.authUser]);
   return (
     <div className="p-5">
       {MatchStore.matchesFromFriends.length == 0 &&

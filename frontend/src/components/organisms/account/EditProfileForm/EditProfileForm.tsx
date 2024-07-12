@@ -4,6 +4,7 @@ import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import UserStore from "@store/user";
 import { useNavigate } from "react-router-dom";
+import AuthStore from "@store/auth";
 
 export const EditProfileForm: React.FC = () => {
   const [formValue, setFormValue] = useState<FormDataI>(getInitState());
@@ -16,7 +17,9 @@ export const EditProfileForm: React.FC = () => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(formValue);
-    UserStore.updateUser("3", formValue);
+    if (AuthStore.authUser) {
+      UserStore.updateUser(AuthStore.authUser.telegram_user_id, formValue);
+    }
     navigate("/profile");
   };
   return (

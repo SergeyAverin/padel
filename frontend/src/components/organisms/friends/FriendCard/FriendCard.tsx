@@ -50,14 +50,13 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
     TagStore.filterTags,
     TagStore.friendsWithTags,
   ]);
-
   return (
     <>
       {isShow && (
         <div className="bg-primary p-5 rounded-xl">
           <div className="flex justify-between">
             <div className="flex">
-              <UserPhoto />
+              <UserPhoto avatar={user.avatar} />
 
               <div className="ml-5">
                 <div className="text-[16px] font-bold">{user.username}</div>

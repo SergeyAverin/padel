@@ -32,7 +32,7 @@ const App = observer(() => {
         <>
           {AuthStore.isLogin && (
             <>
-              <div className="text-fg bg-bg mt-[25px]">
+              <div className="text-fg bg-bg mt-[25px] pb-[90px]">
                 <BrowserRouter>
                   <MainRouter />
                 </BrowserRouter>

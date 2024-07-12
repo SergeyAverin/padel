@@ -24,7 +24,7 @@ bot = Bot(bot_settings.bot_token)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    url = f'http://{api_setting.api_domain}/api/v1.0/user/{str(message.from_user.id)}'
+    url = f'https://{api_setting.api_domain}/api/v1.0/user/{str(message.from_user.id)}'
     res = requests.get(url)
 
     if res.status_code == 404:
@@ -38,7 +38,7 @@ async def command_start_handler(message: Message) -> None:
             hand=Hand.RIGHT_HAND,
             position=Position.BOTH
         )
-        url = f'http://{api_setting.api_domain}/api/v1.0/user/'
+        url = f'https://{api_setting.api_domain}/api/v1.0/user/'
         data = user_data.model_dump()
         requests.post(url, json=data)
 

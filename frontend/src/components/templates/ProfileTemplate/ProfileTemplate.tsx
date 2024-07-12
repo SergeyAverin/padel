@@ -9,13 +9,16 @@ import PadelInfo from "@organisms/account/PadelInfo";
 import MatchStore from "@store/match";
 import Match from "@organisms/matches/Match";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import AuthStore from "@store/auth";
 
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
 
 export const ProfileTemplate: React.FC = observer(() => {
   useEffect(() => {
-    MatchStore.loadUserMatches("3");
-  }, []);
+    if (AuthStore.authUser?.telegram_user_id) {
+      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+    }
+  }, [AuthStore.authUser]);
   return (
     <div className="p-2">
       <UserInfo />

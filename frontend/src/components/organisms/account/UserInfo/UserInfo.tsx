@@ -44,7 +44,7 @@ export const UserInfo: React.FC = observer(() => {
                 )}
               </div>
             </div>
-            <UserLvl lvl={8.4} />
+            {/* <UserLvl lvl={8.4} /> */}
           </div>
           {isMore && (
             <div className="mt-[25px]">
