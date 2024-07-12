@@ -31,7 +31,6 @@ async def get_stats(
 @profile_router.get('/{telegram_user_id}')
 async def get_user(
     telegram_user_id: str,
-    user: UserDTO = Depends(get_current_user)
 ) -> UserDTO:
     user = await user_service.get_user_by_telegram_user_id(telegram_id=telegram_user_id)
     if not user:
@@ -51,8 +50,7 @@ async def update_user_by_telegram_user_id(
 
 @profile_router.post('/')
 async def create_user(
-        user_data: UserDTO,
-        user: UserDTO = Depends(get_current_user)
+        user_data: UserDTO
 ):
     user = await user_service.create_user(user_data)
     return user

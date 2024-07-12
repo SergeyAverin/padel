@@ -13,9 +13,9 @@ match_router = APIRouter(tags=['match'])
 @match_router.post('/matches')
 async def create_match(
     match_create_data: MatchCreateDTO = Body(),
-    user: UserDTO = Depends(get_current_user)
+    auth_user: UserDTO = Depends(get_current_user)
 ):
-    user = await user_service.get_user_by_telegram_user_id(user.telegram_user_id)
+    user = await user_service.get_user_by_telegram_user_id(auth_user.telegram_user_id)
     return await match_service.create_match(match_create_data, user)
 
 

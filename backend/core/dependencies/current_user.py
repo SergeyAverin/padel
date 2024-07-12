@@ -26,5 +26,5 @@ async def get_current_user(
     '''
     token = credentials.credentials
     payload = decode_jwt(token)
-    user = await user_service.get(payload['sub'])
+    user = await user_service.get_user_by_telegram_user_id(payload['sub'])
     return user
