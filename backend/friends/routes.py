@@ -40,13 +40,12 @@ async def create_friend_request(
     return request
 
 
-@friend_router.get('/friend/{first_user_id}/{second_user_id}')
+@friend_router.get('/user/{second_user_id}/relation_status')
 async def get_user_relation_status(
-    first_user_id: str,
     second_user_id: str,
     user: UserDTO = Depends(get_current_user)
 ):
-    status = await friend_service.get_user_relation_status(first_user_id, second_user_id)
+    status = await friend_service.get_user_relation_status(user.telegram_user_id, second_user_id)
     return status
 
 
