@@ -35,7 +35,14 @@ export const EditClubPhotos: React.FC = observer(() => {
       <Heading variant={HeadingVariant.H2}>Club photos</Heading>
       <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
         <div className="text-[24px] mt-5">Upload avatar:</div>
-        <div className="mt-5" onClick={() => fileInputRef.current?.click()}>
+        <div
+          className="mt-5"
+          onClick={(e: React.MouseEvent) => {
+            if (e.target != fileInputRef.current) {
+              fileInputRef.current?.click();
+            }
+          }}
+        >
           <div className="flex items-center">
             <FileIcon />
             <input

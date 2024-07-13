@@ -30,7 +30,14 @@ export const UploadClubPhoto: React.FC = observer(() => {
       <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
         <img src={ClubStore.openedClub?.avatar} />
         <div className="mt-5">
-          <div className="mt-5" onClick={() => fileInputRef.current?.click()}>
+          <div
+            className="mt-5"
+            onClick={(e: React.MouseEvent) => {
+              if (e.target != fileInputRef.current) {
+                fileInputRef.current?.click();
+              }
+            }}
+          >
             <div className="flex items-center">
               <FileIcon />
               <input

@@ -9,6 +9,7 @@ import FileIcon from "@assets/FileIcon.svg?react";
 export const UploadPhotoForm: React.FC = observer(() => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     if (e.target.files) {
       setSelectedFile(e.target.files[0]);
     }
@@ -36,7 +37,14 @@ export const UploadPhotoForm: React.FC = observer(() => {
         </div>
       )}
       <div className="text-[24px] mt-5">Select new avatar:</div>
-      <div className="mt-1" onClick={() => fileInputRef.current?.click()}>
+      <div
+        className="mt-1"
+        onClick={(e: React.MouseEvent) => {
+          if (e.target != fileInputRef.current) {
+            fileInputRef.current?.click();
+          }
+        }}
+      >
         <div className="flex items-center">
           <FileIcon />
           <input
