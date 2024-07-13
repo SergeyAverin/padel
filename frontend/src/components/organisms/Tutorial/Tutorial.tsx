@@ -74,7 +74,7 @@ export const Tutorial: React.FC = () => {
   return (
     <>
       {isOpen && (
-        <div className="fixed left-0 top-0 bg-primary text-fg w-full h-full z-10 transition-all">
+        <div className="fixed left-0 top-0 bg-primary text-fg w-full h-full z-[1000] transition-all">
           {sliders[step - 1]}
           <div className="flex justify-center items-center">
             <div>

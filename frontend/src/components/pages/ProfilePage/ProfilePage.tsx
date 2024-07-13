@@ -4,6 +4,7 @@ import ProfileTemplate from "@templates/ProfileTemplate";
 import UserStore from "@store/user";
 import AuthStore from "@store/auth";
 import MatchStore from "@store/match";
+import { Spinner } from "@atoms/index";
 
 export const ProfilePage: React.FC = observer(() => {
   useEffect(() => {
@@ -12,5 +13,5 @@ export const ProfilePage: React.FC = observer(() => {
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
     }
   }, [AuthStore.authUser]);
-  return <>{UserStore.user && <ProfileTemplate />}</>;
+  return <>{UserStore.user ? <ProfileTemplate /> : <Spinner />}</>;
 });
