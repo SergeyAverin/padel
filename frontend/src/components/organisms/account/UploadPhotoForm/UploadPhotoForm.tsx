@@ -45,7 +45,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
           }
         }}
       >
-        <div className="flex items-center">
+        <div className="flex items-center mt-5 mb-5">
           <FileIcon />
           <input
             className="file:border-none file:bg-primary file:text-highlight"
@@ -55,6 +55,14 @@ export const UploadPhotoForm: React.FC = observer(() => {
             ref={fileInputRef}
           />
         </div>
+      </div>
+      <div className="mt-2">
+        {selectedFile && (
+          <img
+            className="rounded-full w-[80px] h-[80px]"
+            src={URL.createObjectURL(selectedFile)}
+          />
+        )}
       </div>
       <div className="mt-5">
         <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
