@@ -1,65 +1,62 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { useLoadUserInfo } from "./hooks/useLoadUserInfo";
-import UserLvl from "@molecules/account/UserLvl";
 import UserPhoto from "@molecules/account/UserPhoto";
-import UserStore from "@store/user";
+import { IUser } from "@schemas/user";
 
-export const UserInfo: React.FC = observer(() => {
+interface IUserInfoProps {
+  user: IUser;
+}
+
+export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
   const [isMore, setIsMore] = useState(false);
   // useLoadUserInfo();
 
   return (
     <>
-      {UserStore.user && (
-        <div>
-          <div className="flex justify-between">
-            <div className="flex">
-              <div className="w-[100px] h-[100px]">
-                <UserPhoto avatar={UserStore.user.avatar} />
-              </div>
-              <div className="ml-[20px]">
-                <div className="text-[24px] font-bold">
-                  {UserStore.user.username}
-                </div>
-                <div className="text-[20px] font-medium">
-                  {UserStore.user.first_name} {UserStore.user.last_name}
-                </div>
-                {!isMore && (
-                  <div
-                    className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                    onClick={() => {
-                      setIsMore(true);
-                      navigator.vibrate(40);
-                    }}
-                  >
-                    Show more
-                  </div>
-                )}
-                {isMore && (
-                  <div
-                    className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                    onClick={() => {
-                      setIsMore(false);
-                      navigator.vibrate(40);
-                    }}
-                  >
-                    Close
-                  </div>
-                )}
-              </div>
+      <div>
+        <div className="flex justify-between">
+          <div className="flex">
+            <div className="w-[100px] h-[100px]">
+              <UserPhoto avatar={user.avatar} />
             </div>
-            {/* <UserLvl lvl={8.4} /> */}
+            <div className="ml-[20px]">
+              <div className="text-[24px] font-bold">{user.username}</div>
+              <div className="text-[20px] font-medium">
+                {user.first_name} {user.last_name}
+              </div>
+              {!isMore && (
+                <div
+                  className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+                  onClick={() => {
+                    setIsMore(true);
+                    navigator.vibrate(40);
+                  }}
+                >
+                  Show more
+                </div>
+              )}
+              {isMore && (
+                <div
+                  className="text-highlight cursor-pointer text-[16px] mt-[8px]"
+                  onClick={() => {
+                    setIsMore(false);
+                    navigator.vibrate(40);
+                  }}
+                >
+                  Close
+                </div>
+              )}
+            </div>
           </div>
-          {isMore && (
-            <div className="mt-[25px]">
-              <Info infoValue={UserStore.user.email} infoKey="email" />
-              <Info infoValue={UserStore.user.age} infoKey="age" />
-            </div>
-          )}
         </div>
-      )}
+        {isMore && (
+          <div className="mt-[25px]">
+            <Info infoValue={user.email} infoKey="email" />
+            <Info infoValue={user.age} infoKey="age" />
+          </div>
+        )}
+      </div>
     </>
   );
 });

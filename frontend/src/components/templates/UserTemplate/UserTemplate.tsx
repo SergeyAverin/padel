@@ -1,23 +1,22 @@
-import React, { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import React from "react";
 
-import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
+import { Heading, HeadingVariant } from "@atoms/index";
 import UserInfo from "@organisms/account/UserInfo";
 import UserStats from "@organisms/account/UserStats";
 import PadelInfo from "@organisms/account/PadelInfo";
 import MatchStore from "@store/match";
 import Match from "@organisms/matches/Match";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
-import AuthStore from "@store/auth";
+import UserStore from "@store/user";
 
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
 import RelationButton from "@organisms/account/RelationButton";
+import { IUser } from "@schemas/user";
 
 export const UserTemplate: React.FC = () => {
   return (
     <div className="p-2">
-      <UserInfo />
+      <UserInfo user={UserStore.user as IUser} />
       <div className="mt-[30px]">
         <div className="w-[250px]">
           {/* <Link to="/profile/edit">
@@ -29,7 +28,7 @@ export const UserTemplate: React.FC = () => {
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Padel info:</Heading>
         <div className="mt-[8px]">
-          <PadelInfo />
+          <PadelInfo user={UserStore.user as IUser} />
         </div>
       </div>
       <div className="mt-[30px]">

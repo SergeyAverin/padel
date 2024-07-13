@@ -8,6 +8,8 @@ import { useAuth } from "@hooks/useAuth";
 import AuthStore from "@store/auth";
 /** Путь к API */
 // const API_URL = import.meta.env.VITE_API_URL;
+import MatchStore from "@store/match";
+import UserStore from "@store/user";
 
 const App = observer(() => {
   useEffect(() => {
@@ -25,6 +27,16 @@ const App = observer(() => {
   }
 
   useAuth(userId);
+
+  useEffect(() => {
+    if (AuthStore.authUser?.telegram_user_id) {
+      UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+    }
+    return () => {
+      UserStore.user = null;
+    };
+  }, [AuthStore.authUser]);
 
   return (
     <>

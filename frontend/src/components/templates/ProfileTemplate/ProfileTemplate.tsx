@@ -12,11 +12,12 @@ import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import AuthStore from "@store/auth";
 
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
+import { IUser } from "@schemas/user";
 
 export const ProfileTemplate: React.FC = observer(() => {
   return (
     <div className="p-2">
-      <UserInfo />
+      <UserInfo user={AuthStore.authUser as IUser} />
       <div className="mt-[30px]">
         <div className="w-[250px]">
           <Link to="/profile/edit">
@@ -27,7 +28,7 @@ export const ProfileTemplate: React.FC = observer(() => {
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Padel info:</Heading>
         <div className="mt-[8px]">
-          <PadelInfo />
+          <PadelInfo user={AuthStore.authUser as IUser} />
         </div>
       </div>
       <div className="mt-[30px]">
