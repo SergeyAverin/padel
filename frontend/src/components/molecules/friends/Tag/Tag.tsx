@@ -1,5 +1,7 @@
 import TagStore from "@store/tags";
 
+import TrashIcon from "@assets/TrashIcon.svg?react";
+
 interface ITagProps {
   text: string;
   id: number;
@@ -32,7 +34,11 @@ export const Tag: React.FC<ITagProps> = ({
 
       {text}
       {!isAdd && <div onClick={removeTag}>X</div>}
-      {isAdd && <div onClick={deleteTag}>X</div>}
+      {isAdd && (
+        <div onClick={deleteTag}>
+          <TrashIcon />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import TagStore from "@store/tags";
+import DoneIcon from "@assets/DoneIcon.svg?react";
 
 export const CreateTag: React.FC = () => {
   const [value, setValue] = useState("");
@@ -15,9 +16,11 @@ export const CreateTag: React.FC = () => {
     setValue("");
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="flex items-center">
       <input value={value} onChange={onChange} className="bg-bg" />
-      <button>submit</button>
+      <button>
+        <DoneIcon />
+      </button>
     </form>
   );
 };

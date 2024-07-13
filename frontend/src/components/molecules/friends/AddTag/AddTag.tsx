@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import Tag from "../Tag";
 import TagsStore from "@store/tags";
 import CreateTag from "../CreateTag";
+import BackIcon from "@assets/BackIcon.svg?react";
 
 interface IAddTagProps {
   userId: string;
@@ -32,7 +33,9 @@ export const AddTag: React.FC<IAddTagProps> = observer(({ userId }) => {
         <>
           <div className="flex justify-between">
             <div>
-              <div onClick={toggleIsOpenAddTag}>CLOSE</div>
+              <div onClick={toggleIsOpenAddTag}>
+                <BackIcon />
+              </div>
             </div>
             <CreateTag />
           </div>
