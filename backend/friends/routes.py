@@ -3,6 +3,7 @@ from logging import getLogger
 from fastapi import APIRouter, Body, Depends
 
 from friends.services import friend_request_service, friend_service, tags_service
+from friends.models import FriendRequest
 from account.service import user_service
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
@@ -54,7 +55,7 @@ async def get_user_friends(
     user_id: str,
     user: UserDTO = Depends(get_current_user)
 ):
-    user_friends = await friend_service.get_user_friends(user_id)
+    user_friends = await friend_service.get_user_friends(user.telegram_user_id)
     return user_friends
 
 

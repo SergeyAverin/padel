@@ -22,7 +22,24 @@ export const unUserFriends = async (userId: string) => {
 };
 
 export const findUser = async (username: string) => {
-  const res = await axios.get(API_URL + `/user/find_user?username=${username}`);
+  const res = await axios.get(
+    API_URL + `/user/find_user?username=${username}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = await res.data;
+  return data;
+};
+
+export const getRelationStatus = async (userId: string) => {
+  const res = await axios.get(API_URL + `/user/${userId}/relation_status`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   const data = await res.data;
   return data;
 };

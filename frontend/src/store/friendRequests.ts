@@ -55,6 +55,7 @@ class FriendRequestsStore {
   async createFriendRequest(userId: string) {
     const friendRequest = await createFriendRequest(userId);
     this.appendFriendRequest(friendRequest);
+    return friendRequest.id;
   }
 
   async acceptFriendRequest(friendRequestId: number) {

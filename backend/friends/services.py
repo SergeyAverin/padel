@@ -72,7 +72,14 @@ class FriendService:
             recipient_user__telegram_user_id=to_user_id
         )
         if friend_request:
-            status = 'friend_request_sended'
+            status = friend_request.id
+            return status
+        friend_request = await FriendRequest.get_or_none(
+            sender_user__telegram_user_id=to_user_id,
+            recipient_user__telegram_user_id=from_user_id
+        )
+        if friend_request:
+            return 'await_answer'
         return status
 
 

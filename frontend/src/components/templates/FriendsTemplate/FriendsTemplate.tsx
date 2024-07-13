@@ -1,11 +1,12 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 
 import FriendCard from "@organisms/friends/FriendCard";
 import FriendStore from "@store/friends";
 import FriendsFilter from "@organisms/friends/FriendsFilter";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 
-export const FriendsTemplate: React.FC = () => {
+export const FriendsTemplate: React.FC = observer(() => {
   return (
     <div>
       <FriendsFilter />
@@ -20,4 +21,4 @@ export const FriendsTemplate: React.FC = () => {
       </div>
     </div>
   );
-};
+});

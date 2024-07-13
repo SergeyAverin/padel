@@ -12,6 +12,7 @@ import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import AuthStore from "@store/auth";
 
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
+import RelationButton from "@organisms/account/RelationButton";
 
 export const UserTemplate: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ export const UserTemplate: React.FC = () => {
           {/* <Link to="/profile/edit">
             <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
           </Link> */}
+          <RelationButton />
         </div>
       </div>
       <div className="mt-[30px]">

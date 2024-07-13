@@ -16,11 +16,13 @@ import {
   Position,
 } from "@schemas/user";
 import AuthStore from "@store/auth";
+import { getRelationStatus } from "@dal/friends";
 
 class UserStore {
   isLoading = false;
   user: IUser | null = null;
   stats: IUserStats | null = null;
+  relationStatus: string = "its_me";
 
   constructor() {
     makeAutoObservable(this);
@@ -52,6 +54,9 @@ class UserStore {
   async uploadPhoto(userId: string, photo: FormData) {
     await uploadPhoto(userId, photo);
     await this.getUserInfo(userId);
+  }
+  async getRelationStatus(userId: string) {
+    this.relationStatus = await getRelationStatus(userId);
   }
 }
 

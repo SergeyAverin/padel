@@ -1,7 +1,13 @@
 import FriendRequestStore from "@store/friendRequests";
+import UserStore from "@store/user";
 
-export const useCancelFriendRequest = (friendRequestId: number) => {
-  return () => {
-    FriendRequestStore.cancelFriendRequest(friendRequestId);
+export const useCancelFriendRequest = (
+  friendRequestId: number,
+  userId: string
+) => {
+  return async () => {
+    UserStore.relationStatus = "no_friend";
+    await FriendRequestStore.cancelFriendRequest(friendRequestId);
+    // await UserStore.getRelationStatus(userId);
   };
 };

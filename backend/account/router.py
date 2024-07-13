@@ -14,8 +14,8 @@ profile_router = APIRouter(prefix='/user', tags=['user'])
 
 
 @profile_router.get('/find_user')
-async def find_user(username: str):
-    return await User.filter(username__icontains=username.lower())
+async def find_user(username: str, user: UserDTO = Depends(get_current_user)):
+    return await User.filter(username__icontains=username.lower(), telegram_user_id__not=user.telegram_user_id)
 
 
 @profile_router.get('/stats/{telegram_user_id}')
