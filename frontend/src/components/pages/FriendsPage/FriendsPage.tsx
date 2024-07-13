@@ -8,6 +8,7 @@ import FriendsTemplate from "@templates/FriendsTemplate";
 import FriendStore from "@store/friends";
 import FriendRequestsStore from "@store/friendRequests";
 import AuthStore from "@store/auth";
+import FindUserForm from "@organisms/friends/FindUserForm";
 
 export const FriendsPage: React.FC = observer(() => {
   useEffect(() => {
@@ -32,6 +33,11 @@ export const FriendsPage: React.FC = observer(() => {
       to: "#outerFriendRequests",
       text: "Outer",
       content: <OuterFriendRequestsTemplate />,
+    },
+    {
+      to: "#findUser",
+      text: "Find",
+      content: <FindUserForm />,
     },
   ];
   return (
