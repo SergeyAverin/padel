@@ -11,7 +11,7 @@ export default {
       primary: '#100E0E',
       secondary: '#252D3A',
       highlight: '#97E7E1',
-      grey: '#62707D',
+      grey: '#A2ACB0',
       error: '#F54747'
     }
   },
