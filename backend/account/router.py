@@ -13,6 +13,11 @@ from core.dependencies.current_user import get_current_user
 profile_router = APIRouter(prefix='/user', tags=['user'])
 
 
+@profile_router.get('/find_user')
+async def find_user(username: str):
+    return await User.filter(username__icontains=username.lower())
+
+
 @profile_router.get('/stats/{telegram_user_id}')
 async def get_stats(
         telegram_user_id: str,

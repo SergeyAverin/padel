@@ -6,8 +6,10 @@ import UserStore from "@store/user";
 
 export const UserStats: React.FC = observer(() => {
   useEffect(() => {
-    UserStore.getStats();
-  }, []);
+    if (UserStore.user) {
+      UserStore.getStats(UserStore.user.telegram_user_id);
+    }
+  }, [UserStore.user]);
   return (
     <>
       {UserStore.stats && (

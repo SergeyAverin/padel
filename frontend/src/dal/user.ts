@@ -38,8 +38,8 @@ export const updateUser = async (userId: string, data: IUpdateUserData) => {
   });
 };
 
-export const getStats = async () => {
-  const res = await axios.get(API_URL + `/user/stats/3`, {
+export const getStats = async (userId: string) => {
+  const res = await axios.get(API_URL + `/user/stats/${userId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },

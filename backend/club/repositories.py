@@ -44,9 +44,9 @@ class ClubRepository:
         query = Q()
 
         if name:
-            query &= Q(name__icontains=name)
+            query &= Q(name__icontains=name.lower())
         if city:
-            query &= Q(city__icontains=name)
+            query &= Q(city__icontains=city.lower())
 
         if query:
             return await Club.filter(query).all()

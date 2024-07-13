@@ -28,12 +28,14 @@ class UserService:
         return await self.user_repository.update_user_by_id(telegram_user_id, new_user_data)
 
     async def change_hand(self, user: UserDTO, new_hand: Hand) -> UserDTO:
-        user.hand = new_hand
-        return await self.user_repository.update_user_by_id(user.telegram_user_id, user)
+        user = await User.get_or_none(telegram_user_id=user.telegram_user_id)
+        user.hand = new_hand.value
+        return await user.save()
 
     async def change_position(self, user: UserDTO, new_position: Position) -> UserDTO:
-        user.position = new_position
-        return await self.user_repository.update_user_by_id(user.telegram_user_id, user)
+        user = await User.get_or_none(telegram_user_id=user.telegram_user_id)
+        user.position = new_position.value
+        return await user.save()
 
     async def upload_user_photo(self, user_id: str, photo: UploadFile):
         user = await user_service.get_user_by_telegram_user_id(user_id)

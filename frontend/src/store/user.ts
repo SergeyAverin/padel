@@ -46,8 +46,8 @@ class UserStore {
     await updateUser(userId, data);
     await this.getUserInfo(userId);
   }
-  async getStats() {
-    this.stats = await getStats();
+  async getStats(userId: string) {
+    this.stats = await getStats(userId);
   }
   async uploadPhoto(userId: string, photo: FormData) {
     await uploadPhoto(userId, photo);
