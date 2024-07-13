@@ -1,12 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
 
 import { config, FormDataI, getInitState } from "./editProfileConfig";
-import { Button, ButtonVariant, Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Input } from "@atoms/index";
 import UserStore from "@store/user";
 import { useNavigate } from "react-router-dom";
 import AuthStore from "@store/auth";
 
 export const EditProfileForm: React.FC = () => {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [formValue, setFormValue] = useState<FormDataI>(getInitState());
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as keyof FormDataI;
@@ -16,11 +18,14 @@ export const EditProfileForm: React.FC = () => {
   const navigate = useNavigate();
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(formValue);
-    if (AuthStore.authUser) {
-      UserStore.updateUser(AuthStore.authUser.telegram_user_id, formValue);
+    if (re.test(String(formValue.email)) && formValue.age > 0) {
+      if (AuthStore.authUser) {
+        UserStore.updateUser(AuthStore.authUser.telegram_user_id, formValue);
+      }
+      navigate("/profile");
+    } else {
+      alert("Write a valid data!!!");
     }
-    navigate("/profile");
   };
   return (
     <form onSubmit={onSubmit}>
@@ -39,6 +44,12 @@ export const EditProfileForm: React.FC = () => {
             </div>
           </div>
         ))}
+        <div className="mt-5">
+          {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
+          {!re.test(String(formValue.email).toLowerCase()) && (
+            <div className="text-error">Invalid email</div>
+          )}
+        </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Apply

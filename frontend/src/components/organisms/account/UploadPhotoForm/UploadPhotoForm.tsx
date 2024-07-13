@@ -26,7 +26,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
-      <div className="text-[24px]">User avatar:</div>
+      <div className="text-[24px]">Avatar now:</div>
       {UserStore.user && (
         <div>
           <img
@@ -35,8 +35,8 @@ export const UploadPhotoForm: React.FC = observer(() => {
           />
         </div>
       )}
-      <div className="text-[24px] mt-5">Upload avatar:</div>
-      <div className="mt-5" onClick={() => fileInputRef.current?.click()}>
+      <div className="text-[24px] mt-5">Select new avatar:</div>
+      <div className="mt-1" onClick={() => fileInputRef.current?.click()}>
         <div className="flex items-center">
           <FileIcon />
           <input
@@ -50,7 +50,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
       </div>
       <div className="mt-5">
         <Button variant={ButtonVariant.OUTLINED} type="submit">
-          Submit
+          Upload new photo
         </Button>
       </div>
     </form>

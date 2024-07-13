@@ -45,9 +45,13 @@ export const Hand: React.FC<IHandProps> = ({
 }) => {
   return (
     <div
-      className={classNames("flex flex-col items-center  p-5 box-border", {
-        "border-highlight rounded-xl border-4 box-border": isActive,
-      })}
+      className={classNames(
+        "flex flex-col items-center  p-5 box-border border-4 ",
+        {
+          "border-highlight rounded-xl": isActive,
+          "border-primary border-4 ": !isActive,
+        }
+      )}
       onClick={onClick}
     >
       {icon}

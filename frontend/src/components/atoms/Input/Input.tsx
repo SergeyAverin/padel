@@ -19,7 +19,7 @@ interface IInputProps {
   /**  Текст подсказки */
   placeholder?: string;
 
-  requirement: boolean;
+  requirement?: boolean;
 }
 
 /** Компонент для ввода данных */

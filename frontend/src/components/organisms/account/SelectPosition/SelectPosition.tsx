@@ -53,7 +53,8 @@ export const Hand: React.FC<IPositionProps> = ({
   return (
     <div
       className={classNames("flex flex-col items-center  p-5", {
-        "border-highlight rounded-xl border-4": isActive,
+        "border-highlight rounded-xl border-4 ": isActive,
+        "border-primary border-4 ": !isActive,
       })}
       onClick={onClick}
     >
