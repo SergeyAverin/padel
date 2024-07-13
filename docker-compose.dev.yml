@@ -35,6 +35,8 @@ services:
       - 5432:5432
     env_file:
       - .env.dev
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
 
   padel_pgadmin4:
     image: dpage/pgadmin4
