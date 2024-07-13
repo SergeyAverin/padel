@@ -33,7 +33,7 @@ async def create_friend_request(
     recipient_user_id: str = Body(),
     user: UserDTO = Depends(get_current_user)
 ):
-    sender_user_id = 'string'
+    sender_user_id = user.telegram_user_id
     # ToDo: Защита от повторного создание
     # ToDo: Добавление в друзья если получатель тоже отправил запрос
     request = await friend_request_service.create_friend_request(sender_user_id, recipient_user_id)

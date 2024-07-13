@@ -2,6 +2,7 @@ from logging import getLogger
 
 from friends.repositories import FriendRepository, FriendRequestRepository, TagRepository
 from account.service import user_service
+from friends.models import FriendRequest
 
 logger = getLogger()
 
@@ -66,6 +67,12 @@ class FriendService:
         for friend in user_friends:
             if friend.telegram_user_id == to_user_id:
                 status = 'friend'
+        friend_request = await FriendRequest.get_or_none(
+            sender_user__telegram_user_id=from_user_id,
+            recipient_user__telegram_user_id=to_user_id
+        )
+        if friend_request:
+            status = 'friend_request_sended'
         return status
 
 
