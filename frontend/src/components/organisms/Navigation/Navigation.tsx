@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import NavigationButton from "@molecules/NavigationButton";
 
@@ -14,6 +14,18 @@ export const Navigation: React.FC = () => {
   const onClick = () => {
     setIsOpen((prev) => !prev);
   };
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [ref]);
   return (
     <div className="bg-primary p-5 flex items-center justify-center fixed bottom-0 left-0 w-full">
       <div className="w-full flex justify-around items-end">
@@ -23,6 +35,7 @@ export const Navigation: React.FC = () => {
         <div
           className="flex self-center  justify-start  items-center cursor-pointer relative"
           onClick={onClick}
+          ref={ref}
         >
           {isOpen && (
             <div className="absolute mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500">
