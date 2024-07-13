@@ -38,6 +38,8 @@ upload
 *.manifest
 *.spec
 
+postgres_data
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
