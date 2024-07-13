@@ -9,17 +9,17 @@ export const EditProfileTemplate: React.FC = () => {
   const tabs = [
     {
       to: "#edit_profile_data",
-      text: "Edit profile data",
+      text: "Info",
       content: <EditProfileForm />,
     },
     {
       to: "#upload_avatar",
-      text: "Upload avatar",
+      text: "Avatar",
       content: <UploadPhotoForm />,
     },
     {
       to: "#edit_padel_data",
-      text: "Edit padel data",
+      text: "Padel",
       content: (
         <>
           {" "}

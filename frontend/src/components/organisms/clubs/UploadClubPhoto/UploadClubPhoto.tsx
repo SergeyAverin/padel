@@ -37,6 +37,7 @@ export const UploadClubPhoto: React.FC = observer(() => {
                 className="file:border-none file:bg-primary file:text-highlight"
                 type="file"
                 onChange={handleFileChange}
+                accept=".jpg, .jpeg, .png"
                 ref={fileInputRef}
               />
             </div>

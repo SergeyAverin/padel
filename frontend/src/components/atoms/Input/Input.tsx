@@ -18,6 +18,8 @@ interface IInputProps {
 
   /**  Текст подсказки */
   placeholder?: string;
+
+  requirement: boolean;
 }
 
 /** Компонент для ввода данных */
@@ -28,6 +30,7 @@ export const Input: React.FC<IInputProps> = ({
   type,
   disabled,
   placeholder,
+  requirement = true,
 }) => {
   return (
     <div className="relative">
@@ -50,6 +53,7 @@ export const Input: React.FC<IInputProps> = ({
         disabled={disabled}
         placeholder={placeholder}
         onChange={onChange}
+        required={requirement}
       />
     </div>
   );

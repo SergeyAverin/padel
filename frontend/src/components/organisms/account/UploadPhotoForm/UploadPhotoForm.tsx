@@ -42,6 +42,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
           <input
             className="file:border-none file:bg-primary file:text-highlight"
             type="file"
+            accept=".jpg, .jpeg, .png"
             onChange={handleFileChange}
             ref={fileInputRef}
           />

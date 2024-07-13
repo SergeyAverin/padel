@@ -37,17 +37,21 @@ export const ProfileTemplate: React.FC = observer(() => {
         </div>
       </div>
       <div>
-        <div className="mt-5">
+        <div className="mt-5 ">
           <Heading variant={HeadingVariant.H2}>Matches:</Heading>
         </div>
-        {MatchStore.matches.length == 0 && (
-          <EmptyBanner text="You have not matches" icon={<EmptyIcon />} />
-        )}
-        {MatchStore.matches.map((match) => (
-          <div key={match.id} className="mt-5">
-            <Match />
-          </div>
-        ))}
+        <div className="pb-[200px]">
+          {MatchStore.matches.length == 0 && (
+            <div className="mt-[80px]">
+              <EmptyBanner text="You have not matches" icon={<EmptyIcon />} />
+            </div>
+          )}
+          {MatchStore.matches.map((match) => (
+            <div key={match.id} className="mt-5">
+              <Match />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
