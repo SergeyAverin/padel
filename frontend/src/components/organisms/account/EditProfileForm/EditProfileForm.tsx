@@ -13,7 +13,7 @@ export const EditProfileForm: React.FC = () => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as keyof FormDataI;
     const value = e.target.value;
-    setFormValue((prev) => ({ ...prev, [name]: value }));
+    setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
   const navigate = useNavigate();
   const onSubmit = (event: React.FormEvent) => {
