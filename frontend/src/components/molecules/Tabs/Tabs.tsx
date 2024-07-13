@@ -17,6 +17,7 @@ export const Tabs: React.FC<ITabsProps> = observer(({ subTab }) => {
   const [activeTab, setActiveTab] = useState(subTab[0]);
   const onChangeTab = (tab: Tab) => {
     setActiveTab(tab);
+    navigator.vibrate(30);
   };
 
   return (

@@ -9,6 +9,7 @@ export const useSetPosition = (): [
 ] => {
   const [position, sePosition] = useState(UserStore.user?.position);
   const onChangePosition = (position: Position) => {
+    navigator.vibrate(40);
     sePosition(position);
     UserStore.changePosition(position);
   };

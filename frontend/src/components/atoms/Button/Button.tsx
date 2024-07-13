@@ -1,6 +1,7 @@
 import classNames from "classnames";
 
 import { ButtonVariant } from "./ButtonVariant";
+import React from "react";
 
 interface IButtonProps extends React.PropsWithChildren {
   /** Функция вызываемая при клике на кнопку */
@@ -46,7 +47,10 @@ export const Button: React.FC<IButtonProps> = ({
           "text-highlight": variant == ButtonVariant.OUTLINED,
         }
       )}
-      onClick={onClick}
+      onClick={(e: React.MouseEvent) => {
+        if (onClick) onClick(e);
+        navigator.vibrate(30);
+      }}
     >
       {/** Отображает иконку в левой части кнопки */}
       {icon && <div className="w-[18px] h-[18px] mr-[8px]">{icon}</div>}

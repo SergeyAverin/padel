@@ -29,7 +29,10 @@ export const UserInfo: React.FC = observer(() => {
                 {!isMore && (
                   <div
                     className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                    onClick={() => setIsMore(true)}
+                    onClick={() => {
+                      setIsMore(true);
+                      navigator.vibrate(40);
+                    }}
                   >
                     Show more
                   </div>
@@ -37,7 +40,10 @@ export const UserInfo: React.FC = observer(() => {
                 {isMore && (
                   <div
                     className="text-highlight cursor-pointer text-[16px] mt-[8px]"
-                    onClick={() => setIsMore(false)}
+                    onClick={() => {
+                      setIsMore(false);
+                      navigator.vibrate(40);
+                    }}
                   >
                     Close
                   </div>

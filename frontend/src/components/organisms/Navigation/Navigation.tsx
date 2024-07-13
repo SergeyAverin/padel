@@ -13,6 +13,7 @@ export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const onClick = () => {
     setIsOpen((prev) => !prev);
+    navigator.vibrate(30);
   };
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {

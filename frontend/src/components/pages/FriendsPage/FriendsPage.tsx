@@ -25,12 +25,12 @@ export const FriendsPage: React.FC = observer(() => {
     },
     {
       to: "#innerFriendRequests",
-      text: "Inner requests",
+      text: "Inner",
       content: <InnerFriendRequestsTemplate />,
     },
     {
       to: "#outerFriendRequests",
-      text: "Outer requests",
+      text: "Outer",
       content: <OuterFriendRequestsTemplate />,
     },
   ];
