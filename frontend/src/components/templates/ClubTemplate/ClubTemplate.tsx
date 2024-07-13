@@ -36,11 +36,6 @@ export const ClubTemplate: React.FC = observer(() => {
       ),
     },
     {
-      to: "#booking",
-      text: "Booking",
-      content: <div>booking</div>,
-    },
-    {
       to: "#photos",
       text: "Photos",
       content: (
