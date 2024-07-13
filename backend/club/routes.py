@@ -123,7 +123,6 @@ async def remove_club_images(
 @club_routes.get("/image/{image_path:path}", tags=['Image'])
 async def get_image(
     image_path: str,
-    user: UserDTO = Depends(get_current_user)
 ):
     file_path = f"upload/clubs/{image_path}"
     return FileResponse(file_path)

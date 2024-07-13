@@ -14,11 +14,6 @@ import AuthStore from "@store/auth";
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
 
 export const ProfileTemplate: React.FC = observer(() => {
-  useEffect(() => {
-    if (AuthStore.authUser?.telegram_user_id) {
-      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
-    }
-  }, [AuthStore.authUser]);
   return (
     <div className="p-2">
       <UserInfo />

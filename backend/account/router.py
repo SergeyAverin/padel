@@ -92,8 +92,7 @@ async def upload_photo(
 
 @profile_router.get("/image/{image_path:path}")
 async def get_image(
-    image_path: str,
-    user: UserDTO = Depends(get_current_user)
+    image_path: str
 ):
     file_path = f"upload/users/{image_path}"
     return FileResponse(file_path)
