@@ -25,8 +25,8 @@ export const CreateClubForm: React.FC = observer(() => {
         <div className="text-[24px]">Main info:</div>
 
         {config.map((item) => (
-          <div className="mt-[15px]" key={item.name}>
-            <Label>{item.name}</Label>
+          <div className="mt-[35px]" key={item.name}>
+            {/* <Label>{item.name}</Label> */}
             <div className="mt-[8px]">
               <Input
                 name={item.name}

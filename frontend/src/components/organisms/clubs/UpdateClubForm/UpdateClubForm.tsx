@@ -28,8 +28,8 @@ export const UpdateClubForm: React.FC = () => {
 
         {config.map((item) => (
           <div className="mt-[15px]" key={item.name}>
-            <Label>{item.name}</Label>
-            <div className="mt-[8px]">
+            {/* <Label>{item.name}</Label> */}
+            <div className="mt-[30px]">
               <Input
                 name={item.name}
                 value={formValue[item.name as keyof FormDataI]}

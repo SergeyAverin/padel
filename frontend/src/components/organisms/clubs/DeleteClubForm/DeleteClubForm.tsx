@@ -18,10 +18,15 @@ export const DeleteClubForm: React.FC = observer(() => {
     }
   };
   return (
-    <div className="p-5 bg-primary rounded-xl">
+    <div className="p-5 bg-primary rounded-xl pb-[50px] pt-[50px]">
       <Label>
         <div className="text-[20px] mb-5">Delete club</div>
       </Label>
+      {ClubStore.openedClub && (
+        <div className="mb-5">
+          Write club name ({ClubStore.openedClub.name}) to delete.
+        </div>
+      )}
       {isError && <div className="text-error mb-3">No valid name</div>}
       <Input
         value={value}

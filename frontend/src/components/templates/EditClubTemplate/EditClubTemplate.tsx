@@ -10,22 +10,22 @@ export const EditClubTemplate: React.FC = () => {
   const tabs = [
     {
       to: "#edit_club",
-      text: "Edit club data",
+      text: "Data",
       content: <UpdateClubForm />,
     },
     {
       to: "#edit_club_avatar",
-      text: "Edit club avatar",
+      text: "Avatar",
       content: <UploadClubPhoto />,
     },
     {
       to: "#edit_photos",
-      text: "Edit club photos",
+      text: "Photos",
       content: <EditClubPhotos />,
     },
     {
       to: "#delete_club",
-      text: "Delete club",
+      text: "Delete",
       content: <DeleteClubForm />,
     },
   ];
