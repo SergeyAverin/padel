@@ -12,6 +12,9 @@ export const ProfilePage: React.FC = observer(() => {
       UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
     }
+    return () => {
+      UserStore.user = null;
+    };
   }, [AuthStore.authUser]);
   return <>{UserStore.user ? <ProfileTemplate /> : <Spinner />}</>;
 });

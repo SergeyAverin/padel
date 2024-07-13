@@ -8,7 +8,7 @@ import UserStore from "@store/user";
 
 export const UserInfo: React.FC = observer(() => {
   const [isMore, setIsMore] = useState(false);
-  useLoadUserInfo();
+  // useLoadUserInfo();
 
   return (
     <>

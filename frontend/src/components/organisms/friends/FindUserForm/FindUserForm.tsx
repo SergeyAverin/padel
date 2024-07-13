@@ -33,7 +33,7 @@ export const FindUserForm: React.FC = observer(() => {
             to={`/user/${user.telegram_user_id}`}
             key={user.telegram_user_id}
           >
-            <div className="bg-primary p-5 rounded-xl">
+            <div className="bg-primary p-5 rounded-xl mb-5">
               <div className="flex">
                 <UserPhoto avatar={user.avatar} />
 

@@ -9,6 +9,13 @@ export const UserStats: React.FC = observer(() => {
     if (UserStore.user) {
       UserStore.getStats(UserStore.user.telegram_user_id);
     }
+    return () => {
+      UserStore.stats = {
+        clubs_count: 0,
+        friends_count: 0,
+        matches_count: 0,
+      };
+    };
   }, [UserStore.user]);
   return (
     <>
