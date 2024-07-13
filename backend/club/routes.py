@@ -1,3 +1,5 @@
+from logging import getLogger
+
 from fastapi.responses import FileResponse
 from fastapi import APIRouter, Body, UploadFile, File, Depends
 
@@ -10,14 +12,15 @@ from core.dependencies.current_user import get_current_user
 
 
 club_routes = APIRouter(tags=['club'], prefix='/club')
-
+logger = getLogger()
 
 # ToDo: удалить этот route
+
+
 @club_routes.get('/clubs')
 async def get_all_clubs(
     name: str | None = None,
-    city: str | None = None,
-    user: UserDTO = Depends(get_current_user)
+    city: str | None = None
 ):
     return await club_service.filter_club(name, city)
 
@@ -70,8 +73,7 @@ async def get_bookmarked_clubs(
 
 @club_routes.get('/{club_id}')
 async def get_club_by_id(
-    club_id: int,
-    user: UserDTO = Depends(get_current_user)
+    club_id: int
 ):
     club = await club_service.get_club_by_id(club_id)
     return club

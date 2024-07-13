@@ -47,7 +47,7 @@ export const getClubs = async () => {
 
 export const createClub = async (createClubData: ICreateClub) => {
   const createClubResponse = await axios.post(
-    API_URL + "/club",
+    API_URL + "/club/",
     createClubData,
     {
       headers: {
