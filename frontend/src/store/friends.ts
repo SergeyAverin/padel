@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { getUserFriends, unUserFriends } from "@dal/friends";
+import { getUserFriends, unUserFriends, findUser } from "@dal/friends";
 import { IUser } from "@schemas/user";
 
 class FriendStore {
   isLoading = false;
   friends: Array<IUser> = [];
+  foundUsers: Array<IUser> = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -27,6 +28,9 @@ class FriendStore {
   async unFriends(FriendId: string) {
     await unUserFriends(FriendId);
     this.removeFriend(FriendId);
+  }
+  async findUser(username: string) {
+    this.foundUsers = await findUser(username);
   }
 }
 

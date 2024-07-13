@@ -20,3 +20,9 @@ export const unUserFriends = async (userId: string) => {
     },
   });
 };
+
+export const findUser = async (username: string) => {
+  const res = await axios.get(API_URL + `/user/find_user?username=${username}`);
+  const data = await res.data;
+  return data;
+};
