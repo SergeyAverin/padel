@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Button, ButtonVariant } from "@atoms/index";
+import { Button, ButtonVariant, Loading } from "@atoms/index";
 import UserStore from "@store/user";
 import AuthStore from "@store/auth";
 import FileIcon from "@assets/FileIcon.svg?react";
 
 export const UploadPhotoForm: React.FC = observer(() => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     if (e.target.files) {
@@ -21,19 +22,29 @@ export const UploadPhotoForm: React.FC = observer(() => {
       formData.append("file", selectedFile);
       if (AuthStore.authUser) {
         UserStore.uploadPhoto(AuthStore.authUser.telegram_user_id, formData);
+        setIsLoading(true);
+        setSelectedFile(null);
       }
     }
   };
+  useEffect(() => {
+    setIsLoading(false);
+  }, [UserStore.user.avatar]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
       <div className="text-[24px]">Avatar now:</div>
       {UserStore.user && (
-        <div>
+        <div className="flex items-center mt-3">
           <img
             className="rounded-full w-[80px] h-[80px]"
             src={UserStore.user.avatar}
           />
+          {isLoading && (
+            <div className="ml-[35px]">
+              <Loading />
+            </div>
+          )}
         </div>
       )}
       <div className="text-[24px] mt-5">Select new avatar:</div>

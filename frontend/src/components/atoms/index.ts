@@ -4,6 +4,7 @@ export { Heading } from "./Heading/Heading";
 export { HeadingVariant } from "./Heading/HeadingVariant";
 export { Text } from "./Text/Text";
 export { Spinner } from "./Spinner/Spinner";
+export { Loading } from "./Loading/Loading";
 export { Label } from "./Label/Label";
 export { Input } from "./Input/Input";
 export { Icon } from "./Icon/Icon";
