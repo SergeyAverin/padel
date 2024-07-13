@@ -20,6 +20,8 @@ interface IInputProps {
   placeholder?: string;
 
   requirement?: boolean;
+
+  haveBackground?: boolean;
 }
 
 /** Компонент для ввода данных */
@@ -31,20 +33,31 @@ export const Input: React.FC<IInputProps> = ({
   disabled,
   placeholder,
   requirement = true,
+  haveBackground = true,
 }) => {
   return (
     <div className="relative">
       <label
         htmlFor={name}
-        className="absolute left-[10px] top-[-25%] bg-primary pl-2 pr-2 text-[14px] focus:text-highlight"
+        className={classNames(
+          "absolute left-[10px] top-[-25%] pl-2 pr-2 text-[14px] focus:text-highlight",
+          {
+            "bg-primary": haveBackground,
+            "bg-bg": !haveBackground,
+          }
+        )}
       >
         {name}
       </label>
       <input
         className={classNames(
-          "w-full h-[40px] p-[20px] text-[16px] rounded-2xl bg-bg outline-none transition-all",
+          "w-full h-[40px] p-[20px] text-[16px] rounded-2xl  outline-none transition-all",
           "border-2 border-grey placeholder-grey",
-          "focus:border-highlight text-fg"
+          "focus:border-highlight text-fg",
+          {
+            "bg-primary": haveBackground,
+            "bg-bg": !haveBackground,
+          }
         )}
         name={name}
         id={name}

@@ -20,6 +20,7 @@ export const FindUserForm: React.FC = observer(() => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValue(e.target.value)
           }
+          haveBackground={false}
         />
         <div className="mt-5">
           <Button variant={ButtonVariant.OUTLINED} type="submit">

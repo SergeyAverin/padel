@@ -57,7 +57,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
         </div>
       </div>
       <div className="mt-5">
-        <Button variant={ButtonVariant.OUTLINED} type="submit">
+        <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
           Upload new photo
         </Button>
       </div>
