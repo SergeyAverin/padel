@@ -11,6 +11,7 @@ import AuthStore from "@store/auth";
 import MatchStore from "@store/match";
 import UserStore from "@store/user";
 import FriendRequestsStore from "@store/friendRequests";
+import FriendStore from "@store/friends";
 
 const App = observer(() => {
   useEffect(() => {
@@ -34,6 +35,7 @@ const App = observer(() => {
       UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
       FriendRequestsStore.loadingRequests();
+      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
     }
     return () => {
       UserStore.user = null;

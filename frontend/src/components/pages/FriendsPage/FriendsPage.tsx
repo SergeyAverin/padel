@@ -1,21 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
 import Tabs from "@molecules/Tabs";
 import InnerFriendRequestsTemplate from "@templates/InnerFriendRequestsTemplate";
 import OuterFriendRequestsTemplate from "@templates/OuterFriendRequestsTemplate";
 import FriendsTemplate from "@templates/FriendsTemplate";
-import FriendStore from "@store/friends";
-import AuthStore from "@store/auth";
 import FindUserForm from "@organisms/friends/FindUserForm";
-import { Spinner } from "@atoms/index";
 
 export const FriendsPage: React.FC = observer(() => {
-  useEffect(() => {
-    if (AuthStore.authUser) {
-      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
-    }
-  }, [AuthStore.authUser]);
   const tabs = [
     {
       to: "#friends",

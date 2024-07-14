@@ -4,7 +4,7 @@ import { getUserFriends, unUserFriends, findUser } from "@dal/friends";
 import { IUser } from "@schemas/user";
 
 class FriendStore {
-  isLoading = false;
+  isLoading = true;
   friends: Array<IUser> = [];
   foundUsers: Array<IUser> = [];
 

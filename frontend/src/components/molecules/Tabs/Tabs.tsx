@@ -24,7 +24,7 @@ export const Tabs: React.FC<ITabsProps> = observer(({ subTab }) => {
     <>
       <div className="flex  items-end">
         {subTab.map((tab) => (
-          <div onClick={() => onChangeTab(tab)}>
+          <div onClick={() => onChangeTab(tab)} key={tab.to}>
             <TabsLink key={tab.to} isActive={tab.to == activeTab.to}>
               {tab.text}
             </TabsLink>
