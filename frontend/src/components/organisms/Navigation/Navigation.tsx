@@ -30,9 +30,16 @@ export const Navigation: React.FC = () => {
   return (
     <div className="bg-primary p-5 flex items-center justify-center fixed bottom-0 left-0 w-full">
       <div className="w-full flex justify-around items-end">
-        <NavigationButton href="/clubs" icon={<ClubIcon />} text="Clubs" />
-        <NavigationButton href="/matches" icon={<MatchIcon />} text="Matches" />
-
+        <NavigationButton
+          href="/profile"
+          icon={<ProfileIcon />}
+          text="Profile"
+        />
+        <NavigationButton
+          href="/friends"
+          icon={<FriendsIcon />}
+          text="Friends"
+        />
         <div
           className="flex self-center  justify-start  items-center cursor-pointer relative"
           onClick={onClick}
@@ -54,16 +61,8 @@ export const Navigation: React.FC = () => {
           )}
           <AddIcon />
         </div>
-        <NavigationButton
-          href="/friends"
-          icon={<FriendsIcon />}
-          text="Friends"
-        />
-        <NavigationButton
-          href="/profile"
-          icon={<ProfileIcon />}
-          text="Profile"
-        />
+        <NavigationButton href="/matches" icon={<MatchIcon />} text="Matches" />
+        <NavigationButton href="/clubs" icon={<ClubIcon />} text="Clubs" />
       </div>
     </div>
   );
