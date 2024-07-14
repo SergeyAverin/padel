@@ -97,7 +97,7 @@ async def remove_friend(
     recipient_id: str,
     user: UserDTO = Depends(get_current_user)
 ):
-    await friend_service.remove_user_friend('321', recipient_id)
+    await friend_service.remove_user_friend(user.telegram_user_id, recipient_id)
     return {'message': 'ok'}
 
 
