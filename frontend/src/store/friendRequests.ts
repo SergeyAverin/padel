@@ -66,6 +66,7 @@ class FriendRequestsStore {
   }
 
   async cancelFriendRequest(friendRequestId: number) {
+    console.log(friendRequestId);
     await cancelFriendRequest(friendRequestId);
     this.removeFriendRequestOuter(friendRequestId);
   }

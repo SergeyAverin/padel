@@ -21,7 +21,7 @@ export const FriendRequestOuter: React.FC<IFriendRequestProps> = ({
       </div>
       <div className="flex mt-5">
         <div className="w-[140px]">
-          <CancelFriendRequest userId={friendRequestId} />
+          <CancelFriendRequest requestId={friendRequestId} userId={""} />
         </div>
       </div>
     </div>
