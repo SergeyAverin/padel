@@ -10,6 +10,7 @@ import AuthStore from "@store/auth";
 // const API_URL = import.meta.env.VITE_API_URL;
 import MatchStore from "@store/match";
 import UserStore from "@store/user";
+import FriendRequestsStore from "@store/friendRequests";
 
 const App = observer(() => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const App = observer(() => {
     if (AuthStore.authUser?.telegram_user_id) {
       UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+      FriendRequestsStore.loadingRequests();
     }
     return () => {
       UserStore.user = null;

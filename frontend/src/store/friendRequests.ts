@@ -12,7 +12,7 @@ import { IFriendRequest } from "@schemas/friendRequest";
 import FriendStore from "@store/friends";
 
 class FriendRequestsStore {
-  isLoading = false;
+  isLoading = true;
   friendRequestsInner: Array<IFriendRequest> = [];
   friendRequestsOuter: Array<IFriendRequest> = [];
 
@@ -37,18 +37,14 @@ class FriendRequestsStore {
   }
 
   async getInnerFriendRequests() {
-    this.isLoading = true;
     runInAction(async () => {
       this.friendRequestsInner = await getInnerFriendRequests();
-      this.isLoading = false;
     });
   }
 
   async getOuterFriendRequests() {
-    this.isLoading = true;
     runInAction(async () => {
       this.friendRequestsOuter = await getOuterFriendRequests();
-      this.isLoading = false;
     });
   }
 
@@ -72,6 +68,15 @@ class FriendRequestsStore {
   async cancelFriendRequest(friendRequestId: number) {
     await cancelFriendRequest(friendRequestId);
     this.removeFriendRequestOuter(friendRequestId);
+  }
+
+  async loadingRequests() {
+    this.isLoading = true;
+    runInAction(async () => {
+      this.getInnerFriendRequests();
+      this.getOuterFriendRequests();
+      this.isLoading = false;
+    });
   }
 }
 
