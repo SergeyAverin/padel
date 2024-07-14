@@ -34,6 +34,7 @@ const App = observer(() => {
     if (AuthStore.authUser?.telegram_user_id) {
       UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadingMatch();
       FriendRequestsStore.loadingRequests();
       FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
     }

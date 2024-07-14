@@ -7,9 +7,10 @@ import {
   getMatchesFromBookmarkedClubs,
 } from "@dal/match";
 import { IMatch } from "@schemas/match";
+import AuthStore from "@store/auth";
 
 class MatchStore {
-  isLoading = false;
+  isLoading = true;
   matches: Array<IMatch> = [];
   matchesFromFriends: Array<IMatch> = [];
   matchesFromBookmarks: Array<IMatch> = [];
@@ -39,11 +40,22 @@ class MatchStore {
     });
   }
   async loadMatchesFromBookmarkedClubs(userId: string) {
-    this.isLoading = true;
     runInAction(async () => {
       this.matchesFromBookmarks = await getMatchesFromBookmarkedClubs(userId);
-      this.isLoading = false;
     });
+  }
+  async loadingMatch() {
+    this.isLoading = true;
+    runInAction(async () => {
+      if (AuthStore.authUser) {
+        await this.loadUserMatches(AuthStore.authUser.telegram_user_id);
+        await this.loadFriendsMatches(AuthStore.authUser.telegram_user_id);
+        await this.loadMatchesFromBookmarkedClubs(
+          AuthStore.authUser.telegram_user_id
+        );
+      }
+    });
+    this.isLoading = false;
   }
 }
 
