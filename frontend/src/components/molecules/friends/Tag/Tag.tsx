@@ -1,6 +1,8 @@
 import TagStore from "@store/tags";
 
 import TrashIcon from "@assets/TrashIcon.svg?react";
+import CloseIcon from "@assets/CloseIcon.svg?react";
+import AddTag from "@assets/AddTagIcon.svg?react";
 
 interface ITagProps {
   text: string;
@@ -29,13 +31,21 @@ export const Tag: React.FC<ITagProps> = ({
     TagStore.deleteTag(id);
   };
   return (
-    <div className="bg-highlight p-1 font-bold rounded-full w-[80px] text-bg text-[12px] flex justify-between items-center pl-3 pr-3">
-      {isAdd && <div onClick={addTag}>+</div>}
+    <div className="bg-highlight p-1 font-bold rounded-full  text-bg text-[12px] flex justify-between items-center pl-3 pr-3">
+      {isAdd && (
+        <div onClick={addTag} className="mr-2">
+          <AddTag />
+        </div>
+      )}
 
       {text}
-      {!isAdd && <div onClick={removeTag}>X</div>}
+      {!isAdd && (
+        <div onClick={removeTag} className="ml-3">
+          <CloseIcon />
+        </div>
+      )}
       {isAdd && (
-        <div onClick={deleteTag}>
+        <div onClick={deleteTag} className="ml-3">
           <TrashIcon />
         </div>
       )}

@@ -18,6 +18,13 @@ export const ClubTemplate: React.FC = observer(() => {
       ClubStore.loadClubPhotos(ClubStore.openedClub?.id);
     }
   }, [ClubStore.openedClub]);
+  useEffect(() => {
+    return () => {
+      MatchStore.matches = [];
+      ClubStore.clubPhotos = [];
+      ClubStore.openedClub = null;
+    };
+  }, []);
   const tabs = [
     {
       to: "#match",
