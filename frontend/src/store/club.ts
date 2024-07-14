@@ -18,7 +18,7 @@ import {
 import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 
 class ClubStore {
-  isLoading = false;
+  isLoading = true;
   clubs: Array<IClub> = [];
   bookmarkedClubs: Array<IClub> = [];
   bookmarks: Map<number, boolean> = new Map();
@@ -29,17 +29,17 @@ class ClubStore {
   constructor() {
     makeAutoObservable(this);
   }
-  getClubs() {
-    this.isLoading = true;
-    runInAction(async () => {
-      this.clubs = await getClubs();
-      this.isLoading = false;
-    });
+  async getClubs() {
+    this.clubs = await getClubs();
   }
-  getBookedClubs() {
+  async getBookedClubs() {
+    this.bookmarkedClubs = await getClubsByBookmark();
+  }
+  loadClubs() {
     this.isLoading = true;
     runInAction(async () => {
-      this.bookmarkedClubs = await getClubsByBookmark();
+      await this.getClubs();
+      await this.getBookedClubs();
       this.isLoading = false;
     });
   }
