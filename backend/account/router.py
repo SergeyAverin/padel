@@ -87,7 +87,7 @@ async def upload_photo(
     user: UserDTO = Depends(get_current_user),
     file: UploadFile = File()
 ):
-    await user_service.upload_user_photo(user.telegram_user_id, file)
+    return await user_service.upload_user_photo(user.telegram_user_id, file)
 
 
 @profile_router.get("/image/{image_path:path}")

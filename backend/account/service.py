@@ -42,6 +42,7 @@ class UserService:
         await self.photo_repository.save_photo(user_id, photo)
         user.avatar = f"http://{api_setting.api_domain}/api/v1.0/user/image/{user_id}_{photo.filename}"
         await user.save()
+        return user.avatar
 
 
 user_service = UserService(UserRepository())

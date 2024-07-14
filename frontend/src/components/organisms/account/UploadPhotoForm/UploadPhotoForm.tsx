@@ -29,16 +29,16 @@ export const UploadPhotoForm: React.FC = observer(() => {
   };
   useEffect(() => {
     setIsLoading(false);
-  }, [UserStore.user.avatar]);
+  }, [AuthStore.authUser?.avatar]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
       <div className="text-[24px]">Avatar now:</div>
-      {UserStore.user && (
+      {AuthStore.authUser && (
         <div className="flex items-center mt-3">
           <img
             className="rounded-full w-[80px] h-[80px]"
-            src={UserStore.user.avatar}
+            src={AuthStore.authUser.avatar}
           />
           {isLoading && (
             <div className="ml-[35px]">

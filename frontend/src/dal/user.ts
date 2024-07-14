@@ -63,10 +63,18 @@ export const getStats = async (userId: string) => {
 };
 
 export const uploadPhoto = async (userId: string, photo: FormData) => {
-  await axios.post(API_URL + `/user/${userId}/upload_photo`, photo, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  const req = await axios.post(
+    API_URL + `/user/${userId}/upload_photo`,
+    photo,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = await req.data;
+  if (AuthStore.authUser) {
+    AuthStore.authUser.avatar = data;
+  }
 };
