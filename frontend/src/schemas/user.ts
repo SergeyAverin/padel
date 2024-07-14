@@ -17,9 +17,11 @@ export interface IUserStats {
 }
 
 export interface IUpdateUserData {
-  clubs_count: number;
-  friends_count: number;
-  matches_count: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+  age: number;
+  email: string;
 }
 
 export enum Hand {

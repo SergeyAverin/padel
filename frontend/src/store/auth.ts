@@ -23,6 +23,7 @@ class AuthStore {
   }
   async acceptUser() {
     this.authUser = await getUserInfo(Telegram.WebApp.initDataUnsafe.user.id);
+    console.log(this.authUser);
   }
 }
 

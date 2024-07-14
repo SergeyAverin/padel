@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { Hand, IUpdateUserData, Position } from "@schemas/user";
+import AuthStore from "@store/auth";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,6 +21,9 @@ export const changeHand = async (userId: string, hand: Hand) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+  if (AuthStore.authUser) {
+    AuthStore.authUser.hand = hand;
+  }
 };
 
 export const changePosition = async (userId: string, position: Position) => {
@@ -28,6 +32,9 @@ export const changePosition = async (userId: string, position: Position) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+  if (AuthStore.authUser) {
+    AuthStore.authUser.position = position;
+  }
 };
 
 export const updateUser = async (userId: string, data: IUpdateUserData) => {
@@ -36,6 +43,13 @@ export const updateUser = async (userId: string, data: IUpdateUserData) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+  if (AuthStore.authUser) {
+    AuthStore.authUser.first_name = data.first_name;
+    AuthStore.authUser.last_name = data.last_name;
+    AuthStore.authUser.username = data.username;
+    AuthStore.authUser.email = data.email;
+    AuthStore.authUser.age = data.age;
+  }
 };
 
 export const getStats = async (userId: string) => {

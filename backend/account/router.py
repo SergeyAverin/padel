@@ -66,20 +66,20 @@ async def change_hand(
     telegram_user_id: str,
     user: UserDTO = Depends(get_current_user),
     new_hand: Hand = Body()
-) -> UserDTO:
+):
     user = await user_service.get_user_by_telegram_user_id(telegram_user_id)
     new_user = await user_service.change_hand(user, new_hand)
-    return new_user
+    return {'new_user': 123}
 
 
 @profile_router.patch('/{telegram_user_id}/position')
 async def change_position(
     user: UserDTO = Depends(get_current_user),
     new_position: Position = Body()
-) -> UserDTO:
+):
     user = await user_service.get_user_by_telegram_user_id(user.telegram_user_id)
     new_user = await user_service.change_position(user, new_position)
-    return new_user
+    return {'new_user': 123}
 
 
 @profile_router.post('/{telegram_user_id}/upload_photo')
