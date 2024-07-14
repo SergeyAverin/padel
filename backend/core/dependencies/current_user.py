@@ -24,7 +24,6 @@ async def get_current_user(
     Return:
      Авторизированные пользователь, в виде UserDTO
     '''
-    logger.debug('get current user')
     token = credentials.credentials
     payload = decode_jwt(token)
     user = await user_service.get_user_by_telegram_user_id(payload['sub'])

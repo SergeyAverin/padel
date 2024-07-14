@@ -54,8 +54,6 @@ def decode_jwt(
      Возвращает dict с данными из jwt токена
     '''
 
-    logger.debug('2 1')
     decoded = jwt.decode(jwt_token, public_key, algorithms=algorithm)
-    logger.debug('2 2')
 
     return decoded
