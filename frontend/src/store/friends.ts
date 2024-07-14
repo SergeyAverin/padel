@@ -7,6 +7,7 @@ class FriendStore {
   isLoading = true;
   friends: Array<IUser> = [];
   foundUsers: Array<IUser> = [];
+  isFindUserLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,7 +31,11 @@ class FriendStore {
     this.removeFriend(FriendId);
   }
   async findUser(username: string) {
-    this.foundUsers = await findUser(username);
+    this.isFindUserLoading = true;
+    runInAction(async () => {
+      this.foundUsers = await findUser(username);
+      this.isFindUserLoading = false;
+    });
   }
 }
 
