@@ -4,13 +4,15 @@ import { observer } from "mobx-react-lite";
 import classNames from "classnames";
 import ClubStore from "@store/club";
 import ClubFilterStore from "@store/clubFilter";
-import { Button, ButtonVariant, Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Input } from "@atoms/index";
 
 const ClubFiltersComponent: React.FC = observer(() => {
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
+    ClubStore.isFilterAwait = true;
     e.preventDefault();
-    ClubStore.getClubs();
     ClubFilterStore.toggleIsOpen();
+    await ClubStore.getClubs();
+    ClubStore.isFilterAwait = false;
   };
   return (
     <div
@@ -22,29 +24,31 @@ const ClubFiltersComponent: React.FC = observer(() => {
         }
       )}
     >
-      <div className="pt-[70px] pl-5 z-20 relative">
+      <div className="pt-[70px] pl-5 pr-5 z-20 relative">
         <div
           className="absolute right-[40px] top-[40px]"
           onClick={() => ClubFilterStore.toggleIsOpen()}
         >
           X
         </div>
-        <form className="w-[250px]" onSubmit={onSubmit}>
+        <form className=" mx-auto" onSubmit={onSubmit}>
           <div className="mt-5">
-            <Label htmlFor="name">Name</Label>
+            {/* <Label htmlFor="name">Name</Label> */}
             <Input
               name="name"
               value={ClubFilterStore.name}
+              requirement={false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 ClubFilterStore.changeName(e.target.value)
               }
             />
           </div>
           <div className="mt-5">
-            <Label htmlFor="city">City</Label>
+            {/* <Label htmlFor="city">City</Label> */}
             <Input
               name="city"
               value={ClubFilterStore.city}
+              requirement={false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 ClubFilterStore.changeCity(e.target.value)
               }

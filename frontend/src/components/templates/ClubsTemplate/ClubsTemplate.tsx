@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Heading, HeadingVariant, Spinner } from "@atoms/index";
+import { Heading, HeadingVariant, Loading, Spinner } from "@atoms/index";
 import ClubStore from "@store/club";
 import ClubFilterStore from "@store/clubFilter";
 import Club from "@organisms/clubs/Club";
@@ -46,14 +46,17 @@ export const ClubsTemplate: React.FC = observer(() => {
             </div>
             <div className="p-5">
               <div className="flex items-center">
-                <div>
+                <div className="mr-5">
                   <FilterIcon onClick={() => ClubFilterStore.toggleIsOpen()} />
                 </div>
                 {ClubFilterStore.name != "" && (
                   <div
-                    onClick={() => {
+                    className="mr-2"
+                    onClick={async () => {
                       ClubFilterStore.changeName("");
-                      ClubStore.getClubs();
+                      ClubStore.isFilterAwait = true;
+                      await ClubStore.getClubs();
+                      ClubStore.isFilterAwait = false;
                     }}
                   >
                     <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
@@ -61,9 +64,12 @@ export const ClubsTemplate: React.FC = observer(() => {
                 )}
                 {ClubFilterStore.city != "" && (
                   <div
-                    onClick={() => {
+                    className="mr-2"
+                    onClick={async () => {
+                      ClubStore.isFilterAwait = true;
                       ClubFilterStore.changeCity("");
-                      ClubStore.getClubs();
+                      await ClubStore.getClubs();
+                      ClubStore.isFilterAwait = false;
                     }}
                   >
                     <Tag id={2} isAdd={false} text={ClubFilterStore.city} />
@@ -71,14 +77,22 @@ export const ClubsTemplate: React.FC = observer(() => {
                 )}
               </div>
             </div>
-            {ClubStore.clubs.length == 0 && (
-              <EmptyBanner text="Clubs not found" />
+            {!ClubStore.isFilterAwait ? (
+              <>
+                {ClubStore.clubs.length == 0 && (
+                  <EmptyBanner text="Clubs not found" />
+                )}
+                <div className="grid grid-cols-2 gap-2 mt-5">
+                  {ClubStore.clubs.map((club) => (
+                    <Club club={club} key={club.id} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="flex justify-center mt-[40px] pb-[80px]">
+                <Loading />
+              </div>
             )}
-            <div className="grid grid-cols-2 gap-2 mt-5">
-              {ClubStore.clubs.map((club) => (
-                <Club club={club} key={club.id} />
-              ))}
-            </div>
           </div>
         </>
       )}

@@ -25,6 +25,7 @@ class ClubStore {
   openedClub: IClub | null = null;
   isLoadingOpenedClub: boolean = true;
   clubPhotos: Array<IClubPhoto> = [];
+  isFilterAwait: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
