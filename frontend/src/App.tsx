@@ -13,6 +13,8 @@ import UserStore from "@store/user";
 import FriendRequestsStore from "@store/friendRequests";
 import FriendStore from "@store/friends";
 import ClubStore from "@store/club";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = observer(() => {
   useEffect(() => {
@@ -52,10 +54,12 @@ const App = observer(() => {
           {AuthStore.isLogin && (
             <>
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
-                <BrowserRouter>
-                  <MainRouter />
-                </BrowserRouter>
-                <TutorialPortal />
+                <DndProvider backend={HTML5Backend}>
+                  <BrowserRouter>
+                    <MainRouter />
+                  </BrowserRouter>
+                  <TutorialPortal />
+                </DndProvider>
               </div>
             </>
           )}
