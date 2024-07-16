@@ -7,3 +7,9 @@ export interface IMatch {
   status: string;
   end_at: Date;
 }
+
+export enum MatchStatusEnum {
+  EXPECTATION = "expectation",
+  PLAYED = "played",
+  DONE = "done",
+}

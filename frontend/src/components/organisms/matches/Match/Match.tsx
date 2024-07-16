@@ -1,8 +1,13 @@
+import Select, { SingleValue } from "react-select";
 import UserInMatch from "@molecules/matches/UserInMatch";
 import { IUser } from "@schemas/user";
-import React from "react";
+import React, { useState } from "react";
 import { useDrop } from "react-dnd";
-
+import { MatchStatusEnum } from "@schemas/match";
+interface Option {
+  value: string;
+  label: string;
+}
 export const Match: React.FC = () => {
   const user1: IUser = {
     age: 12,
@@ -48,11 +53,30 @@ export const Match: React.FC = () => {
     telegram_user_id: "23",
     usernam: "sdf",
   };
+  const [selectedOption, setSelectedOption] =
+    useState<SingleValue<Option>>(null);
+
+  const handleChange = (option: SingleValue<Option>) => {
+    setSelectedOption(option);
+  };
+
   return (
     <div className="bg-primary p-5 rounded-2xl">
       <div className="flex justify-between">
         <div className="font-light text-[14px]">Friday 30 May | 10:00h</div>
-        <div className="font-light text-[14px]">Status</div>
+        <div className="font-light text-[14px]">
+          <div>
+            <Select
+              defaultValue={selectedOption}
+              onChange={handleChange}
+              options={[
+                { value: MatchStatusEnum.DONE, label: "Done" },
+                { value: MatchStatusEnum.EXPECTATION, label: "Expectation" },
+                { value: MatchStatusEnum.PLAYED, label: "Played" },
+              ]}
+            />
+          </div>
+        </div>
       </div>
       <div className="mt-2">
         <div className="font-light text-[14px]">Club name address</div>
