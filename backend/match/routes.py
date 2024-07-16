@@ -2,6 +2,7 @@ from fastapi import APIRouter, Body, Depends
 
 from match.schemas import MatchCreateDTO
 from match.services import match_service
+from match.models import StatusEnum
 from account.service import user_service
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
@@ -21,10 +22,19 @@ async def create_match(
 
 @match_router.get('/matches/{match_id}')
 async def get_match(
-    match_id: str,
+    match_id: int,
     user: UserDTO = Depends(get_current_user)
 ):
     return await match_service.get_match_by_id(match_id)
+
+
+@match_router.put('/matches/{match_id}')
+async def change_match_status(
+    match_id: int,
+    status: StatusEnum,
+    user: UserDTO = Depends(get_current_user)
+):
+    return await match_service.change_match_status(match_id, status)
 
 
 @match_router.get('/user/{user_id}/matches', tags=['user'])

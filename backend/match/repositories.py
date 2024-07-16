@@ -1,4 +1,5 @@
 from datetime import datetime
+from logging import getLogger
 
 # from tortoise.expressions import Q
 
@@ -8,6 +9,9 @@ from club.models import Club
 from account.models import User
 from friends.services import friend_service
 from club.services import club_bookmark_service
+
+
+logger = getLogger()
 
 
 class MatchRepository:
@@ -21,8 +25,10 @@ class MatchRepository:
         await match.save()
         return match
 
-    async def get_match_by_id(self, match_id: str):
-        return await Match.get_or_none(id=match_id)
+    async def get_match_by_id(self, match_id: int):
+        match = await Match.get_or_none(id=int(match_id))
+        logger.debug(match)
+        return match
 
     async def get_match_by_user(self, user_id: str):
         return await Match.filter(owner__telegram_user_id=user_id)
