@@ -5,6 +5,7 @@ import { Button, ButtonVariant } from "@atoms/index";
 import Bookmark from "@molecules/clubs/Bookmark";
 import { IClub } from "@schemas/club";
 import ClubStore from "@store/club";
+import style from "./Club.module.sass";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import { Link } from "react-router-dom";
@@ -20,10 +21,15 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
   return (
     <div className="rounded-2xl  bg-primary">
       <div className="relative">
-        <img src={club.avatar} className="absolute" />
-        <h2 className="text-[16px] font-bold absolute top-[100%] left-0">
-          {club.name}
-        </h2>
+        <div className={style.club}>
+          <h2 className="text-[16px] font-bold absolute bottom-5  left-2">
+            {club.name}
+          </h2>
+        </div>
+        <img
+          src={club.avatar}
+          className="absolute w-[100%] h-[120px] object-contain "
+        />
       </div>
       <div className="flex  justify-between p-4 pt-[135px]">
         <div className="flex w-full  items-center">
