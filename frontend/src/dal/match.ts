@@ -1,3 +1,4 @@
+import { MatchStatusEnum } from "@schemas/match";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -39,4 +40,13 @@ export const getMatchesFromBookmarkedClubs = async (userId: string) => {
   });
   const matches = await res.data;
   return matches;
+};
+
+export const changeStatus = async (matchId: number, newStatus: string) => {
+  console.log(newStatus);
+  await axios.put(API_URL + `/matches/${matchId}/status`, newStatus, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 };

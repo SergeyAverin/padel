@@ -5,8 +5,9 @@ import {
   getMatchByUserId,
   getMatchesFromUserFriends,
   getMatchesFromBookmarkedClubs,
+  changeStatus,
 } from "@dal/match";
-import { IMatch } from "@schemas/match";
+import { IMatch, MatchStatusEnum } from "@schemas/match";
 import AuthStore from "@store/auth";
 
 class MatchStore {
@@ -24,6 +25,9 @@ class MatchStore {
       this.matches = await getMatchByUserId(userId);
       this.isLoading = false;
     });
+  }
+  async changeMatchStatus(matchId: number, newStatus: string) {
+    await changeStatus(matchId, newStatus);
   }
   async loadClubMatches(clubId: number) {
     this.isLoading = true;

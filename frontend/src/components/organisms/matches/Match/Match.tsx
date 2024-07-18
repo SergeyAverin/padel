@@ -4,6 +4,7 @@ import { IUser } from "@schemas/user";
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { MatchStatusEnum } from "@schemas/match";
+import MatchStore from "@store/match";
 interface Option {
   value: string;
   label: string;
@@ -57,6 +58,9 @@ export const Match: React.FC = () => {
     useState<SingleValue<Option>>(null);
 
   const handleChange = (option: SingleValue<Option>) => {
+    if (option) {
+      MatchStore.changeMatchStatus(2, option.value);
+    }
     setSelectedOption(option);
   };
 

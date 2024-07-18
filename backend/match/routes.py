@@ -1,3 +1,5 @@
+from logging import getLogger
+
 from fastapi import APIRouter, Body, Depends
 
 from match.schemas import MatchCreateDTO
@@ -7,6 +9,8 @@ from account.service import user_service
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
 
+
+logger = getLogger()
 
 match_router = APIRouter(tags=['match'])
 
@@ -28,12 +32,13 @@ async def get_match(
     return await match_service.get_match_by_id(match_id)
 
 
-@match_router.put('/matches/{match_id}')
+@match_router.put('/matches/{match_id}/status')
 async def change_match_status(
     match_id: int,
-    status: StatusEnum,
+    status: StatusEnum = Body(),
     user: UserDTO = Depends(get_current_user)
 ):
+    logger.debug(status)
     return await match_service.change_match_status(match_id, status)
 
 
