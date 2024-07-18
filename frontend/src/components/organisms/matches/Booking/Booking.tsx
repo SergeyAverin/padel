@@ -4,10 +4,15 @@ import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
+import { Input } from "@atoms/index";
 
 export const Booking: React.FC = observer(() => {
   return (
     <>
+      <Input name="start at" value={""} />
+      <div className="mt-5">
+        <Input name="end at" value={""} />
+      </div>
       {BookingStore.selectedTimePoint && (
         <div>court: {BookingStore.selectedTimePoint.court}</div>
       )}

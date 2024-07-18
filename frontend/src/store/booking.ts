@@ -8,7 +8,14 @@ class AuthStore {
   }
 
   async selectTimePoint(selectedTimePoint: object) {
-    this.selectedTimePoint = selectedTimePoint;
+    if (
+      this.selectedTimePoint == null ||
+      this.selectedTimePoint.court != selectedTimePoint.court
+    ) {
+      this.selectedTimePoint = selectedTimePoint;
+    } else {
+      this.selectedTimePoint = null;
+    }
   }
 }
 
