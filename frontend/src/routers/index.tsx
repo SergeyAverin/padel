@@ -12,11 +12,13 @@ import CreateMatchPage from "@pages/CreateMatchPage";
 import CreateClubPage from "@pages/CreateClubPage";
 import EditClubPage from "@pages/EditClubPage";
 import UserPage from "@pages/UserPage";
+import Booking from "@organisms/matches/Booking";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
   return (
     <>
+      <Booking />
       <Routes>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
