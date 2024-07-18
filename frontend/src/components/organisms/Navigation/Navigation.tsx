@@ -28,7 +28,7 @@ export const Navigation: React.FC = () => {
     };
   }, [ref]);
   return (
-    <div className="bg-primary p-5 flex items-center justify-center fixed bottom-0 left-0 w-full">
+    <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full">
       <div className="w-full flex justify-around items-end">
         <NavigationButton
           href="/profile"

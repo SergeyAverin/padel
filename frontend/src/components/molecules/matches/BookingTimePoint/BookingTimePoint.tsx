@@ -6,30 +6,36 @@ interface IBookingTimePointProps {
   court: number;
   timeStart: number;
   timeEnd: number;
+  isNewMatch?: boolean;
 }
 
 export const BookingTimePoint: React.FC<IBookingTimePointProps> = ({
   court,
   timeEnd,
   timeStart,
+  isNewMatch = false,
 }) => {
   const onClick = () => {
-    BookingStore.selectTimePoint({
-      court: court,
-      timeEnd: timeEnd,
-      timeStart: timeStart,
-    });
+    if (!isNewMatch) {
+      BookingStore.selectTimePoint({
+        court: court,
+        timeEnd: timeEnd,
+        timeStart: timeStart,
+      });
+    }
   };
   return (
     <>
       <div
         className={classNames("rounded-sm", {
+          "bg-error": isNewMatch,
           "bg-highlight":
             BookingStore.selectedTimePoint &&
-            BookingStore.selectedTimePoint.court == court,
+            BookingStore.selectedTimePoint.court == court &&
+            !isNewMatch,
           "bg-fg":
             BookingStore.selectedTimePoint == null ||
-            BookingStore.selectedTimePoint.court != court,
+            (BookingStore.selectedTimePoint.court != court && !isNewMatch),
         })}
         onClick={onClick}
         style={{

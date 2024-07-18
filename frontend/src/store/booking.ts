@@ -2,6 +2,8 @@ import { makeAutoObservable } from "mobx";
 
 class AuthStore {
   selectedTimePoint: null | object = null;
+  startAt: string = "00:00";
+  endAt: string = "00:00";
 
   constructor() {
     makeAutoObservable(this);
