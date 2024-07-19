@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
+import {
+  Button,
+  ButtonVariant,
+  Heading,
+  HeadingVariant,
+  Spinner,
+} from "@atoms/index";
 import Match from "@organisms/matches/Match";
 import ClubStore from "@store/club";
 import MatchStore from "@store/match";
@@ -57,24 +63,32 @@ export const ClubTemplate: React.FC = observer(() => {
     },
   ];
   return (
-    <div className="p-5">
-      <Heading variant={HeadingVariant.H1}>
-        {ClubStore.openedClub?.name}
-      </Heading>
-      <div className="flex w-full  items-center">
-        <AddressIcon />
-        <div className="text-[12px] font-medium ml-3">
-          {ClubStore.openedClub?.address}
-        </div>
-      </div>
+    <>
+      {ClubStore.openedClub ? (
+        <div className="p-5">
+          <Heading variant={HeadingVariant.H1}>
+            {ClubStore.openedClub?.name}
+          </Heading>
+          <div className="flex w-full  items-center">
+            <AddressIcon />
+            <div className="text-[12px] font-medium ml-3">
+              {ClubStore.openedClub?.address}
+            </div>
+          </div>
 
-      <Link to={"/edit/club"}>
-        <div className="w-[150px] mt-5 mb-5">
-          <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
-        </div>
-      </Link>
+          <Link to={"/edit/club"}>
+            <div className="w-[150px] mt-5 mb-5">
+              <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
+            </div>
+          </Link>
 
-      <Tabs subTab={tabs} />
-    </div>
+          <Tabs subTab={tabs} />
+        </div>
+      ) : (
+        <div>
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 });
