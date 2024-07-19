@@ -24,6 +24,7 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
         <div className={style.club}>
           <h2 className="text-[16px] font-bold absolute bottom-5  left-2">
             {club.name}
+            {club.id}
           </h2>
         </div>
         <img
