@@ -54,6 +54,8 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
           <div className="mt-[25px]">
             <Info infoValue={user.email} infoKey="email" />
             <Info infoValue={user.age} infoKey="age" />
+            <Info infoValue={user.city} infoKey="city" />
+            <Info infoValue={user.country} infoKey="country" />
           </div>
         )}
       </div>

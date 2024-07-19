@@ -35,6 +35,8 @@ class UserRepository:
         old_user.first_name = new_user_data.first_name
         old_user.last_name = new_user_data.last_name
         old_user.username = new_user_data.username
+        old_user.city = new_user_data.city
+        old_user.country = new_user_data.country
 
         await old_user.save()
         return old_user

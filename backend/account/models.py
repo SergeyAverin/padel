@@ -42,6 +42,9 @@ class User(Model):
         'models.Club', on_delete=fields.CASCADE, through="clubs_bookmarks")
     # matches
 
+    city = fields.CharField(max_length=255, default='')
+    country = fields.CharField(max_length=255, default='')
+
     def __str__(self):
         return self.first_name
 

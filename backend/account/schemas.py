@@ -11,6 +11,8 @@ class UserDTO(BaseModel):
     age: int
     email: str
     telegram_user_id: str
+    city: str
+    country: str
 
     avatar: str = Field(
         default=f"http://{api_setting.api_domain}/api/v1.0/user/image/default.png")
@@ -25,3 +27,5 @@ class UpdateUserDTO(BaseModel):
     username: str
     age: int
     email: str
+    city: str
+    country: str

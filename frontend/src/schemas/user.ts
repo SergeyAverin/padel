@@ -8,6 +8,8 @@ export interface IUser {
   telegram_user_id: string;
   hand: Hand;
   position: Position;
+  country: string;
+  city: string;
 }
 
 export interface IUserStats {
@@ -22,6 +24,8 @@ export interface IUpdateUserData {
   username: string;
   age: number;
   email: string;
+  country: string;
+  city: string;
 }
 
 export enum Hand {
