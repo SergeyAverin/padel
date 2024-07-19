@@ -6,6 +6,8 @@ import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import Select, { SingleValue } from "react-select";
+import ClubStore from "@store/club";
+import CourtStore from "@store/courts";
 interface Option {
   value: string;
   label: string;
@@ -19,11 +21,21 @@ export const Booking: React.FC = observer(() => {
     useState<SingleValue<Option>>(null);
   const [selectedCourt, setSelectedCourt] = useState<SingleValue<Option>>(null);
 
-  const courtsOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-  ];
+  useEffect(() => {
+    if (ClubStore.openedClub) {
+      CourtStore.getCourts(2);
+    }
+  }, []);
+
+  const [courtsOptions, setCourtsOptions] = useState<Array<Option>>([]);
+
+  useEffect(() => {
+    const options = CourtStore.courts.map((item) => ({
+      value: String(item.id),
+      label: item.name,
+    }));
+    setCourtsOptions(options);
+  }, [CourtStore.courts]);
 
   const getIndexInTimeRange = (time: string) => {
     return timeRange.indexOf(time);
@@ -82,8 +94,8 @@ export const Booking: React.FC = observer(() => {
       )}
       <div className="mt-3">
         <div className={`bg-primary p-5 rounded-xl ${style.booking}`}>
-          {["cort 1", "cort 2", "cort 3"].map((item) => (
-            <div className="col-start-1 w-[50px]">{item}</div>
+          {courtsOptions.map((item) => (
+            <div className="col-start-1">{item.label}</div>
           ))}
           <div className="col-start-1 row-start-1"></div>
           {timeRange.map((item) => (
@@ -91,7 +103,13 @@ export const Booking: React.FC = observer(() => {
           ))}
           {selectedStartOption && selectedEndOption && selectedCourt && (
             <BookingTimePoint
-              court={Number(selectedCourt.value) + 1}
+              court={
+                Number(
+                  courtsOptions.findIndex(
+                    (item) => item.value == selectedCourt.value
+                  )
+                ) + 2
+              }
               isNewMatch={true}
               timeEnd={getIndexInTimeRange(selectedEndOption.value) + 3}
               timeStart={getIndexInTimeRange(selectedStartOption.value) + 2}
