@@ -12,6 +12,16 @@ export const getCourtsByClubId = async (clubId: number) => {
   return courts;
 };
 
+export const getClubCanCreateMatch = async () => {
+  const res = await axios.get(API_URL + `/matches/clubs`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const courts = await res.data;
+  return courts;
+};
+
 export const deleteCourt = async (courtId: number) => {
   await axios.delete(API_URL + `/club/courts/${courtId}`, {
     headers: {

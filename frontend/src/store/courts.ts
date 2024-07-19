@@ -1,9 +1,16 @@
-import { createCourt, deleteCourt, getCourtsByClubId } from "@dal/court";
+import {
+  createCourt,
+  deleteCourt,
+  getClubCanCreateMatch,
+  getCourtsByClubId,
+} from "@dal/court";
+import { IClub } from "@schemas/club";
 import { ICourt } from "@schemas/courts";
 import { makeAutoObservable } from "mobx";
 
 class CourtStore {
   courts: Array<ICourt> = [];
+  clubCanCreateMatch: Array<IClub> = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -18,6 +25,9 @@ class CourtStore {
   async createCourt(courtName: string, clubId: number) {
     const court = await createCourt(courtName, clubId);
     this.courts.push(court);
+  }
+  async getClubCanCreateMatch() {
+    this.clubCanCreateMatch = await getClubCanCreateMatch();
   }
 }
 

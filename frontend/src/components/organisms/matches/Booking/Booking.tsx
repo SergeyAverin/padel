@@ -4,14 +4,16 @@ import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
-import { Button, ButtonVariant, Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Label } from "@atoms/index";
 import Select, { SingleValue } from "react-select";
 import ClubStore from "@store/club";
 import CourtStore from "@store/courts";
+
 interface Option {
   value: string;
   label: string;
 }
+
 export const Booking: React.FC = observer(() => {
   const timeRange = getHoursInRange("08:00", "18:00");
   const options = timeRange.map((time) => ({ value: time, label: time }));
@@ -20,12 +22,17 @@ export const Booking: React.FC = observer(() => {
   const [selectedEndOption, setSelectedEndOption] =
     useState<SingleValue<Option>>(null);
   const [selectedCourt, setSelectedCourt] = useState<SingleValue<Option>>(null);
+  const [selectedClub, setSelectedClub] = useState<SingleValue<Option>>(null);
+  useEffect(() => {
+    CourtStore.getClubCanCreateMatch();
+  }, []);
 
   useEffect(() => {
-    if (ClubStore.openedClub) {
-      CourtStore.getCourts(2);
+    console.log("==");
+    if (selectedClub) {
+      CourtStore.getCourts(Number(selectedClub.value));
     }
-  }, []);
+  }, [selectedClub]);
 
   const [courtsOptions, setCourtsOptions] = useState<Array<Option>>([]);
 
@@ -47,6 +54,12 @@ export const Booking: React.FC = observer(() => {
     }
     setSelectedCourt(option);
   };
+  const handleChangeClubOption = (option: SingleValue<Option>) => {
+    if (option) {
+      console.log(option);
+    }
+    setSelectedClub(option);
+  };
 
   const handleChangeStartOption = (option: SingleValue<Option>) => {
     if (option) {
@@ -64,6 +77,17 @@ export const Booking: React.FC = observer(() => {
 
   return (
     <>
+      <Label>Clubs:</Label>
+
+      <Select
+        defaultValue={selectedClub}
+        onChange={handleChangeClubOption}
+        options={CourtStore.clubCanCreateMatch.map((club) => ({
+          label: club.name,
+          value: String(club.id),
+        }))}
+      />
+
       <Label>Time start</Label>
 
       <Select
@@ -127,12 +151,3 @@ export const Booking: React.FC = observer(() => {
     </>
   );
 });
-
-/*
-          {getHoursInRange("00:00", "23:00").map((item) => (
-            <div className="mr-5">{item}</div>
-          ))}
-                        {["cort 1", "cort 2", "cort 3"].map((item) => (
-              <div className="mt-5">{item}</div>
-            ))}
-              */
