@@ -10,12 +10,16 @@ import FilterIcon from "@assets/FilterIcon.svg?react";
 import ClubFilters from "@organisms/clubs/ClubFilters";
 import Tag from "@molecules/friends/Tag";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import AuthStore from "@store/auth";
 
 export const ClubsTemplate: React.FC = observer(() => {
   useEffect(() => {
     ClubStore.getClubs();
     ClubStore.getBookedClubs();
-  }, []);
+    if (AuthStore.authUser) {
+      ClubFilterStore.changeCity(AuthStore.authUser.city);
+    }
+  }, [AuthStore.authUser]);
 
   return (
     <>

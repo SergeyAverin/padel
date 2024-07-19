@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { login } from "@dal/auth";
 import { IUser } from "@schemas/user";
 import { getUserInfo } from "@dal/user";
+import ClubFilterStore from "@store/clubFilter";
 // import UserStore from "./user";
 
 class AuthStore {
@@ -23,6 +24,9 @@ class AuthStore {
   }
   async acceptUser() {
     this.authUser = await getUserInfo(Telegram.WebApp.initDataUnsafe.user.id);
+    if (this.authUser) {
+      ClubFilterStore.changeCity(this.authUser.city);
+    }
     console.log(this.authUser);
   }
 }
