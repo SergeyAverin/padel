@@ -19,3 +19,20 @@ export const deleteCourt = async (courtId: number) => {
     },
   });
 };
+
+export const createCourt = async (courtName: string, clubId: number) => {
+  const res = await axios.post(
+    API_URL + `/club/courts`,
+    {
+      club_id: clubId,
+      court_name: courtName,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = res.data;
+  return data;
+};

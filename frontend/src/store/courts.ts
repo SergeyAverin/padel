@@ -1,4 +1,4 @@
-import { deleteCourt, getCourtsByClubId } from "@dal/court";
+import { createCourt, deleteCourt, getCourtsByClubId } from "@dal/court";
 import { ICourt } from "@schemas/courts";
 import { makeAutoObservable } from "mobx";
 
@@ -14,6 +14,10 @@ class CourtStore {
   async deleteCourt(courtId: number) {
     this.courts = this.courts.filter((obj) => obj.id !== courtId);
     await deleteCourt(courtId);
+  }
+  async createCourt(courtName: string, clubId: number) {
+    const court = await createCourt(courtName, clubId);
+    this.courts.push(court);
   }
 }
 
