@@ -22,3 +22,9 @@ class ClubPhoto(Model):
     alt = fields.CharField(max_length=150)
     photo_club = fields.ForeignKeyField(
         'models.Club', related_name='club_photo')
+
+
+class Court(Model):
+    name = fields.CharField(max_length=130)
+    club_court = fields.ForeignKeyField(
+        'models.Club', related_name='club_court')
