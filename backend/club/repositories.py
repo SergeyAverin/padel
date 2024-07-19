@@ -4,7 +4,7 @@ from tortoise.expressions import Q
 from fastapi import UploadFile
 
 from club.schemas import CreateClubDTO
-from club.models import Club, ClubPhoto
+from club.models import Club, ClubPhoto, Court
 from account.models import User
 from account.service import user_service
 from core.config.api_settings import api_setting
@@ -121,3 +121,14 @@ class ClubPhotoRepository:
     async def remove_club_image(self, image_id: int):
         photo = await ClubPhoto.get_or_none(id=image_id)
         await photo.delete()
+
+
+class CourtRepository:
+    async def get_court_by_club(self, club_id: int):
+        return await Court.filter(club_court__id=club_id)
+
+    def add_court(self):
+        pass
+
+    def remove_court(self):
+        pass

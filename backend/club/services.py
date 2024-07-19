@@ -4,7 +4,7 @@ from fastapi import UploadFile
 
 from account.models import User
 from club.schemas import CreateClubDTO
-from club.repositories import ClubRepository, ClubBookmarkRepository, ClubPhotoRepository
+from club.repositories import ClubRepository, ClubBookmarkRepository, ClubPhotoRepository, CourtRepository
 
 
 logger = getLogger()
@@ -78,6 +78,21 @@ class ClubPhotosService:
         await self.club_photo_repository.change_avatar(club_id, file)
 
 
+class CourtService:
+    def __init__(self) -> None:
+        self.court_repository = CourtRepository()
+
+    async def get_court_by_club(self, club_id: int):
+        return await self.court_repository.get_court_by_club(club_id)
+
+    async def add_court(self):
+        pass
+
+    async def remove_court(self):
+        pass
+
+
 club_service = ClubService()
 club_bookmark_service = ClubBookmarkService()
 club_photo_service = ClubPhotosService()
+court_service = CourtService()

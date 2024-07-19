@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from fastapi import APIRouter, Body, UploadFile, File, Depends
 
 from club.schemas import CreateClubDTO
-from club.services import club_service, club_bookmark_service, club_photo_service
+from club.services import club_service, club_bookmark_service, club_photo_service, court_service
 from club.models import Club
 from account.service import user_service
 from account.schemas import UserDTO
@@ -137,3 +137,11 @@ async def change_avatar(
     photo: UploadFile = File()
 ):
     await club_photo_service.change_avatar(club_id, photo)
+
+
+@club_routes.post("/courts", tags=['Courts'])
+async def get_court_to_match(
+    club_id: int,
+    user: UserDTO = Depends(get_current_user)
+):
+    return await court_service.get_court_by_club(club_id)
