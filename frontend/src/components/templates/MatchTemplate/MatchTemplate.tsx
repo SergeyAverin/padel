@@ -14,6 +14,9 @@ export const MatchTemplate: React.FC = observer(() => {
       text: "Your",
       content: (
         <>
+          {MatchStore.matches.length == 0 && (
+            <EmptyBanner text="You have not matches" />
+          )}
           {MatchStore.matches.length != 0 && (
             <div>
               <Heading variant={HeadingVariant.H2}>Your match</Heading>
@@ -32,6 +35,9 @@ export const MatchTemplate: React.FC = observer(() => {
       text: "Friends",
       content: (
         <>
+          {MatchStore.matchesFromFriends.length == 0 && (
+            <EmptyBanner text="Your friends have not matches" />
+          )}
           {MatchStore.matchesFromFriends.length != 0 && (
             <div className="mt-5">
               <Heading variant={HeadingVariant.H2}>Match from friends</Heading>
@@ -50,6 +56,9 @@ export const MatchTemplate: React.FC = observer(() => {
       text: "Clubs",
       content: (
         <>
+          {MatchStore.matchesFromBookmarks.length == 0 && (
+            <EmptyBanner text="In your bookmarked clubs have not matches" />
+          )}
           {MatchStore.matchesFromBookmarks.length != 0 && (
             <div className="mt-5">
               <Heading variant={HeadingVariant.H2}>
