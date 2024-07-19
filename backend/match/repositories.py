@@ -59,6 +59,9 @@ class MatchRepository:
     def delete_match_by_id(self):
         pass
 
+    async def get_club_for_match(self, user: User):
+        return await Club.filter(owner__telegram_user_id=user.telegram_user_id)
+
 
 class MatchPlayersRepository:
     def get_match_players(self):

@@ -15,6 +15,9 @@ class MatchService:
     def end_match(self):
         pass
 
+    async def get_club_for_match(self, user: User):
+        return await self.match_repository.get_club_for_match(user)
+
     async def change_match_status(self, match_id: int, status: StatusEnum):
         match = await self.match_repository.get_match_by_id(match_id)
         match.status = status.value

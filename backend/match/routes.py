@@ -15,6 +15,13 @@ logger = getLogger()
 match_router = APIRouter(tags=['match'])
 
 
+@match_router.get('/matches/clubs')
+async def get_club_for_match(
+    user: UserDTO = Depends(get_current_user)
+):
+    return await match_service.get_club_for_match(user)
+
+
 @match_router.post('/matches')
 async def create_match(
     match_create_data: MatchCreateDTO = Body(),
