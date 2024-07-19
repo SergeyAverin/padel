@@ -104,8 +104,18 @@ export const Booking: React.FC = observer(() => {
     setSelectedEndOption(option);
   };
 
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("create");
+
+    console.log(selectedClub);
+    console.log(selectedCourt);
+    console.log(selectedStartOption);
+    console.log(selectedEndOption);
+  };
+
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <Label>Clubs:</Label>
 
       <Select
@@ -182,6 +192,6 @@ export const Booking: React.FC = observer(() => {
           Create
         </Button>
       </div>
-    </>
+    </form>
   );
 });
