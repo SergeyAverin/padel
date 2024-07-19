@@ -90,8 +90,8 @@ class CourtService:
         club = await club_service.get_club_by_id(club_id)
         return await self.court_repository.add_court(club, court_name)
 
-    async def remove_court(self):
-        pass
+    async def remove_court(self, court_id: int):
+        return await self.court_repository.remove_court(court_id)
 
 
 club_service = ClubService()

@@ -139,7 +139,7 @@ async def change_avatar(
     await club_photo_service.change_avatar(club_id, photo)
 
 
-@club_routes.get("/courts/{club_id}", tags=['Courts'])
+@club_routes.get("/courts/clubs/{club_id}", tags=['Courts'])
 async def get_court_to_match(
     club_id: int,
     user: UserDTO = Depends(get_current_user)
@@ -154,3 +154,11 @@ async def add_court(
     user: UserDTO = Depends(get_current_user)
 ):
     return await court_service.add_court(club_id, court_name)
+
+
+@club_routes.delete("/courts/{court_id}", tags=['Courts'])
+async def remove_court(
+    court_id: int,
+    user: UserDTO = Depends(get_current_user)
+):
+    return await court_service.remove_court(court_id)
