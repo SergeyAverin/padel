@@ -127,8 +127,12 @@ class CourtRepository:
     async def get_court_by_club(self, club_id: int):
         return await Court.filter(club_court__id=club_id)
 
-    def add_court(self):
-        pass
+    async def add_court(self, club: Club, court_name: str):
+        court = Court()
+        court.name = court_name
+        court.club_court = club
+        await court.save()
+        return court
 
     def remove_court(self):
         pass

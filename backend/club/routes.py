@@ -139,9 +139,18 @@ async def change_avatar(
     await club_photo_service.change_avatar(club_id, photo)
 
 
-@club_routes.post("/courts", tags=['Courts'])
+@club_routes.get("/courts/{club_id}", tags=['Courts'])
 async def get_court_to_match(
     club_id: int,
     user: UserDTO = Depends(get_current_user)
 ):
     return await court_service.get_court_by_club(club_id)
+
+
+@club_routes.post("/courts", tags=['Courts'])
+async def add_court(
+    club_id: int = Body(),
+    court_name: str = Body(),
+    user: UserDTO = Depends(get_current_user)
+):
+    return await court_service.add_court(club_id, court_name)
