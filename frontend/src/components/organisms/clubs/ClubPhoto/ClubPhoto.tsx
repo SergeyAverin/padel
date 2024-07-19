@@ -8,8 +8,8 @@ interface IClubPhotoProps {
 
 export const ClubPhoto: React.FC<IClubPhotoProps> = ({ photo }) => {
   return (
-    <>
-      <img src={photo.photo} />
-    </>
+    <div className="flex justify-center mb-5">
+      <img className="rounded-2xl w-full object-contain" src={photo.photo} />
+    </div>
   );
 };

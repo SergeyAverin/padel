@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
 import {
@@ -6,19 +6,15 @@ import {
   ButtonVariant,
   Heading,
   HeadingVariant,
-  Loading,
   Spinner,
 } from "@atoms/index";
-import Match from "@organisms/matches/Match";
 import ClubStore from "@store/club";
-import MatchStore from "@store/match";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
-import ClubPhoto from "@organisms/clubs/ClubPhoto";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import ClubMatches from "@organisms/clubs/ClubMatches";
+import ClubPhotos from "@organisms/clubs/ClubPhotos";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [
@@ -30,19 +26,7 @@ export const ClubTemplate: React.FC = observer(() => {
     {
       to: "#photos",
       text: "Photos",
-      content: (
-        <div>
-          {ClubStore.isLoadingGallery && <Loading />}
-          {ClubStore.clubPhotos.map((photo) => (
-            <div key={photo.id}>
-              <ClubPhoto photo={photo} />
-            </div>
-          ))}
-          {ClubStore.clubPhotos.length == 0 && (
-            <EmptyBanner text="Club have not photos" />
-          )}
-        </div>
-      ),
+      content: <ClubPhotos />,
     },
   ];
   return (

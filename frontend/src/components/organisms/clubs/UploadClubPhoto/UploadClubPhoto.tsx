@@ -87,7 +87,7 @@ export const UploadClubPhoto: React.FC = observer(() => {
           )}
         </div>
         <div className="mt-5">
-          <Button variant={ButtonVariant.OUTLINED} type="submit">
+          <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Add photo
           </Button>
         </div>
