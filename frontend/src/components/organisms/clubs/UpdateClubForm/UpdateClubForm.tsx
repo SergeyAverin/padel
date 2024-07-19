@@ -1,11 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { config, FormDataI, getInitState } from "./updateClubConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import ClubStore from "@store/club";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-export const UpdateClubForm: React.FC = () => {
+export const UpdateClubForm: React.FC = observer(() => {
   const [formValue, setFormValue] = useState<FormDataI>(getInitState());
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as keyof FormDataI;
@@ -46,4 +47,4 @@ export const UpdateClubForm: React.FC = () => {
       </div>
     </form>
   );
-};
+});

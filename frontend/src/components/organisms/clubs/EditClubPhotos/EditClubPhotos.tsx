@@ -31,46 +31,48 @@ export const EditClubPhotos: React.FC = observer(() => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="p-5 bg-primary rounded-xl">
-      <Heading variant={HeadingVariant.H2}>Club photos</Heading>
-      <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
-        <div className="text-[24px] mt-5">Upload avatar:</div>
-        <div
-          className="mt-5"
-          onClick={(e: React.MouseEvent) => {
-            if (e.target != fileInputRef.current) {
-              fileInputRef.current?.click();
-            }
-          }}
-        >
-          <div className="flex items-center">
-            <FileIcon />
-            <input
-              className="file:border-none file:bg-primary file:text-highlight"
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              onChange={handleFileChange}
-              ref={fileInputRef}
-            />
-          </div>
-        </div>
-        <div className="mt-5">
-          <Button variant={ButtonVariant.OUTLINED} type="submit">
-            Add photo
-          </Button>
-        </div>
-      </form>
-      {ClubStore.clubPhotos.map((photo) => (
-        <div key={photo.id} className="mt-5 relative">
-          <ClubPhoto photo={photo} />
+    <>
+      <div className="p-5 bg-primary rounded-xl">
+        <Heading variant={HeadingVariant.H2}>Club photos</Heading>
+        <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
+          <div className="text-[24px] mt-5">Upload avatar:</div>
           <div
-            className="absolute right-[10px] bottom-[10px] text-error"
-            onClick={() => deletePhoto(photo.id)}
+            className="mt-5"
+            onClick={(e: React.MouseEvent) => {
+              if (e.target != fileInputRef.current) {
+                fileInputRef.current?.click();
+              }
+            }}
           >
-            Delete
+            <div className="flex items-center">
+              <FileIcon />
+              <input
+                className="file:border-none file:bg-primary file:text-highlight"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+              />
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+          <div className="mt-5">
+            <Button variant={ButtonVariant.OUTLINED} type="submit">
+              Add photo
+            </Button>
+          </div>
+        </form>
+        {ClubStore.clubPhotos.map((photo) => (
+          <div key={photo.id} className="mt-5 relative">
+            <ClubPhoto photo={photo} />
+            <div
+              className="absolute right-[10px] bottom-[10px] text-error"
+              onClick={() => deletePhoto(photo.id)}
+            >
+              Delete
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 });

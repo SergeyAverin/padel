@@ -25,7 +25,7 @@ const MainRouter: React.FC = () => {
         <Route path="/matches" element={<MatchPage />} />
         <Route path="/create/match" element={<CreateMatchPage />} />
         <Route path="/create/club" element={<CreateClubPage />} />
-        <Route path="/edit/club" element={<EditClubPage />} />
+        <Route path="/edit/club/:clubId" element={<EditClubPage />} />
         <Route path="/user/:userId" element={<UserPage />} />
       </Routes>
       <Navigation />

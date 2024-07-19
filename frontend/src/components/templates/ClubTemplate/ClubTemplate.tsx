@@ -16,6 +16,7 @@ import AddressIcon from "@assets/AddressIcon.svg?react";
 import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
 import ClubPhoto from "@organisms/clubs/ClubPhoto";
+import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 
 export const ClubTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -37,13 +38,15 @@ export const ClubTemplate: React.FC = observer(() => {
       text: "match",
       content: (
         <div>
-          {" "}
           <div>
             {MatchStore.matches.map((match) => (
               <div key={match.id} className="mt-5">
                 <Match />
               </div>
             ))}
+            {MatchStore.matches.length == 0 && (
+              <EmptyBanner text="Club have not matches" />
+            )}
           </div>
         </div>
       ),
@@ -58,6 +61,9 @@ export const ClubTemplate: React.FC = observer(() => {
               <ClubPhoto photo={photo} />
             </div>
           ))}
+          {ClubStore.clubPhotos.length == 0 && (
+            <EmptyBanner text="Club have not photos" />
+          )}
         </div>
       ),
     },
@@ -76,7 +82,7 @@ export const ClubTemplate: React.FC = observer(() => {
             </div>
           </div>
 
-          <Link to={"/edit/club"}>
+          <Link to={`/edit/club/${ClubStore.openedClub.id}`}>
             <div className="w-[150px] mt-5 mb-5">
               <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
             </div>

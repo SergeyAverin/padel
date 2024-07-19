@@ -9,5 +9,8 @@ export const useLoadingClubById = () => {
     if (clubId) {
       ClubStore.openClub(clubId);
     }
-  }, []);
+    return () => {
+      ClubStore.openedClub = null;
+    };
+  }, [clubId]);
 };
