@@ -1,4 +1,3 @@
-import club from "@store/club";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -9,8 +8,14 @@ export const getCourtsByClubId = async (clubId: number) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
-  console.log(clubId);
   const courts = await res.data;
-  console.log(courts);
   return courts;
+};
+
+export const deleteCourt = async (courtId: number) => {
+  await axios.delete(API_URL + `/club/courts/${courtId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 };
