@@ -1,7 +1,7 @@
 from match.schemas import MatchCreateDTO
 from match.repositories import MatchRepository
 from match.models import StatusEnum
-from club.services import club_service
+from club.services import club_service, court_service
 from account.models import User
 
 
@@ -26,7 +26,8 @@ class MatchService:
 
     async def create_match(self,  match_create_data: MatchCreateDTO, user: User):
         club = await club_service.get_club_by_id(match_create_data.club_id)
-        return await self.match_repository.create_match(match_create_data, club, user)
+        court = await court_service.get_court_by_id(match_create_data.court_id)
+        return await self.match_repository.create_match(match_create_data, club, user, court)
 
     async def get_match_by_id(self, match_id: int):
         return await self.match_repository.get_match_by_id(match_id)

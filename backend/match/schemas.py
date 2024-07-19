@@ -22,3 +22,4 @@ class MatchCreateDTO(BaseModel):
     start_at: datetime
     end_at: datetime
     club_id: int
+    court_id: int

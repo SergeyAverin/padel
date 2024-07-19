@@ -5,7 +5,7 @@ from logging import getLogger
 
 from match.models import Match, StatusEnum
 from match.schemas import MatchCreateDTO
-from club.models import Club
+from club.models import Club, Court
 from account.models import User
 from friends.services import friend_service
 from club.services import club_bookmark_service
@@ -15,13 +15,14 @@ logger = getLogger()
 
 
 class MatchRepository:
-    async def create_match(self, match_create_data: MatchCreateDTO, club: Club, user: User):
+    async def create_match(self, match_create_data: MatchCreateDTO, club: Club, user: User, court: Court):
         match = Match()
         match.club = club
         match.start_at = match_create_data.start_at
         match.end_at = match_create_data.end_at
         match.created_at = datetime.now()
         match.owner = user
+        match.selected_court = court
         await match.save()
         return match
 

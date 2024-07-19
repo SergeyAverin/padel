@@ -137,3 +137,6 @@ class CourtRepository:
     async def remove_court(self, court_id: int):
         court = await Court.get_or_none(id=court_id)
         await court.delete()
+
+    async def get_court_by_id(self, court_id):
+        return await Court.get_or_none(id=court_id)

@@ -1,4 +1,4 @@
-import { getHoursInRange } from "@utils/timeUtils";
+import { extractTime, getHoursInRange } from "@utils/timeUtils";
 import React, { useEffect, useState } from "react";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
@@ -8,6 +8,7 @@ import { Button, ButtonVariant, Label } from "@atoms/index";
 import Select, { SingleValue } from "react-select";
 import ClubStore from "@store/club";
 import CourtStore from "@store/courts";
+import MatchStore from "@store/match";
 
 interface Option {
   value: string;
@@ -28,11 +29,39 @@ export const Booking: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    console.log("==");
     if (selectedClub) {
       CourtStore.getCourts(Number(selectedClub.value));
+      MatchStore.loadClubMatches(Number(selectedClub.value));
     }
   }, [selectedClub]);
+
+  const [timePoints, setTimePoints] = useState<
+    Array<{
+      startAt: number;
+      endAt: number;
+      courtIndex: number;
+    }>
+  >([]);
+
+  useEffect(() => {
+    const arr: Array<{
+      startAt: number;
+      endAt: number;
+      courtIndex: number;
+    }> = [];
+    MatchStore.matches.forEach((i) => {
+      const startAt = extractTime(String(i.start_at));
+      const endAt = extractTime(String(i.end_at));
+      const courtIndex =
+        courtsOptions.findIndex((item) => item.value == String(i.club_id)) + 3;
+      arr.push({
+        startAt: getIndexInTimeRange(startAt) + 2,
+        endAt: getIndexInTimeRange(endAt) + 3,
+        courtIndex: courtIndex,
+      });
+    });
+    setTimePoints(arr);
+  }, [MatchStore.matches]);
 
   const [courtsOptions, setCourtsOptions] = useState<Array<Option>>([]);
 
@@ -139,8 +168,13 @@ export const Booking: React.FC = observer(() => {
               timeStart={getIndexInTimeRange(selectedStartOption.value) + 2}
             />
           )}
-          <BookingTimePoint court={2} timeEnd={3} timeStart={3} />
-          <BookingTimePoint court={3} timeEnd={6} timeStart={2} />
+          {timePoints.map((item) => (
+            <BookingTimePoint
+              court={item.courtIndex}
+              timeEnd={item.endAt}
+              timeStart={item.startAt}
+            />
+          ))}
         </div>
       </div>
       <div className="mt-5">
