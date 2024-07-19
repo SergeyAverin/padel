@@ -4,7 +4,7 @@ import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
-import { Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import Select, { SingleValue } from "react-select";
 interface Option {
   value: string;
@@ -80,7 +80,7 @@ export const Booking: React.FC = observer(() => {
       {BookingStore.selectedTimePoint && (
         <div>court: {BookingStore.selectedTimePoint.court}</div>
       )}
-      <div className="p-2">
+      <div className="mt-3">
         <div className={`bg-primary p-5 rounded-xl ${style.booking}`}>
           {["cort 1", "cort 2", "cort 3"].map((item) => (
             <div className="col-start-1 w-[50px]">{item}</div>
@@ -100,6 +100,11 @@ export const Booking: React.FC = observer(() => {
           <BookingTimePoint court={2} timeEnd={3} timeStart={3} />
           <BookingTimePoint court={3} timeEnd={6} timeStart={2} />
         </div>
+      </div>
+      <div className="mt-5">
+        <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
+          Create
+        </Button>
       </div>
     </>
   );

@@ -52,11 +52,11 @@ export const Navigation: React.FC = () => {
                   Add club
                 </div>
               </Link>
-              {/* <Link to={"/create/match"}>
+              <Link to={"/create/match"}>
                 <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
                   Add match
                 </div>
-              </Link> */}
+              </Link>
             </div>
           )}
           <AddIcon />
