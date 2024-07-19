@@ -28,12 +28,12 @@ export const BookingTimePoint: React.FC<IBookingTimePointProps> = ({
     <>
       <div
         className={classNames("rounded-sm", {
-          "bg-error": isNewMatch,
+          "bg-fg": isNewMatch,
           "bg-highlight":
             BookingStore.selectedTimePoint &&
             BookingStore.selectedTimePoint.court == court &&
             !isNewMatch,
-          "bg-fg":
+          "bg-error":
             BookingStore.selectedTimePoint == null ||
             (BookingStore.selectedTimePoint.court != court && !isNewMatch),
         })}
