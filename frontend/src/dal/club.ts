@@ -108,6 +108,7 @@ export const loadClubPhoto = async (clubId: number) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+  console.log("123312");
   const data = await res.data;
   return data;
 };

@@ -12,6 +12,7 @@ import AuthStore from "@store/auth";
 
 class MatchStore {
   isLoading = true;
+  isLoadingFromClub = true;
   matches: Array<IMatch> = [];
   matchesFromFriends: Array<IMatch> = [];
   matchesFromBookmarks: Array<IMatch> = [];
@@ -30,10 +31,12 @@ class MatchStore {
     await changeStatus(matchId, newStatus);
   }
   async loadClubMatches(clubId: number) {
-    this.isLoading = true;
+    this.isLoadingFromClub = true;
+    console.log(`loadClubMatches ${clubId}`);
     runInAction(async () => {
       this.matches = await getMatchByClubId(clubId);
-      this.isLoading = false;
+      console.log(123123123);
+      this.isLoadingFromClub = false;
     });
   }
   async loadFriendsMatches(userId: string) {

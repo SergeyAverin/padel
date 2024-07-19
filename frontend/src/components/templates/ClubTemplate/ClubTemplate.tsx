@@ -6,6 +6,7 @@ import {
   ButtonVariant,
   Heading,
   HeadingVariant,
+  Loading,
   Spinner,
 } from "@atoms/index";
 import Match from "@organisms/matches/Match";
@@ -17,45 +18,21 @@ import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
 import ClubPhoto from "@organisms/clubs/ClubPhoto";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import ClubMatches from "@organisms/clubs/ClubMatches";
 
 export const ClubTemplate: React.FC = observer(() => {
-  useEffect(() => {
-    if (ClubStore.openedClub) {
-      MatchStore.loadClubMatches(ClubStore.openedClub?.id);
-      ClubStore.loadClubPhotos(ClubStore.openedClub?.id);
-    }
-  }, [ClubStore.openedClub]);
-  useEffect(() => {
-    return () => {
-      MatchStore.matches = [];
-      ClubStore.clubPhotos = [];
-      ClubStore.openedClub = null;
-    };
-  }, []);
   const tabs = [
     {
       to: "#match",
       text: "match",
-      content: (
-        <div>
-          <div>
-            {MatchStore.matches.map((match) => (
-              <div key={match.id} className="mt-5">
-                <Match />
-              </div>
-            ))}
-            {MatchStore.matches.length == 0 && (
-              <EmptyBanner text="Club have not matches" />
-            )}
-          </div>
-        </div>
-      ),
+      content: <ClubMatches />,
     },
     {
       to: "#photos",
       text: "Photos",
       content: (
         <div>
+          {ClubStore.isLoadingGallery && <Loading />}
           {ClubStore.clubPhotos.map((photo) => (
             <div key={photo.id}>
               <ClubPhoto photo={photo} />

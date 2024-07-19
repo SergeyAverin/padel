@@ -19,6 +19,7 @@ import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 
 class ClubStore {
   isLoading = true;
+  isLoadingGallery = true;
   clubs: Array<IClub> = [];
   bookmarkedClubs: Array<IClub> = [];
   bookmarks: Map<number, boolean> = new Map();
@@ -45,7 +46,11 @@ class ClubStore {
     });
   }
   async loadClubPhotos(clubId: number) {
-    this.clubPhotos = await loadClubPhoto(clubId);
+    this.isLoadingGallery = true;
+    runInAction(async () => {
+      this.clubPhotos = await loadClubPhoto(clubId);
+      this.isLoadingGallery = false;
+    });
   }
   async getIsBookmark(clubId: number) {
     const isBookmark = await getIsClubBookmarked(clubId);
