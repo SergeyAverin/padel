@@ -20,9 +20,7 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
   const [isShow, setIsShow] = useState(true);
 
   useEffect(() => {
-    console.log("reste");
     if (TagStore.filterTags.length > 0) {
-      console.log(TagStore.friendsWithTags.has(user.telegram_user_id));
       if (
         TagStore.friendsWithTags.has(user.telegram_user_id) &&
         (TagStore.friendsWithTags.get(user.telegram_user_id) as Array<ITag>)

@@ -1,11 +1,10 @@
 import Select, { SingleValue } from "react-select";
 import UserInMatch from "@molecules/matches/UserInMatch";
 import { IUser } from "@schemas/user";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
-import { getHoursInRange } from "@utils/timeUtils";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
 import AddUserInMatchPanel from "../AddUserInMatchPanel";
 interface Option {
@@ -16,50 +15,6 @@ interface IMatchProps {
   match: IMatch;
 }
 export const Match: React.FC<IMatchProps> = ({ match }) => {
-  const user1: IUser = {
-    age: 12,
-    avatar: "",
-    email: "sdf",
-    first_name: "safd",
-    hand: "left_hand",
-    last_name: "sdf",
-    position: "left",
-    telegram_user_id: "23",
-    usernam: "sdf",
-  };
-  const user2: IUser = {
-    age: 43,
-    avatar: "",
-    email: "sdf",
-    first_name: "safd",
-    hand: "left_hand",
-    last_name: "sdf",
-    position: "left",
-    telegram_user_id: "23",
-    usernam: "sdf",
-  };
-  const user3: IUser = {
-    age: 56,
-    avatar: "",
-    email: "sdf",
-    first_name: "safd",
-    hand: "left_hand",
-    last_name: "sdf",
-    position: "left",
-    telegram_user_id: "23",
-    usernam: "sdf",
-  };
-  const user4: IUser = {
-    age: 3,
-    avatar: "",
-    email: "sdf",
-    first_name: "safd",
-    hand: "left_hand",
-    last_name: "sdf",
-    position: "left",
-    telegram_user_id: "23",
-    usernam: "sdf",
-  };
   const [selectedOption, setSelectedOption] =
     useState<SingleValue<Option>>(null);
 

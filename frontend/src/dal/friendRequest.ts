@@ -59,7 +59,6 @@ export const rejectFriendRequest = async (friendRequestId: number) => {
 };
 
 export const cancelFriendRequest = async (friendRequestId: number) => {
-  console.log(friendRequestId);
   await axios.post(
     API_URL + `/friend_requests/${friendRequestId}/cancel`,
     friendRequestId,

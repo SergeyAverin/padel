@@ -7,7 +7,6 @@ export const Select: React.FC = () => {
   const [selected, setSelected] = useState("item");
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsOpen((prev) => !prev);
-    console.log(e.target);
   };
   return (
     <div className={style.selectMenuWrapper}>

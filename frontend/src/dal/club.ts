@@ -25,7 +25,6 @@ export const getIsClubBookmarked = async (clubId: number) => {
 };
 
 export const getClubs = async () => {
-  console.log(ClubFiltersStore.name);
   let url = "/club/clubs";
   let flag = true;
   if (ClubFiltersStore.name != "") {
@@ -108,7 +107,6 @@ export const loadClubPhoto = async (clubId: number) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
-  console.log("123312");
   const data = await res.data;
   return data;
 };

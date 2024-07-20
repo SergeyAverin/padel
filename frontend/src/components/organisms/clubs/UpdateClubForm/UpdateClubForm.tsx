@@ -17,7 +17,6 @@ export const UpdateClubForm: React.FC = observer(() => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (ClubStore.openedClub) {
-      console.log(formValue);
       await ClubStore.updateClub(ClubStore.openedClub.id, formValue);
       navigate(`/clubs/${ClubStore.openedClub.id}`);
     }

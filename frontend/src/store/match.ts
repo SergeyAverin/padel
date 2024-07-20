@@ -32,10 +32,8 @@ class MatchStore {
   }
   async loadClubMatches(clubId: number) {
     this.isLoadingFromClub = true;
-    console.log(`loadClubMatches ${clubId}`);
     runInAction(async () => {
       this.matches = await getMatchByClubId(clubId);
-      console.log(123123123);
       this.isLoadingFromClub = false;
     });
   }

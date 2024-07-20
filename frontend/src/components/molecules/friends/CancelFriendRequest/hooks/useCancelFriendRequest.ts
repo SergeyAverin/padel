@@ -7,7 +7,6 @@ export const useCancelFriendRequest = (
 ) => {
   return async () => {
     UserStore.relationStatus = "no_friend";
-    console.log(friendRequestId);
     await FriendRequestStore.cancelFriendRequest(friendRequestId);
     // await UserStore.getRelationStatus(userId);
   };

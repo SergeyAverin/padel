@@ -9,7 +9,6 @@ import UnFriend from "@molecules/friends/UnFriend";
 export const RelationButton: React.FC = observer(() => {
   const { userId } = useParams();
   useEffect(() => {
-    console.log("send");
     if (userId) {
       UserStore.getRelationStatus(userId);
     }

@@ -18,7 +18,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = observer(() => {
   useEffect(() => {
-    console.log(window);
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.expand();
     }

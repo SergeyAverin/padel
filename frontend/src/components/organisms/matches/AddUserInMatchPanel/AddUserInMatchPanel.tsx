@@ -7,8 +7,9 @@ import FriendStore from "@store/friends";
 import { IUser } from "@schemas/user";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
-  const selectUser = (user: IUser) => {
+  const selectUser = (user_id: string) => {
     AddUserStore.toggleIsOpen();
+    AddUserStore.setUser(user_id);
   };
   return (
     <div
@@ -29,7 +30,9 @@ const AddUserInMatchPanel: React.FC = observer(() => {
         </div>
         {AddUserStore.index}
         {FriendStore.friends.map((item) => (
-          <div onClick={() => selectUser(item)}>{item.username}</div>
+          <div onClick={() => selectUser(item.telegram_user_id)}>
+            {item.username}
+          </div>
         ))}
       </div>
     </div>

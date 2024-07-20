@@ -57,7 +57,7 @@ async def get_match(
 @match_router.put('/matches/{match_id}')
 async def set_user_in_match(
     match_id: int,
-    user_id: int = Body(),
+    user_id: str = Body(),
     user_index: int = Body(),
     user: UserDTO = Depends(get_current_user)
 ):
