@@ -7,6 +7,7 @@ from match.services import match_service
 from match.models import StatusEnum
 from account.service import user_service
 from account.schemas import UserDTO
+from account.models import User
 from core.dependencies.current_user import get_current_user
 
 
@@ -37,6 +38,29 @@ async def get_match(
     user: UserDTO = Depends(get_current_user)
 ):
     return await match_service.get_match_by_id(match_id)
+
+
+@match_router.put('/matches/{match_id}')
+async def set_user_in_match(
+    match_id: int,
+    user_id: int = Body(),
+    user_index: int = Body(),
+    user: UserDTO = Depends(get_current_user)
+):
+    match = await match_service.get_match_by_id(match_id)
+    added_user = await user_service.get_user_by_telegram_user_id(user_id)
+    if user_index == 1:
+        match.user_1 = added_user
+    elif user_index == 2:
+        match.user_2 = added_user
+    elif user_index == 3:
+        match.user_3 = added_user
+    elif user_index == 4:
+        match.user_4 = added_user
+    elif user_index == -1:
+        match.user_4 = None
+    await match.save()
+    return match
 
 
 @match_router.put('/matches/{match_id}/status')

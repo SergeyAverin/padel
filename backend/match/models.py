@@ -21,9 +21,16 @@ class Match(Model):
 
     owner = fields.ForeignKeyField('models.User', related_name='match_owner')
 
+    user_1 = fields.ForeignKeyField(
+        'models.User', related_name='user_1', default=None, null=True)
+    user_2 = fields.ForeignKeyField(
+        'models.User', related_name='user_2', default=None, null=True)
+    user_3 = fields.ForeignKeyField(
+        'models.User', related_name='user_3', default=None, null=True)
+    user_4 = fields.ForeignKeyField(
+        'models.User', related_name='user_4', default=None, null=True)
+
     selected_court = fields.ForeignKeyField(
         'models.Court', related_name='selected_court')
-
     # players
     # result
-    # owner
