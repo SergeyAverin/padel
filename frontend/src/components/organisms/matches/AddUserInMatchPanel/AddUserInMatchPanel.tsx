@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
 import AddUserStore from "@store/addUserInMatch";
+import FriendStore from "@store/friends";
+import { IUser } from "@schemas/user";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
+  const selectUser = (user: IUser) => {
+    AddUserStore.toggleIsOpen();
+  };
   return (
     <div
       className={classNames(
@@ -22,7 +27,10 @@ const AddUserInMatchPanel: React.FC = observer(() => {
         >
           X
         </div>
-        <div>s</div>
+        {AddUserStore.index}
+        {FriendStore.friends.map((item) => (
+          <div onClick={() => selectUser(item)}>{item.username}</div>
+        ))}
       </div>
     </div>
   );

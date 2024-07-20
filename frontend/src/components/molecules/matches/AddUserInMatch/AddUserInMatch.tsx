@@ -5,10 +5,14 @@ import React from "react";
 
 interface IAddUserInMatchProps {
   match: IMatch;
+  index: number;
 }
 
-export const AddUserInMatch: React.FC<IAddUserInMatchProps> = ({ match }) => {
-  const onClick = useAddUserInMatch(match, true);
+export const AddUserInMatch: React.FC<IAddUserInMatchProps> = ({
+  match,
+  index,
+}) => {
+  const onClick = useAddUserInMatch(match, index, true);
   return (
     <>
       <div className="flex flex-col justify-center p-2" onClick={onClick}>

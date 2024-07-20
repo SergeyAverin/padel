@@ -9,9 +9,14 @@ import { IMatch } from "@schemas/match";
 interface IUserInMatchProps {
   user: IUser;
   match: IMatch;
+  index: number;
 }
 
-export const UserInMatch: React.FC<IUserInMatchProps> = ({ user, match }) => {
+export const UserInMatch: React.FC<IUserInMatchProps> = ({
+  user,
+  match,
+  index,
+}) => {
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: "UserInMatch",
@@ -22,7 +27,7 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({ user, match }) => {
     }),
     []
   );
-  const onClick = useAddUserInMatch(match);
+  const onClick = useAddUserInMatch(match, index);
 
   return (
     <>

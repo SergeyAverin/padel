@@ -90,14 +90,15 @@ export const Match: React.FC = () => {
         <div className="font-light text-[14px]">Club name address</div>
       </div>
       <div className="flex mt-5 justify-around items-center">
-        <UserInMatchWrapper user={user1} />
-        <UserInMatchWrapper user={user2} />
+        <UserInMatchWrapper user={user1} index={1} />
+        <UserInMatchWrapper user={user2} index={2} />
 
         <div className="w-[1px] h-[120px] bg-fg"></div>
 
-        <UserInMatchWrapper user={user3} />
+        <UserInMatchWrapper user={user3} index={3} />
         {/* <UserInMatchWrapper user={user4} /> */}
         <AddUserInMatch
+          index={4}
           match={{
             club_id: 1,
             created_at: new Date(),
@@ -115,9 +116,13 @@ export const Match: React.FC = () => {
 
 interface IUserInMatchWrapperProps {
   user: IUser;
+  index: number;
 }
 
-const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({ user }) => {
+const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({
+  user,
+  index,
+}) => {
   const x = 0;
   const [{ isOver }, drop] = useDrop(
     () => ({
@@ -143,6 +148,7 @@ const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({ user }) => {
         />
       )}
       <UserInMatch
+        index={index}
         user={user}
         match={{
           club_id: 1,
