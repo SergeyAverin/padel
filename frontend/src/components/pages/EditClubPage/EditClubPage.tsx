@@ -10,13 +10,9 @@ export const EditClubPage: React.FC = observer(() => {
   useEffect(() => {
     if (clubId) {
       ClubStore.openClub(clubId);
+      ClubStore.loadClubPhotos(Number(clubId));
     }
   }, []);
-  // useEffect(() => {
-  //   return () => {
-  //     ClubStore.openedClub = null;
-  //   };
-  // }, []);
   return (
     <>
       <>{ClubStore.openedClub ? <EditClubTemplate /> : <Spinner />}</>

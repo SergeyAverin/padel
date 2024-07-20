@@ -86,8 +86,8 @@ class ClubStore {
     await this.openClub(String(clubId));
   }
   async deletePhoto(clubId: number, photoId: number) {
+    this.clubPhotos = this.clubPhotos.filter((item) => item.id != photoId);
     await deletePhoto(clubId, photoId);
-    await this.loadClubPhotos(clubId);
   }
   async uploadPhoto(clubId: number, photo: FormData) {
     await uploadPhoto(clubId, photo);

@@ -40,9 +40,9 @@ export const UploadClubPhoto: React.FC = observer(() => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="p-5 bg-primary rounded-xl">
+    <div className="p-3 bg-primary rounded-xl">
       <Heading variant={HeadingVariant.H2}>Club photos</Heading>
-      <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
+      <form className="p-2 bg-primary rounded-xl" onSubmit={onSubmit}>
         {ClubStore.openedClub?.avatar && (
           <div className="flex items-center mt-3">
             <img
