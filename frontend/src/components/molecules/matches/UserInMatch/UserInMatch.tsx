@@ -26,7 +26,7 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({ user }) => {
         ref={dragRef}
         style={{ opacity }}
       >
-        <img src={TestPhoto} className="rounded-full w-[60px]" />
+        <img src={TestPhoto} className="rounded-full w-[60px] h-[60px]" />
         <div className="text-[12px] text-center mt-2">{user.username}</div>
         <div className="text-[12px] text-center mt-1">{user.age}</div>
       </div>

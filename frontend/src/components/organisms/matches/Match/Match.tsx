@@ -6,6 +6,7 @@ import { useDrop } from "react-dnd";
 import { MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
 import { getHoursInRange } from "@utils/timeUtils";
+import AddUserInMatch from "@molecules/matches/AddUserInMatch";
 interface Option {
   value: string;
   label: string;
@@ -93,7 +94,8 @@ export const Match: React.FC = () => {
         <div className="w-[1px] h-[120px] bg-fg"></div>
 
         <UserInMatchWrapper user={user3} />
-        <UserInMatchWrapper user={user4} />
+        {/* <UserInMatchWrapper user={user4} /> */}
+        <AddUserInMatch />
       </div>
     </div>
   );
