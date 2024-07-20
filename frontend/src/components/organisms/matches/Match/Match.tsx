@@ -142,7 +142,18 @@ const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({ user }) => {
           }}
         />
       )}
-      <UserInMatch user={user} />
+      <UserInMatch
+        user={user}
+        match={{
+          club_id: 1,
+          created_at: new Date(),
+          end_at: new Date(),
+          id: 2,
+          owner_id: 1,
+          start_at: new Date(),
+          status: "done",
+        }}
+      />
     </div>
   );
 };

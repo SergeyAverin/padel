@@ -1,6 +1,6 @@
+import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
-import AuthStore from "@store/auth";
-import AddUserInMatchStore from "@store/addUserInMatch";
+
 import React from "react";
 
 interface IAddUserInMatchProps {
@@ -8,21 +8,7 @@ interface IAddUserInMatchProps {
 }
 
 export const AddUserInMatch: React.FC<IAddUserInMatchProps> = ({ match }) => {
-  const addUser = () => {
-    AddUserInMatchStore.toggleIsOpen();
-  };
-  const joinInMatch = () => {
-    alert(match.id);
-  };
-  const onClick = () => {
-    if (AuthStore.authUser && match.owner_id == AuthStore.authUser.id) {
-      addUser();
-      alert(AuthStore.authUser.id);
-    } else {
-      alert(AuthStore.authUser?.id);
-      joinInMatch();
-    }
-  };
+  const onClick = useAddUserInMatch(match, true);
   return (
     <>
       <div className="flex flex-col justify-center p-2" onClick={onClick}>
