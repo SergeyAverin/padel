@@ -7,6 +7,7 @@ import { MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
 import { getHoursInRange } from "@utils/timeUtils";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
+import AddUserInMatchPanel from "../AddUserInMatchPanel";
 interface Option {
   value: string;
   label: string;
@@ -68,6 +69,7 @@ export const Match: React.FC = () => {
 
   return (
     <div className="bg-primary p-5 rounded-2xl">
+      <AddUserInMatchPanel />
       <div className="flex justify-between">
         <div className="font-light text-[14px]">Friday 30 May | 10:00h</div>
         <div className="font-light text-[14px]">
@@ -95,7 +97,17 @@ export const Match: React.FC = () => {
 
         <UserInMatchWrapper user={user3} />
         {/* <UserInMatchWrapper user={user4} /> */}
-        <AddUserInMatch />
+        <AddUserInMatch
+          match={{
+            club_id: 1,
+            created_at: new Date(),
+            end_at: new Date(),
+            id: 2,
+            owner_id: 1,
+            start_at: new Date(),
+            status: "done",
+          }}
+        />
       </div>
     </div>
   );

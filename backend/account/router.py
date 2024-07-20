@@ -36,7 +36,7 @@ async def get_stats(
 @profile_router.get('/{telegram_user_id}')
 async def get_user(
     telegram_user_id: str,
-) -> UserDTO:
+):
     user = await user_service.get_user_by_telegram_user_id(telegram_id=telegram_user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")

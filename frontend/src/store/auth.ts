@@ -27,7 +27,6 @@ class AuthStore {
     if (this.authUser) {
       ClubFilterStore.changeCity(this.authUser.city);
     }
-    console.log(this.authUser);
   }
 }
 
