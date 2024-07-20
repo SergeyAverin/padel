@@ -26,42 +26,61 @@ class MatchRepository:
         await match.save()
         return match
 
+    def serealize_match(self, match):
+        return {
+            "club": match.club,
+            "status": match.status,
+            "start_at": match.start_at,
+            "end_at": match.end_at,
+            "created_at": match.created_at,
+            "owner": match.owner,
+            "user_1": match.user_1,
+            "user_2": match.user_2,
+            "user_3": match.user_3,
+            "user_4": match.user_4,
+            "selected_court": match.selected_court,
+        }
+
     async def get_match_by_id(self, match_id: int):
-        match = await Match.get_or_none(id=int(match_id))
-        logger.debug(match)
-        return match
+        # match = await Match.get_or_none(id=int(match_id)).prefetch_related("user_1")
+
+        match = await Match.filter(id=match_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').first()
+        return [self.serealize_match(m) for m in match]
 
     async def get_match_by_user(self, user_id: str):
-        return await Match.filter(owner__telegram_user_id=user_id)
+        matches = await Match.filter(owner__telegram_user_id=user_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court')
+        return [self.serealize_match(m) for m in matches]
 
     async def get_match_by_club(self, club_id: str):
-        return await Match.filter(club_id=club_id)
+        match = await Match.filter(club_id=club_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court')
+        return [self.serealize_match(m) for m in match]
 
     async def get_match_by_friends(self, user_id: str):
         friends = await friend_service.get_user_friends(user_id)
-        matches = await Match.filter(owner__id__in=[friend.id for friend in friends])
+        matches = await Match.filter(owner__id__in=[friend.id for friend in friends]).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court')
 
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
         # ).distinct()
 
-        return matches
+        return [self.serealize_match(m) for m in matches]
 
     async def get_matches_by_club_bookmarks(self, user_id: str):
         bookmarks = await club_bookmark_service.get_bookmarked_clubs(user_id)
-        matches = await Match.filter(club__id__in=[bookmark.id for bookmark in bookmarks])
+        matches = await Match.filter(club__id__in=[bookmark.id for bookmark in bookmarks]).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court')
 
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
         # ).distinct()
 
-        return matches
+        return [self.serealize_match(m) for m in matches]
 
     def delete_match_by_id(self):
         pass
 
     async def get_club_for_match(self, user: User):
-        return await Club.filter(owner__telegram_user_id=user.telegram_user_id)
+        matches = await Club.filter(owner__telegram_user_id=user.telegram_user_id)
+        return matches
 
 
 class MatchPlayersRepository:

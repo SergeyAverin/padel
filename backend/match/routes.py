@@ -37,7 +37,20 @@ async def get_match(
     match_id: int,
     user: UserDTO = Depends(get_current_user)
 ):
-    return await match_service.get_match_by_id(match_id)
+    match = await match_service.get_match_by_id(match_id)
+    return {
+        "club": match.club,
+        "status": match.status,
+        "start_at": match.start_at,
+        "end_at": match.end_at,
+        "created_at": match.created_at,
+        "owner": match.owner,
+        "user_1": match.user_1,
+        "user_2": match.user_2,
+        "user_3": match.user_3,
+        "user_4": match.user_4,
+        "selected_court": match.selected_court,
+    }
 
 
 @match_router.put('/matches/{match_id}')
