@@ -19,7 +19,7 @@ export const MatchClub: React.FC = observer(() => {
           </Heading>
           {MatchStore.matchesFromBookmarks.map((match) => (
             <div className="mt-3" key={match.id}>
-              <Match />
+              <Match match={match} />
             </div>
           ))}
         </div>

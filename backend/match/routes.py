@@ -50,6 +50,7 @@ async def get_match(
         "user_3": match.user_3,
         "user_4": match.user_4,
         "selected_court": match.selected_court,
+        "id": match.id
     }
 
 

@@ -17,7 +17,7 @@ export const MatchUser: React.FC = observer(() => {
           <Heading variant={HeadingVariant.H2}>Your match</Heading>
           {MatchStore.matches.map((match) => (
             <div className="mt-3" key={match.id}>
-              <Match />
+              <Match match={match} />
             </div>
           ))}
         </div>

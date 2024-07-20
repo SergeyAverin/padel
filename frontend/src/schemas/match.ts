@@ -1,11 +1,18 @@
+import { IClub } from "./club";
+import { IUser } from "./user";
+
 export interface IMatch {
-  owner_id: number;
+  owner: IUser | null;
   created_at: Date;
   id: number;
   start_at: Date;
-  club_id: number;
+  club: IClub | null;
   status: string;
   end_at: Date;
+  user_1: IUser | null;
+  user_2: IUser | null;
+  user_3: IUser | null;
+  user_4: IUser | null;
 }
 
 export enum MatchStatusEnum {

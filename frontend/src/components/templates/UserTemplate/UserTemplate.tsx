@@ -49,7 +49,7 @@ export const UserTemplate: React.FC = () => {
           )}
           {MatchStore.matches.map((match) => (
             <div key={match.id} className="mt-5">
-              <Match />
+              <Match match={match} />
             </div>
           ))}
         </div>

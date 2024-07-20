@@ -3,7 +3,7 @@ import UserInMatch from "@molecules/matches/UserInMatch";
 import { IUser } from "@schemas/user";
 import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
-import { MatchStatusEnum } from "@schemas/match";
+import { IMatch, MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
 import { getHoursInRange } from "@utils/timeUtils";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
@@ -12,7 +12,10 @@ interface Option {
   value: string;
   label: string;
 }
-export const Match: React.FC = () => {
+interface IMatchProps {
+  match: IMatch;
+}
+export const Match: React.FC<IMatchProps> = ({ match }) => {
   const user1: IUser = {
     age: 12,
     avatar: "",
@@ -71,7 +74,9 @@ export const Match: React.FC = () => {
     <div className="bg-primary p-5 rounded-2xl">
       <AddUserInMatchPanel />
       <div className="flex justify-between">
-        <div className="font-light text-[14px]">Friday 30 May | 10:00h</div>
+        <div className="font-light text-[14px]">
+          Friday 30 May | 10:00h {match.id}
+        </div>
         <div className="font-light text-[14px]">
           <div>
             <Select
@@ -90,25 +95,30 @@ export const Match: React.FC = () => {
         <div className="font-light text-[14px]">Club name address</div>
       </div>
       <div className="flex mt-5 justify-around items-center">
-        <UserInMatchWrapper user={user1} index={1} />
-        <UserInMatchWrapper user={user2} index={2} />
+        {match.user_1 ? (
+          <UserInMatchWrapper user={match.user_1} index={1} />
+        ) : (
+          <AddUserInMatch index={1} match={match} />
+        )}
+        {match.user_2 ? (
+          <UserInMatchWrapper user={match.user_2} index={2} />
+        ) : (
+          <AddUserInMatch index={2} match={match} />
+        )}
 
         <div className="w-[1px] h-[120px] bg-fg"></div>
 
-        <UserInMatchWrapper user={user3} index={3} />
+        {match.user_3 ? (
+          <UserInMatchWrapper user={match.user_3} index={3} />
+        ) : (
+          <AddUserInMatch index={3} match={match} />
+        )}
         {/* <UserInMatchWrapper user={user4} /> */}
-        <AddUserInMatch
-          index={4}
-          match={{
-            club_id: 1,
-            created_at: new Date(),
-            end_at: new Date(),
-            id: 2,
-            owner_id: 1,
-            start_at: new Date(),
-            status: "done",
-          }}
-        />
+        {match.user_4 ? (
+          <UserInMatchWrapper user={match.user_4} index={4} />
+        ) : (
+          <AddUserInMatch index={4} match={match} />
+        )}
       </div>
     </div>
   );

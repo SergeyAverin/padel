@@ -15,7 +15,7 @@ export const useAddUserInMatch = (
   };
   const onClick = () => {
     AddUserInMatchStore.setIndex(index);
-    if (AuthStore.authUser && match.owner_id == AuthStore.authUser.id) {
+    if (AuthStore.authUser && match.owner?.id == AuthStore.authUser.id) {
       addUser();
     } else {
       if (isFree) {
