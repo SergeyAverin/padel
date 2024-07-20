@@ -29,6 +29,7 @@ const AddUserInMatchPanel: React.FC = observer(() => {
           X
         </div>
         {AddUserStore.index}
+        <div onClick={() => selectUser("-1")}>None</div>
         {FriendStore.friends.map((item) => (
           <div onClick={() => selectUser(item.telegram_user_id)}>
             {item.username}

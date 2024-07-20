@@ -1,12 +1,13 @@
-import Select, { SingleValue } from "react-select";
-import UserInMatch from "@molecules/matches/UserInMatch";
-import { IUser } from "@schemas/user";
 import React, { useState } from "react";
-import { useDrop } from "react-dnd";
+import Select, { SingleValue } from "react-select";
+
+import AddUserInMatchPanel from "../AddUserInMatchPanel";
+import AddUserInMatch from "@molecules/matches/AddUserInMatch";
+import { IUser } from "@schemas/user";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
-import AddUserInMatch from "@molecules/matches/AddUserInMatch";
-import AddUserInMatchPanel from "../AddUserInMatchPanel";
+import UserInMatch from "@molecules/matches/UserInMatch";
+
 interface Option {
   value: string;
   label: string;
@@ -49,82 +50,39 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       <div className="mt-2">
         <div className="font-light text-[14px]">Club name address</div>
       </div>
+
+      {/* Users in match  */}
       <div className="flex mt-5 justify-around items-center">
-        {match.user_1 ? (
-          <UserInMatchWrapper user={match.user_1} index={1} />
-        ) : (
-          <AddUserInMatch index={1} match={match} />
-        )}
-        {match.user_2 ? (
-          <UserInMatchWrapper user={match.user_2} index={2} />
-        ) : (
-          <AddUserInMatch index={2} match={match} />
-        )}
+        <UserInMatchWrapper user={match.user_1} index={1} match={match} />
+        <UserInMatchWrapper user={match.user_2} index={2} match={match} />
 
         <div className="w-[1px] h-[120px] bg-fg"></div>
 
-        {match.user_3 ? (
-          <UserInMatchWrapper user={match.user_3} index={3} />
-        ) : (
-          <AddUserInMatch index={3} match={match} />
-        )}
-        {/* <UserInMatchWrapper user={user4} /> */}
-        {match.user_4 ? (
-          <UserInMatchWrapper user={match.user_4} index={4} />
-        ) : (
-          <AddUserInMatch index={4} match={match} />
-        )}
+        <UserInMatchWrapper user={match.user_3} index={3} match={match} />
+        <UserInMatchWrapper user={match.user_4} index={4} match={match} />
       </div>
     </div>
   );
 };
 
 interface IUserInMatchWrapperProps {
-  user: IUser;
+  user: IUser | null;
   index: number;
+  match: IMatch;
 }
 
 const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({
   user,
   index,
+  match,
 }) => {
-  const x = 0;
-  const [{ isOver }, drop] = useDrop(
-    () => ({
-      accept: "UserInMatch",
-      drop: () => alert(x),
-    }),
-    [x]
-  );
   return (
-    <div ref={drop}>
-      {isOver && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: "100%",
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: "yellow",
-          }}
-        />
+    <>
+      {user ? (
+        <UserInMatch user={user} index={index} match={match} />
+      ) : (
+        <AddUserInMatch index={index} match={match} />
       )}
-      <UserInMatch
-        index={index}
-        user={user}
-        match={{
-          club_id: 1,
-          created_at: new Date(),
-          end_at: new Date(),
-          id: 2,
-          owner_id: 1,
-          start_at: new Date(),
-          status: "done",
-        }}
-      />
-    </div>
+    </>
   );
 };
