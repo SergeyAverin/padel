@@ -7,6 +7,7 @@ import { IUser } from "@schemas/user";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
 import UserInMatch from "@molecules/matches/UserInMatch";
+import AuthStore from "@store/auth";
 
 interface Option {
   value: string;
@@ -26,6 +27,11 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
     setSelectedOption(option);
   };
 
+  const permission =
+    AuthStore.authUser?.id == match.owner?.id ||
+    AuthStore.authUser?.id == match.club?.owner_id ||
+    AuthStore.authUser?.status == "super_admin";
+
   return (
     <div className="bg-primary p-5 rounded-2xl">
       {match.id}
@@ -35,17 +41,21 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           Friday 30 May | 10:00h {match.id}
         </div>
         <div className="font-light text-[14px]">
-          <div>
-            <Select
-              defaultValue={selectedOption}
-              onChange={handleChange}
-              options={[
-                { value: MatchStatusEnum.DONE, label: "Done" },
-                { value: MatchStatusEnum.EXPECTATION, label: "Expectation" },
-                { value: MatchStatusEnum.PLAYED, label: "Played" },
-              ]}
-            />
-          </div>
+          {permission ? (
+            <div>
+              <Select
+                defaultValue={selectedOption}
+                onChange={handleChange}
+                options={[
+                  { value: MatchStatusEnum.DONE, label: "Done" },
+                  { value: MatchStatusEnum.EXPECTATION, label: "Expectation" },
+                  { value: MatchStatusEnum.PLAYED, label: "Played" },
+                ]}
+              />
+            </div>
+          ) : (
+            <div>{match.status}</div>
+          )}
         </div>
       </div>
       <div className="mt-2">

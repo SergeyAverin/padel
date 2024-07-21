@@ -5,6 +5,7 @@ export interface IClub {
   registration_address: string;
   city: string;
   avatar: string;
+  owner_id: number;
 }
 
 export interface ICreateClub {

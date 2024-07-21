@@ -17,7 +17,7 @@ export const ClubMatches: React.FC = observer(() => {
       <div>
         {MatchStore.matches.map((match) => (
           <div key={match.id} className="mt-5">
-            <Match />
+            <Match match={match} />
           </div>
         ))}
         {MatchStore.matches.length == 0 && (

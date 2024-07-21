@@ -28,7 +28,7 @@ export const Navigation: React.FC = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [ref]);
-  const or =
+  const permission =
     AuthStore.authUser?.status == "club_admin" ||
     AuthStore.authUser?.status == "super_admin";
   return (
@@ -51,7 +51,7 @@ export const Navigation: React.FC = () => {
         >
           {isOpen && (
             <div className="absolute mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500">
-              {or && (
+              {permission && (
                 <Link to={"/create/club"}>
                   <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
                     Add club

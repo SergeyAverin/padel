@@ -15,6 +15,7 @@ import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
 import ClubMatches from "@organisms/clubs/ClubMatches";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
+import AuthStore from "@store/auth";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [
@@ -29,6 +30,9 @@ export const ClubTemplate: React.FC = observer(() => {
       content: <ClubPhotos />,
     },
   ];
+  const permission =
+    AuthStore.authUser?.id == ClubStore.openedClub?.owner_id ||
+    AuthStore.authUser?.status == "super_admin";
   return (
     <>
       {ClubStore.openedClub ? (
@@ -45,7 +49,9 @@ export const ClubTemplate: React.FC = observer(() => {
 
           <Link to={`/edit/club/${ClubStore.openedClub.id}`}>
             <div className="w-[150px] mt-5 mb-5">
-              <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
+              {permission && (
+                <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
+              )}
             </div>
           </Link>
 
