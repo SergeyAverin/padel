@@ -13,6 +13,7 @@ import requests
 from core.config.bot_settings import bot_settings
 from core.config.api_settings import api_setting
 from account.schemas import UserDTO, Hand, Position
+from account.models import UserStatus
 from account.service import user_service
 
 logger = logging.getLogger()
@@ -35,8 +36,11 @@ async def command_start_handler(message: Message) -> None:
             username=message.from_user.username,
             age=1,
             email='',
+            status=UserStatus.PLAYER.value,
             hand=Hand.RIGHT_HAND,
-            position=Position.BOTH
+            position=Position.BOTH,
+            country='',
+            city=''
         )
         url = f'https://{api_setting.api_domain}/api/v1.0/user/'
         data = user_data.model_dump()

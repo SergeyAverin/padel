@@ -11,6 +11,7 @@ export interface IUser {
   position: Position;
   country: string;
   city: string;
+  status: string;
 }
 
 export interface IUserStats {

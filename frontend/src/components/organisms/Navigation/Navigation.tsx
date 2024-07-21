@@ -8,6 +8,7 @@ import FriendsIcon from "@assets/FriendsIcon.svg?react";
 import ProfileIcon from "@assets/ProfileIcon.svg?react";
 import AddIcon from "@assets/AddIcon.svg?react";
 import { Link } from "react-router-dom";
+import AuthStore from "@store/auth";
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,9 @@ export const Navigation: React.FC = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [ref]);
+  const or =
+    AuthStore.authUser?.status == "club_admin" ||
+    AuthStore.authUser?.status == "super_admin";
   return (
     <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full">
       <div className="w-full flex justify-around items-end">
@@ -47,11 +51,13 @@ export const Navigation: React.FC = () => {
         >
           {isOpen && (
             <div className="absolute mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500">
-              <Link to={"/create/club"}>
-                <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
-                  Add club
-                </div>
-              </Link>
+              {or && (
+                <Link to={"/create/club"}>
+                  <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
+                    Add club
+                  </div>
+                </Link>
+              )}
               <Link to={"/create/match"}>
                 <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
                   Add match

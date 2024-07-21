@@ -19,6 +19,12 @@ class Hand(str, Enum):
     RIGHT_HAND = "right_hand"
 
 
+class UserStatus(str, Enum):
+    SUPER_ADMIN = 'super_admin'
+    CLUB_ADMIN = 'club_admin'
+    PLAYER = 'player'
+
+
 class User(Model):
     first_name = fields.CharField(max_length=255)
     last_name = fields.CharField(max_length=255)
@@ -34,6 +40,7 @@ class User(Model):
 
     position = fields.CharEnumField(Position, default=Position.BOTH)
     hand = fields.CharEnumField(Hand, default=Hand.RIGHT_HAND)
+    status = fields.CharEnumField(UserStatus, default=UserStatus.PLAYER)
 
     friends: fields.ManyToManyRelation["User"] = fields.ManyToManyField(
         'models.User', on_delete=fields.CASCADE, through="user_friends")

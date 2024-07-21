@@ -13,6 +13,7 @@ class UserDTO(BaseModel):
     telegram_user_id: str
     city: str
     country: str
+    status: str
 
     avatar: str = Field(
         default=f"http://{api_setting.api_domain}/api/v1.0/user/image/default.png")

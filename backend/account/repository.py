@@ -2,7 +2,7 @@ from logging import getLogger
 
 from fastapi import UploadFile
 
-from account.models import User
+from account.models import User, UserStatus
 from account.schemas import UserDTO, UpdateUserDTO
 
 
@@ -23,6 +23,7 @@ class UserRepository:
             telegram_user_id=user_data.telegram_user_id,
             age=user_data.age,
             hand=user_data.hand.value,
+            status=UserStatus.PLAYER.value,
             position=user_data.position.value
         )
         await user.save()
