@@ -169,8 +169,8 @@ export const Booking: React.FC = observer(() => {
               court={
                 Number(
                   courtsOptions.findIndex(
-                    (item) => item.value == selectedCourt.value
-                  )
+                    (item) => item.value == selectedCourt.value,
+                  ),
                 ) + 2
               }
               isNewMatch={true}

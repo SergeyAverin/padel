@@ -27,8 +27,8 @@ class FriendStore {
     });
   }
   async unFriends(FriendId: string) {
-    await unUserFriends(FriendId);
     this.removeFriend(FriendId);
+    await unUserFriends(FriendId);
   }
   async findUser(username: string) {
     this.isFindUserLoading = true;

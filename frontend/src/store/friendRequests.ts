@@ -10,6 +10,7 @@ import {
 } from "@dal/friendRequest";
 import { IFriendRequest } from "@schemas/friendRequest";
 import FriendStore from "@store/friends";
+import AuthStore from "@store/auth";
 
 class FriendRequestsStore {
   isLoading = true;
@@ -55,19 +56,21 @@ class FriendRequestsStore {
   }
 
   async acceptFriendRequest(friendRequestId: number) {
-    await acceptFriendRequest(friendRequestId);
     this.removeFriendRequest(friendRequestId);
-    FriendStore.getFriends("321");
+    await acceptFriendRequest(friendRequestId);
+    if (AuthStore.authUser) {
+      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
+    }
   }
 
   async rejectFriendRequest(friendRequestId: number) {
-    await rejectFriendRequest(friendRequestId);
     this.removeFriendRequest(friendRequestId);
+    await rejectFriendRequest(friendRequestId);
   }
 
   async cancelFriendRequest(friendRequestId: number) {
-    await cancelFriendRequest(friendRequestId);
     this.removeFriendRequestOuter(friendRequestId);
+    await cancelFriendRequest(friendRequestId);
   }
 
   async loadingRequests() {

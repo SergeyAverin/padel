@@ -52,7 +52,7 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
     <>
       {isShow && (
         <div className="bg-primary p-5 rounded-xl">
-          <div className="flex justify-between">
+          <div className="flex justify-between w-full">
             <div className="flex">
               <UserPhoto avatar={user.avatar} />
 
@@ -63,7 +63,7 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
                 </div>
               </div>
             </div>
-            <div className="w-[140px]">
+            <div className="w-[100px]">
               <UnFriend friendId={user.telegram_user_id} />
             </div>
           </div>
