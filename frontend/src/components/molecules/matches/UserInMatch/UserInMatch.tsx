@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useReducer, useRef } from "react";
 
 import TestPhoto from "@assets/TestPhoto.png";
 import { useDrag } from "react-dnd";
 import { IUser } from "@schemas/user";
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
+import AddUserInMatch from "@store/addUserInMatch";
 
 interface IUserInMatchProps {
   user: IUser;
@@ -17,25 +18,15 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
   match,
   index,
 }) => {
-  const [{ opacity }, dragRef] = useDrag(
-    () => ({
-      type: "UserInMatch",
-      item: { user },
-      collect: (monitor) => ({
-        opacity: monitor.isDragging() ? 0.5 : 1,
-      }),
-    }),
-    []
-  );
   const onClick = useAddUserInMatch(match, index);
 
   return (
     <>
       <div
-        className="flex flex-col justify-center p-2"
-        ref={dragRef}
-        style={{ opacity }}
-        onClick={onClick}
+        className="flex flex-col justify-center"
+        onClick={() => {
+          onClick();
+        }}
       >
         <img src={TestPhoto} className="rounded-full w-[60px] h-[60px]" />
         <div className="text-[12px] text-center mt-2">{user.username}</div>

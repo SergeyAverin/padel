@@ -28,6 +28,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
   return (
     <div className="bg-primary p-5 rounded-2xl">
+      {match.id}
       <AddUserInMatchPanel />
       <div className="flex justify-between">
         <div className="font-light text-[14px]">
@@ -52,7 +53,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       </div>
 
       {/* Users in match  */}
-      <div className="flex mt-5 justify-around items-center">
+      <div className="flex mt-5 justify-around items-start">
         <UserInMatchWrapper user={match.user_1} index={1} match={match} />
         <UserInMatchWrapper user={match.user_2} index={2} match={match} />
 
