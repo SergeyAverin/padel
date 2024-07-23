@@ -50,3 +50,20 @@ export const changeStatus = async (matchId: number, newStatus: string) => {
     },
   });
 };
+
+export const getMatchByDay = async (
+  clubId: number,
+  day: number,
+  month: number
+) => {
+  const res = await axios.get(
+    API_URL + `/matches/${clubId}/by_day?month=${month}&day=${day}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const matches = await res.data;
+  return matches;
+};

@@ -5,6 +5,8 @@ export interface IMatch {
   owner: IUser | null;
   created_at: Date;
   id: number;
+  club_id: number;
+  selected_court_id: number;
   start_at: Date;
   club: IClub | null;
   status: string;
