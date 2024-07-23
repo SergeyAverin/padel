@@ -10,40 +10,7 @@ export const BookingDesk: React.FC = observer(() => {
   const getIndexInTimeRange = (time: string) => {
     return timeRange.indexOf(time);
   };
-  const [timePoints, setTimePoints] = useState<
-    Array<{
-      startAt: number;
-      endAt: number;
-      courtIndex: number;
-    }>
-  >([]);
 
-  useEffect(() => {
-    const arr: Array<{
-      startAt: number;
-      endAt: number;
-      courtIndex: number;
-    }> = [];
-    BookingStore.matches.forEach((i) => {
-      const startAt = extractTime(String(i.start_at));
-      const endAt = extractTime(String(i.end_at));
-      const courtIndex = BookingStore.courtOption.findIndex(
-        (item) => item.value == String(i.selected_court_id)
-      );
-      console.log(
-        `${startAt} ${endAt} ${i.selected_court_id} | cur ${courtIndex} ${
-          courtIndex + 2
-        }`
-      );
-      console.log(courtIndex);
-      arr.push({
-        startAt: getIndexInTimeRange(startAt) + 2,
-        endAt: getIndexInTimeRange(endAt) + 3,
-        courtIndex: courtIndex + 2,
-      });
-    });
-    setTimePoints(arr);
-  }, [BookingStore.matches]);
   return (
     <>
       {BookingStore.selectedClubId && BookingStore.selectedData && (
@@ -72,7 +39,7 @@ export const BookingDesk: React.FC = observer(() => {
                   timeStart={getIndexInTimeRange(BookingStore.endAt) + 3}
                 />
               )}
-            {timePoints.map((item) => (
+            {BookingStore.breakPoints.map((item) => (
               <BookingTimePoint
                 court={item.courtIndex}
                 timeEnd={item.endAt}

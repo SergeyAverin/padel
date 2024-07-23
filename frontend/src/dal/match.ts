@@ -67,3 +67,27 @@ export const getMatchByDay = async (
   const matches = await res.data;
   return matches;
 };
+
+export const createMatch = async (
+  startAt: Date,
+  endAt: Date,
+  clubId: number,
+  courtId: number
+) => {
+  const res = await axios.post(
+    API_URL + `/matches`,
+    {
+      start_at: startAt,
+      end_at: endAt,
+      club_id: clubId,
+      court_id: courtId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const matches = await res.data;
+  return matches;
+};

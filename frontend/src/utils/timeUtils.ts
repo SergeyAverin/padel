@@ -38,8 +38,8 @@ export function extractTime(input: string): string {
   const date = new Date(input);
 
   // Получаем часы и минуты
-  const hours = String(date.getUTCHours()).padStart(2, "0"); // Получаем часы в формате 2 цифры
-  const minutes = String(date.getUTCMinutes()).padStart(2, "0"); // Получаем минуты в формате 2 цифры
+  const hours = String(date.getHours()).padStart(2, "0"); // Получаем часы в формате 2 цифры
+  const minutes = String(date.getMinutes()).padStart(2, "0"); // Получаем минуты в формате 2 цифры
 
   // Формируем строку в формате 'HH:MM'
   return `${hours}:${minutes}`;

@@ -1,6 +1,8 @@
-import { getMatchByDay } from "@dal/match";
+import { createMatch, getMatchByDay } from "@dal/match";
 import { IClub } from "@schemas/club";
 import { IMatch } from "@schemas/match";
+import { extractDayAndMonth } from "@utils/dateUtils";
+import { extractTime, getHoursInRange } from "@utils/timeUtils";
 import { makeAutoObservable } from "mobx";
 
 class AuthStore {
@@ -15,9 +17,40 @@ class AuthStore {
   }[] = [];
   selectedCourt: null | string = null;
   matches: Array<IMatch> = [];
+  breakPoints: Array<{
+    startAt: number;
+    endAt: number;
+    courtIndex: number;
+  }> = [];
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  private setBreakPoints() {
+    const arr: Array<{
+      startAt: number;
+      endAt: number;
+      courtIndex: number;
+    }> = [];
+    this.matches.forEach((i) => {
+      const startAt = extractTime(String(i.start_at));
+      const endAt = extractTime(String(i.end_at));
+      const timeRange = getHoursInRange("08:00", "18:00");
+      const getIndexInTimeRange = (time: string) => {
+        return timeRange.indexOf(time);
+      };
+
+      const courtIndex = this.courtOption.findIndex(
+        (item) => item.value == String(i.selected_court_id)
+      );
+      arr.push({
+        startAt: getIndexInTimeRange(startAt) + 2,
+        endAt: getIndexInTimeRange(endAt) + 3,
+        courtIndex: courtIndex + 2,
+      });
+    });
+    this.breakPoints = arr;
   }
 
   async selectClub(club: string) {
@@ -61,9 +94,22 @@ class AuthStore {
 
   async getMatchByDay(clubId: number, day: number, month: number) {
     this.matches = await getMatchByDay(clubId, day, month);
-    this.matches.forEach((item) => {
-      console.log(item);
-    });
+    this.setBreakPoints();
+  }
+  async createMatch(
+    startAt: Date,
+    endAt: Date,
+    clubId: number,
+    courtId: number
+  ) {
+    const res = await createMatch(startAt, endAt, clubId, courtId);
+    this.matches.push(res);
+    if (this.selectedData) {
+      const d = extractDayAndMonth(this.selectedData);
+      this.selectStartAt("00:00");
+      this.selectEndAt("00:00");
+      this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+    }
   }
 }
 
