@@ -15,6 +15,9 @@ class MatchService:
     def end_match(self):
         pass
 
+    async def get_match_by_day(self, day: int, month: int, club_id: int):
+        return await self.match_repository.get_match_by_day(day, month, club_id)
+
     async def get_club_for_match(self, user: User):
         return await self.match_repository.get_club_for_match(user)
 

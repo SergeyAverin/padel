@@ -42,6 +42,9 @@ class MatchRepository:
             "id": match.id
         }
 
+    async def get_match_by_day(self, day: int, month: int, club_id: int):
+        return await Match.filter(club__id=club_id, start_at__day=day, start_at__month=month)
+
     async def get_match_by_id(self, match_id: int):
         # match = await Match.get_or_none(id=int(match_id)).prefetch_related("user_1")
 
@@ -81,7 +84,7 @@ class MatchRepository:
         pass
 
     async def get_club_for_match(self, user: User):
-        matches = await Club.filter(owner__telegram_user_id=user.telegram_user_id).order_by('created_at')
+        matches = await Club.filter(owner__telegram_user_id=user.telegram_user_id)
         return matches
 
 

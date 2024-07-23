@@ -16,6 +16,16 @@ logger = getLogger()
 match_router = APIRouter(tags=['match'])
 
 
+@match_router.get('/matches/{club_id}/by_day')
+async def get_match_by_day(
+    club_id: int,
+    month: int,
+    day: int,
+    user: UserDTO = Depends(get_current_user)
+):
+    return await match_service.get_match_by_day(day, month, club_id)
+
+
 @match_router.get('/matches/clubs')
 async def get_club_for_match(
     user: UserDTO = Depends(get_current_user)
