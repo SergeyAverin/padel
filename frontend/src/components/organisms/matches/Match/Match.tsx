@@ -34,11 +34,26 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
   return (
     <div className="bg-primary p-5 rounded-2xl">
-      {match.id}
+      #{match.id}
       <AddUserInMatchPanel />
       <div className="flex justify-between">
         <div className="font-light text-[14px]">
-          Friday 30 May | 10:00h {match.id}
+          {new Date(match.start_at).getDate()}
+          {"."}
+          {new Date(match.start_at).getMonth() + 1}
+          {"."}
+          {new Date(match.start_at).getFullYear()}
+          {" | "}
+          {new Date(match.start_at).getHours()}
+          {":"}
+          {new Date(match.start_at).getMinutes()}
+          {"-"}
+          {new Date(match.end_at).getHours()}
+          {":"}
+          {new Date(match.end_at).getMinutes()}
+          {" | "}
+          {new Date(match.end_at).getHours() -
+            new Date(match.start_at).getHours()}
         </div>
         <div className="font-light text-[14px]">
           {permission ? (
@@ -59,9 +74,8 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
         </div>
       </div>
       <div className="mt-2">
-        <div className="font-light text-[14px]">Club name address</div>
+        <div className="font-light text-[14px]">{match.club?.address}</div>
       </div>
-
       {/* Users in match  */}
       <div className="flex mt-5 justify-around items-start">
         <UserInMatchWrapper user={match.user_1} index={1} match={match} />
