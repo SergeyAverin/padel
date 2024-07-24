@@ -35,7 +35,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
   return (
     <div className="bg-primary p-5 rounded-2xl">
       #{match.id}
-      <AddUserInMatchPanel />
+      <AddUserInMatchPanel matchId={match.id} />
       <div className="flex justify-between">
         <div className="font-light text-[14px]">
           {new Date(match.start_at).getDate()}
