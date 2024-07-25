@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BookingStore from "@store/booking";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
+
 import { Label } from "@atoms/index";
 import { observer } from "mobx-react-lite";
 import CourtStore from "@store/courts";
@@ -13,7 +14,7 @@ interface Option {
 
 export const SelectCourt: React.FC = observer(() => {
   const [courtsOptions, setCourtsOptions] = useState<Array<Option>>([]);
-  const [selectedCourt, setSelectedCourt] = useState<SingleValue<Option>>(null);
+  const [selectedCourt, setSelectedCourt] = useState<Option>(null);
 
   useEffect(() => {
     const options = CourtStore.courts.map((item) => ({
@@ -31,7 +32,7 @@ export const SelectCourt: React.FC = observer(() => {
     }
   }, [BookingStore.selectedClubId]);
 
-  const handleChangeCourtOption = (option: SingleValue<Option>) => {
+  const handleChangeCourtOption = (option: Option) => {
     if (option) {
       BookingStore.setSelectCourt(option.value);
     }
@@ -47,6 +48,7 @@ export const SelectCourt: React.FC = observer(() => {
             options={courtsOptions}
             defaultValue={selectedCourt}
             onChange={handleChangeCourtOption}
+            placeholder="Select court"
           />
         </div>
       )}

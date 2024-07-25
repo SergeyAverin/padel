@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
 import { Button, ButtonVariant, Label } from "@atoms/index";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
 import ClubStore from "@store/club";
 import CourtStore from "@store/courts";
 import MatchStore from "@store/match";
@@ -16,7 +16,7 @@ interface Option {
 }
 
 export const Booking: React.FC = observer(() => {
-  const [selectedCourt, setSelectedCourt] = useState<SingleValue<Option>>(null);
+  const [selectedCourt, setSelectedCourt] = useState<Option>(null);
 
   const getIndexInTimeRange = (time: string) => {
     return timeRange.indexOf(time);

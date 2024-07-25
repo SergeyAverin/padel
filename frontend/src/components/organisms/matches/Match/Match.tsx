@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
 
 import AddUserInMatchPanel from "../AddUserInMatchPanel";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
@@ -17,10 +17,12 @@ interface IMatchProps {
   match: IMatch;
 }
 export const Match: React.FC<IMatchProps> = ({ match }) => {
-  const [selectedOption, setSelectedOption] =
-    useState<SingleValue<Option>>(null);
+  const [selectedOption, setSelectedOption] = useState<Option>({
+    value: match.status,
+    label: match.status,
+  });
 
-  const handleChange = (option: SingleValue<Option>) => {
+  const handleChange = (option: Option) => {
     if (option) {
       MatchStore.changeMatchStatus(2, option.value);
     }

@@ -1,7 +1,7 @@
 import { Label } from "@atoms/index";
 import { getHoursInRange } from "@utils/timeUtils";
 import React, { useState } from "react";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 
@@ -10,12 +10,11 @@ interface Option {
   label: string;
 }
 export const SelectStartAt: React.FC = observer(() => {
-  const [selectedStartOption, setSelectedStartOption] =
-    useState<SingleValue<Option>>(null);
+  const [selectedStartOption, setSelectedStartOption] = useState<Option>(null);
   const timeRange = getHoursInRange("08:00", "18:00");
   const options = timeRange.map((time) => ({ value: time, label: time }));
 
-  const handleChangeStartOption = (option: SingleValue<Option>) => {
+  const handleChangeStartOption = (option: Option) => {
     if (option) {
       BookingStore.selectStartAt(option.value);
     }
@@ -31,6 +30,7 @@ export const SelectStartAt: React.FC = observer(() => {
             options={options}
             defaultValue={selectedStartOption}
             onChange={handleChangeStartOption}
+            placeholder="Select end match"
           />
         </>
       )}

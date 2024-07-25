@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BookingStore from "@store/booking";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
+
 import { Label } from "@atoms/index";
 import { observer } from "mobx-react-lite";
 import { extractDayAndMonth, getNext14Days } from "@utils/dateUtils";
@@ -10,9 +11,9 @@ interface Option {
   label: string;
 }
 export const SelectDate: React.FC = observer(() => {
-  const [selectedDate, setSelectedDate] = useState<SingleValue<Option>>(null);
+  const [selectedDate, setSelectedDate] = useState<Option>(null);
 
-  const handleChangeDateOption = (option: SingleValue<Option>) => {
+  const handleChangeDateOption = (option: Option) => {
     if (option) {
       BookingStore.selectDate(option.value);
     }
@@ -40,6 +41,7 @@ export const SelectDate: React.FC = observer(() => {
               label: item,
               value: item,
             }))}
+            placeholder="Select date"
           />
         </>
       )}

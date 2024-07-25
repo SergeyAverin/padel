@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Select, { SingleValue } from "react-select";
+import Select from "@atoms/Select";
 import { Label } from "@atoms/index";
 import CourtStore from "@store/courts";
 import BookingStore from "@store/booking";
@@ -11,12 +11,12 @@ interface Option {
 }
 
 export const SelectClub: React.FC = observer(() => {
-  const [selectedClub, setSelectedClub] = useState<SingleValue<Option>>(null);
+  const [selectedClub, setSelectedClub] = useState<Option>(null);
   useEffect(() => {
     CourtStore.getClubCanCreateMatch();
   }, []);
 
-  const handleChangeClubOption = (option: SingleValue<Option>) => {
+  const handleChangeClubOption = (option: Option) => {
     if (option) {
       BookingStore.selectClub(option.value);
     }
@@ -33,6 +33,7 @@ export const SelectClub: React.FC = observer(() => {
           label: club.name,
           value: String(club.id),
         }))}
+        placeholder="Select club"
       />
     </>
   );
