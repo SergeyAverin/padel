@@ -32,7 +32,7 @@ export const Navigation: React.FC = () => {
     AuthStore.authUser?.status == "club_admin" ||
     AuthStore.authUser?.status == "super_admin";
   return (
-    <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full">
+    <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full shadow-md">
       <div className="w-full flex justify-around items-end">
         <NavigationButton
           href="/profile"
@@ -53,13 +53,13 @@ export const Navigation: React.FC = () => {
             <div className="absolute mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500">
               {permission && (
                 <Link to={"/create/club"}>
-                  <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
+                  <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center shadow-md">
                     Add club
                   </div>
                 </Link>
               )}
               <Link to={"/create/match"}>
-                <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center">
+                <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center shadow-md">
                   Add match
                 </div>
               </Link>
