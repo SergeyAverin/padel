@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+
+import style from "./Select.module.sass";
 
 import ArrowIcon from "@assets/ArrowIcon.svg?react";
 
@@ -12,12 +14,14 @@ interface ISelectProps {
   defaultValue?: Option | null;
   onChange?: (option: Option) => void | null;
   placeholder?: string;
+  isLoading?: boolean;
 }
 
 export const Select: React.FC<ISelectProps> = ({
   defaultValue = null,
   onChange = null,
   options = [],
+  isLoading = false,
   placeholder = "Select item",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,10 +33,26 @@ export const Select: React.FC<ISelectProps> = ({
     }
     setIsOpen(false);
   };
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [ref]);
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <div
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          if (!isLoading) {
+            setIsOpen((prev) => !prev);
+          }
+        }}
         className={classNames(
           "p-2 pl-3 cursor-pointer select-none  rounded-xl",
           " flex justify-between items-center",
@@ -44,6 +64,7 @@ export const Select: React.FC<ISelectProps> = ({
       >
         <div className="pr-2 ">{selected ? selected.label : placeholder}</div>
         <div className="flex items-center ">
+          {isLoading && <div className={style.spinner}>Loading&#8230;</div>}
           <div className={classNames("pl-2 border-l-2 border-grey")}>
             <div
               className={classNames("transition", {
@@ -66,6 +87,7 @@ export const Select: React.FC<ISelectProps> = ({
             "cursor-pointer select-none "
           )}
         >
+          {options.length == 0 && <div className="pl-3">Empty</div>}
           {options.map((item) => (
             <div className="hover:bg-secondary" key={item.value}>
               <div onClick={() => onItemClick(item)} className=" p-1 pl-3 ">

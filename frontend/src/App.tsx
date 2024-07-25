@@ -15,6 +15,7 @@ import FriendStore from "@store/friends";
 import ClubStore from "@store/club";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Select from "@atoms/Select";
 
 const App = observer(() => {
   useEffect(() => {
@@ -48,6 +49,7 @@ const App = observer(() => {
 
   return (
     <>
+      <Select />
       {window.Telegram.WebApp.initData ? (
         <>
           {AuthStore.isLogin && (
