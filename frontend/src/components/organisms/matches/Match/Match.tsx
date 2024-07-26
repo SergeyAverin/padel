@@ -102,13 +102,13 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               </div>
             </>
           )}
-        {match.owner?.id != AuthStore.authUser?.id &&
-          match.status == MatchStatusEnum.DONE && (
+        {match.owner?.id == AuthStore.authUser?.id &&
+          match.status == MatchStatusEnum.EXPECTATION && (
             <>
               <hr className="mb-3" />
               <div className="flex justify-between items-center">
-                <div className="text-[24px]">1</div>
-                <div className="text-[24px]">2</div>
+                <div className="text-[24px]">{match.first_team_score}</div>
+                <div className="text-[24px]">{match.second_team_score}</div>
               </div>
             </>
           )}

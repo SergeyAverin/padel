@@ -15,6 +15,8 @@ export interface IMatch {
   user_2: IUser | null;
   user_3: IUser | null;
   user_4: IUser | null;
+  first_team_score: number;
+  second_team_score: number;
 }
 
 export enum MatchStatusEnum {

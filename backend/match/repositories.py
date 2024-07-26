@@ -39,6 +39,8 @@ class MatchRepository:
             "user_3": match.user_3,
             "user_4": match.user_4,
             "selected_court": match.selected_court,
+            "first_team_score": match.first_team_score,
+            "second_team_score": match.second_team_score,
             "id": match.id
         }
 

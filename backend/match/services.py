@@ -27,6 +27,15 @@ class MatchService:
         await match.save()
         return match
 
+    async def chage_score(self, match_id: int, score: int, team: int):
+        match = await self.match_repository.get_match_by_id(match_id)
+        if team == 1:
+            match.first_team_score = score
+        elif team == 2:
+            match.second_team_score = score
+        await match.save()
+        return match
+
     async def create_match(self,  match_create_data: MatchCreateDTO, user: User):
         club = await club_service.get_club_by_id(match_create_data.club_id)
         court = await court_service.get_court_by_id(match_create_data.court_id)

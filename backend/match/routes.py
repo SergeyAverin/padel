@@ -64,6 +64,16 @@ async def get_match(
     }
 
 
+@match_router.put('/matches/{match_id}/score')
+async def change_match_status(
+    match_id: int,
+    score: int = Body(),
+    team: int = Body(),
+    user: UserDTO = Depends(get_current_user)
+):
+    return await match_service.chage_score(match_id, score, team)
+
+
 @match_router.put('/matches/{match_id}')
 async def set_user_in_match(
     match_id: int,
