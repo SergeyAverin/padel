@@ -31,7 +31,7 @@ export const Tag: React.FC<ITagProps> = ({
     TagStore.deleteTag(id);
   };
   return (
-    <div className="bg-highlight p-1 font-bold rounded-full  text-bg text-[12px] flex justify-between items-center pl-3 pr-3">
+    <div className="bg-highlight p-1 font-bold rounded-full  text-bg text-[12px] flex justify-between items-center pl-3 pr-3 select-none">
       {isAdd && (
         <div onClick={addTag} className="mr-2">
           <AddTag />

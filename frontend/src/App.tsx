@@ -15,6 +15,7 @@ import FriendStore from "@store/friends";
 import ClubStore from "@store/club";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import TagStore from "@store/tags";
 
 const App = observer(() => {
   useEffect(() => {
@@ -40,6 +41,7 @@ const App = observer(() => {
       FriendRequestsStore.loadingRequests();
       FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
       ClubStore.loadClubs();
+      TagStore.getTags();
     }
     return () => {
       UserStore.user = null;
