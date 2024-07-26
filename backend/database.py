@@ -11,6 +11,7 @@ MODELS = [
     "friends.models",
     "club.models",
     'match.models',
+    "blank.models",
     "aerich.models"
 ]
 
