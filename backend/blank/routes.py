@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Body
 
 from blank.service import blank_service
+from blank.schemas import CreaetBlankDTO
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
 
@@ -14,3 +15,12 @@ async def match_with_out_blank(
 ):
     matches = await blank_service.get_match_with_out_match(user.telegram_user_id)
     return matches
+
+
+@blank_router.post('/match/{match_id}/blank')
+async def create_blank(
+    match_id: int,
+    create_blank_data: CreaetBlankDTO = Body(),
+    user: UserDTO = Depends(get_current_user)
+):
+    return await blank_service.create_blank(create_blank_data, user.telegram_user_id, match_id)
