@@ -24,3 +24,13 @@ async def create_blank(
     user: UserDTO = Depends(get_current_user)
 ):
     return await blank_service.create_blank(create_blank_data, user.telegram_user_id, match_id)
+
+
+@blank_router.get('/match/{match_id}/blank')
+async def get_lvl_chagne(
+    match_id: int,
+    user_number: int,
+    user: UserDTO = Depends(get_current_user)
+):
+    lvl_change = await blank_service.get_blank_change_lvl(match_id, user_number)
+    return lvl_change

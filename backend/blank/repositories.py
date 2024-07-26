@@ -8,8 +8,9 @@ from match.services import match_service
 
 
 class BlankRepository:
-    def get_blanks_by_match(self):
-        pass
+    def get_blanks_by_match(self, match_id: int):
+        blanks = Blank.filter(match__id=match_id)
+        return blanks
 
     async def get_match_with_out_match(self, user_id: str):
         matches = await Match.filter(
