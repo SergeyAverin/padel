@@ -13,6 +13,7 @@ interface Option {
   value: string;
   label: string;
 }
+
 interface IMatchProps {
   match: IMatch;
 }
@@ -24,7 +25,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
   const handleChange = (option: Option) => {
     if (option) {
-      MatchStore.changeMatchStatus(2, option.value);
+      MatchStore.changeMatchStatus(match.id, option.value);
     }
     setSelectedOption(option);
   };
@@ -87,6 +88,9 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
         <UserInMatchWrapper user={match.user_3} index={3} match={match} />
         <UserInMatchWrapper user={match.user_4} index={4} match={match} />
+      </div>
+      <div>
+        {match.owner?.id == AuthStore.authUser?.id && <div>resuslt</div>}
       </div>
     </div>
   );

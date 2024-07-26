@@ -90,11 +90,11 @@ async def set_user_in_match(
 @match_router.put('/matches/{match_id}/status')
 async def change_match_status(
     match_id: int,
-    status: StatusEnum = Body(),
+    status: str = Body(),
     user: UserDTO = Depends(get_current_user)
 ):
-    logger.debug(status)
-    return await match_service.change_match_status(match_id, status)
+    enum_status = getattr(StatusEnum, status.upper())
+    return await match_service.change_match_status(match_id, enum_status)
 
 
 @match_router.get('/user/{user_id}/matches', tags=['user'])
