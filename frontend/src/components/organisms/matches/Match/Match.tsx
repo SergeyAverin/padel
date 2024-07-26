@@ -8,6 +8,7 @@ import { IMatch, MatchStatusEnum } from "@schemas/match";
 import MatchStore from "@store/match";
 import UserInMatch from "@molecules/matches/UserInMatch";
 import AuthStore from "@store/auth";
+import SelectScore from "@molecules/matches/SelectScore";
 
 interface Option {
   value: string;
@@ -90,7 +91,27 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
         <UserInMatchWrapper user={match.user_4} index={4} match={match} />
       </div>
       <div>
-        {match.owner?.id == AuthStore.authUser?.id && <div>resuslt</div>}
+        {match.owner?.id == AuthStore.authUser?.id &&
+          match.status == MatchStatusEnum.DONE && (
+            <>
+              <hr className="mb-3" />
+              <div className="mb-3">Match result:</div>
+              <div className="flex justify-between items-center">
+                <SelectScore matchId={match.id} />
+                <SelectScore matchId={match.id} />
+              </div>
+            </>
+          )}
+        {match.owner?.id != AuthStore.authUser?.id &&
+          match.status == MatchStatusEnum.DONE && (
+            <>
+              <hr className="mb-3" />
+              <div className="flex justify-between items-center">
+                <div className="text-[24px]">1</div>
+                <div className="text-[24px]">2</div>
+              </div>
+            </>
+          )}
       </div>
     </div>
   );
