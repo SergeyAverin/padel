@@ -54,7 +54,7 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
         <div className="bg-primary p-5 rounded-xl">
           <div className="flex justify-between w-full">
             <div className="flex">
-              <UserPhoto avatar={user.avatar} />
+              <UserPhoto lvl={user.lvl} avatar={user.avatar} />
 
               <div className="ml-5">
                 <div className="text-[16px] font-bold">{user.username}</div>

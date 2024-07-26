@@ -5,11 +5,13 @@ import classNames from "classnames";
 
 interface IUserPhotoProps {
   avatar: string;
+  lvl: number;
   isProfile?: boolean;
 }
 
 export const UserPhoto: React.FC<IUserPhotoProps> = ({
   avatar,
+  lvl,
   isProfile = false,
 }) => {
   return (
@@ -23,7 +25,7 @@ export const UserPhoto: React.FC<IUserPhotoProps> = ({
           })}
         />
         <div className="absolute right-[-5px] bottom-[-5px]">
-          <UserLvl lvl={10} />
+          <UserLvl lvl={lvl} />
         </div>
       </div>
     </>

@@ -18,7 +18,7 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
         <div className="flex justify-between">
           <div className="flex">
             <div className="w-[100px] h-[100px]">
-              <UserPhoto avatar={user.avatar} isProfile={true} />
+              <UserPhoto avatar={user.avatar} isProfile={true} lvl={user.lvl} />
             </div>
             <div className="ml-[20px]">
               <div className="text-[24px] font-bold">{user.username}</div>

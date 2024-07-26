@@ -50,7 +50,7 @@ export const FindUserForm: React.FC = observer(() => {
               >
                 <div className="bg-primary p-5 rounded-xl mb-5">
                   <div className="flex">
-                    <UserPhoto avatar={user.avatar} />
+                    <UserPhoto avatar={user.avatar} lvl={user.lvl} />
 
                     <div className="ml-5">
                       <div className="text-[16px] font-bold">

@@ -14,7 +14,10 @@ export const FriendRequestInner: React.FC<IFriendRequestProps> = ({
   return (
     <div className="bg-primary p-5 rounded-2xl">
       <div className="flex">
-        <UserPhoto avatar="http://averin.pagekite.me/api/v1.0/user/image/default.png" />
+        <UserPhoto
+          lvl={user.lvl}
+          avatar="http://averin.pagekite.me/api/v1.0/user/image/default.png"
+        />
         <div className="ml-5">
           <div className="text-[16px] font-bold">Player 2</div>
           <div className="text-[16px] font-medium">Jacob Williams</div>
