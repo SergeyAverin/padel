@@ -6,17 +6,18 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 interface ISlideProps {
+  title: string;
   text: string;
   animation: string;
 }
-export const Slide: React.FC<ISlideProps> = ({ animation, text }) => {
+export const Slide: React.FC<ISlideProps> = ({ animation, text, title }) => {
   const container = useAnimation(animation);
   return (
     <div>
       <div className="mx-auto w-[250px] mt-[38px]">
         <div ref={container}></div>
       </div>
-      <div className="text-center text-[24px]">{text}</div>
+      <div className="text-center text-[24px]">{title}</div>
       <div className="text-center">{text}</div>
     </div>
   );
@@ -26,11 +27,10 @@ export const Tutorial: React.FC = () => {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const sliders = [
-    <Slide animation="/EmptyAnimation.json" text="1" />,
-    <Slide animation="/EmptyAnimation.json" text="2" />,
-    <Slide animation="/EmptyAnimation.json" text="3" />,
+    <Slide animation="/EmptyAnimation.json" title="Title" text="1" />,
+    <Slide animation="/EmptyAnimation.json" title="Title" text="2" />,
+    <Slide animation="/EmptyAnimation.json" title="Title" text="3" />,
     <div>
-      <Slide animation="/EmptyAnimation.json" text="select headn" />,
       <div className="flex justify-center">
         <div className="w-[280px text-center]">
           <SelectHand />
@@ -38,7 +38,6 @@ export const Tutorial: React.FC = () => {
       </div>
     </div>,
     <div>
-      <Slide animation="/EmptyAnimation.json" text="select position" />,
       <div className="flex justify-center">
         <div className="w-[280px text-center]">
           <SelectPosition />
@@ -74,7 +73,7 @@ export const Tutorial: React.FC = () => {
   return (
     <>
       {isOpen && (
-        <div className="fixed left-0 top-0 bg-primary text-fg w-full h-full z-[1000] transition-all">
+        <div className="fixed left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
           {sliders[step - 1]}
           <div className="flex justify-center items-center">
             <div>
