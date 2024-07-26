@@ -9,6 +9,8 @@ import MatchStore from "@store/match";
 import UserInMatch from "@molecules/matches/UserInMatch";
 import AuthStore from "@store/auth";
 import SelectScore from "@molecules/matches/SelectScore";
+import { Link } from "react-router-dom";
+import club from "@store/club";
 
 interface Option {
   value: string;
@@ -78,7 +80,12 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
         </div>
       </div>
       <div className="mt-2">
-        <div className="font-light text-[14px]">{match.club?.address}</div>
+        <div className="font-light text-[14px]">
+          Address: {match.club?.address}
+        </div>
+        <div className="font-light text-[14px]">
+          <Link to={`/clubs/${match.club?.id}`}>Club: {match.club?.name}</Link>
+        </div>
       </div>
       {/* Users in match  */}
       <div className="flex mt-5 justify-around items-start">
