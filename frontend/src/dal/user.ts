@@ -26,6 +26,17 @@ export const changeHand = async (userId: string, hand: Hand) => {
   }
 };
 
+export const changeLvl = async (lvl: number) => {
+  await axios.patch(API_URL + "/user/lvl", lvl, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  if (AuthStore.authUser) {
+    AuthStore.authUser.lvl = lvl;
+  }
+};
+
 export const changePosition = async (userId: string, position: Position) => {
   await axios.patch(API_URL + `/user/${userId}/position`, position, {
     headers: {

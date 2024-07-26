@@ -12,6 +12,7 @@ export interface IUser {
   country: string;
   city: string;
   status: string;
+  lvl: number;
 }
 
 export interface IUserStats {

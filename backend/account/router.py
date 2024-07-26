@@ -18,6 +18,14 @@ async def find_user(username: str, user: UserDTO = Depends(get_current_user)):
     return await User.filter(username__icontains=username.lower(), telegram_user_id__not=user.telegram_user_id)
 
 
+@profile_router.patch('/lvl')
+async def change_lvl(
+    user: UserDTO = Depends(get_current_user),
+    lvl: int = Body()
+):
+    return await user_service.change_lvl(user, lvl)
+
+
 @profile_router.get('/stats/{telegram_user_id}')
 async def get_stats(
         telegram_user_id: str,
@@ -80,14 +88,6 @@ async def change_position(
     user = await user_service.get_user_by_telegram_user_id(user.telegram_user_id)
     new_user = await user_service.change_position(user, new_position)
     return {'new_user': 123}
-
-
-@profile_router.patch('/{telegram_user_id}/lvl')
-async def change_lvl(
-    user: UserDTO = Depends(get_current_user),
-    lvl: int = Body()
-):
-    return await user_service.change_lvl(user, lvl)
 
 
 @profile_router.post('/{telegram_user_id}/upload_photo')

@@ -7,6 +7,7 @@ import {
   updateUser,
   getStats,
   uploadPhoto,
+  changeLvl,
 } from "@dal/user";
 import {
   Hand,
@@ -57,6 +58,9 @@ class UserStore {
   }
   async getRelationStatus(userId: string) {
     this.relationStatus = await getRelationStatus(userId);
+  }
+  async changeLvl(lvl: number) {
+    await changeLvl(lvl);
   }
 }
 

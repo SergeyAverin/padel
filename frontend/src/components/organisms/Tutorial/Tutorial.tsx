@@ -5,6 +5,7 @@ import SelectHand from "@organisms/account/SelectHand";
 import SelectPosition from "@organisms/account/SelectPosition";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import UserStore from "@store/user";
 
 interface ISlideProps {
   title: string;
@@ -44,6 +45,10 @@ const LvlDescription: React.FC<LvlDescriptionProps> = ({
   );
 };
 
+const onChange = (item: { label: string; value: string }) => {
+  UserStore.changeLvl(Number(item.value));
+};
+
 export const Tutorial: React.FC = () => {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -72,6 +77,7 @@ export const Tutorial: React.FC = () => {
           <div className="w-[300px] m-auto mb-5">
             <Select
               defaultValue={{ label: "1 - initiation", value: "1" }}
+              onChange={onChange}
               options={[
                 { label: "1 - initiation", value: "1" },
                 { label: "2 - initiation", value: "2" },
