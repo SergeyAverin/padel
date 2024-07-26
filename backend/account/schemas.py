@@ -21,6 +21,8 @@ class UserDTO(BaseModel):
     position: Position = Field(default=Position.BOTH.value)
     hand: Hand = Field(default=Hand.RIGHT_HAND.value)
 
+    lvl: int
+
 
 class UpdateUserDTO(BaseModel):
     first_name: str

@@ -37,6 +37,12 @@ class UserService:
         user.position = new_position.value
         return await user.save()
 
+    async def change_lvl(self, user: UserDTO, lvl: int) -> UserDTO:
+        user = await User.get_or_none(telegram_user_id=user.telegram_user_id)
+        user.lvl = lvl
+        await user.save()
+        return user
+
     async def upload_user_photo(self, user_id: str, photo: UploadFile):
         user = await user_service.get_user_by_telegram_user_id(user_id)
         await self.photo_repository.save_photo(user_id, photo)

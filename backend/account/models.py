@@ -52,6 +52,8 @@ class User(Model):
     city = fields.CharField(max_length=255, default='')
     country = fields.CharField(max_length=255, default='')
 
+    lvl = fields.IntField(default=0)
+
     def __str__(self):
         return self.first_name
 
