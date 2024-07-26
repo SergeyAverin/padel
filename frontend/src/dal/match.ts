@@ -43,7 +43,6 @@ export const getMatchesFromBookmarkedClubs = async (userId: string) => {
 };
 
 export const changeStatus = async (matchId: number, newStatus: string) => {
-  console.log(newStatus);
   await axios.put(API_URL + `/matches/${matchId}/status`, newStatus, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

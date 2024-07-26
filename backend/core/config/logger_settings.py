@@ -12,6 +12,8 @@ ERROR_LOGS_FILE = f'{LOGGING_DIR}/error_logs.log'
 ACCESS_LOGS_FILE = f'{LOGGING_DIR}/access_logs.log'
 DEBUG_LOGS_FILE = f'{LOGGING_DIR}/debug_logs.log'
 MAIN_LOGS_FILE = f'{LOGGING_DIR}/main_logs.log'
+SQL_LOGS_FILE = f'{LOGGING_DIR}/sql_logs.log'
+TORTORISE_LOGS_FILE = f'{LOGGING_DIR}/tortoise_logs.log'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -24,6 +26,17 @@ def only_filter(lvl: str):
          :param lvl: уровень логов которые будут записываться.
     '''
     return lambda record: record.levelno == lvl
+
+
+class ExcludeModuleFilter(logging.Filter):
+    ''' Исключает python модуль из логгера. '''
+
+    def __init__(self, module_name):
+        super().__init__()
+        self.module_name = module_name
+
+    def filter(self, record):
+        return self.module_name not in record.name
 
 
 class TracebackFormatter(logging.Formatter):
@@ -73,6 +86,7 @@ logger.addHandler(error_handler)
 #  Handler который записывает все debug сообщения в logs/error_logs.log
 debug_handle = logging.FileHandler(DEBUG_LOGS_FILE)
 debug_handle.setLevel(logging.DEBUG)
+debug_handle.addFilter(ExcludeModuleFilter('tortoise.db_client'))
 debug_handle.addFilter(only_filter(logging.DEBUG))
 
 debug_handle.setFormatter(formatter)
@@ -83,6 +97,8 @@ logger.addHandler(debug_handle)
 main_handle = logging.FileHandler(MAIN_LOGS_FILE)
 main_handle.setLevel(logging.DEBUG)
 # debug_handle.addFilter(logging.DEBUG)
+main_handle.addFilter(ExcludeModuleFilter('tortoise.db_client'))
+main_handle.addFilter(ExcludeModuleFilter('tortoise'))
 main_handle.setFormatter(formatter)
 
 logger.addHandler(main_handle)
@@ -103,6 +119,21 @@ access_handle.setFormatter(formatter)
 
 access_logger.addHandler(access_handle)
 
+# Отдельый логер для SQL запросов
+logger_db_client = logging.getLogger("tortoise.db_client")
+logger_db_client_handle = logging.FileHandler(SQL_LOGS_FILE)
+logger_db_client_handle.setLevel(logging.DEBUG)
+logger_db_client.setLevel(logging.DEBUG)
+logger_db_client.addHandler(logger_db_client_handle)
+
+# Отдельый логер для tortoise orm
+logger_tortoise = logging.getLogger("tortoise")
+logger_tortories_handle = logging.FileHandler(TORTORISE_LOGS_FILE)
+logger_tortories_handle.setLevel(logging.DEBUG)
+logger_tortories_handle.addFilter(ExcludeModuleFilter('tortoise.db_client'))
+logger_tortoise.setLevel(logging.DEBUG)
+logger_tortoise.addHandler(logger_tortories_handle)
+
 
 def clear_log_file(file_path: str):
     ''' Очищает переданный файл. '''
@@ -119,4 +150,6 @@ def clear_logs():
         clear_log_file(ERROR_LOGS_FILE)
         clear_log_file(ACCESS_LOGS_FILE)
         clear_log_file(DEBUG_LOGS_FILE)
+        clear_log_file(SQL_LOGS_FILE)
+        clear_log_file(TORTORISE_LOGS_FILE)
         clear_log_file(MAIN_LOGS_FILE)

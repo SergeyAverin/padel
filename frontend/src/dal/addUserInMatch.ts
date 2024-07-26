@@ -7,7 +7,6 @@ export const addUserInMatch = async (
   userId: string,
   userIndex: number
 ) => {
-  console.log(matchId);
   await axiosInstance.put(
     `${API_URL}/matches/${matchId}`,
     {

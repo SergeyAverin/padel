@@ -10,11 +10,10 @@ interface IAddUserInMatchPanelProps {
   matchId: number;
 }
 const AddUserInMatchPanel: React.FC<IAddUserInMatchPanelProps> = observer(
-  ({ matchId }) => {
+  () => {
     const selectUser = (user_id: string) => {
       AddUserStore.toggleIsOpen();
       AddUserStore.setUser(user_id);
-      console.log(`update match ${matchId}`);
     };
     return (
       <div

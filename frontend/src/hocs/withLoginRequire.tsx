@@ -11,9 +11,6 @@ export function withLoginRequire(WrappedComponent: React.FC) {
         userId = String(JSON.parse(session).tgWebAppData);
       }
     }
-    useEffect(() => {
-      console.log(AuthStore.isLogin);
-    }, [AuthStore.isLogin]);
 
     useAuth(userId);
 
