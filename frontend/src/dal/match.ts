@@ -50,6 +50,25 @@ export const changeStatus = async (matchId: number, newStatus: string) => {
   });
 };
 
+export const changeScore = async (
+  matchId: number,
+  team: number,
+  score: number
+) => {
+  await axios.put(
+    API_URL + `/matches/${matchId}/score`,
+    {
+      score,
+      team,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+};
+
 export const getMatchByDay = async (
   clubId: number,
   day: number,

@@ -97,8 +97,16 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               <hr className="mb-3" />
               <div className="mb-3">Match result:</div>
               <div className="flex justify-between items-center">
-                <SelectScore matchId={match.id} />
-                <SelectScore matchId={match.id} />
+                <SelectScore
+                  team={1}
+                  defaultScore={match.first_team_score}
+                  matchId={match.id}
+                />
+                <SelectScore
+                  team={2}
+                  defaultScore={match.second_team_score}
+                  matchId={match.id}
+                />
               </div>
             </>
           )}

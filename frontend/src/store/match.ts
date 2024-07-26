@@ -6,6 +6,7 @@ import {
   getMatchesFromUserFriends,
   getMatchesFromBookmarkedClubs,
   changeStatus,
+  changeScore,
 } from "@dal/match";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
 import AuthStore from "@store/auth";
@@ -48,6 +49,9 @@ class MatchStore {
     runInAction(async () => {
       this.matchesFromBookmarks = await getMatchesFromBookmarkedClubs(userId);
     });
+  }
+  async changeScore(matchId: number, team: number, score: number) {
+    await changeScore(matchId, team, score);
   }
   async loadingMatch() {
     this.isLoading = true;

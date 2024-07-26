@@ -1,5 +1,7 @@
-import Select from "@atoms/Select";
 import React from "react";
+
+import Select from "@atoms/Select";
+import MatchStore from "@store/match";
 
 const scores = [
   { label: "0", value: "0" },
@@ -18,12 +20,25 @@ const scores = [
 
 interface ISelectScoreProps {
   matchId: number;
+  defaultScore: number;
+  team: number;
 }
 
-export const SelectScore: React.FC<ISelectScoreProps> = ({ matchId }) => {
+export const SelectScore: React.FC<ISelectScoreProps> = ({
+  matchId,
+  defaultScore,
+  team,
+}) => {
+  const onChange = (item: { label: string; value: string }) => {
+    MatchStore.changeScore(matchId, team, Number(item.value));
+  };
   return (
     <>
-      <Select defaultValue={scores[0]} options={scores} />
+      <Select
+        onChange={onChange}
+        defaultValue={scores[defaultScore]}
+        options={scores}
+      />
     </>
   );
 };
