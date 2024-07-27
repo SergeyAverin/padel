@@ -1,36 +1,27 @@
 export function getHoursInRange(startTime: string, endTime: string): string[] {
-  const [startHours, startMinutes] = startTime.split(":").map(Number);
-  const [endHours, endMinutes] = endTime.split(":").map(Number);
+  const timeSlots: string[] = [];
 
-  const hours: string[] = [];
+  // Функция для преобразования времени в минуты
+  const timeToMinutes = (time: string): number => {
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+  };
 
-  let currentHours = startHours;
-  let currentMinutes = startMinutes;
+  // Функция для преобразования минут обратно в строку времени
+  const minutesToTime = (minutes: number): string => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`;
+  };
 
-  while (true) {
-    hours.push(
-      `${currentHours.toString().padStart(2, "0")}:${currentMinutes
-        .toString()
-        .padStart(2, "0")}`
-    );
+  const startMinutes = timeToMinutes(startTime);
+  const endMinutes = timeToMinutes(endTime);
 
-    currentMinutes += 60;
-    currentHours++;
-
-    if (
-      currentHours > endHours ||
-      (currentHours === endHours && currentMinutes >= endMinutes)
-    ) {
-      break;
-    }
-
-    if (currentMinutes >= 60) {
-      currentHours++;
-      currentMinutes -= 60;
-    }
+  for (let minutes = startMinutes; minutes <= endMinutes; minutes += 30) {
+    timeSlots.push(minutesToTime(minutes));
   }
 
-  return hours;
+  return timeSlots;
 }
 
 export function extractTime(input: string): string {

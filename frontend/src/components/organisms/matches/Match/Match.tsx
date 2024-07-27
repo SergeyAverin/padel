@@ -118,7 +118,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               </div>
             </>
           )}
-        {match.owner?.id == AuthStore.authUser?.id &&
+        {match.owner?.id != AuthStore.authUser?.id &&
           match.status == MatchStatusEnum.DONE && (
             <>
               <hr className="mb-3" />
