@@ -12,12 +12,30 @@ class BlankRepository:
         blanks = Blank.filter(match__id=match_id)
         return blanks
 
+    def serealize_match(self, match):
+        return {
+            "club": match.club,
+            "status": match.status,
+            "start_at": match.start_at,
+            "end_at": match.end_at,
+            "created_at": match.created_at,
+            "owner": match.owner,
+            "user_1": match.user_1,
+            "user_2": match.user_2,
+            "user_3": match.user_3,
+            "user_4": match.user_4,
+            "selected_court": match.selected_court,
+            "first_team_score": match.first_team_score,
+            "second_team_score": match.second_team_score,
+            "id": match.id
+        }
+
     async def get_match_with_out_match(self, user_id: str):
         matches = await Match.filter(
             ~Q(blank_match__id__isnull=False),
             owner__telegram_user_id=user_id
-        ).all()
-        return matches
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').all()
+        return [self.serealize_match(m) for m in matches]
 
     async def create_blank(slef, create_blank_data: CreaetBlankDTO, user_id: str, match_id: int):
         blank = Blank()
