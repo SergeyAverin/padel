@@ -5,6 +5,7 @@ from blank.schemas import CreaetBlankDTO
 from match.models import Match
 from account.service import user_service
 from match.services import match_service
+from match.models import StatusEnum
 
 
 class BlankRepository:
@@ -33,7 +34,8 @@ class BlankRepository:
     async def get_match_with_out_match(self, user_id: str):
         matches = await Match.filter(
             ~Q(blank_match__id__isnull=False),
-            owner__telegram_user_id=user_id
+            owner__telegram_user_id=user_id,
+            status=StatusEnum.DONE
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').all()
         return [self.serealize_match(m) for m in matches]
 

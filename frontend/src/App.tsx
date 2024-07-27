@@ -61,26 +61,30 @@ const App = observer(() => {
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
                 <DndProvider backend={HTML5Backend}>
                   <BrowserRouter>
-                    <div className="fixed w-full h-full top-0 left-0 bg-primary z-50 overflow-y-auto">
-                      <div className="p-5">
-                        <Heading variant={HeadingVariant.H2}>
-                          Select mark for user
-                        </Heading>
-                      </div>
+                    {BlankStore.matchWithOutBlank.length > 0 && (
+                      <>
+                        <div className="fixed w-full h-full top-0 left-0 bg-primary z-50 overflow-y-auto">
+                          <div className="p-5">
+                            <Heading variant={HeadingVariant.H2}>
+                              Select mark for user
+                            </Heading>
+                          </div>
 
-                      {BlankStore.isLoading && (
-                        <div className="flex justify-center items-center mt-[100px] w-full">
-                          <Loading />
+                          {BlankStore.isLoading && (
+                            <div className="flex justify-center items-center mt-[100px] w-full">
+                              <Loading />
+                            </div>
+                          )}
+                          {!BlankStore.isLoading && (
+                            <>
+                              {BlankStore.matchWithOutBlank.map((item) => (
+                                <Blank match={item} />
+                              ))}
+                            </>
+                          )}
                         </div>
-                      )}
-                      {!BlankStore.isLoading && (
-                        <>
-                          {BlankStore.matchWithOutBlank.map((item) => (
-                            <Blank match={item} />
-                          ))}
-                        </>
-                      )}
-                    </div>
+                      </>
+                    )}
                     <MainRouter />
                   </BrowserRouter>
                   <TutorialPortal />
