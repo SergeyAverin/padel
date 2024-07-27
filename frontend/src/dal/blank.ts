@@ -11,6 +11,15 @@ export const getMatchWithOutBlank = async () => {
   const match = await matchResponse.data;
   return match;
 };
+export const getChangeLvl = async (matchId: number) => {
+  const matchResponse = await axios.get(API_URL + `/match/${matchId}/blank`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const match = await matchResponse.data;
+  return match;
+};
 
 export const createBlank = async (
   matchId: number,

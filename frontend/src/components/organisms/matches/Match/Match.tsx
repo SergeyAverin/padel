@@ -11,6 +11,7 @@ import AuthStore from "@store/auth";
 import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
 import club from "@store/club";
+import ChangeLvl from "@molecules/matches/ChangeLvl";
 
 interface Option {
   value: string;
@@ -118,13 +119,14 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
             </>
           )}
         {match.owner?.id == AuthStore.authUser?.id &&
-          match.status == MatchStatusEnum.EXPECTATION && (
+          match.status == MatchStatusEnum.DONE && (
             <>
               <hr className="mb-3" />
               <div className="flex justify-between items-center">
                 <div className="text-[24px]">{match.first_team_score}</div>
                 <div className="text-[24px]">{match.second_team_score}</div>
               </div>
+              <ChangeLvl matchId={match.id} />
             </>
           )}
       </div>
