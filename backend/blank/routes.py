@@ -29,8 +29,7 @@ async def create_blank(
 @blank_router.get('/match/{match_id}/blank')
 async def get_lvl_chagne(
     match_id: int,
-    user_number: int,
     user: UserDTO = Depends(get_current_user)
 ):
-    lvl_change = await blank_service.get_blank_change_lvl(match_id, user_number)
+    lvl_change = await blank_service.get_blank_change_lvl(match_id, user)
     return lvl_change
