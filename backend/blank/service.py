@@ -22,23 +22,28 @@ class BlankService:
         user_3 = 0
         user_4 = 0
 
-        if match.user_1:
-            user_1 = await match.user_1.values()
-        if match.user_2:
-            user_2 = await match.user_2.values()
-        if match.user_3:
-            user_3 = await match.user_3.values()
-        if match.user_4:
-            user_4 = await match.user_4.values()
+        if user:
+            if match.user_1:
+                user_1 = await match.user_1.values()
+            if match.user_2:
+                user_2 = await match.user_2.values()
+            if match.user_3:
+                user_3 = await match.user_3.values()
+            if match.user_4:
+                user_4 = await match.user_4.values()
 
-        if user_1['id'] == user.id:
-            return 1
-        elif user_2['id'] == user.id:
-            return 2
-        elif user_3['id'] == user.id:
-            return 3
-        elif user_4['id'] == user.id:
-            return 4
+            logger.debug(user)
+            logger.debug(user_2)
+
+            if user_1 != 0 and user_1['id'] == user.id:
+                return 1
+            elif user_2 != 0 and user_2['id'] == user.id:
+                return 2
+            elif user_3 != 0 and user_3['id'] == user.id:
+                return 3
+            elif user_4 != 0 and user_4['id'] == user.id:
+                return 4
+        return 0
 
     async def _update_user_balance(self, user, match_id: str):
         if user:
@@ -54,9 +59,9 @@ class BlankService:
 
     async def get_blank_change_lvl(self, match_id: int, user: User):
         user_number = await self._get_user_number(match_id, user)
+        lvl_change = 0
         if user_number != 0:
             blanks = await self.blank_repository.get_blanks_by_match(match_id)
-            lvl_change = 0
             for blank in blanks:
                 if user_number == 1:
                     lvl_change += blank.user_1
@@ -66,7 +71,7 @@ class BlankService:
                     lvl_change += blank.user_3
                 if user_number == 4:
                     lvl_change += blank.user_4
-            return lvl_change
+        return lvl_change
 
     async def get_match_with_out_match(self, user_id: str):
         return await self.blank_repository.get_match_with_out_match(user_id)
