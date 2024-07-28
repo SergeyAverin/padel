@@ -18,7 +18,7 @@ class ClubRepository:
         club = Club()
         club.name = club_data.name
         club.address = club_data.address
-        club.registration_address = club_data.registration_address
+        club.registration_address = '_'
         club.city = club_data.city
         club.owner = owner
         await club.save()
@@ -58,7 +58,7 @@ class ClubRepository:
         old_club.name = new_club_data.name
         old_club.city = new_club_data.city
         old_club.address = new_club_data.address
-        old_club.registration_address = new_club_data.registration_address
+        old_club.registration_address = '_'
 
         await old_club.save()
         return old_club

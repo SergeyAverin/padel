@@ -13,20 +13,20 @@ export const config: Array<IConfig> = [
     name: "address",
     placeholder: "first_name",
   },
-  {
-    name: "registration_address",
-    placeholder: "last_name",
-  },
+  // {
+  //   name: "registration_address",
+  //   placeholder: "last_name",
+  // },
   {
     name: "city",
-    placeholder: "age",
+    placeholder: "city",
   },
 ];
 
 export const initialState: FormDataI = {
   name: "",
   address: "",
-  registration_address: "",
+  // registration_address: "",
   city: "",
 };
 
@@ -35,8 +35,8 @@ export const getInitState = (): FormDataI => {
     return {
       name: ClubStore.openedClub.name,
       address: ClubStore.openedClub.city,
-      registration_address: ClubStore.openedClub.address,
-      city: ClubStore.openedClub.registration_address,
+      // registration_address: ClubStore.openedClub.address,
+      city: ClubStore.openedClub.city,
     };
   } else {
     return initialState;
@@ -46,6 +46,6 @@ export const getInitState = (): FormDataI => {
 export type FormDataI = {
   name: string;
   address: string;
-  registration_address: string;
+  // registration_address: string;
   city: string;
 };

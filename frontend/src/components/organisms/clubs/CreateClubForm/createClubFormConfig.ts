@@ -11,10 +11,10 @@ export const config: Array<IConfig> = [
     name: "address",
     placeholder: "first_name",
   },
-  {
-    name: "registration_address",
-    placeholder: "last_name",
-  },
+  // {
+  //   name: "registration_address",
+  //   placeholder: "last_name",
+  // },
   {
     name: "city",
     placeholder: "age",
@@ -24,13 +24,13 @@ export const config: Array<IConfig> = [
 export const initialState: FormDataI = {
   name: "",
   address: "",
-  registration_address: "",
+  // registration_address: "",
   city: "",
 };
 
 export type FormDataI = {
   name: string;
   address: string;
-  registration_address: string;
+  // registration_address: string;
   city: string;
 };
