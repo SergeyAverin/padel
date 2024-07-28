@@ -6,6 +6,8 @@ import { IUser } from "@schemas/user";
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
 import AddUserInMatch from "@store/addUserInMatch";
+import { shortenString } from "@utils/shoringString";
+import UserPhoto from "@molecules/account/UserPhoto";
 
 interface IUserInMatchProps {
   user: IUser;
@@ -23,14 +25,16 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
   return (
     <>
       <div
-        className="flex flex-col justify-center"
+        className="flex"
         onClick={() => {
           onClick();
         }}
       >
-        <img src={TestPhoto} className="rounded-full w-[60px] h-[60px]" />
-        <div className="text-[12px] text-center mt-2">{user.username}</div>
-        <div className="text-[12px] text-center mt-1">{user.age}</div>
+        <img className="w-[42px] h-[42px] rounded-full" src={user.avatar} />
+
+        <div className="text-[14px] mt-2 ml-1">
+          {shortenString(user.username, 12)}
+        </div>
       </div>
     </>
   );

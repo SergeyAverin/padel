@@ -15,10 +15,11 @@ export const AddUserInMatch: React.FC<IAddUserInMatchProps> = ({
   const onClick = useAddUserInMatch(match, index, true);
   return (
     <>
-      <div className="flex flex-col justify-center p-2" onClick={onClick}>
-        <div className="w-[60px] h-[60px] border-2 border-highlight text-highlight rounded-full border-dashed flex justify-center items-center">
+      <div className="flex items-center" onClick={onClick}>
+        <div className="w-[42px] h-[42px] border-2 border-highlight text-highlight rounded-full border-dashed flex justify-center items-center">
           +
         </div>
+        <div className="ml-2 text-[14px]">Add user</div>
       </div>
     </>
   );

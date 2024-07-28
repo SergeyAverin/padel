@@ -10,7 +10,6 @@ import UserInMatch from "@molecules/matches/UserInMatch";
 import AuthStore from "@store/auth";
 import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
-import club from "@store/club";
 import ChangeLvl from "@molecules/matches/ChangeLvl";
 import { shortenString } from "@utils/shoringString";
 
@@ -42,7 +41,6 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
   return (
     <div className="bg-primary p-5 rounded-2xl">
-      #{match.id}
       <AddUserInMatchPanel matchId={match.id} />
       <div className="flex justify-between">
         <div className="font-light text-[14px]">
@@ -51,7 +49,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           {new Date(match.start_at).getMonth() + 1}
           {"."}
           {new Date(match.start_at).getFullYear()}
-          {" | "}
+          <br />
           {new Date(match.start_at).getHours()}
           {":"}
           {new Date(match.start_at).getMinutes()}
@@ -59,9 +57,6 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           {new Date(match.end_at).getHours()}
           {":"}
           {new Date(match.end_at).getMinutes()}
-          {" | "}
-          {new Date(match.end_at).getHours() -
-            new Date(match.start_at).getHours()}
         </div>
         <div className="font-light text-[14px]">
           {permission ? (
@@ -81,55 +76,83 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           )}
         </div>
       </div>
+      <div className="font-light text-[14px] mt-3">
+        <Link to={`/clubs/${match.club?.id}`} className="text-highlight">
+          Club: {shortenString(match.club?.name, 30)}
+        </Link>
+      </div>
       <div className="mt-2">
         <div className="font-light text-[14px]">
           Address: {shortenString(match.club?.address, 40)}
         </div>
-        <div className="font-light text-[14px]">
-          <Link to={`/clubs/${match.club?.id}`} className="text-highlight">
-            Club: {shortenString(match.club?.name, 30)}
-          </Link>
-        </div>
       </div>
       {/* Users in match  */}
       <div className="flex mt-5 justify-around items-start">
-        <UserInMatchWrapper user={match.user_1} index={1} match={match} />
-        <UserInMatchWrapper user={match.user_2} index={2} match={match} />
+        <div className="w-[50%]">
+          <UserInMatchWrapper user={match.user_1} index={1} match={match} />
+          <div className="mt-5">
+            <UserInMatchWrapper user={match.user_2} index={2} match={match} />
+          </div>
+        </div>
 
         <div className="w-[1px] h-[120px] bg-fg"></div>
-
-        <UserInMatchWrapper user={match.user_3} index={3} match={match} />
-        <UserInMatchWrapper user={match.user_4} index={4} match={match} />
+        <div className="w-[50%] ml-2">
+          <UserInMatchWrapper user={match.user_3} index={3} match={match} />
+          <div className="mt-5">
+            <UserInMatchWrapper user={match.user_4} index={4} match={match} />
+          </div>
+        </div>
       </div>
       <div>
         {match.owner?.id == AuthStore.authUser?.id &&
           match.status == MatchStatusEnum.DONE && (
             <>
-              <hr className="mb-3" />
-              <div className="mb-3">Match result:</div>
+              <hr className="" />
               <div className="flex justify-between items-center">
-                <SelectScore
-                  team={1}
-                  defaultScore={match.first_team_score}
-                  matchId={match.id}
-                />
-                <SelectScore
-                  team={2}
-                  defaultScore={match.second_team_score}
-                  matchId={match.id}
-                />
+                <div className="w-[48%] flex justify-end">
+                  <div className="w-[70px] mt-3 mr-2">
+                    <SelectScore
+                      team={1}
+                      defaultScore={match.first_team_score}
+                      matchId={match.id}
+                    />
+                  </div>
+                </div>
+                <div className="w-[1px] h-[60px] bg-fg"></div>
+
+                <div className="w-[50%] ">
+                  <div className="w-[70px] mt-3 ml-2">
+                    <SelectScore
+                      team={2}
+                      defaultScore={match.second_team_score}
+                      matchId={match.id}
+                    />
+                  </div>
+                </div>
               </div>
             </>
           )}
-        {match.owner?.id != AuthStore.authUser?.id &&
-          match.status == MatchStatusEnum.DONE && (
+        {match.owner?.id == AuthStore.authUser?.id &&
+          match.status == MatchStatusEnum.EXPECTATION && (
             <>
-              <hr className="mb-3" />
+              <hr />
               <div className="flex justify-between items-center">
-                <div className="text-[24px]">{match.first_team_score}</div>
-                <div className="text-[24px]">{match.second_team_score}</div>
+                <div className="w-[48%] flex justify-end">
+                  <div className="w-[70px] mt-3 mr-2">
+                    <div className="text-[24px]  text-end">
+                      {match.first_team_score}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[1px] h-[60px] bg-fg"></div>
+
+                <div className="w-[50%] ">
+                  <div className="w-[70px] mt-3 ml-2">
+                    <div className="text-[24px]">{match.second_team_score}</div>
+                  </div>
+                </div>
               </div>
-              <ChangeLvl matchId={match.id} />
+              {/* <ChangeLvl matchId={match.id} /> */}
             </>
           )}
       </div>
