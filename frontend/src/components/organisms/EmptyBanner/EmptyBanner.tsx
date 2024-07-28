@@ -1,6 +1,8 @@
 import { useAnimation } from "@hooks/useAnimation";
 import React from "react";
 
+import EmptyIcon from "@assets/EmptyIcon.svg?react";
+
 interface IEmptyBannerProps {
   text?: string;
   icon?: React.ReactNode;
@@ -8,7 +10,7 @@ interface IEmptyBannerProps {
 
 export const EmptyBanner: React.FC<IEmptyBannerProps> = ({
   text = "Empty",
-  icon,
+  icon = <EmptyIcon />,
 }) => {
   const container = useAnimation("/EmptyAnimation.json");
   return (

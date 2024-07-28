@@ -50,6 +50,10 @@ class BlankService:
             u = await user.values()
             user_from_db = await User.get_or_none(id=u['id'])
             user_numver = await self._get_user_number(match_id, user_from_db)
+            if user_numver > 10:
+                user_numver = 10
+            if user_numver < 0:
+                user_numver = 0
             if user_numver != 0:
                 user_from_db.lvl = await self.get_blank_change_lvl(
                     match_id,
