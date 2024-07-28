@@ -5,6 +5,10 @@ import classNames from "classnames";
 import AddUserStore from "@store/addUserInMatch";
 import FriendStore from "@store/friends";
 import { IUser } from "@schemas/user";
+import UserPhoto from "@molecules/account/UserPhoto";
+import user from "@store/user";
+
+import CloseIcon from "@assets/CloseIcon.svg?react";
 
 interface IAddUserInMatchPanelProps {
   matchId: number;
@@ -30,16 +34,35 @@ const AddUserInMatchPanel: React.FC<IAddUserInMatchPanelProps> = observer(
             className="absolute right-[40px] top-[40px]"
             onClick={() => AddUserStore.toggleIsOpen()}
           >
-            X
+            <CloseIcon stroke="#fff" />
           </div>
-          {AddUserStore.index}
-          <div onClick={() => selectUser("-1")}>None</div>
+          <div
+            onClick={() => selectUser("-1")}
+            className="flex bg-bg p-3 rounded-2xl items-center mt-5"
+          >
+            <div className="w-[72px] h-[72px]">
+              <div className="w-[72px] h-[72px] border-2 border-highlight text-highlight rounded-full border-dashed flex justify-center items-center">
+                +
+              </div>
+            </div>
+            <div>
+              <div className="text-[18px] ml-3">Empty</div>
+            </div>
+          </div>
           {FriendStore.friends.map((item) => (
             <div
               onClick={() => selectUser(item.telegram_user_id)}
               key={item.id}
+              className="flex bg-bg p-3 rounded-2xl mt-5 items-center"
             >
-              {item.username}
+              <div className="w-[72px] h-[72px]">
+                <UserPhoto avatar={item.avatar} lvl={item.lvl} />
+              </div>
+              <div>
+                <div className="text-[24px] ml-3">{item.username}</div>
+                <div className="text-[14px] ml-3">{item.first_name}</div>
+                <div className="text-[14px] ml-3">{item.last_name}</div>
+              </div>
             </div>
           ))}
         </div>

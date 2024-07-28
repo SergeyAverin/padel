@@ -41,7 +41,7 @@ export const Tag: React.FC<ITagProps> = ({
       {text}
       {!isAdd && (
         <div onClick={removeTag} className="ml-3">
-          <CloseIcon />
+          <CloseIcon stroke="#000" />
         </div>
       )}
       {isAdd && (
