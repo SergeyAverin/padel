@@ -69,7 +69,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
                 options={[
                   { value: MatchStatusEnum.DONE, label: "Done" },
                   { value: MatchStatusEnum.EXPECTATION, label: "Expectation" },
-                  { value: MatchStatusEnum.PLAYED, label: "Played" },
+                  // { value: MatchStatusEnum.PLAYED, label: "Played" },
                 ]}
               />
             </div>
@@ -107,7 +107,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       </div>
       <div>
         {match.owner?.id == AuthStore.authUser?.id &&
-          match.status == MatchStatusEnum.DONE && (
+          selectedOption.value == MatchStatusEnum.DONE && (
             <>
               <hr className="" />
               <div className="flex justify-between items-center">
@@ -134,8 +134,8 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               </div>
             </>
           )}
-        {match.owner?.id == AuthStore.authUser?.id &&
-          match.status == MatchStatusEnum.EXPECTATION && (
+        {match.owner?.id != AuthStore.authUser?.id &&
+          selectedOption.value == MatchStatusEnum.DONE && (
             <>
               <hr />
               <div className="flex justify-between items-center">
