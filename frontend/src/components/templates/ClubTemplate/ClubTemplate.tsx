@@ -17,6 +17,8 @@ import ClubMatches from "@organisms/clubs/ClubMatches";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import AuthStore from "@store/auth";
 import { shortenString } from "@utils/shoringString";
+import Bookmark from "@molecules/clubs/Bookmark";
+import club from "@store/club";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [
@@ -41,11 +43,14 @@ export const ClubTemplate: React.FC = observer(() => {
           <Heading variant={HeadingVariant.H1}>
             {shortenString(ClubStore.openedClub?.name, 24)}
           </Heading>
-          <div className="flex w-full  items-center">
-            <AddressIcon />
-            <div className="text-[12px] font-medium ml-3">
-              {shortenString(ClubStore.openedClub?.address, 54)}
+          <div className="flex justify-between">
+            <div className="flex w-full  items-center">
+              <AddressIcon />
+              <div className="text-[12px] font-medium ml-3">
+                {shortenString(ClubStore.openedClub?.address, 54)}
+              </div>
             </div>
+            <Bookmark clubId={ClubStore.openedClub.id} />
           </div>
 
           <Link to={`/edit/club/${ClubStore.openedClub.id}`}>
