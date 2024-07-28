@@ -8,19 +8,22 @@ import { IMatch } from "@schemas/match";
 import AddUserInMatch from "@store/addUserInMatch";
 import { shortenString } from "@utils/shoringString";
 import UserPhoto from "@molecules/account/UserPhoto";
+import AddUserInMatchLocal from "@store/addUserInMatchLocal";
 
 interface IUserInMatchProps {
   user: IUser;
   match: IMatch;
   index: number;
+  userStore: AddUserInMatchLocal;
 }
 
 export const UserInMatch: React.FC<IUserInMatchProps> = ({
   user,
   match,
   index,
+  userStore,
 }) => {
-  const onClick = useAddUserInMatch(match, index);
+  const onClick = useAddUserInMatch(match, index, userStore);
 
   return (
     <>

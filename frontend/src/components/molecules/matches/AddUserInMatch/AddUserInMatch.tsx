@@ -6,13 +6,15 @@ import React from "react";
 interface IAddUserInMatchProps {
   match: IMatch;
   index: number;
+  userStore: AddUserInMatchLocal;
 }
 
 export const AddUserInMatch: React.FC<IAddUserInMatchProps> = ({
   match,
   index,
+  userStore,
 }) => {
-  const onClick = useAddUserInMatch(match, index, true);
+  const onClick = useAddUserInMatch(match, index, userStore, true);
   return (
     <>
       <div className="flex items-center" onClick={onClick}>

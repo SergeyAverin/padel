@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Select from "@atoms/Select";
 
 import AddUserInMatchPanel from "../AddUserInMatchPanel";
@@ -12,6 +12,8 @@ import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
 import ChangeLvl from "@molecules/matches/ChangeLvl";
 import { shortenString } from "@utils/shoringString";
+import AddUserInMatchLocal from "@store/addUserInMatchLocal";
+import { observer, useLocalStore } from "mobx-react-lite";
 
 interface Option {
   value: string;
@@ -166,18 +168,25 @@ interface IUserInMatchWrapperProps {
   match: IMatch;
 }
 
-const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = ({
-  user,
-  index,
-  match,
-}) => {
-  return (
-    <>
-      {user ? (
-        <UserInMatch user={user} index={index} match={match} />
-      ) : (
-        <AddUserInMatch index={index} match={match} />
-      )}
-    </>
-  );
-};
+const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = observer(
+  ({ user, index, match }) => {
+    const userStore = useLocalStore(() => new AddUserInMatchLocal());
+    useEffect(() => {
+      userStore.setUser(user);
+    }, [user]);
+    return (
+      <>
+        {userStore.user ? (
+          <UserInMatch
+            userStore={userStore}
+            user={userStore.user}
+            index={index}
+            match={match}
+          />
+        ) : (
+          <AddUserInMatch index={index} match={match} userStore={userStore} />
+        )}
+      </>
+    );
+  }
+);
