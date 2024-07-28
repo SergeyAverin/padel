@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import UserPhoto from "@molecules/account/UserPhoto";
 import { IUser } from "@schemas/user";
+import { shortenString } from "@utils/shoringString";
 
 interface IUserInfoProps {
   user: IUser;
@@ -21,9 +22,13 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
               <UserPhoto avatar={user.avatar} isProfile={true} lvl={user.lvl} />
             </div>
             <div className="ml-[20px]">
-              <div className="text-[24px] font-bold">{user.username}</div>
+              <div className="text-[24px] font-bold">
+                {shortenString(user.username, 18)}
+              </div>
               <div className="text-[20px] font-medium">
-                {user.first_name} {user.last_name}
+                {shortenString(user.first_name, 20)}
+                <br></br>
+                {shortenString(user.last_name, 20)}
               </div>
               {!isMore && (
                 <div
@@ -71,7 +76,7 @@ export const Info: React.FC<IInfo> = ({ infoKey, infoValue }) => {
   return (
     <div className="text-[8px] mt-[8px] text-ellipsis overflow-hidden w-full">
       <span className="font-bold">{infoKey}:</span>
-      <span className="ml-[5px]">{infoValue}</span>
+      <span className="ml-[5px]">{shortenString(String(infoValue), 30)}</span>
     </div>
   );
 };

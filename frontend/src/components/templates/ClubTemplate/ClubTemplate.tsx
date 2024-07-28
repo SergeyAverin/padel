@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import ClubMatches from "@organisms/clubs/ClubMatches";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import AuthStore from "@store/auth";
+import { shortenString } from "@utils/shoringString";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [
@@ -38,12 +39,12 @@ export const ClubTemplate: React.FC = observer(() => {
       {ClubStore.openedClub ? (
         <div className="p-5">
           <Heading variant={HeadingVariant.H1}>
-            {ClubStore.openedClub?.name}
+            {shortenString(ClubStore.openedClub?.name, 24)}
           </Heading>
           <div className="flex w-full  items-center">
             <AddressIcon />
             <div className="text-[12px] font-medium ml-3">
-              {ClubStore.openedClub?.address}
+              {shortenString(ClubStore.openedClub?.address, 54)}
             </div>
           </div>
 

@@ -8,6 +8,7 @@ import UnFriend from "@molecules/friends/UnFriend";
 import AddTag from "@molecules/friends/AddTag";
 import TagStore from "@store/tags";
 import { ITag } from "@schemas/tags";
+import { shortenString } from "@utils/shoringString";
 
 interface IFriendCardProps {
   user: IUser;
@@ -57,9 +58,13 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
               <UserPhoto lvl={user.lvl} avatar={user.avatar} />
 
               <div className="ml-5">
-                <div className="text-[16px] font-bold">{user.username}</div>
+                <div className="text-[16px] font-bold">
+                  {shortenString(user.username, 17)}
+                </div>
                 <div className="text-[16px] font-medium">
-                  {user.first_name} {user.last_name}
+                  {shortenString(user.first_name, 17)}
+                  <br />
+                  {shortenString(user.last_name, 17)}
                 </div>
               </div>
             </div>

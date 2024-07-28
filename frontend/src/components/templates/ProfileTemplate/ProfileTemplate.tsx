@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
+import {
+  Button,
+  ButtonVariant,
+  Heading,
+  HeadingVariant,
+  Loading,
+} from "@atoms/index";
 import UserInfo from "@organisms/account/UserInfo";
 import UserStats from "@organisms/account/UserStats";
 import PadelInfo from "@organisms/account/PadelInfo";
@@ -15,11 +21,17 @@ import EmptyIcon from "@assets/EmptyIcon.svg?react";
 import { IUser } from "@schemas/user";
 
 export const ProfileTemplate: React.FC = observer(() => {
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (AuthStore.authUser) {
-      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+      setIsLoading(true);
+      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id).then(
+        () => {
+          setIsLoading(false);
+        }
+      );
     }
-  });
+  }, []);
 
   return (
     <div className="p-2">
@@ -48,9 +60,14 @@ export const ProfileTemplate: React.FC = observer(() => {
           <Heading variant={HeadingVariant.H2}>Matches:</Heading>
         </div>
         <div className="pb-[200px]">
-          {MatchStore.matches.length == 0 && (
+          {!isLoading && MatchStore.matches.length == 0 && (
             <div className="mt-[80px]">
               <EmptyBanner text="You have not matches" icon={<EmptyIcon />} />
+            </div>
+          )}
+          {isLoading && (
+            <div>
+              <Loading />
             </div>
           )}
           {MatchStore.matches.map((match) => (

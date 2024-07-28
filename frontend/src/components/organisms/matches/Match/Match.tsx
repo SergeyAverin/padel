@@ -12,6 +12,7 @@ import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
 import club from "@store/club";
 import ChangeLvl from "@molecules/matches/ChangeLvl";
+import { shortenString } from "@utils/shoringString";
 
 interface Option {
   value: string;
@@ -82,10 +83,12 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       </div>
       <div className="mt-2">
         <div className="font-light text-[14px]">
-          Address: {match.club?.address}
+          Address: {shortenString(match.club?.address, 40)}
         </div>
         <div className="font-light text-[14px]">
-          <Link to={`/clubs/${match.club?.id}`}>Club: {match.club?.name}</Link>
+          <Link to={`/clubs/${match.club?.id}`} className="text-highlight">
+            Club: {shortenString(match.club?.name, 30)}
+          </Link>
         </div>
       </div>
       {/* Users in match  */}
