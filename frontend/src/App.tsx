@@ -86,8 +86,8 @@ const App = observer(() => {
                       </>
                     )}
                     <MainRouter />
+                    <TutorialPortal />
                   </BrowserRouter>
-                  <TutorialPortal />
                 </DndProvider>
               </div>
             </>

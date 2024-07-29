@@ -3,6 +3,7 @@ import TagStore from "@store/tags";
 import TrashIcon from "@assets/TrashIcon.svg?react";
 import CloseIcon from "@assets/CloseIcon.svg?react";
 import AddTag from "@assets/AddTagIcon.svg?react";
+import { shortenString } from "@utils/shoringString";
 
 interface ITagProps {
   text: string;
@@ -38,7 +39,7 @@ export const Tag: React.FC<ITagProps> = ({
         </div>
       )}
 
-      {text}
+      {shortenString(text, 10)}
       {!isAdd && (
         <div onClick={removeTag} className="ml-3">
           <CloseIcon stroke="#000" />

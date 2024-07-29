@@ -6,6 +6,7 @@ import SelectPosition from "@organisms/account/SelectPosition";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import UserStore from "@store/user";
+import EditProfileForm from "@organisms/account/EditProfileForm";
 
 interface ISlideProps {
   title: string;
@@ -67,6 +68,13 @@ export const Tutorial: React.FC = () => {
       <div className="flex justify-center">
         <div className="w-[280px text-center]">
           <SelectPosition />
+        </div>
+      </div>
+    </div>,
+    <div>
+      <div className="">
+        <div className="text-center">
+          <EditProfileForm />
         </div>
       </div>
     </div>,
