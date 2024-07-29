@@ -39,7 +39,7 @@ export const AddTag: React.FC<IAddTagProps> = observer(({ userId }) => {
             </div>
             <CreateTag />
           </div>
-          <div className="mt-5 flex flex-wrap">
+          <div className="mt-5  grid gap-2  grid-cols-2">
             {TagsStore.tags.map((tag) => (
               <div className="mr-1 " key={tag.id}>
                 <Tag text={tag.name} isAdd={true} id={tag.id} userId={userId} />

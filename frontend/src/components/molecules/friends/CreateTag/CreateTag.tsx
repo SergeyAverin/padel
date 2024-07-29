@@ -17,7 +17,11 @@ export const CreateTag: React.FC = () => {
   };
   return (
     <form onSubmit={onSubmit} className="flex items-center">
-      <input value={value} onChange={onChange} className="bg-bg" />
+      <input
+        value={value}
+        onChange={onChange}
+        className="bg-primary border-b-2 border-grey"
+      />
       <button>
         <DoneIcon />
       </button>

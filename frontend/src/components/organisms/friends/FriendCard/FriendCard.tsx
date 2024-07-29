@@ -72,7 +72,7 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
               <UnFriend friendId={user.telegram_user_id} />
             </div>
           </div>
-          <div className="mt-5 flex items-center flex-wrap">
+          <div className="mt-5 grid gap-2  grid-cols-3">
             {TagStore.friendsWithTags.has(user.telegram_user_id) &&
               TagStore.friendsWithTags
                 .get(user.telegram_user_id)
