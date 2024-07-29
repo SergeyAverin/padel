@@ -11,7 +11,11 @@ interface Option {
   label: string;
 }
 export const SelectDate: React.FC = observer(() => {
-  const [selectedDate, setSelectedDate] = useState<Option>(null);
+  const dates = getNext14Days().map((item) => ({
+    label: item,
+    value: item,
+  }));
+  const [selectedDate, setSelectedDate] = useState<Option>(dates[0]);
 
   const handleChangeDateOption = (option: Option) => {
     if (option) {
@@ -37,10 +41,7 @@ export const SelectDate: React.FC = observer(() => {
           <Select
             defaultValue={selectedDate}
             onChange={handleChangeDateOption}
-            options={getNext14Days().map((item) => ({
-              label: item,
-              value: item,
-            }))}
+            options={dates}
             placeholder="Select date"
           />
         </>

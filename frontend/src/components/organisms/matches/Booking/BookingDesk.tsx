@@ -1,5 +1,5 @@
-import { extractTime, getHoursInRange } from "@utils/timeUtils";
-import React, { useEffect, useState } from "react";
+import { getHoursInRange } from "@utils/timeUtils";
+import React from "react";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";

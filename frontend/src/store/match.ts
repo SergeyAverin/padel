@@ -8,7 +8,7 @@ import {
   changeStatus,
   changeScore,
 } from "@dal/match";
-import { IMatch, MatchStatusEnum } from "@schemas/match";
+import { IMatch } from "@schemas/match";
 import AuthStore from "@store/auth";
 
 class MatchStore {

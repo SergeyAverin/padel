@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 
 import MatchStore from "@store/match";
 import { Heading, HeadingVariant, Spinner } from "@atoms/index";
-import Match from "@organisms/matches/Match";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import Tabs from "@molecules/Tabs";
 import MatchUser from "@organisms/matches/MatchUser";

@@ -14,7 +14,7 @@ interface Option {
 
 export const SelectCourt: React.FC = observer(() => {
   const [courtsOptions, setCourtsOptions] = useState<Array<Option>>([]);
-  const [selectedCourt, setSelectedCourt] = useState<Option>(null);
+  const [selectedCourt, setSelectedCourt] = useState<Option>(courtsOptions[0]);
 
   useEffect(() => {
     const options = CourtStore.courts.map((item) => ({

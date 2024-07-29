@@ -1,4 +1,3 @@
-import { Heading, HeadingVariant } from "@atoms/index";
 import Tabs from "@molecules/Tabs";
 import DeleteClubForm from "@organisms/clubs/DeleteClubForm";
 import EditClubPhotos from "@organisms/clubs/EditClubPhotos";

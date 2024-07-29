@@ -2,7 +2,6 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import { Hand, IUser, Position } from "@schemas/user";
-import UserStore from "@store/user";
 
 import LeftHandIcon from "@assets/LeftHandIcon.svg?react";
 import RightHandIcon from "@assets/RightHandIcon.svg?react";

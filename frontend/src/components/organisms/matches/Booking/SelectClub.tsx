@@ -11,7 +11,12 @@ interface Option {
 }
 
 export const SelectClub: React.FC = observer(() => {
-  const [selectedClub, setSelectedClub] = useState<Option>(null);
+  const [selectedClub, setSelectedClub] = useState<Option>(
+    CourtStore.clubCanCreateMatch.map((club) => ({
+      label: club.name,
+      value: String(club.id),
+    }))[0]
+  );
   useEffect(() => {
     CourtStore.getClubCanCreateMatch();
   }, []);

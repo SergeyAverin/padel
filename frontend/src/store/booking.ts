@@ -5,7 +5,7 @@ import { extractTime, getHoursInRange } from "@utils/timeUtils";
 import { makeAutoObservable } from "mobx";
 
 class AuthStore {
-  selectedTimePoint: null | object = null;
+  selectedTimePoint: null | { court: number } = null;
   startAt: string = "00:00";
   endAt: string = "00:00";
   selectedClubId: null | string = null;
@@ -82,7 +82,11 @@ class AuthStore {
     this.endAt = endAt;
   }
 
-  async selectTimePoint(selectedTimePoint: object) {
+  async selectTimePoint(selectedTimePoint: {
+    court: number;
+    timeEnd: number;
+    timeStart: number;
+  }) {
     if (
       this.selectedTimePoint == null ||
       this.selectedTimePoint.court != selectedTimePoint.court

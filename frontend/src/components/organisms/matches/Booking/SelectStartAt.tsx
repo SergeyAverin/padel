@@ -1,9 +1,5 @@
 import { Label } from "@atoms/index";
-import {
-  addOneAndHalfHours,
-  getHoursInRange,
-  parseTime,
-} from "@utils/timeUtils";
+import { addOneAndHalfHours, getHoursInRange } from "@utils/timeUtils";
 import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
 import BookingStore from "@store/booking";
@@ -14,9 +10,11 @@ interface Option {
   label: string;
 }
 export const SelectStartAt: React.FC = observer(() => {
-  const [selectedStartOption, setSelectedStartOption] = useState<Option>(null);
   const timeRange = getHoursInRange("08:00", "18:00");
   const options = timeRange.map((time) => ({ value: time, label: time }));
+  const [selectedStartOption, setSelectedStartOption] = useState<Option>(
+    options[0]
+  );
 
   const handleChangeStartOption = (option: Option) => {
     if (option) {

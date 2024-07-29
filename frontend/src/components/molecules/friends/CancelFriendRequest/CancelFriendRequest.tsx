@@ -10,9 +10,8 @@ interface ICancelFriendRequestProps {
 
 export const CancelFriendRequest: React.FC<ICancelFriendRequestProps> = ({
   requestId,
-  userId,
 }) => {
-  const onAccept = useCancelFriendRequest(requestId, userId);
+  const onAccept = useCancelFriendRequest(requestId);
   return (
     <Button variant={ButtonVariant.OUTLINED} onClick={onAccept}>
       Cancel

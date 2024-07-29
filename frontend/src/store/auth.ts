@@ -23,7 +23,11 @@ class AuthStore {
     this.isLogin = true;
   }
   async acceptUser() {
-    this.authUser = await getUserInfo(Telegram.WebApp.initDataUnsafe.user.id);
+    if (Telegram.WebApp.initDataUnsafe.user) {
+      this.authUser = await getUserInfo(
+        String(Telegram.WebApp.initDataUnsafe.user.id)
+      );
+    }
     if (this.authUser) {
       ClubFilterStore.changeCity(this.authUser.city);
     }

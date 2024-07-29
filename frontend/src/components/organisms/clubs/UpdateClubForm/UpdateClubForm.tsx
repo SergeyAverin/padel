@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import { config, FormDataI, getInitState } from "./updateClubConfig";
-import { Button, ButtonVariant, Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Input } from "@atoms/index";
 import ClubStore from "@store/club";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 export const UpdateClubForm: React.FC = observer(() => {
@@ -17,7 +17,12 @@ export const UpdateClubForm: React.FC = observer(() => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (ClubStore.openedClub) {
-      await ClubStore.updateClub(ClubStore.openedClub.id, formValue);
+      await ClubStore.updateClub(ClubStore.openedClub.id, {
+        address: formValue.address,
+        city: formValue.city,
+        name: formValue.name,
+        registration_address: "",
+      });
       navigate(`/clubs/${ClubStore.openedClub.id}`);
     }
   };

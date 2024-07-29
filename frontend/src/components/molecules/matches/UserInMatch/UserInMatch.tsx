@@ -1,13 +1,9 @@
-import React, { useReducer, useRef } from "react";
+import React from "react";
 
-import TestPhoto from "@assets/TestPhoto.png";
-import { useDrag } from "react-dnd";
 import { IUser } from "@schemas/user";
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
-import AddUserInMatch from "@store/addUserInMatch";
 import { shortenString } from "@utils/shoringString";
-import UserPhoto from "@molecules/account/UserPhoto";
 import AddUserInMatchLocal from "@store/addUserInMatchLocal";
 
 interface IUserInMatchProps {

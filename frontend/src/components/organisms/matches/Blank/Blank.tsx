@@ -1,4 +1,4 @@
-import { Button, ButtonVariant, Heading, HeadingVariant } from "@atoms/index";
+import { Button, ButtonVariant } from "@atoms/index";
 import SelectUserLvl from "@molecules/matches/SelectUserLvl";
 import { IMatch } from "@schemas/match";
 import Match from "@organisms/matches/Match";

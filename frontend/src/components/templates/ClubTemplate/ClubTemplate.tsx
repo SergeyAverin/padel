@@ -18,7 +18,6 @@ import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import AuthStore from "@store/auth";
 import { shortenString } from "@utils/shoringString";
 import Bookmark from "@molecules/clubs/Bookmark";
-import club from "@store/club";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [

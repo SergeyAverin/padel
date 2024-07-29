@@ -1,12 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
 import AddUserStore from "@store/addUserInMatch";
 import FriendStore from "@store/friends";
-import { IUser } from "@schemas/user";
 import UserPhoto from "@molecules/account/UserPhoto";
-import user from "@store/user";
 
 import CloseIcon from "@assets/CloseIcon.svg?react";
 

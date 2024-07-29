@@ -3,13 +3,16 @@ import React from "react";
 import UserPhoto from "@molecules/account/UserPhoto";
 import AcceptFriendRequest from "@molecules/friends/AcceptFriendRequest";
 import RejectFriendRequest from "@molecules/friends/RejectFriendRequest";
+import { IUser } from "@schemas/user";
 
 interface IFriendRequestProps {
   friendRequestId: number;
+  user: IUser;
 }
 
 export const FriendRequestInner: React.FC<IFriendRequestProps> = ({
   friendRequestId,
+  user,
 }) => {
   return (
     <div className="bg-primary p-5 rounded-2xl">

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { config, FormDataI, initialState } from "./createClubFormConfig";
-import { Button, ButtonVariant, Input, Label } from "@atoms/index";
+import { Button, ButtonVariant, Input } from "@atoms/index";
 import ClubStore from "@store/club";
 
 export const CreateClubForm: React.FC = observer(() => {
@@ -16,7 +16,12 @@ export const CreateClubForm: React.FC = observer(() => {
   const navigate = useNavigate();
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const newClubId = await ClubStore.createClub(formValue);
+    const newClubId = await ClubStore.createClub({
+      address: formValue.address,
+      city: formValue.city,
+      name: formValue.name,
+      registration_address: "",
+    });
     navigate(`/clubs/${newClubId}`);
   };
   return (
