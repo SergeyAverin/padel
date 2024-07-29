@@ -12,8 +12,8 @@ export const useAddUserInMatch = (
   const addUser = () => {
     AddUserInMatchStore.toggleIsOpen();
   };
-  const joinInMatch = () => {
-    alert(match.id);
+  const joinInMatch = (index: number) => {
+    AddUserInMatchStore.joinInMatch(index);
   };
   const onClick = () => {
     AddUserInMatchStore.setIndex(index, match.id, userStore);
@@ -21,7 +21,10 @@ export const useAddUserInMatch = (
       addUser();
     } else {
       if (isFree) {
-        joinInMatch();
+        joinInMatch(index);
+      } else {
+        if (userStore.user && userStore.user.id == AuthStore.authUser?.id)
+          AddUserInMatchStore.leveMatch(index);
       }
     }
   };

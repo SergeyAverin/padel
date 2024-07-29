@@ -1,7 +1,7 @@
 import { addUserInMatch } from "@dal/addUserInMatch";
 import { IUser } from "@schemas/user";
 import { makeAutoObservable } from "mobx";
-import React from "react";
+import AuthStore from "@store/auth";
 import AddUserInMatchLocal from "./addUserInMatchLocal";
 import { getUserInfo } from "@dal/user";
 
@@ -30,11 +30,30 @@ class AddUserInMatchStore {
   async setUser(user_id: string) {
     await addUserInMatch(this.matchId, user_id, this.index);
     if (this.userStore) {
-      console.log(user_id);
       if (user_id != "-1") {
         const user = await getUserInfo(user_id);
         this.userStore.setUser(user);
       } else {
+        this.userStore.setUser(null);
+      }
+    }
+  }
+  async joinInMatch(index: number) {
+    if (AuthStore.authUser) {
+      await addUserInMatch(
+        this.matchId,
+        AuthStore.authUser.telegram_user_id,
+        index
+      );
+      if (this.userStore) {
+        this.userStore.setUser(AuthStore.authUser);
+      }
+    }
+  }
+  async leveMatch(index: number) {
+    if (AuthStore.authUser) {
+      await addUserInMatch(this.matchId, "-1", index);
+      if (this.userStore) {
         this.userStore.setUser(null);
       }
     }
