@@ -35,3 +35,24 @@ export function extractTime(input: string): string {
   // Формируем строку в формате 'HH:MM'
   return `${hours}:${minutes}`;
 }
+
+export function addOneAndHalfHours(time: string): string {
+  // Разделяем строку по символу ':'
+  const parts = time.split(":");
+
+  // Преобразуем каждую часть в число
+  const hours = parseInt(parts[0], 10);
+  const minutes = parseInt(parts[1], 10);
+
+  // Преобразуем время в общее количество минут
+  const totalMinutes = hours * 60 + minutes + 90; // Добавляем 90 минут
+
+  // Вычисляем новые часы и минуты
+  const newHours = Math.floor(totalMinutes / 60) % 24; // Учитываем 24-часовой формат
+  const newMinutes = totalMinutes % 60;
+
+  // Форматируем результат в строку "часы:минуты"
+  return `${newHours.toString().padStart(2, "0")}:${newMinutes
+    .toString()
+    .padStart(2, "0")}`;
+}

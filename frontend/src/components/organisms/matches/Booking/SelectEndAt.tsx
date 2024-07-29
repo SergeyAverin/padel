@@ -1,6 +1,6 @@
 import { Label } from "@atoms/index";
 import { getHoursInRange } from "@utils/timeUtils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
@@ -10,7 +10,17 @@ interface Option {
   label: string;
 }
 export const SelectEndAt: React.FC = observer(() => {
-  const [selectedEndOption, setSelectedEndOption] = useState<Option>(null);
+  const [selectedEndOption, setSelectedEndOption] = useState<Option>({
+    label: String(BookingStore.endAt),
+    value: String(BookingStore.endAt),
+  });
+  useEffect(() => {
+    setSelectedEndOption({
+      label: String(BookingStore.endAt),
+      value: String(BookingStore.endAt),
+    });
+  }, [BookingStore.endAt]);
+
   const timeRange = getHoursInRange("08:00", "18:00");
   const options = timeRange.map((time) => ({ value: time, label: time }));
 

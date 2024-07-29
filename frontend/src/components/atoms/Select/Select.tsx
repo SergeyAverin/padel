@@ -26,6 +26,9 @@ export const Select: React.FC<ISelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(defaultValue);
+  useEffect(() => {
+    setSelected(defaultValue);
+  }, [defaultValue]);
   const onItemClick = (item: Option) => {
     setSelected(item);
     if (onChange) {
