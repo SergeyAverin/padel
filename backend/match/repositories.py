@@ -41,6 +41,7 @@ class MatchRepository:
             "selected_court": match.selected_court,
             "first_team_score": match.first_team_score,
             "second_team_score": match.second_team_score,
+            "match_lvl": f'{str(match.owner.lvl-0.5)}-{str(match.owner.lvl+0.5)}',
             "id": match.id
         }
 
