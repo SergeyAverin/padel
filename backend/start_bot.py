@@ -40,7 +40,9 @@ async def command_start_handler(message: Message) -> None:
             hand=Hand.RIGHT_HAND,
             position=Position.BOTH,
             country='',
-            city=''
+            city='',
+            avatar='',
+            lvl=1
         )
         url = f'https://{api_setting.api_domain}/api/v1.0/user/'
         data = user_data.model_dump()

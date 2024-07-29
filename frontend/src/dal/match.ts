@@ -90,7 +90,8 @@ export const createMatch = async (
   startAt: Date,
   endAt: Date,
   clubId: number,
-  courtId: number
+  courtId: number,
+  match_lvl: string
 ) => {
   const res = await axios.post(
     API_URL + `/matches`,
@@ -99,6 +100,7 @@ export const createMatch = async (
       end_at: endAt,
       club_id: clubId,
       court_id: courtId,
+      match_lvl: match_lvl,
     },
     {
       headers: {

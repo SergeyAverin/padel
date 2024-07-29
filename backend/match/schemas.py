@@ -14,6 +14,7 @@ class MatchDTO(BaseModel):
     start_at: datetime
     end_at: datetime
     created_at: datetime
+    match_lvl: str
 
     # owner: User
 
@@ -22,4 +23,5 @@ class MatchCreateDTO(BaseModel):
     start_at: datetime
     end_at: datetime
     club_id: int
+    match_lvl: str
     court_id: int

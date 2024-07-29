@@ -16,7 +16,8 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
     "hand" VARCHAR(10) NOT NULL  DEFAULT 'right_hand',
     "status" VARCHAR(11) NOT NULL  DEFAULT 'player',
     "city" VARCHAR(255) NOT NULL  DEFAULT '',
-    "country" VARCHAR(255) NOT NULL  DEFAULT ''
+    "country" VARCHAR(255) NOT NULL  DEFAULT '',
+    "lvl" INT NOT NULL  DEFAULT 0
 );
 COMMENT ON COLUMN "user"."position" IS 'LEFT: left\nRIGHT: right\nBOTH: both';
 COMMENT ON COLUMN "user"."hand" IS 'LEFT_HAND: left_hand\nRIGHT_HAND: right_hand';
@@ -56,7 +57,10 @@ CREATE TABLE IF NOT EXISTS "match" (
     "status" VARCHAR(11) NOT NULL  DEFAULT 'expectation',
     "start_at" TIMESTAMPTZ NOT NULL,
     "end_at" TIMESTAMPTZ NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-07-21T07:32:55.485361',
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-07-29T09:32:06.150561',
+    "match_lvl" VARCHAR(255) NOT NULL  DEFAULT '1-2',
+    "first_team_score" INT NOT NULL  DEFAULT 0,
+    "second_team_score" INT NOT NULL  DEFAULT 0,
     "club_id" INT NOT NULL REFERENCES "club" ("id") ON DELETE CASCADE,
     "owner_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
     "selected_court_id" INT NOT NULL REFERENCES "court" ("id") ON DELETE CASCADE,
@@ -66,22 +70,31 @@ CREATE TABLE IF NOT EXISTS "match" (
     "user_4_id" INT REFERENCES "user" ("id") ON DELETE CASCADE
 );
 COMMENT ON COLUMN "match"."status" IS 'EXPECTATION: expectation\nPLAYED: played\nDONE: done';
+CREATE TABLE IF NOT EXISTS "blank" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "user_1" INT NOT NULL  DEFAULT 0,
+    "user_2" INT NOT NULL  DEFAULT 0,
+    "user_3" INT NOT NULL  DEFAULT 0,
+    "user_4" INT NOT NULL  DEFAULT 0,
+    "match_id" INT NOT NULL REFERENCES "match" ("id") ON DELETE CASCADE,
+    "owner_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
+);
 CREATE TABLE IF NOT EXISTS "aerich" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "version" VARCHAR(255) NOT NULL,
     "app" VARCHAR(100) NOT NULL,
     "content" JSONB NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "user_friends" (
-    "user_rel_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
-    "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
-);
-CREATE UNIQUE INDEX IF NOT EXISTS "uidx_user_friend_user_re_d51527" ON "user_friends" ("user_rel_id", "user_id");
 CREATE TABLE IF NOT EXISTS "clubs_bookmarks" (
     "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
     "club_id" INT NOT NULL REFERENCES "club" ("id") ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX IF NOT EXISTS "uidx_clubs_bookm_user_id_c3e073" ON "clubs_bookmarks" ("user_id", "club_id");
+CREATE TABLE IF NOT EXISTS "user_friends" (
+    "user_rel_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
+    "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "uidx_user_friend_user_re_d51527" ON "user_friends" ("user_rel_id", "user_id");
 CREATE TABLE IF NOT EXISTS "friends_with_tag" (
     "tag_id" INT NOT NULL REFERENCES "tag" ("id") ON DELETE CASCADE,
     "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE

@@ -23,6 +23,7 @@ class MatchRepository:
         match.created_at = datetime.now()
         match.owner = user
         match.selected_court = court
+        match.match_lvl = match_create_data.match_lvl
         await match.save()
         return match
 
@@ -41,7 +42,7 @@ class MatchRepository:
             "selected_court": match.selected_court,
             "first_team_score": match.first_team_score,
             "second_team_score": match.second_team_score,
-            "match_lvl": f'{str(match.owner.lvl-0.5)}-{str(match.owner.lvl+0.5)}',
+            "match_lvl": match.match_lvl,
             "id": match.id
         }
 

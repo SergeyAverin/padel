@@ -1,5 +1,4 @@
 import { createMatch, getMatchByDay } from "@dal/match";
-import { IClub } from "@schemas/club";
 import { IMatch } from "@schemas/match";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { extractTime, getHoursInRange } from "@utils/timeUtils";
@@ -22,6 +21,8 @@ class AuthStore {
     endAt: number;
     courtIndex: number;
   }> = [];
+  lvlMin: string = "0";
+  lvlMax: string = "0";
 
   constructor() {
     makeAutoObservable(this);
@@ -96,13 +97,25 @@ class AuthStore {
     this.matches = await getMatchByDay(clubId, day, month);
     this.setBreakPoints();
   }
+  async setLvlMin(lvl: string) {
+    this.lvlMin = lvl;
+  }
+  async setLvlMax(lvl: string) {
+    this.lvlMax = lvl;
+  }
   async createMatch(
     startAt: Date,
     endAt: Date,
     clubId: number,
     courtId: number
   ) {
-    const res = await createMatch(startAt, endAt, clubId, courtId);
+    const res = await createMatch(
+      startAt,
+      endAt,
+      clubId,
+      courtId,
+      `${this.lvlMin}-${this.lvlMax}`
+    );
     this.matches.push(res);
     if (this.selectedData) {
       const d = extractDayAndMonth(this.selectedData);

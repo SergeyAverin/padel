@@ -30,6 +30,8 @@ class Match(Model):
     user_4 = fields.ForeignKeyField(
         'models.User', related_name='user_4', default=None, null=True)
 
+    match_lvl = fields.CharField(max_length=255, default='1-2')
+
     first_team_score = fields.IntField(default=0)
     second_team_score = fields.IntField(default=0)
 

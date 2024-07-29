@@ -9,6 +9,7 @@ import BookingStore from "@store/booking";
 import { Button, ButtonVariant } from "@atoms/index";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { useNavigate } from "react-router-dom";
+import { SelectMatchLvl } from "./SelectMatchLvl";
 
 export const Booking: React.FC = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export const Booking: React.FC = () => {
       <SelectEndAt />
       <SelectCourt />
       <BookingDesk />
+      <SelectMatchLvl />
       <div className="mt-5">
         <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
           Create
