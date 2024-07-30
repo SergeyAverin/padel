@@ -5,6 +5,7 @@ import classNames from "classnames";
 import ClubStore from "@store/club";
 import ClubFilterStore from "@store/clubFilter";
 import { Button, ButtonVariant, Input } from "@atoms/index";
+import CloseIcon from "@assets/CloseIcon.svg?react";
 
 const ClubFiltersComponent: React.FC = observer(() => {
   const onSubmit = async (e: React.FormEvent) => {
@@ -29,7 +30,7 @@ const ClubFiltersComponent: React.FC = observer(() => {
           className="absolute right-[40px] top-[40px]"
           onClick={() => ClubFilterStore.toggleIsOpen()}
         >
-          X
+          <CloseIcon stroke="#fff" />
         </div>
         <form className=" mx-auto" onSubmit={onSubmit}>
           <div className="mt-5">
