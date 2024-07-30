@@ -24,7 +24,8 @@ class UserRepository:
             age=user_data.age,
             hand=user_data.hand.value,
             status=UserStatus.PLAYER.value,
-            position=user_data.position.value
+            position=user_data.position.value,
+            lvl=1
         )
         await user.save()
         return user
