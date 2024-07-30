@@ -55,7 +55,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               <br />
               {new Date(match.start_at).getHours()}
               {":"}
-              {new Date(match.start_at).getMinutes()}
+              {String(new Date(match.start_at).getMinutes()).padStart(2, "0")}
               {"-"}
               {new Date(match.end_at).getHours()}
               {":"}
