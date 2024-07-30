@@ -1,12 +1,27 @@
 import React, { ChangeEvent, useState } from "react";
 
 import { config, FormDataI, getInitState } from "./updateClubConfig";
-import { Button, ButtonVariant, Input } from "@atoms/index";
+import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import ClubStore from "@store/club";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-
+import { getHoursInRange } from "@utils/timeUtils";
+import Select from "@atoms/Select";
+interface Option {
+  value: string;
+  label: string;
+}
 export const UpdateClubForm: React.FC = observer(() => {
+  const [selectedOpeningOption, setSelectedOpeningOption] = useState<Option>({
+    label: "08:00",
+    value: "08:00",
+  });
+  const [selectedClosingOption, setSelectedClosingOption] = useState<Option>({
+    label: "23:00",
+    value: "23:00",
+  });
+  const timeRange = getHoursInRange("08:00", "18:00");
+  const options = timeRange.map((time) => ({ value: time, label: time }));
   const [formValue, setFormValue] = useState<FormDataI>(getInitState());
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as keyof FormDataI;
@@ -22,6 +37,8 @@ export const UpdateClubForm: React.FC = observer(() => {
         city: formValue.city,
         name: formValue.name,
         registration_address: "",
+        opening: selectedOpeningOption.value,
+        closing: selectedClosingOption.value,
       });
       navigate(`/clubs/${ClubStore.openedClub.id}`);
     }
@@ -43,6 +60,26 @@ export const UpdateClubForm: React.FC = observer(() => {
             </div>
           </div>
         ))}
+        <div className="mt-5">
+          <Label>Club opening at:</Label>
+
+          <Select
+            options={options}
+            defaultValue={selectedOpeningOption}
+            onChange={(option) => setSelectedOpeningOption(option)}
+            placeholder="Club opening at"
+          />
+        </div>
+        <div className="mt-5">
+          <Label>Club closing at:</Label>
+
+          <Select
+            options={options}
+            defaultValue={selectedClosingOption}
+            onChange={(option) => setSelectedClosingOption(option)}
+            placeholder="Club closing+ at"
+          />
+        </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Apply

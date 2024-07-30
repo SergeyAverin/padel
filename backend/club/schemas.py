@@ -6,3 +6,5 @@ class CreateClubDTO(BaseModel):
     address: str
     # registration_address: str
     city: str
+    opening: str
+    closing: str

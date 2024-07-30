@@ -6,6 +6,8 @@ export interface IClub {
   city: string;
   avatar: string;
   owner_id: number;
+  opening: string;
+  closing: string;
 }
 
 export interface ICreateClub {
@@ -13,6 +15,8 @@ export interface ICreateClub {
   address: string;
   registration_address: string;
   city: string;
+  opening: string;
+  closing: string;
 }
 
 export interface IClubPhoto {

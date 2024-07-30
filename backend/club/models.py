@@ -14,7 +14,8 @@ class Club(Model):
 
     owner = fields.ForeignKeyField('models.User', related_name='club_owner')
 
-    # photos
+    opening = fields.CharField(max_length=6, default="08:00")
+    closing = fields.CharField(max_length=6, default="23:00")
 
 
 class ClubPhoto(Model):

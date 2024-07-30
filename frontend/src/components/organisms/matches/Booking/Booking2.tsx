@@ -39,7 +39,7 @@ export const Booking: React.FC = () => {
         Number(BookingStore.selectedClubId),
         Number(BookingStore.selectedCourt)
       );
-      navigate("/matches");
+      // navigate("/matches");
     }
   };
   return (

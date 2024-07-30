@@ -113,20 +113,42 @@ class AuthStore {
     clubId: number,
     courtId: number
   ) {
-    const res = await createMatch(
-      startAt,
-      endAt,
-      clubId,
-      courtId,
-      `${this.lvlMin}-${this.lvlMax}`
-    );
-    this.matches.push(res);
-    if (this.selectedData) {
-      const d = extractDayAndMonth(this.selectedData);
-      this.selectStartAt("00:00");
-      this.selectEndAt("00:00");
-      this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+    console.log("dsfs");
+    const timeRange = getHoursInRange("08:00", "18:00");
+    const getIndexInTimeRange = (time: string) => {
+      return timeRange.indexOf(time);
+    };
+    if (courtId) {
+      const court = courtId + 2;
+      const filteredBreakPoints = this.breakPoints.filter((item) => {
+        console.log(String(item.courtIndex));
+        console.log(court);
+        return item.courtIndex == court;
+      });
+
+      filteredBreakPoints.forEach((item) => {
+        console.log(getIndexInTimeRange(this.startAt) + 2);
+        console.log(getIndexInTimeRange(this.startAt) + 2);
+        console.log();
+        console.log(item.startAt);
+        console.log(item.endAt);
+      });
     }
+    // const res = await createMatch(
+    //   startAt,
+    //   endAt,
+    //   clubId,
+    //   courtId,
+    //   `${this.lvlMin}-${this.lvlMax}`
+    // );
+    // this.matches.push(res);
+
+    // if (this.selectedData) {
+    //   const d = extractDayAndMonth(this.selectedData);
+    //   this.selectStartAt("00:00");
+    //   this.selectEndAt("00:00");
+    //   this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+    // }
   }
 }
 

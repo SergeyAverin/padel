@@ -18,6 +18,7 @@ import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import AuthStore from "@store/auth";
 import { shortenString } from "@utils/shoringString";
 import Bookmark from "@molecules/clubs/Bookmark";
+import ClockIcon from "@assets/ClockIcon.svg?react";
 
 export const ClubTemplate: React.FC = observer(() => {
   const tabs = [
@@ -50,6 +51,14 @@ export const ClubTemplate: React.FC = observer(() => {
               </div>
             </div>
             <Bookmark clubId={ClubStore.openedClub.id} />
+          </div>
+          <div className="flex justify-between">
+            <div className="flex w-full  items-center">
+              <ClockIcon />
+              <div className="text-[12px] font-medium ml-3">
+                {ClubStore.openedClub.opening}-{ClubStore.openedClub.closing}
+              </div>
+            </div>
           </div>
 
           <Link to={`/edit/club/${ClubStore.openedClub.id}`}>
