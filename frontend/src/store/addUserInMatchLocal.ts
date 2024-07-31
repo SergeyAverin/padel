@@ -2,12 +2,12 @@ import { IUser } from "@schemas/user";
 import { makeAutoObservable } from "mobx";
 
 class AddUserInMatchLocal {
-  user: IUser | null = null;
+  user: IUser | string | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
-  setUser(user: IUser | null) {
+  setUser(user: IUser | string | null) {
     this.user = user;
   }
 }

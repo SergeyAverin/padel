@@ -20,3 +20,21 @@ export const addUserInMatch = async (
     }
   );
 };
+export const addTestUserInMatch = async (
+  matchId: number,
+  text: string,
+  userIndex: number
+) => {
+  await axiosInstance.put(
+    `${API_URL}/matches/${matchId}`,
+    {
+      text_user: text,
+      user_index: userIndex,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+};

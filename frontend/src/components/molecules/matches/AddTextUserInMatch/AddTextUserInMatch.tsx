@@ -4,14 +4,16 @@ import UserPhoto from "@molecules/account/UserPhoto";
 
 import TestPhoto from "@assets/TestPhoto.png";
 import AddIcon from "@assets/AddTagIcon.svg?react";
+import AddUserStore from "@store/addUserInMatch";
 
 export const AddTextUserInMatch: React.FC = () => {
   const [value, setValue] = useState("");
+  const selectUser = () => {
+    AddUserStore.toggleIsOpen();
+    AddUserStore.setUser(value, true);
+  };
   return (
-    <div
-      // onClick={() => selectUser(item.telegram_user_id)}
-      className="flex bg-bg p-3 rounded-2xl mt-5 items-center"
-    >
+    <div className="flex bg-bg p-3 rounded-2xl mt-5 items-center">
       <div className="w-[72px] h-[72px]">
         <UserPhoto avatar={TestPhoto} />
       </div>
@@ -25,7 +27,7 @@ export const AddTextUserInMatch: React.FC = () => {
         ></input>
         <div className="border-2 p-1 pl-3 rounded-full border-highlight  w-[130px] text-center flex items-center justify-center">
           <AddIcon stroke="#fff" />
-          <div>add user</div>
+          <div onClick={() => selectUser()}>add user</div>
         </div>
       </div>
     </div>

@@ -211,11 +211,15 @@ const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = observer(
   ({ user, index, match, userText }) => {
     const userStore = useLocalStore(() => new AddUserInMatchLocal());
     useEffect(() => {
-      userStore.setUser(user);
+      if (!userText) {
+        userStore.setUser(user);
+      } else {
+        userStore.setUser(userText);
+      }
     }, [user]);
     return (
       <>
-        {userStore.user && !userText && (
+        {typeof userStore.user != "string" && userStore.user && (
           <UserInMatch
             userStore={userStore}
             user={userStore.user}
@@ -223,13 +227,13 @@ const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = observer(
             match={match}
           />
         )}
-        {!userStore.user && !userText && (
+        {typeof userStore.user != "string" && !userStore.user && !userText && (
           <AddUserInMatch index={index} match={match} userStore={userStore} />
         )}
 
-        {userText && (
+        {typeof userStore.user == "string" && (
           <TextUserInMatch
-            text={userText}
+            text={userStore.user}
             index={index}
             match={match}
             userStore={userStore}
