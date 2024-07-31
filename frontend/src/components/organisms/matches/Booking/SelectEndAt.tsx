@@ -11,7 +11,7 @@ interface Option {
 }
 export const SelectEndAt: React.FC = observer(() => {
   const [selectedEndOption, setSelectedEndOption] = useState<Option>({
-    label: String(BookingStore.endAt),
+    label: String(BookingStore.selectClub),
     value: String(BookingStore.endAt),
   });
   useEffect(() => {
@@ -21,8 +21,17 @@ export const SelectEndAt: React.FC = observer(() => {
     });
   }, [BookingStore.endAt]);
 
-  const timeRange = getHoursInRange("08:00", "18:00");
+  const timeRange = getHoursInRange(BookingStore.opening, BookingStore.closing);
   const options = timeRange.map((time) => ({ value: time, label: time }));
+  const [timeRangeOpen, setTimeRangeOpen] = useState(options);
+  useEffect(() => {
+    const timeRange = getHoursInRange(
+      BookingStore.opening,
+      BookingStore.closing
+    );
+    const p = timeRange.map((time) => ({ value: time, label: time }));
+    setTimeRangeOpen(p);
+  }, [BookingStore.opening, BookingStore.closing]);
 
   const handleChangeEndOption = (option: Option) => {
     if (option) {
@@ -37,7 +46,7 @@ export const SelectEndAt: React.FC = observer(() => {
           <Label>Time End</Label>
 
           <Select
-            options={options}
+            options={timeRangeOpen}
             defaultValue={selectedEndOption}
             onChange={handleChangeEndOption}
             placeholder="Select start match"

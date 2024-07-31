@@ -1,4 +1,6 @@
+import { getClubById } from "@dal/club";
 import { createMatch, getMatchByDay } from "@dal/match";
+import { IClub } from "@schemas/club";
 import { IMatch } from "@schemas/match";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { extractTime, getHoursInRange } from "@utils/timeUtils";
@@ -23,6 +25,8 @@ class AuthStore {
   }> = [];
   lvlMin: string = "0";
   lvlMax: string = "0";
+  opening: string = "08:00";
+  closing: string = "23:00";
 
   constructor() {
     makeAutoObservable(this);
@@ -56,6 +60,9 @@ class AuthStore {
 
   async selectClub(club: string) {
     this.selectedClubId = club;
+    const res = await getClubById(club);
+    this.opening = res.opening;
+    this.closing = res.closing;
   }
 
   async setCourtOption(
@@ -134,21 +141,21 @@ class AuthStore {
         console.log(item.endAt);
       });
     }
-    // const res = await createMatch(
-    //   startAt,
-    //   endAt,
-    //   clubId,
-    //   courtId,
-    //   `${this.lvlMin}-${this.lvlMax}`
-    // );
-    // this.matches.push(res);
+    const res = await createMatch(
+      startAt,
+      endAt,
+      clubId,
+      courtId,
+      `${this.lvlMin}-${this.lvlMax}`
+    );
+    this.matches.push(res);
 
-    // if (this.selectedData) {
-    //   const d = extractDayAndMonth(this.selectedData);
-    //   this.selectStartAt("00:00");
-    //   this.selectEndAt("00:00");
-    //   this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
-    // }
+    if (this.selectedData) {
+      const d = extractDayAndMonth(this.selectedData);
+      this.selectStartAt("00:00");
+      this.selectEndAt("00:00");
+      this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+    }
   }
 }
 

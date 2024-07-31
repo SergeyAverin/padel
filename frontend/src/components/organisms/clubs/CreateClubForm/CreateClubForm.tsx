@@ -7,7 +7,6 @@ import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import ClubStore from "@store/club";
 import Select from "@atoms/Select";
 import { getHoursInRange } from "@utils/timeUtils";
-import { set } from "mobx";
 interface Option {
   value: string;
   label: string;

@@ -10,8 +10,18 @@ interface Option {
   label: string;
 }
 export const SelectStartAt: React.FC = observer(() => {
-  const timeRange = getHoursInRange("08:00", "18:00");
+  const timeRange = getHoursInRange(BookingStore.opening, BookingStore.closing);
   const options = timeRange.map((time) => ({ value: time, label: time }));
+  const [timeRangeOpen, setTimeRangeOpen] = useState(options);
+  useEffect(() => {
+    const timeRange = getHoursInRange(
+      BookingStore.opening,
+      BookingStore.closing
+    );
+    const p = timeRange.map((time) => ({ value: time, label: time }));
+    setTimeRangeOpen(p);
+  }, [BookingStore.opening, BookingStore.closing]);
+
   const [selectedStartOption, setSelectedStartOption] = useState<Option>(
     options[0]
   );
@@ -40,7 +50,7 @@ export const SelectStartAt: React.FC = observer(() => {
           <Label>Time start</Label>
 
           <Select
-            options={options}
+            options={timeRangeOpen}
             defaultValue={selectedStartOption}
             onChange={handleChangeStartOption}
             placeholder="Select end match"
