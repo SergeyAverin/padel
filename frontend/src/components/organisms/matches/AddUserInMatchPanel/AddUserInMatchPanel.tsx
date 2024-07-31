@@ -6,6 +6,7 @@ import FriendStore from "@store/friends";
 import UserPhoto from "@molecules/account/UserPhoto";
 
 import CloseIcon from "@assets/CloseIcon.svg?react";
+import AddTextUserInMatch from "@molecules/matches/AddTextUserInMatch";
 
 interface IAddUserInMatchPanelProps {
   matchId: number;
@@ -45,6 +46,9 @@ const AddUserInMatchPanel: React.FC<IAddUserInMatchPanelProps> = observer(
             <div>
               <div className="text-[18px] ml-3">Empty</div>
             </div>
+          </div>
+          <div className="mt-5 mb-5">
+            <AddTextUserInMatch />
           </div>
           {FriendStore.friends.map((item) => (
             <div
