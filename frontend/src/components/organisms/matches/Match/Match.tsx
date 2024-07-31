@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { shortenString } from "@utils/shoringString";
 import AddUserInMatchLocal from "@store/addUserInMatchLocal";
 import { observer, useLocalStore } from "mobx-react-lite";
+import { TextUserInMatch } from "@molecules/matches/TextUserInMatch/TextUserInMatch";
 
 interface Option {
   value: string;
@@ -104,24 +105,36 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           <hr className="mt-5" />
           <div className="flex  justify-around items-start">
             <div className="w-[50%] mt-4 mb-4">
-              <UserInMatchWrapper user={match.user_1} index={1} match={match} />
+              <UserInMatchWrapper
+                user={match.user_1}
+                index={1}
+                match={match}
+                userText={match.text_user_1}
+              />
               <div className="mt-5">
                 <UserInMatchWrapper
                   user={match.user_2}
                   index={2}
                   match={match}
+                  userText={match.text_user_2}
                 />
               </div>
             </div>
 
             <div className="w-[1px] h-[140px] bg-fg"></div>
             <div className="w-[50%] mt-4 mb-4 ml-2">
-              <UserInMatchWrapper user={match.user_3} index={3} match={match} />
+              <UserInMatchWrapper
+                user={match.user_3}
+                index={3}
+                match={match}
+                userText={match.text_user_3}
+              />
               <div className="mt-5">
                 <UserInMatchWrapper
                   user={match.user_4}
                   index={4}
                   match={match}
+                  userText={match.text_user_4}
                 />
               </div>
             </div>
@@ -189,27 +202,38 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
 
 interface IUserInMatchWrapperProps {
   user: IUser | null;
+  userText: string | null;
   index: number;
   match: IMatch;
 }
 
 const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = observer(
-  ({ user, index, match }) => {
+  ({ user, index, match, userText }) => {
     const userStore = useLocalStore(() => new AddUserInMatchLocal());
     useEffect(() => {
       userStore.setUser(user);
     }, [user]);
     return (
       <>
-        {userStore.user ? (
+        {userStore.user && !userText && (
           <UserInMatch
             userStore={userStore}
             user={userStore.user}
             index={index}
             match={match}
           />
-        ) : (
+        )}
+        {!userStore.user && !userText && (
           <AddUserInMatch index={index} match={match} userStore={userStore} />
+        )}
+
+        {userText && (
+          <TextUserInMatch
+            text={userText}
+            index={index}
+            match={match}
+            userStore={userStore}
+          />
         )}
       </>
     );

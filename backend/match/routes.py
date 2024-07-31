@@ -77,22 +77,51 @@ async def change_match_status(
 @match_router.put('/matches/{match_id}')
 async def set_user_in_match(
     match_id: int,
-    user_id: str = Body(),
+    user_id: str | None = Body(default=None),
     user_index: int = Body(),
+    text_user: str | None = Body(default=None),
     user: UserDTO = Depends(get_current_user)
 ):
     match = await match_service.get_match_by_id(match_id)
     added_user = await user_service.get_user_by_telegram_user_id(user_id)
-    if user_index == 1:
-        match.user_1 = added_user
-    elif user_index == 2:
-        match.user_2 = added_user
-    elif user_index == 3:
-        match.user_3 = added_user
-    elif user_index == 4:
-        match.user_4 = added_user
-    elif user_index == -1:
-        match.user_4 = None
+    if not text_user:
+        logger.debug(1)
+        if user_index == 1:
+            logger.debug(added_user)
+            match.user_1 = added_user
+            match.text_user_1 = None
+        elif user_index == 2:
+            match.user_2 = added_user
+            match.text_user_2 = None
+        elif user_index == 3:
+            match.user_3 = added_user
+            match.text_user_3 = None
+        elif user_index == 4:
+            match.user_4 = added_user
+            match.text_user_4 = None
+        elif user_index == -1:
+            match.user_4 = None
+            match.text_user_1 = None
+
+    if text_user:
+        logger.debug(2)
+        if user_index == 1:
+            logger.debug(text_user)
+            match.text_user_1 = text_user
+            match.user_1 = None
+        elif user_index == 2:
+            match.text_user_2 = text_user
+            match.user_2 = None
+        elif user_index == 3:
+            match.text_user_3 = text_user
+            match.user_3 = None
+        elif user_index == 4:
+            match.user_4 = None
+            match.text_user_4 = text_user
+        elif user_index == -1:
+            match.user_4 = None
+            match.text_user_1 = None
+
     await match.save()
     return match
 

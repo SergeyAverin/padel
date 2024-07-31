@@ -15,6 +15,11 @@ export interface IMatch {
   user_2: IUser | null;
   user_3: IUser | null;
   user_4: IUser | null;
+  text_user_1: string | null;
+  text_user_2: string | null;
+  text_user_3: string | null;
+  text_user_4: string | null;
+
   first_team_score: number;
   second_team_score: number;
   match_lvl: string;
