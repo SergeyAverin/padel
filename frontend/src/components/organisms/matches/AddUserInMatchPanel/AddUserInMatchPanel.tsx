@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
 import AddUserStore from "@store/addUserInMatch";
@@ -13,6 +13,9 @@ interface IAddUserInMatchPanelProps {
 }
 const AddUserInMatchPanel: React.FC<IAddUserInMatchPanelProps> = observer(
   () => {
+    useEffect(() => {
+      AddUserStore.getUserForMatch(AddUserStore.matchId);
+    }, [AddUserStore.matchId]);
     const selectUser = (user_id: string) => {
       AddUserStore.toggleIsOpen();
       AddUserStore.setUser(user_id);
@@ -50,7 +53,7 @@ const AddUserInMatchPanel: React.FC<IAddUserInMatchPanelProps> = observer(
           <div className="mt-5 mb-5">
             <AddTextUserInMatch />
           </div>
-          {FriendStore.friends.map((item) => (
+          {AddUserStore.userForMatch.map((item) => (
             <div
               onClick={() => selectUser(item.telegram_user_id)}
               key={item.id}

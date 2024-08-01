@@ -1,4 +1,8 @@
-import { addTestUserInMatch, addUserInMatch } from "@dal/addUserInMatch";
+import {
+  addTestUserInMatch,
+  addUserInMatch,
+  getUserToAddInMatch,
+} from "@dal/addUserInMatch";
 import { IUser } from "@schemas/user";
 import { makeAutoObservable } from "mobx";
 import AuthStore from "@store/auth";
@@ -11,6 +15,7 @@ class AddUserInMatchStore {
   matchId = 0;
   userInMatchRef: IUser | null = null;
   userStore: AddUserInMatchLocal | null = null;
+  userForMatch: Array<IUser> = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -26,6 +31,9 @@ class AddUserInMatchStore {
     this.index = selectedIndex;
     this.matchId = matchId;
     this.userStore = userStore;
+  }
+  async getUserForMatch(matchId: number) {
+    this.userForMatch = await getUserToAddInMatch(matchId);
   }
   async setUser(user_id: string, isTextUser: boolean = false) {
     if (!isTextUser) {

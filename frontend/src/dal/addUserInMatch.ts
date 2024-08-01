@@ -20,6 +20,7 @@ export const addUserInMatch = async (
     }
   );
 };
+
 export const addTestUserInMatch = async (
   matchId: number,
   text: string,
@@ -37,4 +38,17 @@ export const addTestUserInMatch = async (
       },
     }
   );
+};
+
+export const getUserToAddInMatch = async (matchId: number) => {
+  const res = await axiosInstance.get(
+    API_URL + `/matches/${matchId}/users_for_match`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = await res.data;
+  return data;
 };
