@@ -65,7 +65,7 @@ async def get_match(
 
 
 @match_router.put('/matches/{match_id}/score')
-async def change_match_status(
+async def change_match_score(
     match_id: int,
     score: int = Body(),
     team: int = Body(),
@@ -166,3 +166,16 @@ async def get_matches_by_club_bookmarks(
     user: UserDTO = Depends(get_current_user)
 ):
     return await match_service.get_matches_by_club_bookmarks(user_id)
+
+
+@match_router.get('/matches/{match_id}/users_for_match')
+async def get_user_for_match(
+    match_id: int,
+    user: UserDTO = Depends(get_current_user)
+):
+    user_db = await user_service.get_user_by_telegram_user_id(user.telegram_user_id)
+    match = await match_service.get_match_by_id(match_id)
+    if match.is_private:
+        return await match.user_for_match.all()
+    else:
+        return await user_db.friends.all()

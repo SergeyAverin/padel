@@ -26,3 +26,4 @@ class MatchCreateDTO(BaseModel):
     match_lvl: str
     court_id: int
     is_private: bool
+    tag_id: int

@@ -7,6 +7,7 @@ from match.models import Match, StatusEnum
 from match.schemas import MatchCreateDTO
 from club.models import Club, Court
 from account.models import User
+from friends.models import Tag
 from friends.services import friend_service
 from club.services import club_bookmark_service
 
@@ -15,7 +16,13 @@ logger = getLogger()
 
 
 class MatchRepository:
-    async def create_match(self, match_create_data: MatchCreateDTO, club: Club, user: User, court: Court):
+    async def create_match(
+        self,
+        match_create_data: MatchCreateDTO,
+        club: Club,
+        user: User,
+        court: Court
+    ):
         match = Match()
         match.club = club
         match.start_at = match_create_data.start_at
@@ -25,6 +32,11 @@ class MatchRepository:
         match.selected_court = court
         match.match_lvl = match_create_data.match_lvl
         match.is_private = match_create_data.is_private
+        if match.is_private:
+            tag = await Tag.get_or_none(id=match_create_data.tag_id)
+            users_to_match = await tag.friends_with_tag.all()
+            for user_to_match in users_to_match:
+                match.user_for_match.add(user_to_match)
         await match.save()
         return match
 
@@ -95,14 +107,3 @@ class MatchRepository:
     async def get_club_for_match(self, user: User):
         matches = await Club.filter(owner__telegram_user_id=user.telegram_user_id)
         return matches
-
-
-class MatchPlayersRepository:
-    def get_match_players(self):
-        pass
-
-    def add_player_in_match(self):
-        pass
-
-    def remove_player_from_match(self):
-        pass
