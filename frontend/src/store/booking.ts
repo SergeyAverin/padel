@@ -118,7 +118,9 @@ class AuthStore {
     startAt: Date,
     endAt: Date,
     clubId: number,
-    courtId: number
+    courtId: number,
+    isPrivate: boolean,
+    selectedTagId: number | null
   ) {
     console.log("dsfs");
     const timeRange = getHoursInRange("08:00", "18:00");
@@ -146,7 +148,9 @@ class AuthStore {
       endAt,
       clubId,
       courtId,
-      `${this.lvlMin}-${this.lvlMax}`
+      `${this.lvlMin}-${this.lvlMax}`,
+      isPrivate,
+      selectedTagId
     );
     this.matches.push(res);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SelectClub } from "./SelectClub";
 import { SelectDate } from "./SelectDate";
 import { SelectStartAt } from "./SelectStartAt";
@@ -6,10 +6,12 @@ import { SelectEndAt } from "./SelectEndAt";
 import { SelectCourt } from "./SelectCourt";
 import { BookingDesk } from "./BookingDesk";
 import BookingStore from "@store/booking";
-import { Button, ButtonVariant } from "@atoms/index";
+import { Button, ButtonVariant, Label, Toggle } from "@atoms/index";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { SelectMatchLvl } from "./SelectMatchLvl";
+import TagsStore from "@store/tags";
+import Select from "@atoms/Select";
 
 export const Booking: React.FC = () => {
   const navigate = useNavigate();
@@ -37,11 +39,24 @@ export const Booking: React.FC = () => {
         startDate,
         endDate,
         Number(BookingStore.selectedClubId),
-        Number(BookingStore.selectedCourt)
+        Number(BookingStore.selectedCourt),
+        isPrivate,
+        selectedTagId
       );
-      // navigate("/matches");
+      navigate("/matches");
     }
   };
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [tagsOptoin, setTagOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [selectedTagId, setSelectedTagId] = useState<number | null>(null);
+  useEffect(() => {
+    const t = TagsStore.tags.map((tag) => {
+      return { label: tag.name, value: String(tag.id) };
+    });
+    setTagOptions(t);
+  }, [TagsStore.tags]);
   return (
     <form onSubmit={onSubmit}>
       <SelectClub />
@@ -51,6 +66,27 @@ export const Booking: React.FC = () => {
       <SelectCourt />
       <BookingDesk />
       <SelectMatchLvl />
+      <div className="mt-5">
+        <div className="mb-3">
+          <Label>Is private:</Label>
+        </div>
+        <Toggle
+          defaultValue={isPrivate}
+          onChange={(item) => setIsPrivate(item)}
+          isDisable={false}
+        />
+      </div>
+      {isPrivate && (
+        <div className="mt-5">
+          <div className="mb-3">
+            <Label>Select user group how can join in match</Label>
+          </div>
+          <Select
+            options={tagsOptoin}
+            onChange={(i) => setSelectedTagId(Number(i.value))}
+          />
+        </div>
+      )}
       <div className="mt-5">
         <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
           Create

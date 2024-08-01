@@ -90,7 +90,9 @@ export const createMatch = async (
   endAt: Date,
   clubId: number,
   courtId: number,
-  match_lvl: string
+  match_lvl: string,
+  isPrivate: boolean,
+  selectedTagId: number | null
 ) => {
   const res = await axios.post(
     API_URL + `/matches`,
@@ -100,6 +102,8 @@ export const createMatch = async (
       club_id: clubId,
       court_id: courtId,
       match_lvl: match_lvl,
+      is_private: isPrivate,
+      tag_id: selectedTagId ? selectedTagId : 0,
     },
     {
       headers: {
