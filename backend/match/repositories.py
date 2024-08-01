@@ -24,6 +24,7 @@ class MatchRepository:
         match.owner = user
         match.selected_court = court
         match.match_lvl = match_create_data.match_lvl
+        match.is_private = match_create_data.is_private
         await match.save()
         return match
 

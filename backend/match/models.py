@@ -40,7 +40,9 @@ class Match(Model):
     first_team_score = fields.IntField(default=0)
     second_team_score = fields.IntField(default=0)
 
+    is_private = fields.BooleanField(default=False)
+    user_for_match = fields.ManyToManyField(
+        'models.User', on_delete=fields.CASCADE, through="user_for_match")
+
     selected_court = fields.ForeignKeyField(
         'models.Court', related_name='selected_court')
-    # players
-    # result

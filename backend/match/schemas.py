@@ -25,3 +25,4 @@ class MatchCreateDTO(BaseModel):
     club_id: int
     match_lvl: str
     court_id: int
+    is_private: bool
