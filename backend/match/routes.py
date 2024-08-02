@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Body, Depends, HTTPException
 
 from match.schemas import MatchCreateDTO
 from match.services import match_service
@@ -84,6 +84,10 @@ async def set_user_in_match(
 ):
     match = await match_service.get_match_by_id(match_id)
     added_user = await user_service.get_user_by_telegram_user_id(user_id)
+    if match.is_private == True:
+        if not added_user in await match.user_for_match.all():
+            raise HTTPException(
+                status_code=403, detail="User not in user_for_match.")
     if not text_user:
         logger.debug(1)
         if user_index == 1:

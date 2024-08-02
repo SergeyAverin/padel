@@ -60,7 +60,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               {"-"}
               {new Date(match.end_at).getHours()}
               {":"}
-              {new Date(match.end_at).getMinutes()}
+              {String(new Date(match.end_at).getMinutes()).padStart(2, "0")}
             </div>
             <div className="font-light text-[14px]">
               {permission ? (

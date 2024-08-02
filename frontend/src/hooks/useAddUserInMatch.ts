@@ -20,7 +20,7 @@ export const useAddUserInMatch = (
     if (AuthStore.authUser && match.owner?.id == AuthStore.authUser.id) {
       addUser();
     } else {
-      if (AuthStore.authUser) {
+      if (AuthStore.authUser && match.status != "done") {
         if (
           AuthStore.authUser.lvl < parseRange(match.match_lvl)[0] ||
           AuthStore.authUser.lvl > parseRange(match.match_lvl)[1]
@@ -30,7 +30,11 @@ export const useAddUserInMatch = (
           if (isFree) {
             joinInMatch(index);
           } else {
-            if (userStore.user && userStore.user.id == AuthStore.authUser?.id)
+            if (
+              userStore.user &&
+              typeof userStore.user != "string" &&
+              userStore.user.id == AuthStore.authUser?.id
+            )
               AddUserInMatchStore.leveMatch(index);
           }
         }
