@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
+import { Info } from "./Info";
 import UserPhoto from "@molecules/account/UserPhoto";
 import { IUser } from "@schemas/user";
 import { shortenString } from "@utils/shoringString";
@@ -11,7 +12,6 @@ interface IUserInfoProps {
 
 export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
   const [isMore, setIsMore] = useState(false);
-  // useLoadUserInfo();
 
   return (
     <>
@@ -67,16 +67,3 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
     </>
   );
 });
-interface IInfo {
-  infoKey: string;
-  infoValue: string | number;
-}
-
-export const Info: React.FC<IInfo> = ({ infoKey, infoValue }) => {
-  return (
-    <div className="text-[8px] mt-[8px] text-ellipsis overflow-hidden w-full">
-      <span className="font-bold">{infoKey}:</span>
-      <span className="ml-[5px]">{shortenString(String(infoValue), 30)}</span>
-    </div>
-  );
-};

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
 import { TabsLink } from "@atoms/index";
+import { useOpenTab } from "./hooks/useOpenTab";
 
 export interface Tab {
   to: string;
@@ -14,11 +15,7 @@ interface ITabsProps {
 }
 
 export const Tabs: React.FC<ITabsProps> = observer(({ subTab }) => {
-  const [activeTab, setActiveTab] = useState(subTab[0]);
-  const onChangeTab = (tab: Tab) => {
-    setActiveTab(tab);
-    navigator.vibrate(30);
-  };
+  const [activeTab, onChangeTab] = useOpenTab(subTab);
 
   return (
     <>

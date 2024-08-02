@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import NavigationButton from "@molecules/NavigationButton";
+
+import { useCloseOnClickOutItem } from "./hooks/useCloseOnClickOutItem";
+import AuthStore from "@store/auth";
 
 import ClubIcon from "@assets/ClubsIcon.svg?react";
 import MatchIcon from "@assets/MatchIcon.svg?react";
 import FriendsIcon from "@assets/FriendsIcon.svg?react";
 import ProfileIcon from "@assets/ProfileIcon.svg?react";
 import AddIcon from "@assets/AddIcon.svg?react";
-import { Link } from "react-router-dom";
-import AuthStore from "@store/auth";
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,21 +18,13 @@ export const Navigation: React.FC = () => {
     setIsOpen((prev) => !prev);
     navigator.vibrate(30);
   };
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [ref]);
+
+  const ref = useCloseOnClickOutItem(setIsOpen);
+
   const permission =
     AuthStore.authUser?.status == "club_admin" ||
     AuthStore.authUser?.status == "super_admin";
+
   return (
     <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full shadow-md">
       <div className="w-full flex justify-around items-end">

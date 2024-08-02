@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 import style from "./Select.module.sass";
 
+import { Option } from "./selectOption";
+import { useCloseOnClickOutItem } from "./hooks/useCloseOnClickOutItem";
+
 import ArrowIcon from "@assets/ArrowIcon.svg?react";
 
-interface Option {
-  value: string;
-  label: string;
-}
 interface ISelectProps {
   options?: Array<Option>;
   defaultValue?: Option | null;
@@ -36,18 +35,7 @@ export const Select: React.FC<ISelectProps> = ({
     }
     setIsOpen(false);
   };
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [ref]);
+  const ref = useCloseOnClickOutItem(setIsOpen);
   return (
     <div className="relative" ref={ref}>
       <div

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import TagStore from "@store/tags";
+import { useCreateTag } from "./hooks/useCreateTag";
+
 import DoneIcon from "@assets/DoneIcon.svg?react";
 
 export const CreateTag: React.FC = () => {
@@ -8,13 +9,8 @@ export const CreateTag: React.FC = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
-  const onSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (value != "") {
-      TagStore.createTag(value);
-    }
-    setValue("");
-  };
+  const onSubmit = useCreateTag(value, setValue);
+
   return (
     <form onSubmit={onSubmit} className="flex items-center">
       <input
