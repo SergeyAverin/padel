@@ -1,7 +1,7 @@
 from datetime import datetime
 from logging import getLogger
 
-# from tortoise.expressions import Q
+from tortoise.expressions import Q
 
 from match.models import Match, StatusEnum
 from match.schemas import MatchCreateDTO
@@ -83,7 +83,13 @@ class MatchRepository:
 
     async def get_match_by_friends(self, user_id: str):
         friends = await friend_service.get_user_friends(user_id)
-        matches = await Match.filter(owner__id__in=[friend.id for friend in friends]).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        matches = await Match.filter(
+            Q(owner__id__in=[friend.id for friend in friends]) |
+            Q(user_1__id__in=[friend.id for friend in friends]) |
+            Q(user_2__id__in=[friend.id for friend in friends]) |
+            Q(user_3__id__in=[friend.id for friend in friends]) |
+            Q(user_4__id__in=[friend.id for friend in friends])
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
 
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)

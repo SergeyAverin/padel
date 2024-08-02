@@ -19,6 +19,7 @@ import TagStore from "@store/tags";
 import Blank from "@organisms/matches/Blank";
 import BlankStore from "@store/blank";
 import { Heading, HeadingVariant, Loading } from "@atoms/index";
+import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 const App = observer(() => {
   useEffect(() => {
@@ -85,6 +86,8 @@ const App = observer(() => {
                         </div>
                       </>
                     )}
+                    <AddUserPanel />
+
                     <MainRouter />
                     <TutorialPortal />
                   </BrowserRouter>

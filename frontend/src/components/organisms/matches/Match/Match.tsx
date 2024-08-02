@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
 
-import AddUserInMatchPanel from "../AddUserInMatchPanel";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
 import { IUser } from "@schemas/user";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
@@ -45,7 +44,6 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
     <div className="bg-primary p-5 rounded-2xl">
       {match.club && (
         <>
-          <AddUserInMatchPanel matchId={match.id} />
           <div className="flex justify-between">
             <div className="font-light text-[14px]">
               {new Date(match.start_at).getDate()}
