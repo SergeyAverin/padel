@@ -1,13 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-import MatchStore from "@store/match";
 import { Heading, HeadingVariant, Spinner } from "@atoms/index";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import Tabs from "@molecules/Tabs";
+import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import MatchUser from "@organisms/matches/MatchUser";
 import { MatchFriend } from "@organisms/matches/MatchFriend/MatchFriend";
 import MatchClub from "@organisms/matches/MatchClub";
+import MatchStore from "@store/match";
 
 export const MatchTemplate: React.FC = observer(() => {
   const tabs = [
@@ -37,11 +37,13 @@ export const MatchTemplate: React.FC = observer(() => {
           MatchStore.matchesFromBookmarks.length == 0 &&
           MatchStore.matches.length == 0 ? (
             <>
+              {/* Show if user have not matches */}
               <Heading variant={HeadingVariant.H2}>Matches not found</Heading>
               <EmptyBanner />
             </>
           ) : (
             <>
+              {/* Show matches */}
               <Tabs subTab={tabs} />
             </>
           )}

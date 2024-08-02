@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
-import UserStore from "@store/user";
-import UserTemplate from "@templates/UserTemplate";
+import { useLoadUser } from "./hooks/useLoadUser";
 import { Spinner } from "@atoms/index";
+import UserTemplate from "@templates/UserTemplate";
+import UserStore from "@store/user";
 
 export const UserPage: React.FC = observer(() => {
-  const { userId } = useParams();
-  useEffect(() => {
-    if (userId) {
-      UserStore.getUserInfo(userId);
-    }
-    return () => {
-      UserStore.user = null;
-    };
-  }, [userId]);
+  useLoadUser();
   return <>{UserStore.user ? <UserTemplate /> : <Spinner />}</>;
 });
