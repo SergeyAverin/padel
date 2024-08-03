@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import UserStore from "@store/user";
 import EditProfileForm from "@organisms/account/EditProfileForm";
+import TutorialEditProfielForm from "@organisms/account/TutorialEditProfielForm";
 
 interface ISlideProps {
   title: string;
@@ -21,7 +22,7 @@ export const Slide: React.FC<ISlideProps> = ({ animation, text, title }) => {
         <div ref={container}></div>
       </div>
       <div className="text-center text-[24px]">{title}</div>
-      <div className="text-center">{text}</div>
+      <div className="text-center  w-[75%] mx-auto">{text}</div>
     </div>
   );
 };
@@ -53,10 +54,40 @@ const onChange = (item: { label: string; value: string }) => {
 export const Tutorial: React.FC = () => {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const next = () => {
+    if (step + 1 <= sliders.length) {
+      setStep((prev) => prev + 1);
+    } else {
+      localStorage.setItem("isOpen", "false");
+      setIsOpen(false);
+    }
+  };
+  const prev = () => {
+    if (step - 1 != 0) {
+      setStep((prev) => prev - 1);
+    }
+  };
   const sliders = [
-    <Slide animation="/EmptyAnimation.json" title="Title" text="1" />,
-    <Slide animation="/EmptyAnimation.json" title="Title" text="2" />,
-    <Slide animation="/EmptyAnimation.json" title="Title" text="3" />,
+    <Slide
+      animation="/FindFriendsAnimation.json"
+      title="Find frinds"
+      text="Look for padel playmates who are equal in strength to you."
+    />,
+    <Slide
+      animation="/ScoreAnimation.json"
+      title="Lvl"
+      text="All users have lvl, which shows their current level of play in padel."
+    />,
+    <Slide
+      animation="/WinAnimation.json"
+      title="Clubs"
+      text="Search for padel clubs in your city. And you see the matches of this club."
+    />,
+    <Slide
+      animation="/MedalAnimation.json"
+      title="Profile"
+      text="All users can see your match history and information about what position and what hand you play in padel."
+    />,
     <div>
       <div className="flex justify-center">
         <div className="w-[280px text-center]">
@@ -74,32 +105,16 @@ export const Tutorial: React.FC = () => {
     <div>
       <div className="">
         <div className="text-center">
-          <EditProfileForm />
+          <TutorialEditProfielForm next={next} prev={prev} />
         </div>
       </div>
     </div>,
     <div>
       <div className="flex justify-center">
         <div className="w-full p-5">
-          <Heading variant={HeadingVariant.H1}>Select lvl</Heading>
-          <div className="w-[300px] m-auto mb-5">
-            <Select
-              defaultValue={{ label: "1 - initiation", value: "1" }}
-              onChange={onChange}
-              options={[
-                { label: "1 - initiation", value: "1" },
-                { label: "2 - initiation", value: "2" },
-                { label: "3 - initiation", value: "3" },
-                { label: "4 - initiation", value: "4" },
-                { label: "5 - initiation", value: "5" },
-                { label: "6 - initiation", value: "6" },
-                { label: "7 - initiation", value: "7" },
-                { label: "8 - initiation", value: "8" },
-                { label: "9 - initiation", value: "9" },
-                { label: "10 - initiation", value: "10" },
-              ]}
-            />
-          </div>
+          <Heading variant={HeadingVariant.H1}>
+            How would you rate your level of padel play?
+          </Heading>
           <div className="overflow-y-scroll h-[300px] ">
             <LvlDescription lvl="1" title="initiation">
               I am interested in the rules I'm starting to play
@@ -120,23 +135,28 @@ export const Tutorial: React.FC = () => {
               starting to play with the windows
             </LvlDescription>
           </div>
+          <div className="w-[300px] m-auto mt-5">
+            <Select
+              defaultValue={{ label: "1 - initiation", value: "1" }}
+              onChange={onChange}
+              options={[
+                { label: "1 - initiation", value: "1" },
+                { label: "2 - initiation", value: "2" },
+                { label: "3 - initiation", value: "3" },
+                { label: "4 - initiation", value: "4" },
+                { label: "5 - initiation", value: "5" },
+                { label: "6 - initiation", value: "6" },
+                { label: "7 - initiation", value: "7" },
+                { label: "8 - initiation", value: "8" },
+                { label: "9 - initiation", value: "9" },
+                { label: "10 - initiation", value: "10" },
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>,
   ];
-  const next = () => {
-    if (step + 1 <= sliders.length) {
-      setStep((prev) => prev + 1);
-    } else {
-      localStorage.setItem("isOpen", "false");
-      setIsOpen(false);
-    }
-  };
-  const prev = () => {
-    if (step - 1 != 0) {
-      setStep((prev) => prev - 1);
-    }
-  };
 
   useEffect(() => {
     if (localStorage.getItem("isOpen") == null) {
@@ -154,20 +174,26 @@ export const Tutorial: React.FC = () => {
       {isOpen && (
         <div className="fixed left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
           {sliders[step - 1]}
-          <div className="flex justify-center items-center">
-            <div>
-              <div className="w-[280px] mt-5">
-                <Button variant={ButtonVariant.FULL_HIGHLIGHT} onClick={next}>
-                  Continue
-                </Button>
-                <div className="mt-5">
-                  <Button variant={ButtonVariant.OUTLINED} onClick={prev}>
-                    Back
+          {step != 7 && (
+            <div className="flex justify-center items-center">
+              <div>
+                <div className="w-[280px] mt-5">
+                  <Button
+                    type="submit"
+                    variant={ButtonVariant.FULL_HIGHLIGHT}
+                    onClick={() => next()}
+                  >
+                    Continue
                   </Button>
+                  <div className="mt-5">
+                    <Button variant={ButtonVariant.OUTLINED} onClick={prev}>
+                      Back
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>

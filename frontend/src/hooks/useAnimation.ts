@@ -17,6 +17,6 @@ export const useAnimation = (animationPath: string) => {
         animation.destroy(); // Clean up animation when component unmounts
       };
     }
-  }, []);
+  }, [animationPath]);
   return container;
 };
