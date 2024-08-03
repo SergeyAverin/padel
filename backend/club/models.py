@@ -9,6 +9,7 @@ class Club(Model):
     address = fields.CharField(max_length=130)
     registration_address = fields.CharField(max_length=130)
     city = fields.CharField(max_length=130)
+    country = fields.CharField(max_length=130)
     avatar = fields.CharField(
         max_length=255, default=f"http://{api_setting.api_domain}/api/v1.0/club/image/default.png")
 

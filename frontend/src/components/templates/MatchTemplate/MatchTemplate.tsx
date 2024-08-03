@@ -36,11 +36,13 @@ export const MatchTemplate: React.FC = observer(() => {
           {MatchStore.matchesFromFriends.length == 0 &&
           MatchStore.matchesFromBookmarks.length == 0 &&
           MatchStore.matches.length == 0 ? (
-            <>
+            <div className="flex flex-col items-center justify-center">
               {/* Show if user have not matches */}
               <Heading variant={HeadingVariant.H2}>Matches not found</Heading>
-              <EmptyBanner />
-            </>
+              <div className="mt-5">
+                <EmptyBanner />
+              </div>
+            </div>
           ) : (
             <>
               {/* Show matches */}
