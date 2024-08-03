@@ -8,3 +8,4 @@ class CreateClubDTO(BaseModel):
     city: str
     opening: str
     closing: str
+    country: str

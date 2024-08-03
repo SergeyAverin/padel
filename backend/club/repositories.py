@@ -23,6 +23,7 @@ class ClubRepository:
         club.owner = owner
         club.opening = club_data.opening
         club.closing = club_data.closing
+        club.country = club_data.country
         await club.save()
         return club
 

@@ -1,12 +1,14 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { City, Country } from "country-state-city";
 
 import { config, FormDataI, initialState } from "./createClubFormConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import ClubStore from "@store/club";
 import Select from "@atoms/Select";
 import { getHoursInRange } from "@utils/timeUtils";
+import { generateRandomString } from "@utils/codeGenerate";
 interface Option {
   value: string;
   label: string;
@@ -29,19 +31,45 @@ export const CreateClubForm: React.FC = observer(() => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value }));
   };
+
+  const [selectedCountry, setSelectedCountry] = useState<null | Option>(null);
+  const countryOptions = Country.getAllCountries().map((country) => ({
+    label: country.name,
+    value: country.isoCode,
+  }));
+  const [selectedCity, setSelectedCity] = useState<null | Option>(null);
+  const [cityOption, setCityOptions] = useState<Array<Option>>([]);
+  useEffect(() => {
+    if (selectedCountry) {
+      const options = City.getCitiesOfCountry(selectedCountry.value);
+      if (options) {
+        const mapedOptions = options.map((city) => {
+          return {
+            label: city.name,
+            value: generateRandomString(10),
+          };
+        });
+        setCityOptions(mapedOptions);
+      }
+    }
+  }, [selectedCountry]);
   const navigate = useNavigate();
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const newClubId = await ClubStore.createClub({
-      address: formValue.address,
-      city: formValue.city,
-      name: formValue.name,
-      registration_address: "",
-      opening: selectedOpeningOption.value,
-      closing: selectedClosingOption.value,
-    });
-    navigate(`/clubs/${newClubId}`);
+    if (selectedCity && selectedCountry) {
+      const newClubId = await ClubStore.createClub({
+        address: formValue.address,
+        city: selectedCity.label,
+        country: selectedCountry.label,
+        name: formValue.name,
+        registration_address: "",
+        opening: selectedOpeningOption.value,
+        closing: selectedClosingOption.value,
+      });
+      navigate(`/clubs/${newClubId}`);
+    }
   };
+
   return (
     <form onSubmit={onSubmit}>
       <div className="p-5 bg-primary rounded-xl">
@@ -79,6 +107,24 @@ export const CreateClubForm: React.FC = observer(() => {
             placeholder="Club closing+ at"
           />
         </div>
+        <div className="mt-[18px] text-left">
+          <Label>Select country</Label>
+          <Select
+            options={countryOptions}
+            defaultValue={selectedCountry}
+            onChange={(option) => setSelectedCountry(option)}
+          />
+        </div>
+        {selectedCountry && (
+          <div className="mt-[18px] text-left">
+            <Label>Select city</Label>
+            <Select
+              options={cityOption}
+              defaultValue={selectedCity}
+              onChange={(option) => setSelectedCity(option)}
+            />
+          </div>
+        )}
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Apply
