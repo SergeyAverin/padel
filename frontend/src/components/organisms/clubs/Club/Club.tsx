@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Button, ButtonVariant, Loading } from "@atoms/index";
+import { Button, ButtonVariant } from "@atoms/index";
 import Bookmark from "@molecules/clubs/Bookmark";
 import { IClub } from "@schemas/club";
 import ClubStore from "@store/club";
