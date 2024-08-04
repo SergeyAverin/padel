@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import CourtStore from "@store/courts";
 import ClubStore from "@store/club";
 import { Button, ButtonVariant, Input } from "@atoms/index";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const Courts: React.FC = observer(() => {
   const deleteCourt = (courtId: number) => {
@@ -19,6 +20,10 @@ export const Courts: React.FC = observer(() => {
   };
   return (
     <div>
+      <HelpBanner isInNavigation={true} localStorageKey="help_add_court">
+        Here you can add the court of your club so that users can add matches in
+        the discarded court
+      </HelpBanner>
       <form onSubmit={createCourt}>
         <div className="mt-5">
           <Input

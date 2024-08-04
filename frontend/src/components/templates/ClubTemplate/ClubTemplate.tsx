@@ -27,12 +27,20 @@ export const ClubTemplate: React.FC = observer(() => {
     {
       to: "#match",
       text: "match",
-      content: <ClubMatches />,
+      content: (
+        <div className="pt-[50px]">
+          <ClubMatches />
+        </div>
+      ),
     },
     {
       to: "#photos",
       text: "Photos",
-      content: <ClubPhotos />,
+      content: (
+        <div className="pt-[50px]">
+          <ClubPhotos />
+        </div>
+      ),
     },
   ];
   const permission =
@@ -41,10 +49,12 @@ export const ClubTemplate: React.FC = observer(() => {
   return (
     <>
       {ClubStore.openedClub ? (
-        <div className="p-5">
-          <Heading variant={HeadingVariant.H1}>
-            {shortenString(ClubStore.openedClub?.name, 24)}
-          </Heading>
+        <div className="p-5 pb-[350px]">
+          <div className="mb-5">
+            <Heading variant={HeadingVariant.H1}>
+              {shortenString(ClubStore.openedClub?.name, 24)}
+            </Heading>
+          </div>
           <div className="flex justify-between">
             <div>
               <div className="flex w-full  items-center">

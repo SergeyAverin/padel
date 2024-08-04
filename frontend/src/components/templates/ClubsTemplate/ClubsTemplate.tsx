@@ -39,7 +39,7 @@ export const ClubsTemplate: React.FC = observer(() => {
             {ClubStore.bookmarkedClubs.length > 0 && (
               <>
                 <div className="mt-5">
-                  <Heading variant={HeadingVariant.H2}>
+                  <Heading variant={HeadingVariant.H3}>
                     Bookmarked clubs
                   </Heading>
                 </div>
@@ -51,7 +51,7 @@ export const ClubsTemplate: React.FC = observer(() => {
               </>
             )}
             <div className="mt-5">
-              <Heading variant={HeadingVariant.H2}>Search clubs</Heading>
+              <Heading variant={HeadingVariant.H3}>Search clubs</Heading>
             </div>
             <div className="p-5">
               <div className="flex items-center">

@@ -70,60 +70,68 @@ export const Booking: React.FC = observer(() => {
       setIsShowDesk(false);
     }
   }, [CourtStore.courts]);
+  const [step, setStep] = useState(1);
   return (
     <form onSubmit={onSubmit}>
-      <SelectClub />
-      <SelectDate />
-      <SelectStartAt />
-      <SelectEndAt />
+      {step == 1 && <SelectClub />}
+      {step == 2 && <SelectDate />}
+      {step == 3 && (
+        <>
+          <SelectStartAt />
+          <SelectEndAt />
 
-      {isShowDesk ? (
-        <>
-          <SelectCourt />
-          <BookingDesk />
-        </>
-      ) : (
-        <>
-          {BookingStore.selectedClubId && (
-            <div className="text-error mt-5">Club have not courts</div>
+          {isShowDesk ? (
+            <>
+              <SelectCourt />
+              <BookingDesk />
+            </>
+          ) : (
+            <>
+              {BookingStore.selectedClubId && (
+                <div className="text-error mt-5">Club have not courts</div>
+              )}
+            </>
           )}
         </>
       )}
-
-      <SelectMatchLvl />
-      <div className="mt-5">
-        <div className="mb-3">
-          <Label>Is private:</Label>
-        </div>
-        <Toggle
-          defaultValue={isPrivate}
-          onChange={(item) => setIsPrivate(item)}
-          isDisable={false}
-        />
-      </div>
-      {isPrivate && (
-        <div className="mt-5">
-          <div className="mb-3">
-            <Label>Select user group how can join in match</Label>
-          </div>
-          <Select
-            options={tagsOptoin}
-            onChange={(i) => setSelectedTagId(Number(i.value))}
-          />
-        </div>
-      )}
-      {BookingStore.startAt &&
-        BookingStore.endAt &&
-        BookingStore.selectedCourt &&
-        BookingStore.selectedData && (
-          <>
-            <div className="mt-5">
-              <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
-                Create
-              </Button>
+      {step == 4 && <SelectMatchLvl />}
+      {step == 5 && (
+        <>
+          <div className="mt-5">
+            <div className="mb-3">
+              <Label>Is private:</Label>
             </div>
-          </>
-        )}
+            <Toggle
+              defaultValue={isPrivate}
+              onChange={(item) => setIsPrivate(item)}
+              isDisable={false}
+            />
+          </div>
+          {isPrivate && (
+            <div className="mt-5">
+              <div className="mb-3">
+                <Label>Select user group how can join in match</Label>
+              </div>
+              <Select
+                options={tagsOptoin}
+                onChange={(i) => setSelectedTagId(Number(i.value))}
+              />
+            </div>
+          )}
+          {BookingStore.startAt &&
+            BookingStore.endAt &&
+            BookingStore.selectedCourt &&
+            BookingStore.selectedData && (
+              <>
+                <div className="mt-5">
+                  <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
+                    Create
+                  </Button>
+                </div>
+              </>
+            )}
+        </>
+      )}
     </form>
   );
 });

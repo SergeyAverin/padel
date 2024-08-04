@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
-import { Label } from "@atoms/index";
+import { Label, Spinner } from "@atoms/index";
 import CourtStore from "@store/courts";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
@@ -41,18 +41,32 @@ export const SelectClub: React.FC = observer(() => {
 
   return (
     <>
-      <Label>Clubs:</Label>
-
-      <Select
-        defaultValue={selectedClub}
-        onChange={handleChangeClubOption}
-        options={CourtStore.clubCanCreateMatch.map((club) => ({
-          label: club.name,
-          value: String(club.id),
-        }))}
-        isLoading={isLoading}
-        placeholder="Select club"
-      />
+      {isLoading && <Spinner />}
+      {CourtStore.clubCanCreateMatch.length == 0 && !isLoading ? (
+        <div className="bg-primary p-5 rounded-2xl shadow-md">
+          <div className="text-[24px] mb-1">⚠️</div>
+          You can only create matches in clubs from your bookmarks, but you do
+          not have any clubs in your notes!
+        </div>
+      ) : (
+        <div>
+          {!isLoading && (
+            <>
+              <Label>Clubs:</Label>
+              <Select
+                defaultValue={selectedClub}
+                onChange={handleChangeClubOption}
+                options={CourtStore.clubCanCreateMatch.map((club) => ({
+                  label: club.name,
+                  value: String(club.id),
+                }))}
+                isLoading={isLoading}
+                placeholder="Select club"
+              />
+            </>
+          )}
+        </div>
+      )}
     </>
   );
 });

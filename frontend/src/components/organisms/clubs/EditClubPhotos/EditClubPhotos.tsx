@@ -10,6 +10,7 @@ import {
   Loading,
 } from "@atoms/index";
 import FileIcon from "@assets/FileIcon.svg?react";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const EditClubPhotos: React.FC = observer(() => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +46,9 @@ export const EditClubPhotos: React.FC = observer(() => {
 
   return (
     <>
+      <HelpBanner localStorageKey="help_add_club_photo">
+        Here you can add photos of your club
+      </HelpBanner>
       <div className="p-3 bg-primary rounded-xl">
         <Heading variant={HeadingVariant.H2}>Upload new club photo</Heading>
         <form className="p-2 bg-primary rounded-xl" onSubmit={onSubmit}>

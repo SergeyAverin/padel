@@ -127,7 +127,7 @@ export const CreateClubForm: React.FC = observer(() => {
         )}
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
-            Apply
+            Create
           </Button>
         </div>
       </div>
