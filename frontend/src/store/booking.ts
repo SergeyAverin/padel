@@ -45,7 +45,6 @@ class AuthStore {
       if (this.selectedClubId) {
         const club = (await getClubById(this.selectedClubId)) as IClub;
         const timeRange = getHoursInRange(club.opening, club.closing);
-        timeRange.map((i) => console.log(i));
         const getIndexInTimeRange = (time: string) => {
           return timeRange.indexOf(time);
         };
@@ -127,42 +126,90 @@ class AuthStore {
     isPrivate: boolean,
     selectedTagId: number | null
   ) {
-    const timeRange = getHoursInRange("08:00", "18:00");
-    const getIndexInTimeRange = (time: string) => {
-      return timeRange.indexOf(time);
-    };
-    if (courtId) {
-      const court = courtId + 2;
-      const filteredBreakPoints = this.breakPoints.filter((item) => {
-        return item.courtIndex == court;
-      });
+    if (this.selectedClubId) {
+      const club = (await getClubById(this.selectedClubId)) as IClub;
 
-      filteredBreakPoints.forEach((item) => {
-        console.log(getIndexInTimeRange(this.startAt) + 2);
-        console.log(getIndexInTimeRange(this.startAt) + 2);
-        console.log();
-        console.log(item.startAt);
-        console.log(item.endAt);
-      });
-    }
-    const res = await createMatch(
-      startAt,
-      endAt,
-      clubId,
-      courtId,
-      `${this.lvlMin}-${this.lvlMax}`,
-      isPrivate,
-      selectedTagId
-    );
-    this.matches.push(res);
+      const timeRange = getHoursInRange(club.opening, club.closing);
+      const getIndexInTimeRange = (time: string) => {
+        return timeRange.indexOf(time);
+      };
+      let flag = true;
+      if (courtId) {
+        const court = courtId + 1;
+        const filteredBreakPoints = this.breakPoints.filter((item) => {
+          console.log("court");
+          console.log(item.courtIndex);
+          console.log(courtId);
+          return item.courtIndex == court;
+        });
 
-    if (this.selectedData) {
-      const d = extractDayAndMonth(this.selectedData);
-      this.selectStartAt("00:00");
-      this.selectEndAt("00:00");
-      this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+        console.log("break points from court");
+        filteredBreakPoints.forEach((item) => {
+          console.log(
+            `[${getIndexInTimeRange(this.startAt) + 2}, ${
+              getIndexInTimeRange(this.endAt) + 2
+            }]`
+          );
+          console.log(`[${item.startAt}, ${item.endAt - 1}]`);
+          console.log(
+            checkIntersection(
+              getIndexInTimeRange(this.startAt) + 2,
+              getIndexInTimeRange(this.endAt) + 2,
+              item.startAt,
+              item.endAt - 1
+            )
+          );
+          if (
+            checkIntersection(
+              getIndexInTimeRange(this.startAt) + 2,
+              getIndexInTimeRange(this.endAt) + 2,
+              item.startAt,
+              item.endAt - 1
+            )
+          ) {
+            flag = false;
+          }
+        });
+      }
+      if (flag) {
+        const res = await createMatch(
+          startAt,
+          endAt,
+          clubId,
+          courtId,
+          `${this.lvlMin}-${this.lvlMax}`,
+          isPrivate,
+          selectedTagId
+        );
+        this.matches.push(res);
+        if (this.selectedData) {
+          const d = extractDayAndMonth(this.selectedData);
+          this.selectStartAt("00:00");
+          this.selectEndAt("00:00");
+          this.getMatchByDay(Number(this.selectedClubId), d[0], d[1]);
+        }
+        return true;
+      } else {
+        alert("It is not possible to create a match at the specified time!");
+        return false;
+      }
     }
   }
 }
 
 export default new AuthStore();
+function checkIntersection(
+  a1: number,
+  b1: number,
+  a2: number,
+  b2: number
+): boolean {
+  // Сортируем начала диапазонов по возрастанию
+  const [start1, start2] = a1 <= a2 ? [a1, a2] : [a2, a1];
+
+  // Сортируем концы диапазонов по возрастанию
+  const [end1, end2] = b1 <= b2 ? [b1, b2] : [b2, b1];
+
+  // Проверяем пересечение
+  return Math.max(start1, start2) <= Math.min(end1, end2);
+}

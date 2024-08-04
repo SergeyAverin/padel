@@ -37,7 +37,7 @@ export const Booking: React.FC = observer(() => {
         minutesStart
       );
       const endDate = new Date(year, b[1] - 1, b[0], hoursEnd, minutesEnd);
-      await BookingStore.createMatch(
+      const flag = await BookingStore.createMatch(
         startDate,
         endDate,
         Number(BookingStore.selectedClubId),
@@ -45,7 +45,9 @@ export const Booking: React.FC = observer(() => {
         isPrivate,
         selectedTagId
       );
-      navigate("/matches");
+      if (flag) {
+        navigate("/matches");
+      }
     }
   };
   const [isPrivate, setIsPrivate] = useState(false);
@@ -114,11 +116,13 @@ export const Booking: React.FC = observer(() => {
         BookingStore.endAt &&
         BookingStore.selectedCourt &&
         BookingStore.selectedData && (
-          <div className="mt-5">
-            <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
-              Create
-            </Button>
-          </div>
+          <>
+            <div className="mt-5">
+              <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
+                Create
+              </Button>
+            </div>
+          </>
         )}
     </form>
   );
