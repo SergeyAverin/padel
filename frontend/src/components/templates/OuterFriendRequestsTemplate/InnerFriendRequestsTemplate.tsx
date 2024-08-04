@@ -19,6 +19,7 @@ export const OuterFriendRequestsTemplate: React.FC = observer(() => {
             <FriendRequestOuter
               friendRequestId={friendRequest.id}
               key={friendRequest.id}
+              user={friendRequest.recipient_user}
             />
           ))}
         </>

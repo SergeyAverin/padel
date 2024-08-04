@@ -17,7 +17,9 @@ class FriendRequestRepository:
             recipient_user=recipient_user
         )
         await friend_request.save()
-        return friend_request
+        return {"sender_user": sender_user,
+                "recipient_user": recipient_user,
+                "id": friend_request.id}
 
     async def get_friend_request_by_id(self, friend_request_id: int) -> None | FriendRequest:
         return await FriendRequest.get_or_none(id=friend_request_id)
@@ -25,16 +27,18 @@ class FriendRequestRepository:
     async def get_outer_friend_requests(self, telegram_user_id: str):
         friend_requests = await FriendRequest.filter(
             sender_user__telegram_user_id=telegram_user_id
-        )
-        # ToDo: добавить то где получатель
-        return friend_requests
+        ).prefetch_related('sender_user', 'recipient_user')
+        return [{"sender_user": m.sender_user,
+                 "recipient_user": m.recipient_user,
+                 "id": m.id} for m in friend_requests]
 
     async def get_inner_friend_requests(self, telegram_user_id: str):
         friend_requests = await FriendRequest.filter(
             recipient_user__telegram_user_id=telegram_user_id
-        )
-        # ToDo: добавить то где получатель
-        return friend_requests
+        ).prefetch_related('sender_user', 'recipient_user')
+        return [{"sender_user": m.sender_user,
+                 "recipient_user": m.recipient_user,
+                 "id": m.id} for m in friend_requests]
 
     async def delete_friend_request(self, friend_request_id: int):
         friend_request = await self.get_friend_request_by_id(friend_request_id)

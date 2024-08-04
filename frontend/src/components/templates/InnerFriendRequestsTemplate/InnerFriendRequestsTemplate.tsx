@@ -17,7 +17,7 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
           {FriendRequestsStore.friendRequestsInner.map((friendRequest) => (
             <FriendRequestInner
               friendRequestId={friendRequest.id}
-              user={friendRequest.recipient_user_id}
+              user={friendRequest.recipient_user}
               key={friendRequest.id}
             />
           ))}
