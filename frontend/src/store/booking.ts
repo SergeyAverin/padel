@@ -32,30 +32,35 @@ class AuthStore {
     makeAutoObservable(this);
   }
 
-  private setBreakPoints() {
+  private async setBreakPoints() {
     const arr: Array<{
       startAt: number;
       endAt: number;
       courtIndex: number;
     }> = [];
-    this.matches.forEach((i) => {
+    await this.matches.forEach(async (i) => {
       const startAt = extractTime(String(i.start_at));
       const endAt = extractTime(String(i.end_at));
-      const timeRange = getHoursInRange("08:00", "18:00");
-      const getIndexInTimeRange = (time: string) => {
-        return timeRange.indexOf(time);
-      };
 
-      const courtIndex = this.courtOption.findIndex(
-        (item) => item.value == String(i.selected_court_id)
-      );
-      arr.push({
-        startAt: getIndexInTimeRange(startAt) + 2,
-        endAt: getIndexInTimeRange(endAt) + 3,
-        courtIndex: courtIndex + 2,
-      });
+      if (this.selectedClubId) {
+        const club = (await getClubById(this.selectedClubId)) as IClub;
+        const timeRange = getHoursInRange(club.opening, club.closing);
+        timeRange.map((i) => console.log(i));
+        const getIndexInTimeRange = (time: string) => {
+          return timeRange.indexOf(time);
+        };
+
+        const courtIndex = this.courtOption.findIndex(
+          (item) => item.value == String(i.selected_court_id)
+        );
+        arr.push({
+          startAt: getIndexInTimeRange(startAt) + 2,
+          endAt: getIndexInTimeRange(endAt) + 3,
+          courtIndex: courtIndex + 2,
+        });
+        this.breakPoints = arr;
+      }
     });
-    this.breakPoints = arr;
   }
 
   async selectClub(club: string) {
@@ -122,7 +127,6 @@ class AuthStore {
     isPrivate: boolean,
     selectedTagId: number | null
   ) {
-    console.log("dsfs");
     const timeRange = getHoursInRange("08:00", "18:00");
     const getIndexInTimeRange = (time: string) => {
       return timeRange.indexOf(time);
@@ -130,8 +134,6 @@ class AuthStore {
     if (courtId) {
       const court = courtId + 2;
       const filteredBreakPoints = this.breakPoints.filter((item) => {
-        console.log(String(item.courtIndex));
-        console.log(court);
         return item.courtIndex == court;
       });
 

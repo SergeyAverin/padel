@@ -58,7 +58,7 @@ export const SelectMatchLvl: React.FC = observer(() => {
         value: String(AuthStore.authUser.lvl - 0.5),
       });
       BookingStore.setLvlMin(String(AuthStore.authUser.lvl - 0.5));
-      BookingStore.setLvlMin(String(AuthStore.authUser.lvl + 0.5));
+      BookingStore.setLvlMax(String(AuthStore.authUser.lvl + 0.5));
 
       setSelectMaxLvl({
         label: String(AuthStore.authUser.lvl + 0.5),

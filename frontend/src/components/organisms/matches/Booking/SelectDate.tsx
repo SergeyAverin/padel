@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookingStore from "@store/booking";
 import Select from "@atoms/Select";
 
@@ -16,7 +16,12 @@ export const SelectDate: React.FC = observer(() => {
     value: item,
   }));
   const [selectedDate, setSelectedDate] = useState<Option>(dates[0]);
-
+  useEffect(() => {
+    setSelectedDate(dates[0]);
+    BookingStore.selectDate(dates[0].value);
+    const d = extractDayAndMonth(dates[0].value);
+    BookingStore.getMatchByDay(Number(BookingStore.selectedClubId), d[0], d[1]);
+  }, []);
   const handleChangeDateOption = (option: Option) => {
     if (option) {
       BookingStore.selectDate(option.value);
