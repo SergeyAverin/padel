@@ -10,7 +10,6 @@ import {
 } from "@atoms/index";
 import ClubStore from "@store/club";
 
-import AddressIcon from "@assets/AddressIcon.svg?react";
 import Tabs from "@molecules/Tabs";
 import { Link } from "react-router-dom";
 import ClubMatches from "@organisms/clubs/ClubMatches";
@@ -18,6 +17,9 @@ import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import AuthStore from "@store/auth";
 import { shortenString } from "@utils/shoringString";
 import Bookmark from "@molecules/clubs/Bookmark";
+
+import AddressIcon from "@assets/AddressIcon.svg?react";
+import FlagIcon from "@assets/ClubsIcon.svg?react";
 import ClockIcon from "@assets/ClockIcon.svg?react";
 
 export const ClubTemplate: React.FC = observer(() => {
@@ -44,10 +46,20 @@ export const ClubTemplate: React.FC = observer(() => {
             {shortenString(ClubStore.openedClub?.name, 24)}
           </Heading>
           <div className="flex justify-between">
-            <div className="flex w-full  items-center">
-              <AddressIcon />
-              <div className="text-[12px] font-medium ml-3">
-                {shortenString(ClubStore.openedClub?.address, 54)}
+            <div>
+              <div className="flex w-full  items-center">
+                <AddressIcon />
+                <div className="text-[12px] font-medium ml-3">
+                  {shortenString(ClubStore.openedClub?.address, 54)}
+                </div>
+              </div>
+
+              <div className="flex w-full  items-center">
+                <FlagIcon />
+                <div className="text-[12px] font-medium ml-3">
+                  {shortenString(ClubStore.openedClub?.country, 54)}{" "}
+                  {shortenString(ClubStore.openedClub?.city, 54)}
+                </div>
               </div>
             </div>
             <Bookmark clubId={ClubStore.openedClub.id} />
