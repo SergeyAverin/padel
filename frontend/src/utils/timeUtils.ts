@@ -56,3 +56,21 @@ export function addOneAndHalfHours(time: string): string {
     .toString()
     .padStart(2, "0")}`;
 }
+
+function timeToMinutes(time: string): number {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+export function compareTimes(time1: string, time2: string): boolean {
+  const minutes1 = timeToMinutes(time1);
+  const minutes2 = timeToMinutes(time2);
+
+  if (minutes1 > minutes2) {
+    return true; // time1 больше time2
+  } else if (minutes1 < minutes2) {
+    return false; // time1 меньше time2
+  } else {
+    return false; // время одинаковое
+  }
+}

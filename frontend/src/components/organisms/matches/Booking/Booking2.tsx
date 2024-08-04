@@ -12,8 +12,10 @@ import { useNavigate } from "react-router-dom";
 import { SelectMatchLvl } from "./SelectMatchLvl";
 import TagsStore from "@store/tags";
 import Select from "@atoms/Select";
+import CourtStore from "@store/courts";
+import { observer } from "mobx-react-lite";
 
-export const Booking: React.FC = () => {
+export const Booking: React.FC = observer(() => {
   const navigate = useNavigate();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,14 +59,35 @@ export const Booking: React.FC = () => {
     });
     setTagOptions(t);
   }, [TagsStore.tags]);
+
+  const [isShowDesk, setIsShowDesk] = useState(false);
+  useEffect(() => {
+    if (CourtStore.courts.length > 0) {
+      setIsShowDesk(true);
+    } else {
+      setIsShowDesk(false);
+    }
+  }, [CourtStore.courts]);
   return (
     <form onSubmit={onSubmit}>
       <SelectClub />
       <SelectDate />
       <SelectStartAt />
       <SelectEndAt />
-      <SelectCourt />
-      <BookingDesk />
+
+      {isShowDesk ? (
+        <>
+          <SelectCourt />
+          <BookingDesk />
+        </>
+      ) : (
+        <>
+          {BookingStore.selectedClubId && (
+            <div className="text-error mt-5">Club have not courts</div>
+          )}
+        </>
+      )}
+
       <SelectMatchLvl />
       <div className="mt-5">
         <div className="mb-3">
@@ -87,11 +110,16 @@ export const Booking: React.FC = () => {
           />
         </div>
       )}
-      <div className="mt-5">
-        <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
-          Create
-        </Button>
-      </div>
+      {BookingStore.startAt &&
+        BookingStore.endAt &&
+        BookingStore.selectedCourt &&
+        BookingStore.selectedData && (
+          <div className="mt-5">
+            <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
+              Create
+            </Button>
+          </div>
+        )}
     </form>
   );
-};
+});

@@ -4,6 +4,7 @@ import { Label } from "@atoms/index";
 import CourtStore from "@store/courts";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
+import MatchStore from "@store/match";
 
 interface Option {
   value: string;
@@ -17,8 +18,12 @@ export const SelectClub: React.FC = observer(() => {
       value: String(club.id),
     }))[0]
   );
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    CourtStore.getClubCanCreateMatch();
+    setIsLoading(true);
+    CourtStore.getClubCanCreateMatch().then(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   const handleChangeClubOption = (option: Option) => {
@@ -27,6 +32,13 @@ export const SelectClub: React.FC = observer(() => {
     }
     setSelectedClub(option);
   };
+  useEffect(() => {
+    if (BookingStore.selectedClubId) {
+      CourtStore.getCourts(Number(BookingStore.selectedClubId));
+      MatchStore.loadClubMatches(Number(BookingStore.selectedClubId));
+    }
+  }, [BookingStore.selectedClubId]);
+
   return (
     <>
       <Label>Clubs:</Label>
@@ -38,6 +50,7 @@ export const SelectClub: React.FC = observer(() => {
           label: club.name,
           value: String(club.id),
         }))}
+        isLoading={isLoading}
         placeholder="Select club"
       />
     </>

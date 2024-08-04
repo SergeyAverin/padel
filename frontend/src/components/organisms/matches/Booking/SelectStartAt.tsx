@@ -12,6 +12,9 @@ interface Option {
 export const SelectStartAt: React.FC = observer(() => {
   const timeRange = getHoursInRange(BookingStore.opening, BookingStore.closing);
   const options = timeRange.map((time) => ({ value: time, label: time }));
+  const [selectedStartOption, setSelectedStartOption] = useState<Option>(
+    options[0]
+  );
   const [timeRangeOpen, setTimeRangeOpen] = useState(options);
   useEffect(() => {
     const timeRange = getHoursInRange(
@@ -20,11 +23,8 @@ export const SelectStartAt: React.FC = observer(() => {
     );
     const p = timeRange.map((time) => ({ value: time, label: time }));
     setTimeRangeOpen(p);
+    setSelectedStartOption(p[0]);
   }, [BookingStore.opening, BookingStore.closing]);
-
-  const [selectedStartOption, setSelectedStartOption] = useState<Option>(
-    options[0]
-  );
 
   const handleChangeStartOption = (option: Option) => {
     if (option) {

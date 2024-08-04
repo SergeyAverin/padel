@@ -5,7 +5,6 @@ import Select from "@atoms/Select";
 import { Label } from "@atoms/index";
 import { observer } from "mobx-react-lite";
 import CourtStore from "@store/courts";
-import MatchStore from "@store/match";
 
 interface Option {
   value: string;
@@ -24,13 +23,6 @@ export const SelectCourt: React.FC = observer(() => {
     setCourtsOptions(options);
     BookingStore.setCourtOption(options);
   }, [CourtStore.courts]);
-
-  useEffect(() => {
-    if (BookingStore.selectedClubId) {
-      CourtStore.getCourts(Number(BookingStore.selectedClubId));
-      MatchStore.loadClubMatches(Number(BookingStore.selectedClubId));
-    }
-  }, [BookingStore.selectedClubId]);
 
   const handleChangeCourtOption = (option: Option) => {
     if (option) {

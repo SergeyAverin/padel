@@ -1,15 +1,19 @@
 import { getHoursInRange } from "@utils/timeUtils";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BookingStore from "@store/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
 
 export const BookingDesk: React.FC = observer(() => {
-  const timeRange = getHoursInRange("08:00", "18:00");
+  const [timeRange, setTimeRange] = useState<Array<string>>([]);
   const getIndexInTimeRange = (time: string) => {
     return timeRange.indexOf(time);
   };
+  useEffect(() => {
+    const a = getHoursInRange(BookingStore.opening, BookingStore.closing);
+    setTimeRange(a);
+  }, [BookingStore.opening, BookingStore.closing]);
 
   return (
     <>
