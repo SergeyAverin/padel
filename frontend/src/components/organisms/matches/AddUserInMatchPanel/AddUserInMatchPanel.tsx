@@ -60,7 +60,9 @@ const AddUserInMatchPanel: React.FC = observer(() => {
             <div>
               <div className="text-[24px] ml-3">{item.username}</div>
               <div className="text-[14px] ml-3">{item.first_name}</div>
-              <div className="text-[14px] ml-3">{item.last_name}</div>
+              <div className="text-[14px] ml-3">
+                {item.last_name.toLowerCase() != "none" && item.last_name}
+              </div>
             </div>
           </div>
         ))}

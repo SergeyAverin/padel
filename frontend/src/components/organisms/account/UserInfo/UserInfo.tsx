@@ -28,7 +28,8 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
               <div className="text-[20px] font-medium">
                 {shortenString(user.first_name, 20)}
                 <br></br>
-                {shortenString(user.last_name, 20)}
+                {user.last_name.toLowerCase() != "none" &&
+                  shortenString(user.last_name, 20)}
               </div>
               {!isMore && (
                 <div

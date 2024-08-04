@@ -57,7 +57,9 @@ export const FindUserForm: React.FC = observer(() => {
                         {user.username}
                       </div>
                       <div className="text-[16px] font-medium">
-                        {user.first_name} {user.last_name}
+                        {user.first_name}{" "}
+                        {user.last_name.toLowerCase() != "none" &&
+                          user.last_name}
                       </div>
                     </div>
                   </div>

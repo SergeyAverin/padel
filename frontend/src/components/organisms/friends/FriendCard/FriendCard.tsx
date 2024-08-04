@@ -84,7 +84,8 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
                 <div className="text-[16px] font-medium">
                   {shortenString(user.first_name, 17)}
                   <br />
-                  {shortenString(user.last_name, 17)}
+                  {user.last_name.toLowerCase() != "none" &&
+                    shortenString(user.last_name, 17)}
                 </div>
               </div>
             </div>
