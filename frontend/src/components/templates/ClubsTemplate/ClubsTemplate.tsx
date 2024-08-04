@@ -11,6 +11,7 @@ import ClubFilters from "@organisms/clubs/ClubFilters";
 import Tag from "@molecules/friends/Tag";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import AuthStore from "@store/auth";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const ClubsTemplate: React.FC = observer(() => {
   useEffect(() => {
@@ -28,6 +29,10 @@ export const ClubsTemplate: React.FC = observer(() => {
       ) : (
         <>
           <ClubFilters />
+          <HelpBanner localStorageKey="help_clubs" isInNavigation={true}>
+            On this page you can find a club to play padel and add it to your
+            bookmarks.
+          </HelpBanner>
           <div className="p-3">
             <Heading variant={HeadingVariant.H1}>Clubs</Heading>
 

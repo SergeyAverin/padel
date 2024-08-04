@@ -19,6 +19,7 @@ import AuthStore from "@store/auth";
 
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
 import { IUser } from "@schemas/user";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const ProfileTemplate: React.FC = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,6 +44,10 @@ export const ProfileTemplate: React.FC = observer(() => {
           </Link>
         </div>
       </div>
+      <HelpBanner localStorageKey="help_profile" isInNavigation={true}>
+        This is your profile, it displays information about you and the matches
+        you participate in. You can edit your information.
+      </HelpBanner>
       <div className="mt-[30px]">
         <Heading variant={HeadingVariant.H1}>Padel info:</Heading>
         <div className="mt-[8px]">

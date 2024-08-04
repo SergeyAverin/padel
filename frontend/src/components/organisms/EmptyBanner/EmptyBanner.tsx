@@ -24,7 +24,7 @@ export const EmptyBanner: React.FC<IEmptyBannerProps> = ({
           </div>
         )}
       </div>
-      <div>{text}</div>
+      <div className="w-[65%] text-center">{text}</div>
     </div>
   );
 };

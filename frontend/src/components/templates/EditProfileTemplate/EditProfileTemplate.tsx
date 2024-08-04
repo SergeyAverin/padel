@@ -3,6 +3,7 @@ import EditProfileForm from "@organisms/account/EditProfileForm";
 import SelectHand from "@organisms/account/SelectHand";
 import SelectPosition from "@organisms/account/SelectPosition";
 import UploadPhotoForm from "@organisms/account/UploadPhotoForm";
+import HelpBanner from "@organisms/HelpBanner";
 import React from "react";
 
 export const EditProfileTemplate: React.FC = () => {
@@ -22,7 +23,10 @@ export const EditProfileTemplate: React.FC = () => {
       text: "Padel",
       content: (
         <>
-          {" "}
+          <HelpBanner localStorageKey="padel_info">
+            This is information about what position and what hand you play in
+            padel.
+          </HelpBanner>
           <SelectHand />
           <div className="mt-3">
             <SelectPosition />

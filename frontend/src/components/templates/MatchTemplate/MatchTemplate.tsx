@@ -8,6 +8,7 @@ import MatchUser from "@organisms/matches/MatchUser";
 import { MatchFriend } from "@organisms/matches/MatchFriend/MatchFriend";
 import MatchClub from "@organisms/matches/MatchClub";
 import MatchStore from "@store/match";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const MatchTemplate: React.FC = observer(() => {
   const tabs = [
@@ -38,11 +39,8 @@ export const MatchTemplate: React.FC = observer(() => {
           MatchStore.matches.length == 0 ? (
             <div className="flex flex-col items-center justify-center">
               {/* Show if user have not matches */}
-              <Heading variant={HeadingVariant.H2}>
-                You have not matches
-              </Heading>
               <div className="mt-5">
-                <EmptyBanner text="Empty" />
+                <EmptyBanner text="You don't have any matches yet." />
               </div>
             </div>
           ) : (
@@ -53,6 +51,10 @@ export const MatchTemplate: React.FC = observer(() => {
           )}
         </>
       )}
+      <HelpBanner localStorageKey="help_match" isInNavigation={true}>
+        On this page will be displayed matches in which you, your friends or
+        matches of clubs from your bookmarks
+      </HelpBanner>
     </div>
   );
 });

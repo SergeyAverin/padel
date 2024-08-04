@@ -12,7 +12,7 @@ export const OuterFriendRequestsTemplate: React.FC = observer(() => {
       {!FriendRequestsStore.isLoading ? (
         <>
           {FriendRequestsStore.friendRequestsOuter.length == 0 && (
-            <EmptyBanner text="No friend inner request" />
+            <EmptyBanner text="This is where the friend requests you sent in." />
           )}
 
           {FriendRequestsStore.friendRequestsOuter.map((friendRequest) => (

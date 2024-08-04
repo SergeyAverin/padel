@@ -6,6 +6,7 @@ import UserPhoto from "@molecules/account/UserPhoto";
 import { Link } from "react-router-dom";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
+import HelpBanner from "@organisms/HelpBanner";
 
 export const FindUserForm: React.FC = observer(() => {
   const [value, setValue] = useState("");
@@ -17,6 +18,11 @@ export const FindUserForm: React.FC = observer(() => {
   };
   return (
     <>
+      <div className="mb-5">
+        <HelpBanner localStorageKey="help_find">
+          Here you can find a user by their username
+        </HelpBanner>
+      </div>
       <form onSubmit={onSubmit}>
         <Input
           name="username"

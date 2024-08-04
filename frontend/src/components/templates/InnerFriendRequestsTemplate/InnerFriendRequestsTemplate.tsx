@@ -12,7 +12,7 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
       {!FriendRequestsStore.isLoading ? (
         <>
           {FriendRequestsStore.friendRequestsInner.length == 0 && (
-            <EmptyBanner text="No friend inner request" />
+            <EmptyBanner text="Here are the friend requests that have been sent to you." />
           )}
           {FriendRequestsStore.friendRequestsInner.map((friendRequest) => (
             <FriendRequestInner

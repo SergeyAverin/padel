@@ -37,6 +37,9 @@ export const FriendsFilter: React.FC = observer(() => {
       <div className="mt-3">
         {isOpen && (
           <div className="flex mb-5 overflow-x-auto pb-3">
+            {TagStore.filterTags.length == 0 && (
+              <div>You don't have tags to categorize frinds.</div>
+            )}
             {TagStore.tags.map((tag) => (
               <div className="mr-1" key={tag.id} onClick={() => addTag(tag)}>
                 <Tag text={tag.name} id={tag.id} isAdd={false} />
