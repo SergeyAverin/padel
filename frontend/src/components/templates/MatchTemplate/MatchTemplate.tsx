@@ -38,9 +38,11 @@ export const MatchTemplate: React.FC = observer(() => {
           MatchStore.matches.length == 0 ? (
             <div className="flex flex-col items-center justify-center">
               {/* Show if user have not matches */}
-              <Heading variant={HeadingVariant.H2}>Matches not found</Heading>
+              <Heading variant={HeadingVariant.H2}>
+                You have not matches
+              </Heading>
               <div className="mt-5">
-                <EmptyBanner />
+                <EmptyBanner text="Empty" />
               </div>
             </div>
           ) : (
