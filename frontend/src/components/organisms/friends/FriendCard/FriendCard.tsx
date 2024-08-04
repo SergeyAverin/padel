@@ -19,36 +19,56 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
     TagStore.getFriendTags(user.telegram_user_id);
   }, [TagStore.tags]);
   const [isShow, setIsShow] = useState(true);
-
   useEffect(() => {
-    if (TagStore.filterTags.length > 0) {
-      if (
-        TagStore.friendsWithTags.has(user.telegram_user_id) &&
-        (TagStore.friendsWithTags.get(user.telegram_user_id) as Array<ITag>)
-          .length > 0
-      ) {
-        (
-          TagStore.friendsWithTags.get(user.telegram_user_id) as Array<ITag>
-        ).map((tag) => {
-          TagStore.filterTags.map((filterTag) => {
-            if (filterTag.id == tag.id) {
-              setIsShow(true);
-            } else {
-              setIsShow(false);
-            }
-          });
-        });
-      } else {
-        setIsShow(false);
-      }
-    } else {
-      setIsShow(true);
+    if (TagStore.friendsWithTags.has(user.telegram_user_id)) {
+      console.log("tags");
+      const userTags = TagStore.friendsWithTags.get(
+        user.telegram_user_id
+      ) as Array<ITag>;
+      let flag = true;
+      TagStore.filterTags.forEach((tag) => {
+        const indexInUserTags = userTags.findIndex((i) => tag.name == i.name);
+        if (indexInUserTags < 0) {
+          flag = false;
+        }
+      });
+      setIsShow(flag);
     }
   }, [
-    TagStore.filterTags.length,
     TagStore.filterTags,
+    TagStore.filterTags.length,
     TagStore.friendsWithTags,
   ]);
+
+  // useEffect(() => {
+  //   if (TagStore.filterTags.length > 0) {
+  //     if (
+  //       TagStore.friendsWithTags.has(user.telegram_user_id) &&
+  //       (TagStore.friendsWithTags.get(user.telegram_user_id) as Array<ITag>)
+  //         .length > 0
+  //     ) {
+  //       (
+  //         TagStore.friendsWithTags.get(user.telegram_user_id) as Array<ITag>
+  //       ).map((tag) => {
+  //         TagStore.filterTags.map((filterTag) => {
+  //           if (filterTag.id == tag.id) {
+  //             setIsShow(true);
+  //           } else {
+  //             setIsShow(false);
+  //           }
+  //         });
+  //       });
+  //     } else {
+  //       setIsShow(false);
+  //     }
+  //   } else {
+  //     setIsShow(true);
+  //   }
+  // }, [
+  //   TagStore.filterTags.length,
+  //   TagStore.filterTags,
+  //   TagStore.friendsWithTags,
+  // ]);
   return (
     <>
       {isShow && (
