@@ -56,9 +56,9 @@ async def update_user_by_telegram_user_id(
     telegram_user_id: str,
     new_user_data: UpdateUserDTO,
     user: UserDTO = Depends(get_current_user)
-) -> UserDTO:
-    user = await user_service.update_user_by_user_id(telegram_user_id, new_user_data)
-    return user
+):
+    user_from_db = await user_service.update_user_by_user_id(telegram_user_id, new_user_data)
+    return user_from_db
 
 
 @profile_router.post('/')

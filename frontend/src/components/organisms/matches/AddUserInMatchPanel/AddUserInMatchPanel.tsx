@@ -18,7 +18,7 @@ const AddUserInMatchPanel: React.FC = observer(() => {
   return (
     <div
       className={classNames(
-        "fixed left-0 bg-primary text-fg w-full h-full z-10 transition-all",
+        "fixed left-0 bg-primary text-fg w-full h-full z-10 transition-all overflow-y-auto pb-[100px]",
         {
           "top-0": AddUserStore.isOpen,
           "top-[100%]": !AddUserStore.isOpen,

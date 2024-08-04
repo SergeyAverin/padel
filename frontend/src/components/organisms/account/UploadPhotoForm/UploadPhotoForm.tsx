@@ -34,6 +34,7 @@ export const UploadPhotoForm: React.FC = observer(() => {
   return (
     <form className="p-5 bg-primary rounded-xl" onSubmit={onSubmit}>
       <div className="text-[24px]">Avatar now:</div>
+      <div>Upload photo in 240x240 size</div>
       {AuthStore.authUser && (
         <div className="flex items-center mt-3">
           <img

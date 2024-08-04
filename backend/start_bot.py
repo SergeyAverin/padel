@@ -34,7 +34,7 @@ async def command_start_handler(message: Message) -> None:
             last_name=str(message.from_user.last_name),
             telegram_user_id=str(message.from_user.id),
             username=message.from_user.username,
-            age=1,
+            age=18,
             email='',
             status=UserStatus.PLAYER.value,
             hand=Hand.RIGHT_HAND,

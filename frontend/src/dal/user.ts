@@ -60,6 +60,8 @@ export const updateUser = async (userId: string, data: IUpdateUserData) => {
     AuthStore.authUser.username = data.username;
     AuthStore.authUser.email = data.email;
     AuthStore.authUser.age = data.age;
+    AuthStore.authUser.city = data.city;
+    AuthStore.authUser.country = data.country;
   }
 };
 

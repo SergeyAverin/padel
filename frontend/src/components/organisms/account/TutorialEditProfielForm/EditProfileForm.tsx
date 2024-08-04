@@ -49,7 +49,7 @@ export const TutorialEditProfielForm: React.FC<TutorialEditProfielForm> = ({
           country: selectedCountry.label,
         });
       }
-      navigate("/profile");
+      next();
     } else {
       alert("Write a valid data!!!");
     }
@@ -143,13 +143,10 @@ export const TutorialEditProfielForm: React.FC<TutorialEditProfielForm> = ({
           {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
           {selectedCity?.value == "" ||
             (!selectedCity && (
-              <div className="text-error">You mast select city</div>
+              <div className="text-error">You mast select city and counrty</div>
             ))}
-          {selectedCountry?.label == "" && (
-            <div className="text-error">You mast select country</div>
-          )}
           {!re.test(String(formValue.email).toLowerCase()) && (
-            <div className="text-error">Invalid email</div>
+            <div className="text-error">You mast write email</div>
           )}
         </div>
         <div className="mt-5">
@@ -158,10 +155,7 @@ export const TutorialEditProfielForm: React.FC<TutorialEditProfielForm> = ({
               <div className="w-[280px] mt-5">
                 <Button
                   variant={ButtonVariant.FULL_HIGHLIGHT}
-                  onClick={() => {
-                    next();
-                    onSubmit();
-                  }}
+                  onClick={onSubmit}
                 >
                   Continue
                 </Button>
