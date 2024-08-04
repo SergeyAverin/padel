@@ -116,23 +116,51 @@ export const Tutorial: React.FC = () => {
             How would you rate your level of padel play?
           </Heading>
           <div className="overflow-y-scroll h-[300px] ">
-            <LvlDescription lvl="1" title="initiation">
-              I am interested in the rules I'm starting to play
+            <LvlDescription lvl="1" title="Initiation">
+              I'm staring to play
+              <br />I am interested in the rule
             </LvlDescription>
 
-            <LvlDescription lvl="2" title="Débutant">
-              I'm starting to learn the basic moves I know the rules The game is
-              slow, the games are short
+            <LvlDescription lvl="2" title="Beginner">
+              I'm starting to learn the basic moves <br />
+              I know the rules
+              <br />
+              The game is slow, the games are short
             </LvlDescription>
 
             <LvlDescription lvl="3" title="Beginner+">
-              I play 1 time a month I'm starting to pull off a few lobs I'm
-              starting to play with the windows
+              I play 1 time a month <br />
+              I'm starting to pull off a few lobs
+              <br />
+              I'm starting to play with the windows
             </LvlDescription>
 
-            <LvlDescription lvl="3" title="Beginner+">
-              I play 1 time a month I'm starting to pull off a few lobs I'm
-              starting to play with the windows
+            <LvlDescription lvl="4" title="Intermediate">
+              I play several times a month
+              <br />
+              I am starting the competition as an amateur
+              <br />
+              === Atack === <br />
+              I climb on the fly after a lob
+              <br />
+              I make volleys of forehand and backhand
+              <br />
+              === Defense === <br />
+              I let the ball pass and wait for the rebound. <br />I pass my lobs
+              1fols out of 2
+            </LvlDescription>
+
+            <LvlDescription lvl="5" title="Intermediate+">
+              I play at least 1 time a week <br />
+              I'm starting to do approved tournaments <br />
+              === Atack === <br />
+              I finish points on the fly
+              <br />
+              Jo finishes points by smashing flat
+              <br />
+              === Defense === <br />
+              I vary between returns in the feet and the lob <br />
+              I'm starting to defend the double windows
             </LvlDescription>
           </div>
           <div className="w-[300px] m-auto mt-5">
@@ -140,11 +168,11 @@ export const Tutorial: React.FC = () => {
               defaultValue={{ label: "1 - initiation", value: "1" }}
               onChange={onChange}
               options={[
-                { label: "1 - initiation", value: "1" },
-                { label: "2 - initiation", value: "2" },
-                { label: "3 - initiation", value: "3" },
-                { label: "4 - initiation", value: "4" },
-                { label: "5 - initiation", value: "5" },
+                { label: "1 - Initiation", value: "1" },
+                { label: "2 - Beginner", value: "2" },
+                { label: "3 - Beginner+", value: "3" },
+                { label: "4 - Intermediate", value: "4" },
+                { label: "5 - Intermediate+", value: "5" },
                 { label: "6 - initiation", value: "6" },
                 { label: "7 - initiation", value: "7" },
                 { label: "8 - initiation", value: "8" },
