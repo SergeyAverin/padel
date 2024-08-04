@@ -88,7 +88,33 @@ export const UpdateClubForm: React.FC = observer(() => {
         setSelectedCity(findCity);
       }
     }
-  }, [ClubStore.openedClub, cityOption]);
+  }, [ClubStore.openedClub]);
+
+  useEffect(() => {
+    if (ClubStore.openedClub) {
+      const findCity = cityOption.find((country) => {
+        if (country.label == ClubStore.openedClub?.city) {
+          return country;
+        }
+      });
+      if (findCity && findCity.label != selectedCity?.label) {
+        setSelectedCity(findCity);
+      }
+    }
+  }, [cityOption]);
+
+  useEffect(() => {
+    if (ClubStore.openedClub) {
+      const findCity = cityOption.find((country) => {
+        if (country.label == ClubStore.openedClub?.city) {
+          return country;
+        }
+      });
+      if (findCity && findCity.label != selectedCity?.label) {
+        setSelectedCity(findCity);
+      }
+    }
+  }, [cityOption]);
   return (
     <form onSubmit={onSubmit}>
       <div className="p-5 bg-primary rounded-xl">

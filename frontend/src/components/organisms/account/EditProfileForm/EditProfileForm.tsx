@@ -82,7 +82,20 @@ export const EditProfileForm: React.FC = () => {
         setSelectedCity(findCity);
       }
     }
-  }, [AuthStore.authUser, cityOption]);
+  }, [AuthStore.authUser]);
+
+  useEffect(() => {
+    if (AuthStore.authUser) {
+      const findCity = cityOption.find((country) => {
+        if (country.label == AuthStore.authUser?.city) {
+          return country;
+        }
+      });
+      if (findCity && findCity.label != selectedCity?.label) {
+        setSelectedCity(findCity);
+      }
+    }
+  }, [cityOption]);
 
   return (
     <form onSubmit={onSubmit}>

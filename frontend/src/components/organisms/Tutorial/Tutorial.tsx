@@ -6,7 +6,6 @@ import SelectPosition from "@organisms/account/SelectPosition";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import UserStore from "@store/user";
-import EditProfileForm from "@organisms/account/EditProfileForm";
 import TutorialEditProfielForm from "@organisms/account/TutorialEditProfielForm";
 
 interface ISlideProps {
