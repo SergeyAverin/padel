@@ -59,7 +59,7 @@ export const Navigation: React.FC = () => {
               </Link>
             </div>
           )}
-          <AddIcon />
+          <AddIcon stroke="#fff" />
         </div>
         <NavigationButton href="/matches" icon={<MatchIcon />} text="Matches" />
         <NavigationButton href="/clubs" icon={<ClubIcon />} text="Clubs" />

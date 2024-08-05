@@ -26,7 +26,7 @@ export const AddTextUserInMatch: React.FC = () => {
           }
         ></input>
         <div className="border-2 p-1 pl-3 rounded-full border-highlight  w-[130px] text-center flex items-center justify-center">
-          <AddIcon stroke="#fff" />
+          <div className="mr-3">+</div>
           <div onClick={() => selectUser()}>add user</div>
         </div>
       </div>

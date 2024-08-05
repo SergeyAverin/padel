@@ -6,6 +6,7 @@ import UserPhoto from "@molecules/account/UserPhoto";
 
 import CloseIcon from "@assets/CloseIcon.svg?react";
 import AddTextUserInMatch from "@molecules/matches/AddTextUserInMatch";
+import HelpBanner from "@organisms/HelpBanner";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   useEffect(() => {
@@ -32,6 +33,10 @@ const AddUserInMatchPanel: React.FC = observer(() => {
         >
           <CloseIcon stroke="#fff" />
         </div>
+        <HelpBanner localStorageKey="help_add_user">
+          Here you can choose the user who will be added to your match, if the
+          user is not in our application you can enter his name manually.
+        </HelpBanner>
         <div
           onClick={() => selectUser("-1")}
           className="flex bg-bg p-3 rounded-2xl items-center mt-5"

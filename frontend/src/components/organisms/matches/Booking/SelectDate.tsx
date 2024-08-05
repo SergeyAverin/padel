@@ -41,7 +41,7 @@ export const SelectDate: React.FC = observer(() => {
     <div className="mt-5">
       {BookingStore.selectedClubId && (
         <>
-          <Label>Select date:</Label>
+          <Label>Select the date when to create the match:</Label>
 
           <Select
             defaultValue={selectedDate}

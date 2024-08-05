@@ -52,7 +52,7 @@ export const SelectClub: React.FC = observer(() => {
         <div>
           {!isLoading && (
             <>
-              <Label>Clubs:</Label>
+              <Label>Choose a club where to create a match :</Label>
               <Select
                 defaultValue={selectedClub}
                 onChange={handleChangeClubOption}
@@ -64,6 +64,13 @@ export const SelectClub: React.FC = observer(() => {
                 placeholder="Select club"
               />
             </>
+          )}
+          {selectedClub && CourtStore.courts.length == 0 && (
+            <div className="bg-primary p-5 rounded-2xl shadow-md mt-5">
+              <div className="text-[24px] mb-1 ">⚠️</div>
+              You can't form a club in this club as the club doesn't have a
+              registered court.
+            </div>
           )}
         </div>
       )}

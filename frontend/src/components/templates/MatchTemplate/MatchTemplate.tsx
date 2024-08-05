@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-import { Heading, HeadingVariant, Spinner } from "@atoms/index";
+import { Spinner } from "@atoms/index";
 import Tabs from "@molecules/Tabs";
 import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
 import MatchUser from "@organisms/matches/MatchUser";

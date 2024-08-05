@@ -71,7 +71,8 @@ export const SelectMatchLvl: React.FC = observer(() => {
     <div className="mt-5">
       {BookingStore.selectedClubId && (
         <>
-          <Label>Select match lvl:</Label>
+          <Label>Select the level of the match:</Label>
+
           <div className="flex  mt-2">
             <Select
               defaultValue={selectMinLvl}
@@ -86,6 +87,11 @@ export const SelectMatchLvl: React.FC = observer(() => {
               options={options}
               placeholder="Select max lvl"
             />
+          </div>
+          <div className="mt-5">
+            The match level determines what level a user must have to
+            participate in a match. The default match level is ±0.5 of your
+            level, but you can specify a different range.
           </div>
         </>
       )}

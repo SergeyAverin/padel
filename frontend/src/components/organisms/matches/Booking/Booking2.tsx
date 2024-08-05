@@ -71,67 +71,103 @@ export const Booking: React.FC = observer(() => {
     }
   }, [CourtStore.courts]);
   const [step, setStep] = useState(1);
+  const STEP_COUNT = 5;
+  const next = () => {
+    if (step + 1 <= STEP_COUNT) {
+      setStep((prev) => prev + 1);
+    }
+  };
+  const prev = () => {
+    if (step - 1 != 0) {
+      setStep((prev) => prev - 1);
+    }
+  };
   return (
-    <form onSubmit={onSubmit}>
-      {step == 1 && <SelectClub />}
-      {step == 2 && <SelectDate />}
-      {step == 3 && (
-        <>
-          <SelectStartAt />
-          <SelectEndAt />
-
-          {isShowDesk ? (
-            <>
-              <SelectCourt />
-              <BookingDesk />
-            </>
-          ) : (
-            <>
-              {BookingStore.selectedClubId && (
-                <div className="text-error mt-5">Club have not courts</div>
-              )}
-            </>
-          )}
-        </>
-      )}
-      {step == 4 && <SelectMatchLvl />}
-      {step == 5 && (
-        <>
-          <div className="mt-5">
-            <div className="mb-3">
-              <Label>Is private:</Label>
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col justify-between min-h-[420px]"
+    >
+      <div>
+        {step == 1 && <SelectClub />}
+        {step == 2 && <SelectDate />}
+        {step == 3 && (
+          <>
+            {isShowDesk ? (
+              <>
+                <SelectStartAt />
+                <SelectEndAt />
+                <SelectCourt />
+                <BookingDesk />
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
+        {step == 4 && <SelectMatchLvl />}
+        {step == 5 && (
+          <>
+            <div className="mt-5">
+              You can make a match private only for a selected group of friends.
             </div>
-            <Toggle
-              defaultValue={isPrivate}
-              onChange={(item) => setIsPrivate(item)}
-              isDisable={false}
-            />
-          </div>
-          {isPrivate && (
             <div className="mt-5">
               <div className="mb-3">
-                <Label>Select user group how can join in match</Label>
+                <Label>Make the match private:</Label>
               </div>
-              <Select
-                options={tagsOptoin}
-                onChange={(i) => setSelectedTagId(Number(i.value))}
+              <Toggle
+                defaultValue={isPrivate}
+                onChange={(item) => setIsPrivate(item)}
+                isDisable={false}
               />
             </div>
-          )}
-          {BookingStore.startAt &&
-            BookingStore.endAt &&
-            BookingStore.selectedCourt &&
-            BookingStore.selectedData && (
-              <>
-                <div className="mt-5">
-                  <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
-                    Create
-                  </Button>
+            {isPrivate && (
+              <div className="mt-5">
+                <div className="mb-3">
+                  <Label>Select user group how can join in match</Label>
                 </div>
-              </>
+                <Select
+                  options={tagsOptoin}
+                  onChange={(i) => setSelectedTagId(Number(i.value))}
+                  placeholder="Select group"
+                />
+              </div>
             )}
-        </>
-      )}
+          </>
+        )}
+      </div>
+      <div>
+        <div className="mb-3 mt-5">
+          {step == 5 && (
+            <>
+              {BookingStore.startAt &&
+                BookingStore.endAt &&
+                BookingStore.selectedCourt &&
+                BookingStore.selectedData && (
+                  <>
+                    <div className="mt-5">
+                      <Button
+                        variant={ButtonVariant.FULL_HIGHLIGHT}
+                        type="submit"
+                      >
+                        Create
+                      </Button>
+                    </div>
+                  </>
+                )}
+            </>
+          )}
+          {step != 5 && isShowDesk && (
+            <Button variant={ButtonVariant.FULL_HIGHLIGHT} onClick={next}>
+              Next
+            </Button>
+          )}
+        </div>
+        <div>
+          <Button variant={ButtonVariant.OUTLINED} onClick={prev}>
+            Prev
+          </Button>
+        </div>
+      </div>
     </form>
   );
 });
