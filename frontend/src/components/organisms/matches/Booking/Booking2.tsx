@@ -53,7 +53,7 @@ export const Booking: React.FC = observer(() => {
         selectedTagId
       );
       if (flag) {
-        // navigate("/matches");
+        navigate("/matches");
       }
     }
   };

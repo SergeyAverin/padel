@@ -175,16 +175,16 @@ class AuthStore {
       }
       console.log(`you can create mathc ${flag}`);
       if (flag) {
-        // const res = await createMatch(
-        //   startAt,
-        //   endAt,
-        //   clubId,
-        //   courtId,
-        //   `${this.lvlMin}-${this.lvlMax}`,
-        //   isPrivate,
-        //   selectedTagId
-        // );
-        // this.matches.push(res);
+        const res = await createMatch(
+          startAt,
+          endAt,
+          clubId,
+          courtId,
+          `${this.lvlMin}-${this.lvlMax}`,
+          isPrivate,
+          selectedTagId
+        );
+        this.matches.push(res);
         if (this.selectedData) {
           const d = extractDayAndMonth(this.selectedData);
           this.selectStartAt("00:00");
