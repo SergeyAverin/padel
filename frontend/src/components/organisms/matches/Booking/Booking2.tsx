@@ -162,11 +162,13 @@ export const Booking: React.FC = observer(() => {
             </Button>
           )}
         </div>
-        <div>
-          <Button variant={ButtonVariant.OUTLINED} onClick={prev}>
-            Prev
-          </Button>
-        </div>
+        {step - 1 != 0 && (
+          <div>
+            <Button variant={ButtonVariant.OUTLINED} onClick={prev}>
+              Back
+            </Button>
+          </div>
+        )}
       </div>
     </form>
   );

@@ -22,8 +22,8 @@ if api_setting.api_is_debug:
 
 logger = getLogger(__name__)
 
-# if api_setting.api_is_debug:
-# app.middleware('http')(catch_exceptions_middleware)
+if api_setting.api_is_debug:
+    app.middleware('http')(catch_exceptions_middleware)
 app.middleware('http')(access_logging_middleware)
 app.add_middleware(
     CORSMiddleware,
