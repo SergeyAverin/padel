@@ -6,7 +6,14 @@ import { SelectEndAt } from "./SelectEndAt";
 import { SelectCourt } from "./SelectCourt";
 import { BookingDesk } from "./BookingDesk";
 import BookingStore from "@store/booking";
-import { Button, ButtonVariant, Label, Toggle } from "@atoms/index";
+import {
+  Button,
+  ButtonVariant,
+  Label,
+  Loading,
+  Spinner,
+  Toggle,
+} from "@atoms/index";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { SelectMatchLvl } from "./SelectMatchLvl";
@@ -97,7 +104,13 @@ export const Booking: React.FC = observer(() => {
                 <SelectStartAt />
                 <SelectEndAt />
                 <SelectCourt />
-                <BookingDesk />
+                {!BookingStore.isLoadingDesk ? (
+                  <BookingDesk />
+                ) : (
+                  <div className="mt-5 mb-5 mx-auto w-full flex justify-center items-center">
+                    <Loading />
+                  </div>
+                )}
               </>
             ) : (
               <></>

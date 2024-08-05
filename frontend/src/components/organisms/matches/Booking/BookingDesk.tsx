@@ -15,6 +15,23 @@ export const BookingDesk: React.FC = observer(() => {
     setTimeRange(a);
   }, [BookingStore.opening, BookingStore.closing]);
 
+  const [deskPoints, setDeskPoints] = useState<JSX.Element[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+    const a = BookingStore.breakPoints.map((item) => {
+      return (
+        <BookingTimePoint
+          court={item.courtIndex}
+          timeEnd={item.endAt}
+          timeStart={item.startAt}
+        />
+      );
+    });
+    setDeskPoints(a);
+    setIsLoading(false);
+  }, [BookingStore.breakPoints]);
+
   return (
     <>
       {BookingStore.selectedClubId && BookingStore.selectedData && (
@@ -43,13 +60,7 @@ export const BookingDesk: React.FC = observer(() => {
                   timeStart={getIndexInTimeRange(BookingStore.endAt) + 3}
                 />
               )}
-            {BookingStore.breakPoints.map((item) => (
-              <BookingTimePoint
-                court={item.courtIndex}
-                timeEnd={item.endAt}
-                timeStart={item.startAt}
-              />
-            ))}
+            {!isLoading && deskPoints}
           </div>
         </div>
       )}

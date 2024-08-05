@@ -27,6 +27,7 @@ class AuthStore {
   lvlMax: string = "0";
   opening: string = "08:00";
   closing: string = "23:00";
+  isLoadingDesk = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -38,12 +39,13 @@ class AuthStore {
       endAt: number;
       courtIndex: number;
     }> = [];
-    await this.matches.forEach(async (i) => {
-      const startAt = extractTime(String(i.start_at));
-      const endAt = extractTime(String(i.end_at));
+    this.isLoadingDesk = true;
+    if (this.selectedClubId) {
+      const club = (await getClubById(this.selectedClubId)) as IClub;
+      await this.matches.forEach(async (i) => {
+        const startAt = extractTime(String(i.start_at));
+        const endAt = extractTime(String(i.end_at));
 
-      if (this.selectedClubId) {
-        const club = (await getClubById(this.selectedClubId)) as IClub;
         const timeRange = getHoursInRange(club.opening, club.closing);
         const getIndexInTimeRange = (time: string) => {
           return timeRange.indexOf(time);
@@ -58,8 +60,8 @@ class AuthStore {
           courtIndex: courtIndex + 2,
         });
         this.breakPoints = arr;
-      }
-    });
+      });
+    }
   }
 
   async selectClub(club: string) {
@@ -109,8 +111,11 @@ class AuthStore {
   }
 
   async getMatchByDay(clubId: number, day: number, month: number) {
+    console.log(`get matches from date ${day} ${month}`);
     this.matches = await getMatchByDay(clubId, day, month);
-    this.setBreakPoints();
+    this.setBreakPoints().then(() => {
+      this.isLoadingDesk = false;
+    });
   }
   async setLvlMin(lvl: string) {
     this.lvlMin = lvl;
@@ -137,9 +142,6 @@ class AuthStore {
       if (courtId) {
         const court = courtId + 1;
         const filteredBreakPoints = this.breakPoints.filter((item) => {
-          console.log("court");
-          console.log(item.courtIndex);
-          console.log(courtId);
           return item.courtIndex == court;
         });
 

@@ -35,14 +35,6 @@ export const SelectStartAt: React.FC = observer(() => {
     setSelectedStartOption(option);
   };
 
-  useEffect(() => {
-    console.log("start");
-    console.log(BookingStore.breakPoints);
-    BookingStore.breakPoints.map((point) => {
-      console.log(`${point.startAt - 2} ${point.endAt - 3}`);
-    });
-  }, []);
-
   return (
     <div className="mt-5">
       {BookingStore.selectedData && BookingStore.selectedClubId && (

@@ -16,12 +16,15 @@ export const SelectDate: React.FC = observer(() => {
     value: item,
   }));
   const [selectedDate, setSelectedDate] = useState<Option>(dates[0]);
-  useEffect(() => {
-    setSelectedDate(dates[0]);
-    BookingStore.selectDate(dates[0].value);
-    const d = extractDayAndMonth(dates[0].value);
-    BookingStore.getMatchByDay(Number(BookingStore.selectedClubId), d[0], d[1]);
-  }, []);
+  // useEffect(() => {
+  //   setSelectedDate(dates[0]);
+  //   BookingStore.selectDate(dates[0].value);
+  // }, []);
+  // useEffect(() => {
+  //   const d = extractDayAndMonth(selectedDate.value);
+  //   console.log(1);
+  //   BookingStore.getMatchByDay(Number(BookingStore.selectedClubId), d[0], d[1]);
+  // }, [selectedDate]);
   const handleChangeDateOption = (option: Option) => {
     if (option) {
       BookingStore.selectDate(option.value);
@@ -29,6 +32,7 @@ export const SelectDate: React.FC = observer(() => {
     setSelectedDate(option);
     if (BookingStore.selectedClubId && option) {
       const d = extractDayAndMonth(option.value);
+      console.log(2);
       BookingStore.getMatchByDay(
         Number(BookingStore.selectedClubId),
         d[0],
