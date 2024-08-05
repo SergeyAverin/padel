@@ -5,6 +5,7 @@ import { IMatch } from "@schemas/match";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { extractTime, getHoursInRange } from "@utils/timeUtils";
 import { makeAutoObservable } from "mobx";
+import CourtStore from "@store/courts";
 
 class AuthStore {
   selectedTimePoint: null | { court: number } = null;
@@ -140,12 +141,11 @@ class AuthStore {
       };
       let flag = true;
       if (courtId) {
-        const court = courtId + 1;
+        const court = CourtStore.courts.findIndex((i) => i.id == courtId) + 2;
         const filteredBreakPoints = this.breakPoints.filter((item) => {
+          console.log(item.courtIndex);
           return item.courtIndex == court;
         });
-
-        console.log("break points from court");
         filteredBreakPoints.forEach((item) => {
           console.log(
             `[${getIndexInTimeRange(this.startAt) + 2}, ${
@@ -173,17 +173,18 @@ class AuthStore {
           }
         });
       }
+      console.log(`you can create mathc ${flag}`);
       if (flag) {
-        const res = await createMatch(
-          startAt,
-          endAt,
-          clubId,
-          courtId,
-          `${this.lvlMin}-${this.lvlMax}`,
-          isPrivate,
-          selectedTagId
-        );
-        this.matches.push(res);
+        // const res = await createMatch(
+        //   startAt,
+        //   endAt,
+        //   clubId,
+        //   courtId,
+        //   `${this.lvlMin}-${this.lvlMax}`,
+        //   isPrivate,
+        //   selectedTagId
+        // );
+        // this.matches.push(res);
         if (this.selectedData) {
           const d = extractDayAndMonth(this.selectedData);
           this.selectStartAt("00:00");
