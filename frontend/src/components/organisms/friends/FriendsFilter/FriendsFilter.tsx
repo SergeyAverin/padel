@@ -37,7 +37,7 @@ export const FriendsFilter: React.FC = observer(() => {
       <div className="mt-3">
         {isOpen && (
           <div className="flex mb-5 overflow-x-auto pb-3">
-            {TagStore.filterTags.length == 0 && (
+            {TagStore.tags.length == 0 && (
               <div>You don't have tags to categorize frinds.</div>
             )}
             {TagStore.tags.map((tag) => (

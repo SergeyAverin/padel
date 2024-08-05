@@ -28,7 +28,9 @@ export const FriendsTemplate: React.FC = observer(() => {
           {/* Friends */}
           <div>
             {FriendStore.friends.map((user) => (
-              <FriendCard user={user} key={user.telegram_user_id} />
+              <div key={user.telegram_user_id} className="mb-3">
+                <FriendCard user={user} />
+              </div>
             ))}
           </div>
         </>

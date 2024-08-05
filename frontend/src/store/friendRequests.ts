@@ -34,7 +34,7 @@ class FriendRequestsStore {
   }
 
   private appendFriendRequest(friendRequest: IFriendRequest) {
-    this.friendRequestsOuter.push(friendRequest);
+    this.friendRequestsInner.push(friendRequest);
   }
 
   async getInnerFriendRequests() {

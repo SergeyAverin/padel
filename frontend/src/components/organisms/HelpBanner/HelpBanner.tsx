@@ -30,7 +30,7 @@ export const HelpBanner: React.FC<IHelpBanner> = ({
           <div
             className={classNames("p-5 mt-5 bg-primary rounded-2xl shadow-md", {
               "relative w-full mx-auto": !isInNavigation,
-              "fixed bottom-[100px] w-[90%] mx-auto": isInNavigation,
+              "fixed z-10 bottom-[100px] w-[90%] mx-auto": isInNavigation,
             })}
           >
             <div className=" absolute right-5 top-5" onClick={onClose}>

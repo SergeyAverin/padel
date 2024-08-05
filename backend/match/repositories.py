@@ -74,7 +74,14 @@ class MatchRepository:
         return await Match.get_or_none(id=match_id)
 
     async def get_match_by_user(self, user_id: str):
-        matches = await Match.filter(owner__telegram_user_id=user_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        matches = await Match.filter(
+            Q(owner__telegram_user_id=user_id) |
+            Q(user_1__id__in=user_id) |
+            Q(user_2__id__in=user_id) |
+            Q(user_3__id__in=user_id) |
+            Q(user_4__id__in=user_id)
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+
         return [self.serealize_match(m) for m in matches]
 
     async def get_match_by_club(self, club_id: str):
@@ -90,7 +97,6 @@ class MatchRepository:
             Q(user_3__id__in=[friend.id for friend in friends]) |
             Q(user_4__id__in=[friend.id for friend in friends])
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
-
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
         # ).distinct()
@@ -111,5 +117,15 @@ class MatchRepository:
         pass
 
     async def get_club_for_match(self, user: User):
-        matches = await Club.filter(owner__telegram_user_id=user.telegram_user_id)
-        return matches
+        bookmarks = await club_bookmark_service.get_bookmarked_clubs(user.telegram_user_id)
+        if (len(bookmarks) > 0):
+            matches = await Club.filter(
+                Q(owner__telegram_user_id=user.telegram_user_id) |
+                Q(id__in=[bookmark.id for bookmark in bookmarks])
+            )
+            return list(set(matches))
+        else:
+            matches = await Club.filter(
+                owner__telegram_user_id=user.telegram_user_id
+            )
+            return matches
