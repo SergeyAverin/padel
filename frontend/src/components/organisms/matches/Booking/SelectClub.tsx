@@ -18,6 +18,16 @@ export const SelectClub: React.FC = observer(() => {
       value: String(club.id),
     }))[0]
   );
+  useEffect(() => {
+    if (CourtStore.clubCanCreateMatch.length > 0) {
+      const opton = CourtStore.clubCanCreateMatch.map((club) => ({
+        label: club.name,
+        value: String(club.id),
+      }));
+      BookingStore.selectClub(opton[0].value);
+      setSelectedClub(opton[0]);
+    }
+  }, [CourtStore.clubCanCreateMatch]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
@@ -65,7 +75,7 @@ export const SelectClub: React.FC = observer(() => {
               />
             </>
           )}
-          {selectedClub && CourtStore.courts.length == 0 && (
+          {selectedClub && CourtStore.courts.length == 0 && !isLoading && (
             <div className="bg-primary p-5 rounded-2xl shadow-md mt-5">
               <div className="text-[24px] mb-1 ">⚠️</div>
               You can't form a club in this club as the club doesn't have a
