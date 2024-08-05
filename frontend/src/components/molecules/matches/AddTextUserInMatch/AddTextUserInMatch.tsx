@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import UserPhoto from "@molecules/account/UserPhoto";
 
 import TestPhoto from "@assets/TestPhoto.png";
-import AddIcon from "@assets/AddTagIcon.svg?react";
 import AddUserStore from "@store/addUserInMatch";
 
 export const AddTextUserInMatch: React.FC = () => {

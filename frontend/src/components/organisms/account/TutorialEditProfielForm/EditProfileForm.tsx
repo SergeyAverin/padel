@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { City, Country } from "country-state-city";
 
 import { config, FormDataI, getInitState } from "./editProfileConfig";
@@ -34,7 +34,7 @@ export const TutorialEditProfielForm: React.FC<TutorialEditProfielForm> = ({
   }));
   const [selectedCity, setSelectedCity] = useState<null | Option>(null);
   const [cityOption, setCityOptions] = useState<Array<Option>>([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const onSubmit = () => {
     if (
       re.test(String(formValue.email)) &&

@@ -1,7 +1,7 @@
-import { Button, ButtonVariant, Label } from "@atoms/index";
+import { Button, ButtonVariant } from "@atoms/index";
 import SelectUserLvl from "@molecules/matches/SelectUserLvl";
 import { IMatch } from "@schemas/match";
-import Match from "@organisms/matches/Match";
+// import Match from "@organisms/matches/Match";
 import React, { useState } from "react";
 import BlankStore from "@store/blank";
 

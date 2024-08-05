@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useRef, useState } from "react";
 import ClubStore from "@store/club";
 import FileIcon from "@assets/FileIcon.svg?react";
-import HelpBanner from "@organisms/HelpBanner";
+// import HelpBanner from "@organisms/HelpBanner";
 
 export const UploadClubPhoto: React.FC = observer(() => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
