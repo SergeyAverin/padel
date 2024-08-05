@@ -24,15 +24,18 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
   return (
     <>
       <div
-        className="flex"
+        className="flex items-center"
         onClick={() => {
           onClick();
         }}
       >
         <img className="w-[42px] h-[42px] rounded-full" src={user.avatar} />
 
-        <div className="text-[14px] mt-2 ml-1">
+        <div className="text-[14px] ml-1">
           {shortenString(user.username, 12)}
+          <div className="p-1 bg-highlight text-bg rounded-full flex justify-center items-center w-[20px] h-[20px] text-[14px]">
+            {user.lvl}
+          </div>
         </div>
       </div>
     </>

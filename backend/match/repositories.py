@@ -10,7 +10,7 @@ from account.models import User
 from friends.models import Tag
 from friends.services import friend_service
 from club.services import club_bookmark_service
-
+from account.service import user_service
 
 logger = getLogger()
 
@@ -32,12 +32,13 @@ class MatchRepository:
         match.selected_court = court
         match.match_lvl = match_create_data.match_lvl
         match.is_private = match_create_data.is_private
+        await match.save()
         if match.is_private:
             tag = await Tag.get_or_none(id=match_create_data.tag_id)
             users_to_match = await tag.friends_with_tag.all()
             for user_to_match in users_to_match:
-                match.user_for_match.add(user_to_match)
-        await match.save()
+                await match.user_for_match.add(user_to_match)
+            await match.save()
         return match
 
     def serealize_match(self, match):
