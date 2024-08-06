@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Spinner } from "@atoms/index";
@@ -11,6 +11,9 @@ import MatchStore from "@store/match";
 import HelpBanner from "@organisms/HelpBanner";
 
 export const MatchTemplate: React.FC = observer(() => {
+  useEffect(() => {
+    MatchStore.loadingMatch();
+  }, []);
   const tabs = [
     {
       to: "#your",
