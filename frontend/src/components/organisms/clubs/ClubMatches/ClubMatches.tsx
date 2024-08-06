@@ -20,7 +20,7 @@ export const ClubMatches: React.FC = observer(() => {
             <Match match={match} />
           </div>
         ))}
-        {MatchStore.matches.length == 0 && (
+        {MatchStore.matches.length == 0 && !MatchStore.isLoadingFromClub && (
           <EmptyBanner text="Club have not matches" />
         )}
       </div>
