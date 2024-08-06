@@ -15,11 +15,14 @@ export const ClubMatches: React.FC = observer(() => {
       )}
 
       <div>
-        {MatchStore.matches.map((match) => (
-          <div key={match.id} className="mt-5">
-            <Match match={match} />
-          </div>
-        ))}
+        {MatchStore.matches
+          .slice(0)
+          .reverse()
+          .map((match) => (
+            <div key={match.id} className="mt-5">
+              <Match match={match} />
+            </div>
+          ))}
         {MatchStore.matches.length == 0 && !MatchStore.isLoadingFromClub && (
           <EmptyBanner text="Club have not matches" />
         )}
