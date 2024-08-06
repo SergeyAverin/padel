@@ -17,11 +17,14 @@ export const MatchClub: React.FC = observer(() => {
           <Heading variant={HeadingVariant.H2}>
             Match from bookmarked clubs
           </Heading>
-          {MatchStore.matchesFromBookmarks.map((match) => (
-            <div className="mt-3" key={match.id}>
-              <Match match={match} />
-            </div>
-          ))}
+          {MatchStore.matchesFromBookmarks
+            .slice()
+            .reverse()
+            .map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match match={match} />
+              </div>
+            ))}
         </div>
       )}
     </>

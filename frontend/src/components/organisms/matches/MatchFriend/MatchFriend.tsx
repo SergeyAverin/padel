@@ -15,11 +15,14 @@ export const MatchFriend: React.FC = observer(() => {
       {MatchStore.matchesFromFriends.length != 0 && (
         <div className="mt-5">
           <Heading variant={HeadingVariant.H2}>Match from friends</Heading>
-          {MatchStore.matchesFromFriends.map((match) => (
-            <div className="mt-3" key={match.id}>
-              <Match match={match} />
-            </div>
-          ))}
+          {MatchStore.matchesFromFriends
+            .slice()
+            .reverse()
+            .map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match match={match} />
+              </div>
+            ))}
         </div>
       )}
     </>

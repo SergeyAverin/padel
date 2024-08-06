@@ -29,11 +29,14 @@ export const MatchUser: React.FC = observer(() => {
               match.
             </HelpBanner>
           </div>
-          {MatchStore.matches.map((match) => (
-            <div className="mt-3" key={match.id}>
-              <Match match={match} />
-            </div>
-          ))}
+          {MatchStore.matches
+            .slice()
+            .reverse()
+            .map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match match={match} />
+              </div>
+            ))}
         </div>
       )}
     </>

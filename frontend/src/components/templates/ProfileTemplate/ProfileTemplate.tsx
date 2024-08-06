@@ -75,11 +75,15 @@ export const ProfileTemplate: React.FC = observer(() => {
               <Loading />
             </div>
           )}
-          {MatchStore.matches.map((match) => (
-            <div key={match.id} className="mt-5">
-              <Match match={match} />
-            </div>
-          ))}
+          {MatchStore.matches.length != 0 &&
+            MatchStore.matches
+              .slice()
+              .reverse()
+              .map((match) => (
+                <div key={match.id} className="mt-5">
+                  <Match match={match} />
+                </div>
+              ))}
         </div>
       </div>
     </div>
