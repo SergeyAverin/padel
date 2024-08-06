@@ -161,6 +161,61 @@ export const Tutorial: React.FC = () => {
               I vary between returns in the feet and the lob <br />
               I'm starting to defend the double windows
             </LvlDescription>
+
+            <LvlDescription lvl="6" title="ADVANCED">
+              I regularly do approved tournaments
+              <br />
+              === Atack === <br />
+              I finish points in a facelifted smash
+              <br />
+              I vary the zones and the speeds of my flights
+              <br />
+              === Defense === <br />
+              I manage to slow down or speed up the game <br />I counterattack
+              the opponent's smashes
+            </LvlDescription>
+
+            <LvlDescription lvl="7" title="ADVANCED+">
+              I win several matches during the approved tournaments
+              <br />
+              === Atack === <br />
+              I master the different forms of smashes (vibora and bandeja)
+              <br />
+              I finish points by getting the ball out
+              <br />
+              === Defense === <br />
+              I manage to defend by turning around the ball
+              <br />I make comebacks, in the feet or lobes
+            </LvlDescription>
+
+            <LvlDescription lvl="8" title="Expert">
+              I am reaching the final stages approved tournaments
+              <br />
+              === Atack === <br />
+              I master all the attack moves I vary the different smashes
+              according to of the opponent's game
+              <br />
+              I finish points by getting the ball out
+              <br />
+              === Defense === <br />I counterattack by varying the blows I
+              master the double windows
+            </LvlDescription>
+
+            <LvlDescription lvl="9" title="Expert+">
+              I am classified between 400 and 200 French
+              <br />
+              === Atack === <br />
+              I master all the attack moves I will finish the point as soon as
+              the opportunity presents itself
+              <br />
+              I finish points by getting the ball out
+              <br />
+              === Defense === <br />I master all the defense moves
+              <br />I master all the counterattack moves
+            </LvlDescription>
+            <LvlDescription lvl="10" title="Elit">
+              I am part of the French Top 200
+            </LvlDescription>
           </div>
           <div className="w-[300px] m-auto mt-5">
             <Select
