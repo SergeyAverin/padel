@@ -10,7 +10,9 @@ import HelpBanner from "@organisms/HelpBanner";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   useEffect(() => {
-    AddUserStore.getUserForMatch(AddUserStore.matchId);
+    if (AddUserStore.matchId) {
+      AddUserStore.getUserForMatch(AddUserStore.matchId);
+    }
   }, [AddUserStore.matchId]);
   const selectUser = (user_id: string) => {
     AddUserStore.toggleIsOpen();
