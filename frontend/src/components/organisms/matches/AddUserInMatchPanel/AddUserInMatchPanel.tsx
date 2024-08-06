@@ -13,6 +13,9 @@ const AddUserInMatchPanel: React.FC = observer(() => {
     if (AddUserStore.matchId != 0) {
       AddUserStore.getUserForMatch(AddUserStore.matchId);
     }
+    return () => {
+      AddUserStore.userForMatch = [];
+    };
   }, [AddUserStore.matchId]);
   const selectUser = (user_id: string) => {
     AddUserStore.toggleIsOpen();

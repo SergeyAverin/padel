@@ -20,6 +20,7 @@ import Blank from "@organisms/matches/Blank";
 import BlankStore from "@store/blank";
 import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+import ClubFilterStore from "@store/clubFilter";
 
 const App = observer(() => {
   useEffect(() => {
@@ -34,6 +35,12 @@ const App = observer(() => {
       userId = String(JSON.parse(session).tgWebAppData);
     }
   }
+
+  useEffect(() => {
+    if (AuthStore.authUser) {
+      ClubFilterStore.changeCity(AuthStore.authUser.city);
+    }
+  }, []);
 
   useAuth(userId);
 
