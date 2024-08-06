@@ -6,6 +6,7 @@ import { extractDayAndMonth } from "@utils/dateUtils";
 import { extractTime, getHoursInRange } from "@utils/timeUtils";
 import { makeAutoObservable } from "mobx";
 import CourtStore from "@store/courts";
+import MatchStore from "@store/match";
 
 class AuthStore {
   selectedTimePoint: null | { court: number } = null;
@@ -185,6 +186,8 @@ class AuthStore {
           selectedTagId
         );
         this.matches.push(res);
+        await MatchStore.loadingMatch();
+        await MatchStore.loadClubMatches(Number(this.selectedClubId));
         if (this.selectedData) {
           const d = extractDayAndMonth(this.selectedData);
           this.selectStartAt("00:00");
