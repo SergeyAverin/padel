@@ -86,7 +86,9 @@ export const ClubsTemplate: React.FC = observer(() => {
             {!ClubStore.isFilterAwait ? (
               <>
                 {ClubStore.clubs.length == 0 && (
-                  <EmptyBanner text="Clubs not found" />
+                  <div className="pt-5 pb-[200px]">
+                    <EmptyBanner text="Clubs not found" />
+                  </div>
                 )}
                 <div className="grid grid-cols-2 gap-2 mt-5">
                   {ClubStore.clubs.map((club) => (
