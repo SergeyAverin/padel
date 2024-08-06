@@ -10,7 +10,7 @@ import HelpBanner from "@organisms/HelpBanner";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   useEffect(() => {
-    if (AddUserStore.matchId) {
+    if (AddUserStore.matchId != 0) {
       AddUserStore.getUserForMatch(AddUserStore.matchId);
     }
   }, [AddUserStore.matchId]);
