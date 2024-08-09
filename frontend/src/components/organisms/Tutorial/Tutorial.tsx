@@ -278,15 +278,10 @@ export const Tutorial: React.FC = () => {
       {isOpen && (
         <div className="fixed left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
           {!(step in [1, 2, 3, 4, 5]) && step > 3 && sliders[step - 1]}
-          {step in [1, 2, 3, 4, 5] && (
-            <div>
-              {sliders[0]}
-              {sliders[1]}
-              {sliders[2]}
-              {sliders[3]}
-              {/* {sliders[4]} */}
-            </div>
-          )}
+          {sliders[0]}
+          {sliders[1]}
+          {sliders[2]}
+          {sliders[3]}
           {step != 7 && (
             <div className="flex justify-center items-center">
               <div>
