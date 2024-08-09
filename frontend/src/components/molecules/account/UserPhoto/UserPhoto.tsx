@@ -16,7 +16,6 @@ export const UserPhoto: React.FC<IUserPhotoProps> = ({
 }) => {
   return (
     <>
-      {avatar}
       <div className="relative">
         <img
           src={avatar}
