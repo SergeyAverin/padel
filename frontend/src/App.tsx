@@ -1,27 +1,26 @@
 import { useEffect } from "react";
-// import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-
-// import MainRouter from "./routers";
-// import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
-// import { useAuth } from "@hooks/useAuth";
-import AuthStore from "@store/auth";
-/** Путь к API */
-// const API_URL = import.meta.env.VITE_API_URL;
-// import MatchStore from "@store/match";
-// import UserStore from "@store/user";
-// import FriendRequestsStore from "@store/friendRequests";
-// import FriendStore from "@store/friends";
-// import ClubStore from "@store/club";
-// import { DndProvider } from "react-dnd";
 // import { HTML5Backend } from "react-dnd-html5-backend";
-// import TagStore from "@store/tags";
-// import Blank from "@organisms/matches/Blank";
-// import BlankStore from "@store/blank";
-// import { Heading, HeadingVariant, Loading } from "@atoms/index";
-// import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
-// import ClubFilterStore from "@store/clubFilter";
+// import { DndProvider } from "react-dnd";
+
+import MainRouter from "./routers";
+import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import CleanLocalStorage from "@molecules/CleanLocalStorage";
+import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
+import Blank from "@organisms/matches/Blank";
+import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+
+import { useAuth } from "@hooks/useAuth";
+// import MatchStore from "@store/match";
+// import FriendStore from "@store/friends";
+// import FriendRequestsStore from "@store/friendRequests";
+// import ClubStore from "@store/club";
+// import UserStore from "@store/user";
+// import TagStore from "@store/tags";
+import AuthStore from "@store/auth";
+import BlankStore from "@store/blank";
+import ClubFilterStore from "@store/clubFilter";
 
 const App = observer(() => {
   useEffect(() => {
@@ -29,24 +28,25 @@ const App = observer(() => {
       window.Telegram.WebApp.expand();
     }
   }, []);
-  // let userId = "";
-  // if (window.Telegram.WebApp.initDataUnsafe.user) {
-  //   const session = sessionStorage.getItem("__telegram__initParams");
-  //   if (session) {
-  //     userId = String(JSON.parse(session).tgWebAppData);
-  //   }
-  // }
+
+  let userId = "";
+  if (window.Telegram.WebApp.initDataUnsafe.user) {
+    const session = sessionStorage.getItem("__telegram__initParams");
+    if (session) {
+      userId = String(JSON.parse(session).tgWebAppData);
+    }
+  }
+
+  useEffect(() => {
+    if (AuthStore.isLogin && AuthStore.authUser) {
+      ClubFilterStore.changeCity(AuthStore.authUser.city);
+    }
+  }, []);
+
+  useAuth(userId);
 
   // useEffect(() => {
-  //   if (AuthStore.authUser) {
-  //     ClubFilterStore.changeCity(AuthStore.authUser.city);
-  //   }
-  // }, []);
-
-  // useAuth(userId);
-
-  // useEffect(() => {
-  //   if (AuthStore.authUser && AuthStore.authUser?.telegram_user_id) {
+  //   if (AuthStore.isLogin && AuthStore.authUser?.telegram_user_id) {
   //     UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
   //     MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
   //     MatchStore.loadingMatch();
@@ -66,45 +66,42 @@ const App = observer(() => {
       <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
-          {/* {AuthStore.isLogin && (
+          {AuthStore.isLogin && (
             <>
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
-                <DndProvider backend={HTML5Backend}>
-                  <BrowserRouter>
-                    {BlankStore.matchWithOutBlank.length > 0 && (
-                      <>
-                        <div className="fixed w-full h-full top-0 left-0 bg-primary z-50 overflow-y-auto">
-                          <div className="p-5">
-                            <Heading variant={HeadingVariant.H2}>
-                              Select mark for user
-                            </Heading>
-                          </div>
-
-                          {BlankStore.isLoading && (
-                            <div className="flex justify-center items-center mt-[100px] w-full">
-                              <Loading />
-                            </div>
-                          )}
-                          {!BlankStore.isLoading && (
-                            <>
-                              {BlankStore.matchWithOutBlank.map((item) => (
-                                <Blank match={item} />
-                              ))}
-                            </>
-                          )}
+                <BrowserRouter>
+                  {BlankStore.matchWithOutBlank.length > 0 && (
+                    <>
+                      <div className="fixed w-full h-full top-0 left-0 bg-primary z-50 overflow-y-auto">
+                        <div className="p-5">
+                          <Heading variant={HeadingVariant.H2}>
+                            Select mark for user
+                          </Heading>
                         </div>
-                      </>
-                    )}
-                    <AddUserPanel />
 
-                    <MainRouter />
-                    <TutorialPortal />
-                  </BrowserRouter>
-                </DndProvider>
+                        {BlankStore.isLoading && (
+                          <div className="flex justify-center items-center mt-[100px] w-full">
+                            <Loading />
+                          </div>
+                        )}
+                        {!BlankStore.isLoading && (
+                          <>
+                            {BlankStore.matchWithOutBlank.map((item) => (
+                              <Blank match={item} />
+                            ))}
+                          </>
+                        )}
+                      </div>
+                    </>
+                  )}
+                  <AddUserPanel />
+
+                  <MainRouter />
+                  <TutorialPortal />
+                </BrowserRouter>
               </div>
             </>
-          )} */}
-          {AuthStore.isLogin && <div>You are loggined</div>}
+          )}
           {!AuthStore.isLogin && <div>Need auth</div>}
         </>
       ) : (
