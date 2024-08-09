@@ -46,7 +46,7 @@ const App = observer(() => {
   useAuth(userId);
 
   useEffect(() => {
-    if (AuthStore.authUser?.telegram_user_id) {
+    if (AuthStore.authUser && AuthStore.authUser?.telegram_user_id) {
       UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
       MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
       MatchStore.loadingMatch();
