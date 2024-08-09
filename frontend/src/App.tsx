@@ -4,23 +4,23 @@ import { observer } from "mobx-react-lite";
 
 // import MainRouter from "./routers";
 // import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
-import { useAuth } from "@hooks/useAuth";
+// import { useAuth } from "@hooks/useAuth";
 import AuthStore from "@store/auth";
 /** Путь к API */
 // const API_URL = import.meta.env.VITE_API_URL;
-import MatchStore from "@store/match";
-import UserStore from "@store/user";
-import FriendRequestsStore from "@store/friendRequests";
-import FriendStore from "@store/friends";
-import ClubStore from "@store/club";
+// import MatchStore from "@store/match";
+// import UserStore from "@store/user";
+// import FriendRequestsStore from "@store/friendRequests";
+// import FriendStore from "@store/friends";
+// import ClubStore from "@store/club";
 // import { DndProvider } from "react-dnd";
 // import { HTML5Backend } from "react-dnd-html5-backend";
-import TagStore from "@store/tags";
+// import TagStore from "@store/tags";
 // import Blank from "@organisms/matches/Blank";
-import BlankStore from "@store/blank";
+// import BlankStore from "@store/blank";
 // import { Heading, HeadingVariant, Loading } from "@atoms/index";
 // import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
-import ClubFilterStore from "@store/clubFilter";
+// import ClubFilterStore from "@store/clubFilter";
 import CleanLocalStorage from "@molecules/CleanLocalStorage";
 
 const App = observer(() => {
@@ -29,37 +29,37 @@ const App = observer(() => {
       window.Telegram.WebApp.expand();
     }
   }, []);
-  let userId = "";
-  if (window.Telegram.WebApp.initDataUnsafe.user) {
-    const session = sessionStorage.getItem("__telegram__initParams");
-    if (session) {
-      userId = String(JSON.parse(session).tgWebAppData);
-    }
-  }
+  // let userId = "";
+  // if (window.Telegram.WebApp.initDataUnsafe.user) {
+  //   const session = sessionStorage.getItem("__telegram__initParams");
+  //   if (session) {
+  //     userId = String(JSON.parse(session).tgWebAppData);
+  //   }
+  // }
 
-  useEffect(() => {
-    if (AuthStore.authUser) {
-      ClubFilterStore.changeCity(AuthStore.authUser.city);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (AuthStore.authUser) {
+  //     ClubFilterStore.changeCity(AuthStore.authUser.city);
+  //   }
+  // }, []);
 
-  useAuth(userId);
+  // useAuth(userId);
 
-  useEffect(() => {
-    if (AuthStore.authUser && AuthStore.authUser?.telegram_user_id) {
-      UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
-      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
-      MatchStore.loadingMatch();
-      FriendRequestsStore.loadingRequests();
-      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
-      ClubStore.loadClubs();
-      TagStore.getTags();
-      BlankStore.loadMatchWithOutBlank();
-    }
-    return () => {
-      UserStore.user = null;
-    };
-  }, [AuthStore.authUser]);
+  // useEffect(() => {
+  //   if (AuthStore.authUser && AuthStore.authUser?.telegram_user_id) {
+  //     UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
+  //     MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+  //     MatchStore.loadingMatch();
+  //     FriendRequestsStore.loadingRequests();
+  //     FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
+  //     ClubStore.loadClubs();
+  //     TagStore.getTags();
+  //     BlankStore.loadMatchWithOutBlank();
+  //   }
+  //   return () => {
+  //     UserStore.user = null;
+  //   };
+  // }, [AuthStore.authUser]);
 
   return (
     <>
@@ -104,7 +104,7 @@ const App = observer(() => {
               </div>
             </>
           )} */}
-          {!AuthStore.isLogin && <div>You are loggined</div>}
+          {AuthStore.isLogin && <div>You are loggined</div>}
           {!AuthStore.isLogin && <div>Need auth</div>}
         </>
       ) : (
