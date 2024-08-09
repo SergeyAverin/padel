@@ -7,16 +7,30 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import UserStore from "@store/user";
 import TutorialEditProfielForm from "@organisms/account/TutorialEditProfielForm";
+import classNames from "classnames";
 
 interface ISlideProps {
   title: string;
   text: string;
   animation: string;
+  index: number;
+  step: number;
 }
-export const Slide: React.FC<ISlideProps> = ({ animation, text, title }) => {
+export const Slide: React.FC<ISlideProps> = ({
+  animation,
+  step,
+  text,
+  title,
+  index,
+}) => {
   const container = useAnimation(animation);
   return (
-    <div>
+    <div
+      className={classNames({
+        block: index == step,
+        hidden: index != step,
+      })}
+    >
       <div className="mx-auto w-[250px] mt-[38px]">
         <div ref={container}></div>
       </div>
@@ -71,21 +85,29 @@ export const Tutorial: React.FC = () => {
       animation="/FindFriendsAnimation.json"
       title="Find frinds"
       text="Look for padel playmates who are equal in strength to you."
+      index={1}
+      step={step}
     />,
     <Slide
       animation="/ScoreAnimation.json"
       title="Lvl"
       text="All users have lvl, which shows their current level of play in padel."
+      index={2}
+      step={step}
     />,
     <Slide
       animation="/WinAnimation.json"
       title="Clubs"
       text="Search for padel clubs in your city. And you see the matches of this club."
+      index={3}
+      step={step}
     />,
     <Slide
       animation="/MedalAnimation.json"
       title="Profile"
       text="All users can see your match history and information about what position and what hand you play in padel."
+      index={4}
+      step={step}
     />,
     <div>
       <div className="flex justify-center">
@@ -255,7 +277,16 @@ export const Tutorial: React.FC = () => {
     <>
       {isOpen && (
         <div className="fixed left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
-          {sliders[step - 1]}
+          {!(step in [1, 2, 3, 4, 5]) && step > 3 && sliders[step - 1]}
+          {step in [1, 2, 3, 4, 5] && (
+            <div>
+              {sliders[0]}
+              {sliders[1]}
+              {sliders[2]}
+              {sliders[3]}
+              {/* {sliders[4]} */}
+            </div>
+          )}
           {step != 7 && (
             <div className="flex justify-center items-center">
               <div>
