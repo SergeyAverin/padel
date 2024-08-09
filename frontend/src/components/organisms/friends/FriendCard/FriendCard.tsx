@@ -9,6 +9,7 @@ import AddTag from "@molecules/friends/AddTag";
 import TagStore from "@store/tags";
 import { ITag } from "@schemas/tags";
 import { shortenString } from "@utils/shoringString";
+import { Link } from "react-router-dom";
 
 interface IFriendCardProps {
   user: IUser;
@@ -74,21 +75,23 @@ export const FriendCard: React.FC<IFriendCardProps> = observer(({ user }) => {
       {isShow && (
         <div className="bg-primary p-5 rounded-xl">
           <div className="flex justify-between w-full">
-            <div className="flex">
-              <UserPhoto lvl={user.lvl} avatar={user.avatar} />
+            <Link to={`/user/${user.telegram_user_id}`}>
+              <div className="flex">
+                <UserPhoto lvl={user.lvl} avatar={user.avatar} />
 
-              <div className="ml-5">
-                <div className="text-[16px] font-bold">
-                  {shortenString(user.username, 17)}
-                </div>
-                <div className="text-[16px] font-medium">
-                  {shortenString(user.first_name, 17)}
-                  <br />
-                  {user.last_name.toLowerCase() != "none" &&
-                    shortenString(user.last_name, 17)}
+                <div className="ml-5">
+                  <div className="text-[16px] font-bold">
+                    {shortenString(user.username, 17)}
+                  </div>
+                  <div className="text-[16px] font-medium">
+                    {shortenString(user.first_name, 17)}
+                    <br />
+                    {user.last_name.toLowerCase() != "none" &&
+                      shortenString(user.last_name, 17)}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="w-[100px]">
               <UnFriend friendId={user.telegram_user_id} />
             </div>
