@@ -12,12 +12,12 @@ import Blank from "@organisms/matches/Blank";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 import { useAuth } from "@hooks/useAuth";
-// import MatchStore from "@store/match";
-// import FriendStore from "@store/friends";
-// import FriendRequestsStore from "@store/friendRequests";
-// import ClubStore from "@store/club";
-// import UserStore from "@store/user";
-// import TagStore from "@store/tags";
+import MatchStore from "@store/match";
+import FriendStore from "@store/friends";
+import FriendRequestsStore from "@store/friendRequests";
+import ClubStore from "@store/club";
+import UserStore from "@store/user";
+import TagStore from "@store/tags";
 import AuthStore from "@store/auth";
 import BlankStore from "@store/blank";
 import ClubFilterStore from "@store/clubFilter";
@@ -36,6 +36,7 @@ const App = observer(() => {
       userId = String(JSON.parse(session).tgWebAppData);
     }
   }
+  useAuth(userId);
 
   useEffect(() => {
     if (AuthStore.isLogin && AuthStore.authUser) {
@@ -43,23 +44,21 @@ const App = observer(() => {
     }
   }, []);
 
-  useAuth(userId);
-
-  // useEffect(() => {
-  //   if (AuthStore.isLogin && AuthStore.authUser?.telegram_user_id) {
-  //     UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
-  //     MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
-  //     MatchStore.loadingMatch();
-  //     FriendRequestsStore.loadingRequests();
-  //     FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
-  //     ClubStore.loadClubs();
-  //     TagStore.getTags();
-  //     BlankStore.loadMatchWithOutBlank();
-  //   }
-  //   return () => {
-  //     UserStore.user = null;
-  //   };
-  // }, [AuthStore.authUser]);
+  useEffect(() => {
+    if (AuthStore.isLogin && AuthStore.authUser?.telegram_user_id) {
+      UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+      MatchStore.loadingMatch();
+      FriendRequestsStore.loadingRequests();
+      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
+      ClubStore.loadClubs();
+      TagStore.getTags();
+      BlankStore.loadMatchWithOutBlank();
+    }
+    return () => {
+      UserStore.user = null;
+    };
+  }, [AuthStore.authUser]);
 
   return (
     <>

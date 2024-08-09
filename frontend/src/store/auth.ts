@@ -15,8 +15,8 @@ class AuthStore {
   }
 
   async login(userId: string) {
-    this.isLogin = true;
     await login(userId);
+    this.isLogin = true;
     // await UserStore.getUser();
   }
   async setAuth() {

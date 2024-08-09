@@ -8,6 +8,7 @@ import "./index.css";
 
 configure({
   enforceActions: "never",
+  useProxies: "never",
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
