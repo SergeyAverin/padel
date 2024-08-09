@@ -15,7 +15,7 @@
     <link href="./output.css" rel="stylesheet" />
   </head>
   <body class="bg-bg">
-    <div id="error-log">Ошибки:</div>
+    <div id="error-log" style="color: #fff">Ошибки:</div>
     <div id="root"></div>
     <div id="add-user-panel"></div>
     <div id="filter"></div>
@@ -24,6 +24,20 @@
     <script>
       var errorLog = document.getElementById("error-log");
       var originalConsoleError = console.error;
+
+      // Перехват XMLHttpRequest
+      var _open = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function () {
+        console.error("Выполняется запрос:", arguments);
+        return _open.apply(this, arguments);
+      };
+
+      // Перехват Fetch
+      var _fetch = window.fetch;
+      window.fetch = function () {
+        console.error("Выполняется запрос Fetch:", arguments);
+        return _fetch.apply(this, arguments);
+      };
 
       console.error = function (...args) {
         // Выводим ошибку в консоль
