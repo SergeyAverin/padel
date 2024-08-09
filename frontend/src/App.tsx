@@ -1,68 +1,93 @@
-import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+// import { useEffect } from "react";
+// import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 // import { HTML5Backend } from "react-dnd-html5-backend";
 // import { DndProvider } from "react-dnd";
 
-import MainRouter from "./routers";
-import { Heading, HeadingVariant, Loading } from "@atoms/index";
-import CleanLocalStorage from "@molecules/CleanLocalStorage";
-import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
-import Blank from "@organisms/matches/Blank";
-import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+// import MainRouter from "./routers";
+// import { Heading, HeadingVariant, Loading } from "@atoms/index";
+// import CleanLocalStorage from "@molecules/CleanLocalStorage";
+// import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
+// import Blank from "@organisms/matches/Blank";
+// import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
-import { useAuth } from "@hooks/useAuth";
-import MatchStore from "@store/match";
-import FriendStore from "@store/friends";
-import FriendRequestsStore from "@store/friendRequests";
-import ClubStore from "@store/club";
-import UserStore from "@store/user";
-import TagStore from "@store/tags";
-import AuthStore from "@store/auth";
-import BlankStore from "@store/blank";
-import ClubFilterStore from "@store/clubFilter";
+// import { useAuth } from "@hooks/useAuth";
+// import MatchStore from "@store/match";
+// import FriendStore from "@store/friends";
+// import FriendRequestsStore from "@store/friendRequests";
+// import ClubStore from "@store/club";
+// import UserStore from "@store/user";
+// import TagStore from "@store/tags";
+// import AuthStore from "@store/auth";
+// import BlankStore from "@store/blank";
+// import ClubFilterStore from "@store/clubFilter";
+
+import TestStore from "@store/test";
+import { useEffect } from "react";
 
 const App = observer(() => {
+  // useEffect(() => {
+  //   if (window.Telegram.WebApp) {
+  //     window.Telegram.WebApp.expand();
+  //   }
+  // }, []);
+
+  // let userId = "";
+  // if (window.Telegram.WebApp.initDataUnsafe.user) {
+  //   const session = sessionStorage.getItem("__telegram__initParams");
+  //   if (session) {
+  //     userId = String(JSON.parse(session).tgWebAppData);
+  //   }
+  // }
+  // useAuth(userId);
+
+  // useEffect(() => {
+  //   if (AuthStore.isLogin && AuthStore.authUser) {
+  //     ClubFilterStore.changeCity(AuthStore.authUser.city);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (AuthStore.isLogin && AuthStore.authUser?.telegram_user_id) {
+  //     UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
+  //     MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
+  //     MatchStore.loadingMatch();
+  //     FriendRequestsStore.loadingRequests();
+  //     FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
+  //     ClubStore.loadClubs();
+  //     TagStore.getTags();
+  //     BlankStore.loadMatchWithOutBlank();
+  //   }
+  //   return () => {
+  //     UserStore.user = null;
+  //   };
+  // }, [AuthStore.authUser]);
   useEffect(() => {
-    if (window.Telegram.WebApp) {
-      window.Telegram.WebApp.expand();
-    }
+    TestStore.testHello();
   }, []);
-
-  let userId = "";
-  if (window.Telegram.WebApp.initDataUnsafe.user) {
-    const session = sessionStorage.getItem("__telegram__initParams");
-    if (session) {
-      userId = String(JSON.parse(session).tgWebAppData);
-    }
-  }
-  useAuth(userId);
-
-  useEffect(() => {
-    if (AuthStore.isLogin && AuthStore.authUser) {
-      ClubFilterStore.changeCity(AuthStore.authUser.city);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (AuthStore.isLogin && AuthStore.authUser?.telegram_user_id) {
-      UserStore.getUserInfo(AuthStore.authUser.telegram_user_id);
-      MatchStore.loadUserMatches(AuthStore.authUser.telegram_user_id);
-      MatchStore.loadingMatch();
-      FriendRequestsStore.loadingRequests();
-      FriendStore.getFriends(AuthStore.authUser.telegram_user_id);
-      ClubStore.loadClubs();
-      TagStore.getTags();
-      BlankStore.loadMatchWithOutBlank();
-    }
-    return () => {
-      UserStore.user = null;
-    };
-  }, [AuthStore.authUser]);
 
   return (
     <>
-      <CleanLocalStorage />
+      <div className="text-fg">{TestStore.count}</div>
+      <div className="flex">
+        <button
+          className="bg-primary text-fg p-3"
+          onClick={() => TestStore.incr()}
+        >
+          +
+        </button>
+        <button
+          className="bg-primary text-fg p-3"
+          onClick={() => TestStore.dect()}
+        >
+          -
+        </button>
+      </div>
+      <div className="text-fg">{TestStore.isLoading && "loading"}</div>
+      <div className="text-fg">
+        {!TestStore.isLoading && <span>{TestStore.msg}</span>}
+      </div>
+      {/* <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
           {AuthStore.isLogin && (
@@ -107,7 +132,7 @@ const App = observer(() => {
         <>
           <div>Need open in telegram web app</div>
         </>
-      )}
+      )} */}
     </>
   );
 });
