@@ -4,7 +4,7 @@ import AuthStore from "../store/auth";
 
 export const useAuth = (userId: string) => {
   useEffect(() => {
-    if (localStorage.getItem("token") != null) {
+    if (localStorage.getItem("token") == null) {
       AuthStore.login(userId);
       AuthStore.acceptUser();
     } else {
