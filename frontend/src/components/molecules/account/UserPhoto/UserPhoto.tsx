@@ -2,7 +2,6 @@ import React from "react";
 
 import UserLvl from "@molecules/account/UserLvl";
 import classNames from "classnames";
-import user from "@store/user";
 
 interface IUserPhotoProps {
   avatar: string;
