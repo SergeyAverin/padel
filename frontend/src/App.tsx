@@ -21,6 +21,7 @@ import BlankStore from "@store/blank";
 import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 import ClubFilterStore from "@store/clubFilter";
+import CleanLocalStorage from "@molecules/CleanLocalStorage";
 
 const App = observer(() => {
   useEffect(() => {
@@ -62,6 +63,7 @@ const App = observer(() => {
 
   return (
     <>
+      <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
           {AuthStore.isLogin && (
