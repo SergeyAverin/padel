@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-import MainRouter from "./routers";
-import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
+// import MainRouter from "./routers";
+// import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
 import { useAuth } from "@hooks/useAuth";
 import AuthStore from "@store/auth";
 /** Путь к API */
@@ -13,13 +13,13 @@ import UserStore from "@store/user";
 import FriendRequestsStore from "@store/friendRequests";
 import FriendStore from "@store/friends";
 import ClubStore from "@store/club";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { DndProvider } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
 import TagStore from "@store/tags";
-import Blank from "@organisms/matches/Blank";
+// import Blank from "@organisms/matches/Blank";
 import BlankStore from "@store/blank";
-import { Heading, HeadingVariant, Loading } from "@atoms/index";
-import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+// import { Heading, HeadingVariant, Loading } from "@atoms/index";
+// import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 import ClubFilterStore from "@store/clubFilter";
 import CleanLocalStorage from "@molecules/CleanLocalStorage";
 
@@ -66,7 +66,7 @@ const App = observer(() => {
       <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
-          {AuthStore.isLogin && (
+          {/* {AuthStore.isLogin && (
             <>
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
                 <DndProvider backend={HTML5Backend}>
@@ -103,7 +103,8 @@ const App = observer(() => {
                 </DndProvider>
               </div>
             </>
-          )}
+          )} */}
+          {!AuthStore.isLogin && <div>You are loggined</div>}
           {!AuthStore.isLogin && <div>Need auth</div>}
         </>
       ) : (
