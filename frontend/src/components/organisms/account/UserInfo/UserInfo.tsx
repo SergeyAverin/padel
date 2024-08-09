@@ -36,7 +36,7 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
                   className="text-highlight cursor-pointer text-[16px] mt-[8px]"
                   onClick={() => {
                     setIsMore(true);
-                    navigator.vibrate(40);
+                    navigator.vibrate(30);
                   }}
                 >
                   Show more
@@ -47,7 +47,7 @@ export const UserInfo: React.FC<IUserInfoProps> = observer(({ user }) => {
                   className="text-highlight cursor-pointer text-[16px] mt-[8px]"
                   onClick={() => {
                     setIsMore(false);
-                    navigator.vibrate(40);
+                    navigator.vibrate(30);
                   }}
                 >
                   Close

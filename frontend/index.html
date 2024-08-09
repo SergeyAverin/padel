@@ -15,7 +15,7 @@
     <link href="./output.css" rel="stylesheet" />
   </head>
   <body class="bg-bg">
-    <div id="error-log" style="color: #fff">Ошибки:</div>
+    <div id="error-log" style="color: #fff"></div>
     <div id="root"></div>
     <div id="add-user-panel"></div>
     <div id="filter"></div>
@@ -49,10 +49,6 @@
         newError.textContent = errorMessage;
         errorLog.appendChild(newError);
       };
-
-      // Пример ошибки
-      console.error("Это тестовая ошибка!");
-      console.error("Ошибка при загрузке ресурса:", "img00.jpg не найден");
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script type="module" src="/src/main.tsx"></script>
