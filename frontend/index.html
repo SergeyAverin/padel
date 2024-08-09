@@ -15,10 +15,31 @@
     <link href="./output.css" rel="stylesheet" />
   </head>
   <body class="bg-bg">
+    <div id="error-log">Ошибки:</div>
     <div id="root"></div>
     <div id="add-user-panel"></div>
     <div id="filter"></div>
     <div id="tutorial"></div>
+
+    <script>
+      var errorLog = document.getElementById("error-log");
+      var originalConsoleError = console.error;
+
+      console.error = function (...args) {
+        // Выводим ошибку в консоль
+        originalConsoleError.apply(console, args);
+
+        // Добавляем ошибку в HTML
+        var errorMessage = args.join(" ");
+        var newError = document.createElement("div");
+        newError.textContent = errorMessage;
+        errorLog.appendChild(newError);
+      };
+
+      // Пример ошибки
+      console.error("Это тестовая ошибка!");
+      console.error("Ошибка при загрузке ресурса:", "img00.jpg не найден");
+    </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script type="module" src="/src/main.tsx"></script>
     <noscript>
