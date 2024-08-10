@@ -40,6 +40,13 @@ api_router.include_router(club_routes)
 api_router.include_router(match_router)
 api_router.include_router(auth_router)
 api_router.include_router(blank_router)
+
+
+@api_router.get('/hello')
+def hello_word():
+    return {'message': 'hello world'}
+
+
 app.include_router(api_router)
 
 
