@@ -75,6 +75,7 @@ class FriendRequestsStore {
 
   async loadingRequests() {
     this.isLoading = true;
+
     runInAction(async () => {
       this.getInnerFriendRequests();
       this.getOuterFriendRequests();

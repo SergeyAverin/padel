@@ -29,6 +29,7 @@ class MatchStore {
   }
   async loadUserMatches(userId: string) {
     this.isLoading = true;
+
     runInAction(async () => {
       try {
         const matches = await getMatchByUserId(userId);
@@ -80,6 +81,7 @@ class MatchStore {
   }
   async loadingMatch() {
     this.isLoading = true;
+
     runInAction(async () => {
       if (AuthStore.authUser) {
         await this.loadUserMatches(AuthStore.authUser.telegram_user_id);

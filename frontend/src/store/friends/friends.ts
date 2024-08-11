@@ -21,6 +21,7 @@ class FriendStore {
 
   async getFriends(FriendId: string) {
     this.isLoading = true;
+
     runInAction(async () => {
       this.friends = await getUserFriends(FriendId);
       this.isLoading = false;
