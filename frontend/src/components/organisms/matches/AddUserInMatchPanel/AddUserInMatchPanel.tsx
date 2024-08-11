@@ -14,7 +14,7 @@ const AddUserInMatchPanel: React.FC = observer(() => {
       AddUserStore.getUserForMatch(AddUserStore.matchId);
     }
     return () => {
-      AddUserStore.userForMatch = [];
+      AddUserStore.setUserForMatch([]);
     };
   }, [AddUserStore.matchId]);
   const selectUser = (user_id: string) => {

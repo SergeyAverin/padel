@@ -4,8 +4,6 @@ import { observer } from "mobx-react-lite";
 
 import MainRouter from "./routers";
 import CleanLocalStorage from "@molecules/core/CleanLocalStorage";
-import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
-import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 import { useAuth } from "@hooks/useAuth";
 import MatchStore from "@store/matches/match";
@@ -52,7 +50,7 @@ const App = observer(() => {
       BlankStore.loadMatchWithOutBlank();
     }
     return () => {
-      UserStore.user = null;
+      UserStore.setUser(null);
     };
   }, [AuthStore.authUser]);
 
@@ -61,7 +59,7 @@ const App = observer(() => {
       <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
-          {AuthStore.authUser && (
+          {AuthStore.isLogin && (
             <>
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
                 <BrowserRouter>
@@ -70,7 +68,7 @@ const App = observer(() => {
               </div>
             </>
           )}
-          {!AuthStore.authUser && <div>Need auth</div>}
+          {!AuthStore.isLogin && <div>Need auth</div>}
         </>
       ) : (
         <>

@@ -30,11 +30,21 @@ class FriendStore {
     this.removeFriend(FriendId);
     await unUserFriends(FriendId);
   }
+  async setFoundUser(users: Array<IUser>) {
+    this.foundUsers = users;
+  }
+  async setLoading(isLoading: boolean) {
+    this.isFindUserLoading = isLoading;
+  }
   async findUser(username: string) {
     this.isFindUserLoading = true;
     runInAction(async () => {
-      this.foundUsers = await findUser(username);
-      this.isFindUserLoading = false;
+      try {
+        const data = await findUser(username);
+        await this.setFoundUser(data);
+      } finally {
+        this.setLoading(false);
+      }
     });
   }
 }

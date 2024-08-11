@@ -28,11 +28,18 @@ class UserStore {
   constructor() {
     makeAutoObservable(this);
   }
+  async setUser(user: IUser | null) {
+    this.user = user;
+  }
   async getUserInfo(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
-      this.user = await getUserInfo(userId);
-      this.isLoading = false;
+      try {
+        const data = await getUserInfo(userId);
+        await this.setUser(data);
+      } finally {
+        this.isLoading = false;
+      }
     });
   }
   async changeHand(hand: Hand) {
@@ -49,15 +56,23 @@ class UserStore {
     await updateUser(userId, data);
     await this.getUserInfo(userId);
   }
+  async setStats(stats: IUserStats) {
+    this.stats = stats;
+  }
   async getStats(userId: string) {
-    this.stats = await getStats(userId);
+    const data = await getStats(userId);
+    await this.setStats(data);
   }
   async uploadPhoto(userId: string, photo: FormData) {
     await uploadPhoto(userId, photo);
     await this.getUserInfo(userId);
   }
+  async setRelationStatus(status: string) {
+    this.relationStatus = status;
+  }
   async getRelationStatus(userId: string) {
-    this.relationStatus = await getRelationStatus(userId);
+    const status = await getRelationStatus(userId);
+    this.setRelationStatus(status);
   }
   async changeLvl(lvl: number) {
     await changeLvl(lvl);

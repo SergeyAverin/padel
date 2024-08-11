@@ -55,13 +55,7 @@ export const updateUser = async (userId: string, data: IUpdateUserData) => {
     },
   });
   if (AuthStore.authUser) {
-    AuthStore.authUser.first_name = data.first_name;
-    AuthStore.authUser.last_name = data.last_name;
-    AuthStore.authUser.username = data.username;
-    AuthStore.authUser.email = data.email;
-    AuthStore.authUser.age = data.age;
-    AuthStore.authUser.city = data.city;
-    AuthStore.authUser.country = data.country;
+    AuthStore.updateUserData(data);
   }
 };
 
@@ -88,6 +82,6 @@ export const uploadPhoto = async (userId: string, photo: FormData) => {
   );
   const data = await req.data;
   if (AuthStore.authUser) {
-    AuthStore.authUser.avatar = data;
+    AuthStore.setAvatar(data);
   }
 };

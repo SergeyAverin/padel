@@ -10,7 +10,7 @@ export const useLoadUser = () => {
       UserStore.getUserInfo(userId);
     }
     return () => {
-      UserStore.user = null;
+      UserStore.setUser(null);
     };
   }, [userId]);
 };

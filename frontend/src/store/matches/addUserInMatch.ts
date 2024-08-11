@@ -33,7 +33,8 @@ class AddUserInMatchStore {
     this.userStore = userStore;
   }
   async getUserForMatch(matchId: number) {
-    this.userForMatch = await getUserToAddInMatch(matchId);
+    const data = await getUserToAddInMatch(matchId);
+    this.setUserForMatch(data);
   }
   async setUser(user_id: string, isTextUser: boolean = false) {
     if (!isTextUser) {
@@ -78,6 +79,9 @@ class AddUserInMatchStore {
   }
   async setUserInMatchRef(nodeRef: IUser) {
     this.userInMatchRef = nodeRef;
+  }
+  async setUserForMatch(matches: Array<IUser>) {
+    this.userForMatch = matches;
   }
 }
 

@@ -21,11 +21,18 @@ class MatchStore {
   constructor() {
     makeAutoObservable(this);
   }
+  async setMatches(matches: Array<IMatch>) {
+    this.matches = matches;
+  }
   async loadUserMatches(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
-      this.matches = await getMatchByUserId(userId);
-      this.isLoading = false;
+      try {
+        const matches = await getMatchByUserId(userId);
+        await this.setMatches(matches);
+      } finally {
+        this.isLoading = false;
+      }
     });
   }
   async changeMatchStatus(matchId: number, newStatus: string) {
