@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import Select from "@atoms/Select";
 
 import { Label } from "@atoms/index";

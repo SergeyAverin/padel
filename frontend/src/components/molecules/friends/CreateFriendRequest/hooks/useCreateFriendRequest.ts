@@ -1,5 +1,5 @@
-import FriendRequestsStore from "@store/friendRequests";
-import UserStore from "@store/user";
+import FriendRequestsStore from "@store/friends/friendRequests";
+import UserStore from "@store/account/user";
 
 export const useCreateFriendRequest = (userId: string) => {
   const onCreateFriendRequest = async () => {

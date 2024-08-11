@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Button, ButtonVariant, Loading } from "@atoms/index";
-import UserStore from "@store/user";
-import AuthStore from "@store/auth";
+import UserStore from "@store/account/user";
+import AuthStore from "@store/account/auth";
 import FileIcon from "@assets/FileIcon.svg?react";
 
 export const UploadPhotoForm: React.FC = observer(() => {

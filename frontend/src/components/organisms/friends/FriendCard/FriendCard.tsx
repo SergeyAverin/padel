@@ -6,7 +6,7 @@ import UserPhoto from "@molecules/account/UserPhoto";
 import { IUser } from "@schemas/user";
 import UnFriend from "@molecules/friends/UnFriend";
 import AddTag from "@molecules/friends/AddTag";
-import TagStore from "@store/tags";
+import TagStore from "@store/friends/tags";
 import { ITag } from "@schemas/tags";
 import { shortenString } from "@utils/shoringString";
 import { Link } from "react-router-dom";

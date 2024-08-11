@@ -3,7 +3,7 @@ import SelectUserLvl from "@molecules/matches/SelectUserLvl";
 import { IMatch } from "@schemas/match";
 // import Match from "@organisms/matches/Match";
 import React, { useState } from "react";
-import BlankStore from "@store/blank";
+import BlankStore from "@store/matches/blank";
 
 interface IBlankProps {
   match: IMatch;

@@ -51,7 +51,7 @@ async def create_seeder():
         telegram_user_id='123132',
         username='OliviaW123'
     )
-    await user_service.create_user(user1)
+    user1 = await user_service.create_user(user1)
 
     user2 = UserDTO(
         age=22,
@@ -68,7 +68,7 @@ async def create_seeder():
         telegram_user_id='3425',
         username='LiamFitz_94'
     )
-    await user_service.create_user(user2)
+    user2 = await user_service.create_user(user2)
 
     user3 = UserDTO(
         age=24,
@@ -85,7 +85,7 @@ async def create_seeder():
         telegram_user_id='4565',
         username='BellaM_xoxo'
     )
-    await user_service.create_user(user3)
+    user3 = await user_service.create_user(user3)
 
     user4 = UserDTO(
         age=24,
@@ -102,9 +102,9 @@ async def create_seeder():
         telegram_user_id='456523',
         username='NoahG_007'
     )
-    await user_service.create_user(user4)
+    user4 = await user_service.create_user(user4)
 
-    user5 = UserDTO(
+    user5 = user5 = UserDTO(
         age=24,
         avatar='',
         city='Omsk',

@@ -1,16 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 
-import ProfilePage from "@pages/ProfilePage";
-import Navigation from "@organisms/Navigation";
-import EditProfilePage from "@pages/EditProfilePage";
-import FriendsPage from "@pages/FriendsPage";
-import ClubsPage from "@pages/ClubsPage";
-import ClubPage from "@pages/ClubPage";
-import MatchPage from "@pages/MatchPage";
-import CreateMatchPage from "@pages/CreateMatchPage";
-import CreateClubPage from "@pages/CreateClubPage";
-import EditClubPage from "@pages/EditClubPage";
-import UserPage from "@pages/UserPage";
+import ProfilePage from "@pages/accounts/ProfilePage";
+import Navigation from "@organisms/core/Navigation";
+import EditProfilePage from "@pages/accounts/EditProfilePage";
+import FriendsPage from "@pages/friends/FriendsPage";
+import ClubsPage from "@pages/clubs/ClubsPage";
+import ClubPage from "@pages/clubs/ClubPage";
+import MatchPage from "@pages/matches/MatchPage";
+import CreateMatchPage from "@pages/matches/CreateMatchPage";
+import CreateClubPage from "@pages/clubs/CreateClubPage";
+import EditClubPage from "@pages/clubs/EditClubPage";
+import UserPage from "@pages/accounts/UserPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {

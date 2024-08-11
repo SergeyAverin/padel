@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import AuthStore from "../store/auth";
+import AuthStore from "../store/account/auth";
 
 export const useAuth = (userId: string) => {
   useEffect(() => {

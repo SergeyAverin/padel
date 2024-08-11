@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
-import ClubStore from "@store/club";
-import ClubFilterStore from "@store/clubFilter";
+import ClubStore from "@store/clubs/club";
+import ClubFilterStore from "@store/clubs/clubFilter";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import CloseIcon from "@assets/CloseIcon.svg?react";
 

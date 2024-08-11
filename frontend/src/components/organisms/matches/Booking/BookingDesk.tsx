@@ -1,6 +1,6 @@
 import { getHoursInRange } from "@utils/timeUtils";
 import React, { useEffect, useState } from "react";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";

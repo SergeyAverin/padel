@@ -1,7 +1,7 @@
 import React from "react";
 
 import Select from "@atoms/Select";
-import MatchStore from "@store/match";
+import MatchStore from "@store/matches/match";
 
 const scores = [
   { label: "0", value: "0" },

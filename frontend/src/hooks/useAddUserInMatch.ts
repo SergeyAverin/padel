@@ -1,7 +1,7 @@
-import AuthStore from "@store/auth";
-import AddUserInMatchStore from "@store/addUserInMatch";
+import AuthStore from "@store/account/auth";
+import AddUserInMatchStore from "@store/matches/addUserInMatch";
 import { IMatch } from "@schemas/match";
-import AddUserInMatchLocal from "@store/addUserInMatchLocal";
+import AddUserInMatchLocal from "@store/matches/addUserInMatchLocal";
 
 export const useAddUserInMatch = (
   match: IMatch,

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
-import AddUserStore from "@store/addUserInMatch";
+import AddUserStore from "@store/matches/addUserInMatch";
 import UserPhoto from "@molecules/account/UserPhoto";
 
 import CloseIcon from "@assets/CloseIcon.svg?react";
 import AddTextUserInMatch from "@molecules/matches/AddTextUserInMatch";
-import HelpBanner from "@organisms/HelpBanner";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   useEffect(() => {

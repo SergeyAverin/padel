@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Spinner } from "@atoms/index";
-import Tabs from "@molecules/Tabs";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import Tabs from "@molecules/core/Tabs";
+import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import MatchUser from "@organisms/matches/MatchUser";
 import { MatchFriend } from "@organisms/matches/MatchFriend/MatchFriend";
 import MatchClub from "@organisms/matches/MatchClub";
-import MatchStore from "@store/match";
-import HelpBanner from "@organisms/HelpBanner";
+import MatchStore from "@store/matches/match";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 export const MatchTemplate: React.FC = observer(() => {
   useEffect(() => {

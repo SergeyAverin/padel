@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import CourtStore from "@store/courts";
-import ClubStore from "@store/club";
+import CourtStore from "@store/clubs/courts";
+import ClubStore from "@store/clubs/club";
 import { Button, ButtonVariant, Input } from "@atoms/index";
-import HelpBanner from "@organisms/HelpBanner";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 export const Courts: React.FC = observer(() => {
   const deleteCourt = (courtId: number) => {

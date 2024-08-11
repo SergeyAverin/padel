@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Position } from "@schemas/user";
-import UserStore from "@store/user";
+import UserStore from "@store/account/user";
 
 export const useSetPosition = (): [
   Position | undefined,

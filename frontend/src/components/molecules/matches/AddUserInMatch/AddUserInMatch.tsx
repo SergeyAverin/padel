@@ -1,6 +1,6 @@
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
-import AddUserInMatchLocal from "@store/addUserInMatchLocal";
+import AddUserInMatchLocal from "@store/matches/addUserInMatchLocal";
 
 import React from "react";
 

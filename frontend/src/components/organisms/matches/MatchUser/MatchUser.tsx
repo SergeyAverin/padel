@@ -1,11 +1,11 @@
 import { Heading, HeadingVariant } from "@atoms/index";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import Match from "@organisms/matches/Match";
 import React from "react";
 
-import MatchStore from "@store/match";
+import MatchStore from "@store/matches/match";
 import { observer } from "mobx-react-lite";
-import HelpBanner from "@organisms/HelpBanner";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 export const MatchUser: React.FC = observer(() => {
   return (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import Stat from "@molecules/account/Stat";
-import UserStore from "@store/user";
+import UserStore from "@store/account/user";
 
 export const UserStats: React.FC = observer(() => {
   useEffect(() => {

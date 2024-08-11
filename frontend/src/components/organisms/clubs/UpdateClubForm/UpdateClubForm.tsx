@@ -3,7 +3,7 @@ import { City, Country } from "country-state-city";
 
 import { config, FormDataI, getInitState } from "./updateClubConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { getHoursInRange } from "@utils/timeUtils";

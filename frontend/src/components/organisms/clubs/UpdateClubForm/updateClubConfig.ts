@@ -1,4 +1,4 @@
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 
 interface IConfig {
   name: string;

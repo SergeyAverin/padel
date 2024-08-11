@@ -6,7 +6,7 @@ import {
 } from "@utils/timeUtils";
 import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import { observer } from "mobx-react-lite";
 
 interface Option {

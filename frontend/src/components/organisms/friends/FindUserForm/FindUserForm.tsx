@@ -1,12 +1,12 @@
 import { Button, ButtonVariant, Input, Loading } from "@atoms/index";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import FriendStore from "@store/friends";
+import FriendStore from "@store/friends/friends";
 import UserPhoto from "@molecules/account/UserPhoto";
 import { Link } from "react-router-dom";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import EmptyIcon from "@assets/EmptyIcon.svg?react";
-import HelpBanner from "@organisms/HelpBanner";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 export const FindUserForm: React.FC = observer(() => {
   const [value, setValue] = useState("");

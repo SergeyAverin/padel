@@ -1,5 +1,5 @@
-import FriendRequestStore from "@store/friendRequests";
-import UserStore from "@store/user";
+import FriendRequestStore from "@store/friends/friendRequests";
+import UserStore from "@store/account/user";
 
 export const useCancelFriendRequest = (friendRequestId: number) => {
   return async () => {

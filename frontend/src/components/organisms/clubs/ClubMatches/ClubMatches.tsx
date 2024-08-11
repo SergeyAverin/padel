@@ -1,7 +1,7 @@
 import { Loading } from "@atoms/index";
-import { EmptyBanner } from "@organisms/EmptyBanner/EmptyBanner";
+import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import React from "react";
-import MatchStore from "@store/match";
+import MatchStore from "@store/matches/match";
 import Match from "@organisms/matches/Match";
 import { observer } from "mobx-react-lite";
 

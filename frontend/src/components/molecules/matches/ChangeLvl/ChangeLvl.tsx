@@ -1,4 +1,4 @@
-import { getChangeLvl } from "@dal/blank";
+import { getChangeLvl } from "@dal/matches/blank";
 import React, { useEffect, useState } from "react";
 
 interface IChangeLvlProps {

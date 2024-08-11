@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import ClubPhoto from "../ClubPhoto";
 import { observer } from "mobx-react-lite";
 import {
@@ -10,7 +10,7 @@ import {
   Loading,
 } from "@atoms/index";
 import FileIcon from "@assets/FileIcon.svg?react";
-import HelpBanner from "@organisms/HelpBanner";
+import HelpBanner from "@organisms/core/HelpBanner";
 
 export const EditClubPhotos: React.FC = observer(() => {
   const [isLoading, setIsLoading] = useState(false);

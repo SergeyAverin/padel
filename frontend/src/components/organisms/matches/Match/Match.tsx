@@ -4,13 +4,13 @@ import Select from "@atoms/Select";
 import AddUserInMatch from "@molecules/matches/AddUserInMatch";
 import { IUser } from "@schemas/user";
 import { IMatch, MatchStatusEnum } from "@schemas/match";
-import MatchStore from "@store/match";
+import MatchStore from "@store/matches/match";
 import UserInMatch from "@molecules/matches/UserInMatch";
-import AuthStore from "@store/auth";
+import AuthStore from "@store/account/auth";
 import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
 import { shortenString } from "@utils/shoringString";
-import AddUserInMatchLocal from "@store/addUserInMatchLocal";
+import AddUserInMatchLocal from "@store/matches/addUserInMatchLocal";
 import { observer, useLocalStore } from "mobx-react-lite";
 import { TextUserInMatch } from "@molecules/matches/TextUserInMatch/TextUserInMatch";
 

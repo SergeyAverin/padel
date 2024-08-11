@@ -5,7 +5,7 @@ import { SelectStartAt } from "./SelectStartAt";
 import { SelectEndAt } from "./SelectEndAt";
 import { SelectCourt } from "./SelectCourt";
 import { BookingDesk } from "./BookingDesk";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import {
   Button,
   ButtonVariant,
@@ -17,9 +17,9 @@ import {
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { SelectMatchLvl } from "./SelectMatchLvl";
-import TagsStore from "@store/tags";
+import TagsStore from "@store/friends/tags";
 import Select from "@atoms/Select";
-import CourtStore from "@store/courts";
+import CourtStore from "@store/clubs/courts";
 import { observer } from "mobx-react-lite";
 
 export const Booking: React.FC = observer(() => {

@@ -1,4 +1,4 @@
-import UserStore from "@store/user";
+import UserStore from "@store/account/user";
 
 interface IConfig {
   name: string;

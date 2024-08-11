@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import { useNavigate } from "react-router-dom";
 
 export const DeleteClubForm: React.FC = observer(() => {

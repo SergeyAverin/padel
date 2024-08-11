@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import Tag from "../Tag";
-import TagsStore from "@store/tags";
+import TagsStore from "@store/friends/tags";
 import CreateTag from "../CreateTag";
 import BackIcon from "@assets/BackIcon.svg?react";
 

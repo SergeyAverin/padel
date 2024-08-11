@@ -6,21 +6,21 @@ import { observer } from "mobx-react-lite";
 
 import MainRouter from "./routers";
 import { Heading, HeadingVariant, Loading } from "@atoms/index";
-import CleanLocalStorage from "@molecules/CleanLocalStorage";
-import { TutorialPortal } from "@organisms/Tutorial/Tutorial";
+import CleanLocalStorage from "@molecules/core/CleanLocalStorage";
+import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
 import Blank from "@organisms/matches/Blank";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 import { useAuth } from "@hooks/useAuth";
-import MatchStore from "@store/match";
-import FriendStore from "@store/friends";
-import FriendRequestsStore from "@store/friendRequests";
-import ClubStore from "@store/club";
-import UserStore from "@store/user";
-import TagStore from "@store/tags";
-import AuthStore from "@store/auth";
-import BlankStore from "@store/blank";
-import ClubFilterStore from "@store/clubFilter";
+import MatchStore from "@store/matches/match";
+import FriendStore from "@store/friends/friends";
+import FriendRequestsStore from "@store/friends/friendRequests";
+import ClubStore from "@store/clubs/club";
+import UserStore from "@store/account/user";
+import TagStore from "@store/friends/tags";
+import AuthStore from "@store/account/auth";
+import BlankStore from "@store/matches/blank";
+import ClubFilterStore from "@store/clubs/clubFilter";
 
 const App = observer(() => {
   useEffect(() => {

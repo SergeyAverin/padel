@@ -1,4 +1,4 @@
-import TagStore from "@store/tags";
+import TagStore from "@store/friends/tags";
 
 import TrashIcon from "@assets/TrashIcon.svg?react";
 import CloseIcon from "@assets/CloseIcon.svg?react";

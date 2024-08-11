@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import UserStore from "@store/user";
+import UserStore from "@store/account/user";
 import CreateFriendRequest from "@molecules/friends/CreateFriendRequest";
 import { useParams } from "react-router-dom";
 import CancelFriendRequest from "@molecules/friends/CancelFriendRequest";

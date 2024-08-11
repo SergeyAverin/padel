@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import UserPhoto from "@molecules/account/UserPhoto";
 
 import TestPhoto from "@assets/TestPhoto.png";
-import AddUserStore from "@store/addUserInMatch";
+import AddUserStore from "@store/matches/addUserInMatch";
 
 export const AddTextUserInMatch: React.FC = () => {
   const [value, setValue] = useState("");

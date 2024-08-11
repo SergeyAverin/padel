@@ -1,4 +1,4 @@
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 
 export const useSetBookmark = (clubId: number) => {
   const addBookmark = () => {

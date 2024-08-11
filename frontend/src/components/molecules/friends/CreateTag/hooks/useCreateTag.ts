@@ -1,4 +1,4 @@
-import TagStore from "@store/tags";
+import TagStore from "@store/friends/tags";
 
 export const useCreateTag = (
   value: string,

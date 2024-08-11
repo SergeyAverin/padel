@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Button, ButtonVariant } from "@atoms/index";
 import Bookmark from "@molecules/clubs/Bookmark";
 import { IClub } from "@schemas/club";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import style from "./Club.module.sass";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";

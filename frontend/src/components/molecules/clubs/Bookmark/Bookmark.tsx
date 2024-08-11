@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 
 import BookmarkOffIcon from "@assets/BookmarkOffIcon.svg?react";
 import BookmarkOnIcon from "@assets/BookmarkOnIcon.svg?react";

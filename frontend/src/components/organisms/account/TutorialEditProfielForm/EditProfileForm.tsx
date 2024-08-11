@@ -4,8 +4,8 @@ import { City, Country } from "country-state-city";
 
 import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
-import UserStore from "@store/user";
-import AuthStore from "@store/auth";
+import UserStore from "@store/account/user";
+import AuthStore from "@store/account/auth";
 import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
 import { generateRandomString } from "@utils/codeGenerate";

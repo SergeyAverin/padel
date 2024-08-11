@@ -1,5 +1,5 @@
 import React from "react";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import classNames from "classnames";
 
 interface IBookingTimePointProps {

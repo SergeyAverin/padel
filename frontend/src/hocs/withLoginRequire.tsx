@@ -1,5 +1,5 @@
 import { useAuth } from "../hooks/useAuth";
-import AuthStore from "../store/auth";
+import AuthStore from "../store/account/auth";
 
 export function withLoginRequire(WrappedComponent: React.FC) {
   return function WithLoginRequire() {

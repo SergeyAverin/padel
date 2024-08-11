@@ -1,6 +1,6 @@
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
-import AddUserInMatchLocal from "@store/addUserInMatchLocal";
+import AddUserInMatchLocal from "@store/matches/addUserInMatchLocal";
 import { shortenString } from "@utils/shoringString";
 import React from "react";
 import TestUserPhoto from "@assets/TestPhoto.png";

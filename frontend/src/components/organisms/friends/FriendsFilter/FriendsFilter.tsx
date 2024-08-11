@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import TagStore from "@store/tags";
+import TagStore from "@store/friends/tags";
 
 import FilterIcon from "@assets/FilterIcon.svg?react";
 import Tag from "@molecules/friends/Tag";

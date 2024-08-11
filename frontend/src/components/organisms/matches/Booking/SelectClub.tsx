@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Select from "@atoms/Select";
 import { Label, Spinner } from "@atoms/index";
-import CourtStore from "@store/courts";
-import BookingStore from "@store/booking";
+import CourtStore from "@store/clubs/courts";
+import BookingStore from "@store/matches/booking";
 import { observer } from "mobx-react-lite";
-import MatchStore from "@store/match";
+import MatchStore from "@store/matches/match";
 
 interface Option {
   value: string;

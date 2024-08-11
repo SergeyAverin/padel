@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import BookingStore from "@store/booking";
+import BookingStore from "@store/matches/booking";
 import Select from "@atoms/Select";
 
 import { Label } from "@atoms/index";
 import { observer } from "mobx-react-lite";
-import CourtStore from "@store/courts";
+import CourtStore from "@store/clubs/courts";
 
 interface Option {
   value: string;

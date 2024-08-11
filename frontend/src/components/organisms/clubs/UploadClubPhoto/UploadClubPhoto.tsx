@@ -7,7 +7,7 @@ import {
 } from "@atoms/index";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useRef, useState } from "react";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import FileIcon from "@assets/FileIcon.svg?react";
 // import HelpBanner from "@organisms/HelpBanner";
 

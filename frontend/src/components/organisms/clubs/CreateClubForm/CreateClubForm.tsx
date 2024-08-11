@@ -5,7 +5,7 @@ import { City, Country } from "country-state-city";
 
 import { config, FormDataI, initialState } from "./createClubFormConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
-import ClubStore from "@store/club";
+import ClubStore from "@store/clubs/club";
 import Select from "@atoms/Select";
 import { getHoursInRange } from "@utils/timeUtils";
 import { generateRandomString } from "@utils/codeGenerate";
