@@ -1,4 +1,4 @@
-import style from "./Spinner.module.sass";
+import style from "./Spinner.module.css";
 
 /** Компонент который отображается при загрузки */
 export const Spinner: React.FC = () => {

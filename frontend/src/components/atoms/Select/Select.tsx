@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
-import style from "./Select.module.sass";
+import style from "./Select.module.css";
 
 import { Option } from "./selectOption";
 import { useCloseOnClickOutItem } from "./hooks/useCloseOnClickOutItem";

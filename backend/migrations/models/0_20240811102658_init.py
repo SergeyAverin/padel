@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "match" (
     "status" VARCHAR(11) NOT NULL  DEFAULT 'expectation',
     "start_at" TIMESTAMPTZ NOT NULL,
     "end_at" TIMESTAMPTZ NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-08-03T00:01:47.664138',
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-08-11T10:26:58.110849',
     "text_user_1" VARCHAR(140),
     "text_user_2" VARCHAR(140),
     "text_user_3" VARCHAR(140),
@@ -93,16 +93,16 @@ CREATE TABLE IF NOT EXISTS "aerich" (
     "app" VARCHAR(100) NOT NULL,
     "content" JSONB NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "user_friends" (
-    "user_rel_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
-    "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
-);
-CREATE UNIQUE INDEX IF NOT EXISTS "uidx_user_friend_user_re_d51527" ON "user_friends" ("user_rel_id", "user_id");
 CREATE TABLE IF NOT EXISTS "clubs_bookmarks" (
     "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
     "club_id" INT NOT NULL REFERENCES "club" ("id") ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX IF NOT EXISTS "uidx_clubs_bookm_user_id_c3e073" ON "clubs_bookmarks" ("user_id", "club_id");
+CREATE TABLE IF NOT EXISTS "user_friends" (
+    "user_rel_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
+    "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "uidx_user_friend_user_re_d51527" ON "user_friends" ("user_rel_id", "user_id");
 CREATE TABLE IF NOT EXISTS "friends_with_tag" (
     "tag_id" INT NOT NULL REFERENCES "tag" ("id") ON DELETE CASCADE,
     "user_id" INT NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE
