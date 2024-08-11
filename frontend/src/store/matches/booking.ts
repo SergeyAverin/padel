@@ -34,7 +34,15 @@ class AuthStore {
   constructor() {
     makeAutoObservable(this);
   }
-
+  setBreakPointsArr(
+    arr: {
+      startAt: number;
+      endAt: number;
+      courtIndex: number;
+    }[]
+  ) {
+    this.breakPoints = arr;
+  }
   private async setBreakPoints() {
     const arr: Array<{
       startAt: number;
@@ -61,7 +69,7 @@ class AuthStore {
           endAt: getIndexInTimeRange(endAt) + 3,
           courtIndex: courtIndex + 2,
         });
-        this.breakPoints = arr;
+        this.setBreakPointsArr(arr);
       });
     }
   }
@@ -112,11 +120,13 @@ class AuthStore {
     }
   }
 
+  async setisLoadingDesk(isLoading: boolean) {
+    this.isLoadingDesk = isLoading;
+  }
   async getMatchByDay(clubId: number, day: number, month: number) {
-    console.log(`get matches from date ${day} ${month}`);
     this.matches = await getMatchByDay(clubId, day, month);
     this.setBreakPoints().then(() => {
-      this.isLoadingDesk = false;
+      this.setisLoadingDesk(false);
     });
   }
   async setLvlMin(lvl: string) {
@@ -144,24 +154,9 @@ class AuthStore {
       if (courtId) {
         const court = CourtStore.courts.findIndex((i) => i.id == courtId) + 2;
         const filteredBreakPoints = this.breakPoints.filter((item) => {
-          console.log(item.courtIndex);
           return item.courtIndex == court;
         });
         filteredBreakPoints.forEach((item) => {
-          console.log(
-            `[${getIndexInTimeRange(this.startAt) + 2}, ${
-              getIndexInTimeRange(this.endAt) + 2
-            }]`
-          );
-          console.log(`[${item.startAt}, ${item.endAt - 1}]`);
-          console.log(
-            checkIntersection(
-              getIndexInTimeRange(this.startAt) + 2,
-              getIndexInTimeRange(this.endAt) + 2,
-              item.startAt,
-              item.endAt - 1
-            )
-          );
           if (
             checkIntersection(
               getIndexInTimeRange(this.startAt) + 2,
@@ -174,7 +169,6 @@ class AuthStore {
           }
         });
       }
-      console.log(`you can create mathc ${flag}`);
       if (flag) {
         const res = await createMatch(
           startAt,

@@ -49,7 +49,7 @@ export const Courts: React.FC = observer(() => {
           </thead>
           <tbody>
             {CourtStore.courts.map((court) => (
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100" key={court.id}>
                 <td className="border border-gray-300 px-4 py-2">
                   {court.name}
                 </td>

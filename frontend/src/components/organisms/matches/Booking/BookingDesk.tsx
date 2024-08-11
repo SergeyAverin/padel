@@ -4,6 +4,7 @@ import BookingStore from "@store/matches/booking";
 import { observer } from "mobx-react-lite";
 import style from "./Booking.module.sass";
 import BookingTimePoint from "@molecules/matches/BookingTimePoint";
+import { generateRandomString } from "@utils/codeGenerate";
 
 export const BookingDesk: React.FC = observer(() => {
   const [timeRange, setTimeRange] = useState<Array<string>>([]);
@@ -21,11 +22,13 @@ export const BookingDesk: React.FC = observer(() => {
     setIsLoading(true);
     const a = BookingStore.breakPoints.map((item) => {
       return (
-        <BookingTimePoint
-          court={item.courtIndex}
-          timeEnd={item.endAt}
-          timeStart={item.startAt}
-        />
+        <div key={generateRandomString(10)}>
+          <BookingTimePoint
+            court={item.courtIndex}
+            timeEnd={item.endAt}
+            timeStart={item.startAt}
+          />
+        </div>
       );
     });
     setDeskPoints(a);
@@ -38,11 +41,15 @@ export const BookingDesk: React.FC = observer(() => {
         <div className="mt-3">
           <div className={`bg-primary p-5 rounded-xl ${style.booking}`}>
             {BookingStore.courtOption.map((item) => (
-              <div className="col-start-1">{item.label}</div>
+              <div className="col-start-1" key={item.value}>
+                {item.label}
+              </div>
             ))}
             <div className="col-start-1 row-start-1"></div>
             {timeRange.map((item) => (
-              <div className="row-start-1">{item}</div>
+              <div className="row-start-1" key={item}>
+                {item}
+              </div>
             ))}
             {BookingStore.endAt &&
               BookingStore.startAt &&

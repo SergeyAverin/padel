@@ -29,7 +29,6 @@ export const SelectStartAt: React.FC = observer(() => {
   const handleChangeStartOption = (option: Option) => {
     if (option) {
       BookingStore.selectStartAt(option.value);
-      console.log(addOneAndHalfHours(option.value));
       BookingStore.selectEndAt(addOneAndHalfHours(option.value));
     }
     setSelectedStartOption(option);

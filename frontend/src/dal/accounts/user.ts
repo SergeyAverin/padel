@@ -22,7 +22,7 @@ export const changeHand = async (userId: string, hand: Hand) => {
     },
   });
   if (AuthStore.authUser) {
-    AuthStore.authUser.hand = hand;
+    AuthStore.setHand(hand);
   }
 };
 
@@ -33,7 +33,7 @@ export const changeLvl = async (lvl: number) => {
     },
   });
   if (AuthStore.authUser) {
-    AuthStore.authUser.lvl = lvl;
+    AuthStore.setLvL(lvl);
   }
 };
 
@@ -44,7 +44,7 @@ export const changePosition = async (userId: string, position: Position) => {
     },
   });
   if (AuthStore.authUser) {
-    AuthStore.authUser.position = position;
+    AuthStore.setPositon(position);
   }
 };
 

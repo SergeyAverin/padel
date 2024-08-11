@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { login } from "@dal/accounts/auth";
-import { IUpdateUserData, IUser } from "@schemas/user";
+import { Hand, IUpdateUserData, IUser, Position } from "@schemas/user";
 import { getUserInfo } from "@dal/accounts/user";
 import ClubFilterStore from "@store/clubs/clubFilter";
 // import UserStore from "./user";
@@ -16,7 +16,8 @@ class AuthStore {
 
   async login(userId: string) {
     await login(userId);
-    this.isLogin = true;
+    // this.isLogin = true;
+    this.setAuth();
     // await UserStore.getUser();
   }
   async setAuth() {
@@ -24,6 +25,16 @@ class AuthStore {
   }
   async setAuthUser(user: IUser) {
     this.authUser = user;
+  }
+  async setHand(hand: Hand) {
+    if (this.authUser) {
+      this.authUser.hand = hand;
+    }
+  }
+  async setPositon(positon: Position) {
+    if (this.authUser) {
+      this.authUser.position = positon;
+    }
   }
   async acceptUser() {
     if (Telegram.WebApp.initDataUnsafe.user) {
@@ -50,6 +61,11 @@ class AuthStore {
   async setAvatar(path: string) {
     if (this.authUser) {
       this.authUser.avatar = path;
+    }
+  }
+  async setLvL(lvl: number) {
+    if (this.authUser) {
+      this.authUser.lvl = lvl;
     }
   }
 }

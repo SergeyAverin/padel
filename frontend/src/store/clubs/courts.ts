@@ -15,19 +15,30 @@ class CourtStore {
   constructor() {
     makeAutoObservable(this);
   }
+  setCourt(court: Array<ICourt>) {
+    this.courts = court;
+  }
   async getCourts(clubId: number) {
-    this.courts = await getCourtsByClubId(clubId);
+    const data = await getCourtsByClubId(clubId);
+    this.setCourt(data);
   }
   async deleteCourt(courtId: number) {
     this.courts = this.courts.filter((obj) => obj.id !== courtId);
     await deleteCourt(courtId);
   }
-  async createCourt(courtName: string, clubId: number) {
-    const court = await createCourt(courtName, clubId);
+  async pushCourts(court: ICourt) {
     this.courts.push(court);
   }
+  async createCourt(courtName: string, clubId: number) {
+    const court = await createCourt(courtName, clubId);
+    this.pushCourts(court);
+  }
+  async setClubCanCreateMatch(courts: Array<IClub>) {
+    this.clubCanCreateMatch = courts;
+  }
   async getClubCanCreateMatch() {
-    this.clubCanCreateMatch = await getClubCanCreateMatch();
+    const data = await getClubCanCreateMatch();
+    this.setClubCanCreateMatch(data);
   }
 }
 

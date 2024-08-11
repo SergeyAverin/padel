@@ -26,7 +26,6 @@ export const Booking: React.FC = observer(() => {
   const navigate = useNavigate();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("create");
 
     if (BookingStore.selectedData) {
       const b = extractDayAndMonth(BookingStore.selectedData);

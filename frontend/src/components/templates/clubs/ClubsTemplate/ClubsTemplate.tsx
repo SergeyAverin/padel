@@ -60,9 +60,10 @@ export const ClubsTemplate: React.FC = observer(() => {
                     className="mr-2"
                     onClick={async () => {
                       ClubFilterStore.changeName("");
-                      ClubStore.isFilterAwait = true;
+
+                      ClubStore.setIsFilterAwait(true);
                       await ClubStore.getClubs();
-                      ClubStore.isFilterAwait = false;
+                      ClubStore.setIsFilterAwait(false);
                     }}
                   >
                     <Tag id={1} isAdd={false} text={ClubFilterStore.name} />
@@ -72,10 +73,10 @@ export const ClubsTemplate: React.FC = observer(() => {
                   <div
                     className="mr-2"
                     onClick={async () => {
-                      ClubStore.isFilterAwait = true;
+                      ClubStore.setIsFilterAwait(true);
                       ClubFilterStore.changeCity("");
                       await ClubStore.getClubs();
-                      ClubStore.isFilterAwait = false;
+                      ClubStore.setIsFilterAwait(false);
                     }}
                   >
                     <Tag id={2} isAdd={false} text={ClubFilterStore.city} />

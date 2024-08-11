@@ -24,6 +24,9 @@ class MatchStore {
   async setMatches(matches: Array<IMatch>) {
     this.matches = matches;
   }
+  async setIsLoading(isLoading: boolean) {
+    this.isLoading = isLoading;
+  }
   async loadUserMatches(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
@@ -31,30 +34,45 @@ class MatchStore {
         const matches = await getMatchByUserId(userId);
         await this.setMatches(matches);
       } finally {
-        this.isLoading = false;
+        this.setIsLoading(false);
       }
     });
   }
   async changeMatchStatus(matchId: number, newStatus: string) {
     await changeStatus(matchId, newStatus);
   }
+  async setisLoadingFromClub(isLoading: boolean) {
+    this.isLoadingFromClub = isLoading;
+  }
   async loadClubMatches(clubId: number) {
     this.isLoadingFromClub = true;
     runInAction(async () => {
-      this.matches = await getMatchByClubId(clubId);
-      this.isLoadingFromClub = false;
+      try {
+        const data = await getMatchByClubId(clubId);
+        this.setMatches(data);
+      } finally {
+        this.setisLoadingFromClub(false);
+      }
     });
+  }
+  async setMatchesFromFriends(mathces: Array<IMatch>) {
+    this.matchesFromFriends = mathces;
   }
   async loadFriendsMatches(userId: string) {
     this.isLoading = true;
     runInAction(async () => {
-      this.matchesFromFriends = await getMatchesFromUserFriends(userId);
-      this.isLoading = false;
+      const data = await getMatchesFromUserFriends(userId);
+      this.setMatchesFromFriends(data);
+      this.setIsLoading(false);
     });
+  }
+  setMatchesFromBookmarks(mathces: Array<IMatch>) {
+    this.matchesFromBookmarks = mathces;
   }
   async loadMatchesFromBookmarkedClubs(userId: string) {
     runInAction(async () => {
-      this.matchesFromBookmarks = await getMatchesFromBookmarkedClubs(userId);
+      const data = await getMatchesFromBookmarkedClubs(userId);
+      this.setMatchesFromBookmarks(data);
     });
   }
   async changeScore(matchId: number, team: number, score: number) {

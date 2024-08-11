@@ -28,8 +28,12 @@ class TagsStore {
       (tagFilter) => tagFilter.id !== tag.id
     );
   }
+  async setTags(tags: Array<ITag>) {
+    this.tags = tags;
+  }
   async getTags() {
-    this.tags = await getTags();
+    const data = await getTags();
+    this.setTags(data);
   }
   async getFriendTags(userId: string) {
     const tags = await getFriendTags(userId);

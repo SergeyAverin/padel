@@ -9,11 +9,11 @@ import CloseIcon from "@assets/CloseIcon.svg?react";
 
 const ClubFiltersComponent: React.FC = observer(() => {
   const onSubmit = async (e: React.FormEvent) => {
-    ClubStore.isFilterAwait = true;
+    ClubStore.setIsFilterAwait(true);
     e.preventDefault();
     ClubFilterStore.toggleIsOpen();
     await ClubStore.getClubs();
-    ClubStore.isFilterAwait = false;
+    ClubStore.setIsFilterAwait(false);
   };
   return (
     <div

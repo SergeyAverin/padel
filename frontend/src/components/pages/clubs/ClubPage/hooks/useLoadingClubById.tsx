@@ -13,9 +13,9 @@ export const useLoadingClubById = () => {
       ClubStore.loadClubPhotos(Number(clubId));
     }
     return () => {
-      ClubStore.openedClub = null;
-      MatchStore.matches = [];
-      ClubStore.clubPhotos = [];
+      ClubStore.setOpenedClub(null);
+      MatchStore.setMatches([]);
+      ClubStore.setPhoto([]);
     };
   }, [clubId]);
 };

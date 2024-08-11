@@ -8,8 +8,11 @@ class ClubFilterStore {
   constructor() {
     makeAutoObservable(this);
   }
+  setIsOpen(isOpen: boolean) {
+    this.isOpen = isOpen;
+  }
   toggleIsOpen() {
-    this.isOpen = !this.isOpen;
+    this.setIsOpen(!this.isOpen);
   }
   changeName(newValue: string) {
     this.name = newValue;

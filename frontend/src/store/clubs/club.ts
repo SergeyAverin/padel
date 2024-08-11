@@ -31,46 +31,82 @@ class ClubStore {
   constructor() {
     makeAutoObservable(this);
   }
+  async setClubs(clubs: Array<IClub>) {
+    this.clubs = clubs;
+  }
   async getClubs() {
-    this.clubs = await getClubs();
+    const data = await getClubs();
+    this.setClubs(data);
+  }
+  async setBookMarkedClubs(clubs: Array<IClub>) {
+    this.bookmarkedClubs = clubs;
   }
   async getBookedClubs() {
-    this.bookmarkedClubs = await getClubsByBookmark();
+    const data = await getClubsByBookmark();
+    this.setBookMarkedClubs(data);
+  }
+  async setIsLoading(isLoading: boolean) {
+    this.isLoading = isLoading;
   }
   loadClubs() {
     this.isLoading = true;
     runInAction(async () => {
-      await this.getClubs();
-      await this.getBookedClubs();
-      this.isLoading = false;
+      try {
+        await this.getClubs();
+        await this.getBookedClubs();
+      } finally {
+        this.setIsLoading(false);
+      }
     });
   }
+  async setIsLoadingGallery(isLoading: boolean) {
+    this.isLoadingGallery = isLoading;
+  }
   async loadClubPhotos(clubId: number) {
-    this.isLoadingGallery = true;
+    this.setIsLoadingGallery(true);
     runInAction(async () => {
-      this.clubPhotos = await loadClubPhoto(clubId);
-      this.isLoadingGallery = false;
+      try {
+        const data = await loadClubPhoto(clubId);
+        this.setPhoto(data);
+      } finally {
+        this.setIsLoadingGallery(false);
+      }
     });
+  }
+  async setBookmark(clubId: number, isBookmark: boolean) {
+    this.bookmarks.set(clubId, isBookmark);
   }
   async getIsBookmark(clubId: number) {
     const isBookmark = await getIsClubBookmarked(clubId);
-    this.bookmarks.set(clubId, isBookmark);
+    this.setBookmark(clubId, isBookmark);
   }
   async addBookmark(clubId: number) {
     await addClubInUserBookmarks(clubId);
-    this.bookmarks.set(clubId, true);
+    this.setBookmark(clubId, true);
+
     this.getBookedClubs();
   }
   async removeBookmark(clubId: number) {
     await removeClubFromUserBookmark(clubId);
-    this.bookmarks.set(clubId, false);
+    this.setBookmark(clubId, false);
+
     this.getBookedClubs();
+  }
+  async setIsLoadingOpenedClub(isLoadingOpenedClub: boolean) {
+    this.isLoadingOpenedClub = isLoadingOpenedClub;
+  }
+  async setOpenedClub(club: IClub | null) {
+    this.openedClub = club;
   }
   async openClub(clubId: string) {
     this.isLoadingOpenedClub = true;
     runInAction(async () => {
-      this.openedClub = await getClubById(clubId);
-      this.isLoadingOpenedClub = false;
+      try {
+        const data = await getClubById(clubId);
+        this.setOpenedClub(data);
+      } finally {
+        this.setIsLoadingOpenedClub(false);
+      }
     });
   }
   async createClub(createClubData: ICreateClub) {
@@ -96,6 +132,12 @@ class ClubStore {
   async uploadAvatar(clubId: number, photo: FormData) {
     await uploadAvatar(clubId, photo);
     await this.openClub(String(clubId));
+  }
+  async setIsFilterAwait(isFilterAwait: boolean) {
+    this.isFilterAwait = isFilterAwait;
+  }
+  async setPhoto(photo: IClubPhoto[]) {
+    this.clubPhotos = photo;
   }
 }
 

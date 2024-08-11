@@ -32,7 +32,6 @@ export const SelectDate: React.FC = observer(() => {
     setSelectedDate(option);
     if (BookingStore.selectedClubId && option) {
       const d = extractDayAndMonth(option.value);
-      console.log(2);
       BookingStore.getMatchByDay(
         Number(BookingStore.selectedClubId),
         d[0],
