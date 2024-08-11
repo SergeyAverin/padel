@@ -1,4 +1,4 @@
-import style from "./Loading.module.sass";
+import style from "./Loading.module.css";
 
 /** Компонент который отображается при загрузки */
 export const Loading: React.FC = () => {
