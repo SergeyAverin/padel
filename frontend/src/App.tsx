@@ -1,14 +1,10 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-// import { HTML5Backend } from "react-dnd-html5-backend";
-// import { DndProvider } from "react-dnd";
 
 import MainRouter from "./routers";
-import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import CleanLocalStorage from "@molecules/core/CleanLocalStorage";
 import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
-import Blank from "@organisms/matches/Blank";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 import { useAuth } from "@hooks/useAuth";
@@ -19,8 +15,8 @@ import ClubStore from "@store/clubs/club";
 import UserStore from "@store/account/user";
 import TagStore from "@store/friends/tags";
 import AuthStore from "@store/account/auth";
-import BlankStore from "@store/matches/blank";
 import ClubFilterStore from "@store/clubs/clubFilter";
+import BlankStore from "@store/matches/blank";
 
 const App = observer(() => {
   useEffect(() => {
@@ -65,43 +61,16 @@ const App = observer(() => {
       <CleanLocalStorage />
       {window.Telegram.WebApp.initData ? (
         <>
-          {AuthStore.isLogin && (
+          {AuthStore.authUser && (
             <>
               <div className="text-fg bg-bg mt-[25px] pb-[90px]">
                 <BrowserRouter>
-                  {BlankStore.matchWithOutBlank.length > 0 && (
-                    <>
-                      <div className="fixed w-full h-full top-0 left-0 bg-primary z-50 overflow-y-auto">
-                        <div className="p-5">
-                          <Heading variant={HeadingVariant.H2}>
-                            Select mark for user
-                          </Heading>
-                        </div>
-
-                        {BlankStore.isLoading && (
-                          <div className="flex justify-center items-center mt-[100px] w-full">
-                            <Loading />
-                          </div>
-                        )}
-                        {!BlankStore.isLoading && (
-                          <>
-                            {BlankStore.matchWithOutBlank.map((item) => (
-                              <Blank match={item} />
-                            ))}
-                          </>
-                        )}
-                      </div>
-                    </>
-                  )}
-                  <AddUserPanel />
-
                   <MainRouter />
-                  <TutorialPortal />
                 </BrowserRouter>
               </div>
             </>
           )}
-          {!AuthStore.isLogin && <div>Need auth</div>}
+          {!AuthStore.authUser && <div>Need auth</div>}
         </>
       ) : (
         <>

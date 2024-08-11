@@ -11,7 +11,7 @@ import SelectScore from "@molecules/matches/SelectScore";
 import { Link } from "react-router-dom";
 import { shortenString } from "@utils/shoringString";
 import AddUserInMatchLocal from "@store/matches/addUserInMatchLocal";
-import { observer, useLocalStore } from "mobx-react-lite";
+import { observer, useLocalObservable } from "mobx-react-lite";
 import { TextUserInMatch } from "@molecules/matches/TextUserInMatch/TextUserInMatch";
 
 interface Option {
@@ -207,7 +207,7 @@ interface IUserInMatchWrapperProps {
 
 const UserInMatchWrapper: React.FC<IUserInMatchWrapperProps> = observer(
   ({ user, index, match, userText }) => {
-    const userStore = useLocalStore(() => new AddUserInMatchLocal());
+    const userStore = useLocalObservable(() => new AddUserInMatchLocal());
     useEffect(() => {
       if (!userText) {
         userStore.setUser(user);

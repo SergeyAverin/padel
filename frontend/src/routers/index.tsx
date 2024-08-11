@@ -1,7 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
-import ProfilePage from "@pages/accounts/ProfilePage";
+import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+import BlankList from "@organisms/matches/BlankList";
 import Navigation from "@organisms/core/Navigation";
+import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
+import ProfilePage from "@pages/accounts/ProfilePage";
 import EditProfilePage from "@pages/accounts/EditProfilePage";
 import FriendsPage from "@pages/friends/FriendsPage";
 import ClubsPage from "@pages/clubs/ClubsPage";
@@ -16,6 +19,9 @@ import UserPage from "@pages/accounts/UserPage";
 const MainRouter: React.FC = () => {
   return (
     <>
+      <AddUserPanel />
+      <BlankList />
+      <TutorialPortal />
       <Routes>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
