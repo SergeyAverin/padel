@@ -17,6 +17,7 @@ import ClubFilterStore from "@store/clubs/clubFilter";
 import BlankStore from "@store/matches/blank";
 
 const App = observer(() => {
+  alert(window.Telegram.WebApp.platform);
   useEffect(() => {
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.expand();
