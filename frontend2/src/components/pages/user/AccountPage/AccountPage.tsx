@@ -1,13 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import UserTemplate from "@templates/user/UserTemplate";
 import { Button, ButtonVariant, Spinner } from "@atoms/index";
-import { Link } from "react-router-dom";
-import { authUserSelector } from "@redux/selectors/authSelectors";
+import { useAuthUser } from "@hooks/useAuthUser";
 
 export const AccountPage: React.FC = () => {
-  const authUser = useSelector(authUserSelector);
+  const authUser = useAuthUser();
   return (
     <>
       {authUser ? (

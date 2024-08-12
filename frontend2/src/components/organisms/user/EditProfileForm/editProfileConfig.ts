@@ -1,4 +1,4 @@
-import UserStore from "@store/account/user";
+import { IUser } from "@schemas/user";
 
 interface IConfig {
   name: string;
@@ -35,14 +35,14 @@ export const initialState: FormDataI = {
   email: "",
 };
 
-export const getInitState = (): FormDataI => {
-  if (UserStore.user) {
+export const getInitState = (user: IUser | null): FormDataI => {
+  if (user) {
     return {
-      username: UserStore.user.username,
-      first_name: UserStore.user.first_name,
-      last_name: UserStore.user.last_name,
-      age: UserStore.user.age,
-      email: UserStore.user.email,
+      username: user.username,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      age: user.age,
+      email: user.email,
     };
   } else {
     return initialState;
