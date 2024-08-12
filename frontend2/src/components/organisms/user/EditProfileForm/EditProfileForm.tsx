@@ -5,6 +5,8 @@ import { Button, ButtonVariant, Input } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
 import SelectCountry from "@molecules/core/SelectCountry";
 import { SelectCity } from "@molecules/SelectCity/SelectCity";
+import { useNavigate } from "react-router-dom";
+import { useUpdateUserInfoMutation } from "@redux/api/userApi";
 
 export const EditProfileForm: React.FC = () => {
   const re =
@@ -26,8 +28,39 @@ export const EditProfileForm: React.FC = () => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
 
+  const navigate = useNavigate();
+  const [updateUser] = useUpdateUserInfoMutation();
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (
+      re.test(String(formValue.email)) &&
+      formValue.age > 0 &&
+      city &&
+      country
+    ) {
+      if (user) {
+        // UserStore.updateUser(AuthStore.authUser.telegram_user_id, {
+        //
+        //   city: selectedCity.label,
+        //   country: selectedCountry.label,
+        // });
+        updateUser({
+          userData: {
+            ...formValue,
+            city: city,
+            country: country,
+          },
+          userId: user.telegram_user_id,
+        });
+      }
+      navigate("/profile");
+    } else {
+      alert("Write a valid data!!!");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="p-5 bg-primary rounded-xl">
         <div className="text-[24px]">Main info:</div>
 

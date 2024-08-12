@@ -40,7 +40,7 @@ class UserRepository:
         old_user.username = new_user_data.username
         old_user.city = new_user_data.city
         old_user.country = new_user_data.country
-        old_user.is_first_open = new_user_data.is_first_open
+        old_user.is_first_open = False
 
         await old_user.save()
         return old_user

@@ -1,5 +1,7 @@
+import { TAGS } from "@redux/tags";
 import { baseApi } from "../baseApi";
-import { IUser, IUserStats } from "@schemas/user";
+import { IUpdateUserData, IUser, IUserStats } from "@schemas/user";
+import { setAuthUser } from "@redux/features/authSlice";
 
 export const UserApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +12,7 @@ export const UserApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      providesTags: [TAGS.PROFILE],
     }),
     getUserById: builder.query<IUser, string>({
       query(userId) {
@@ -19,7 +21,7 @@ export const UserApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      providesTags: [TAGS.USER],
     }),
     getUserProfile: builder.query<IUser, void>({
       query() {
@@ -28,7 +30,29 @@ export const UserApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setAuthUser(data));
+          console.log(data);
+        } catch (error) {
+          console.error("Ошибка при выполнении мутации:", error);
+        }
+      },
+      providesTags: [TAGS.PROFILE],
+    }),
+    updateUserInfo: builder.mutation<
+      IUser,
+      { userData: IUpdateUserData; userId: string }
+    >({
+      query(data) {
+        return {
+          url: `/user/${data.userId}`,
+          method: "PATCH",
+          body: data.userData,
+        };
+      },
+      invalidatesTags: [TAGS.PROFILE],
     }),
   }),
 });
@@ -37,4 +61,5 @@ export const {
   useGetUserStatsQuery,
   useGetUserByIdQuery,
   useGetUserProfileQuery,
+  useUpdateUserInfoMutation,
 } = UserApi;
