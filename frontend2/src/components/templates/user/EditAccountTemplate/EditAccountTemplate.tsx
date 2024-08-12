@@ -1,3 +1,5 @@
+import { Spinner } from "@atoms/index";
+import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import EditProfileForm from "@organisms/user/EditProfileForm";
 import React from "react";
@@ -24,9 +26,6 @@ export const EditAccountTemplate: React.FC = () => {
       ),
     },
   ];
-  return (
-    <>
-      <Tabs subTab={tabs} />
-    </>
-  );
+  const user = useAuthUser();
+  return <>{user ? <Tabs subTab={tabs} /> : <Spinner />}</>;
 };

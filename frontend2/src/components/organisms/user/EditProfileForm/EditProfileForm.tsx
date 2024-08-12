@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input } from "@atoms/index";
@@ -18,6 +18,10 @@ export const EditProfileForm: React.FC = () => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
+
+  useEffect(() => {
+    setFormValue(getInitState(user));
+  }, [user]);
 
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -53,6 +57,11 @@ export const EditProfileForm: React.FC = () => {
 
           {!re.test(String(formValue.email).toLowerCase()) && (
             <div className="text-error">Invalid email</div>
+          )}
+          {country == "" ||
+            (!city && <div className="text-error">You mast select city</div>)}
+          {country == "" && (
+            <div className="text-error">You mast select country</div>
           )}
         </div>
         <div className="mt-5">

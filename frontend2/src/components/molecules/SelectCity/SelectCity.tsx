@@ -5,6 +5,7 @@ import { Option } from "@atoms/Select/selectOption";
 import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { generateRandomString } from "@utils/codeGenerate";
+import { useAuthUser } from "@hooks/useAuthUser";
 
 interface ISelectCityProps {
   setCity: React.Dispatch<React.SetStateAction<string>>;
@@ -37,6 +38,19 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
       setCity(selectedCity.value);
     }
   }, [selectedCity]);
+  const authUser = useAuthUser();
+  useEffect(() => {
+    if (authUser) {
+      const country = cityOption.find((city) => {
+        if (city.label == authUser?.city) {
+          return city;
+        }
+      });
+      if (country && country.value != selectedCity?.value) {
+        setSelectedCity(country);
+      }
+    }
+  }, [authUser]);
   return (
     <>
       <Label>Select City</Label>

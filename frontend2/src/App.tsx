@@ -6,7 +6,7 @@ import { store } from "@redux/store";
 
 const App = () => {
   return (
-    <div className="text-fg p-2">
+    <div className="text-fg p-2 pb-[150px]">
       <Provider store={store}>
         <BrowserRouter>
           <MainRouter />
