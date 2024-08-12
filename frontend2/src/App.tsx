@@ -6,11 +6,13 @@ import { store } from "@redux/store";
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <MainRouter />
-      </BrowserRouter>
-    </Provider>
+    <div className="text-fg p-2">
+      <Provider store={store}>
+        <BrowserRouter>
+          <MainRouter />
+        </BrowserRouter>
+      </Provider>
+    </div>
   );
 };
 

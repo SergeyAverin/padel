@@ -14,6 +14,7 @@ class UserDTO(BaseModel):
     city: str
     country: str
     status: str
+    is_first_open: bool
 
     avatar: str = Field(
         default=f"http://{api_setting.api_domain}/api/v1.0/user/image/default.png")

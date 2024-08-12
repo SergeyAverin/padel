@@ -5,7 +5,7 @@ import { TAGS } from "./tags";
 
 export const baseApi = createApi({
   reducerPath: "api",
-  bObjectObjectObjectaseQuery: baseQuery,
+  baseQuery: baseQuery,
   tagTypes: Object.values(TAGS),
   endpoints: () => ({}),
 });
