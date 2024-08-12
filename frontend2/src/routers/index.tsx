@@ -5,6 +5,7 @@ import AccountPage from "@pages/user/AccountPage";
 // import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 // import BlankList from "@organisms/matches/BlankList";
 import Navigation from "@organisms/core/Navigation";
+import EditAccountPage from "@pages/user/EditAccountPage";
 // import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
 // import ProfilePage from "@pages/accounts/ProfilePage";
 // import EditProfilePage from "@pages/accounts/EditProfilePage";
@@ -26,8 +27,8 @@ const MainRouter: React.FC = () => {
       <TutorialPortal /> */}
       <Routes>
         <Route path="/profile" element={<AccountPage />} />
+        <Route path="/profile/edit" element={<EditAccountPage />} />
         {/* 
-        <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/clubs/:clubId" element={<ClubPage />} />
