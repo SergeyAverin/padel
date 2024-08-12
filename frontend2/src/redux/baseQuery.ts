@@ -17,11 +17,10 @@ export const baseQuery: BaseQueryFn<
 > = fetchBaseQuery({
   baseUrl: BASE_URL,
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem("token");
-
-    if (token != "") {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
+    headers.set(
+      "Authorization",
+      `Bearer ${sessionStorage.getItem("__telegram__initParams")}`
+    );
 
     return headers;
   },
