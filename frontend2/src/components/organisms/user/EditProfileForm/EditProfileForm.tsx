@@ -4,6 +4,7 @@ import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
 import SelectCountry from "@molecules/core/SelectCountry";
+import { SelectCity } from "@molecules/SelectCity/SelectCity";
 
 export const EditProfileForm: React.FC = () => {
   const re =
@@ -19,6 +20,7 @@ export const EditProfileForm: React.FC = () => {
   };
 
   const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   return (
     <form>
@@ -40,6 +42,10 @@ export const EditProfileForm: React.FC = () => {
 
         <div className="mt-5">
           <SelectCountry setCountry={setCountry} />
+        </div>
+
+        <div className="mt-5">
+          <SelectCity setCity={setCity} selectedCountry={country} />
         </div>
 
         <div className="mt-5">
