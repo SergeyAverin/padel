@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
+import SelectCountry from "@molecules/core/SelectCountry";
 
 export const EditProfileForm: React.FC = () => {
   const re =
@@ -16,6 +17,8 @@ export const EditProfileForm: React.FC = () => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
+
+  const [country, setCountry] = useState("");
 
   return (
     <form>
@@ -34,6 +37,10 @@ export const EditProfileForm: React.FC = () => {
             </div>
           </div>
         ))}
+
+        <div className="mt-5">
+          <SelectCountry setCountry={setCountry} />
+        </div>
 
         <div className="mt-5">
           {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
