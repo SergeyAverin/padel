@@ -18,6 +18,13 @@ async def find_user(username: str, user: UserDTO = Depends(get_current_user)):
     return await User.filter(username__icontains=username.lower(), telegram_user_id__not=user.telegram_user_id)
 
 
+@profile_router.get('/profile')
+def get_profile(
+    user: UserDTO = Depends(get_current_user)
+):
+    return user
+
+
 @profile_router.patch('/lvl')
 async def change_lvl(
     user: UserDTO = Depends(get_current_user),

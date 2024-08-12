@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import AccountPage from "@pages/user/AccountPage";
 
@@ -6,6 +7,8 @@ import AccountPage from "@pages/user/AccountPage";
 // import BlankList from "@organisms/matches/BlankList";
 import Navigation from "@organisms/core/Navigation";
 import EditAccountPage from "@pages/user/EditAccountPage";
+import { useEffect } from "react";
+import { useGetUserProfileQuery } from "@redux/api/userApi";
 // import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
 // import ProfilePage from "@pages/accounts/ProfilePage";
 // import EditProfilePage from "@pages/accounts/EditProfilePage";
@@ -17,9 +20,18 @@ import EditAccountPage from "@pages/user/EditAccountPage";
 // import CreateClubPage from "@pages/clubs/CreateClubPage";
 // import EditClubPage from "@pages/clubs/EditClubPage";
 // import UserPage from "@pages/accounts/UserPage";
+import { setAuthUser } from "@redux/features/authSlice";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
+  const { data, isLoading } = useGetUserProfileQuery();
+  const dispatcher = useDispatch();
+  useEffect(() => {
+    if (data) {
+      dispatcher(setAuthUser(data));
+      console.log(data);
+    }
+  }, [isLoading]);
   return (
     <>
       {/* <AddUserPanel />

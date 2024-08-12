@@ -1,17 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import UserTemplate from "@templates/user/UserTemplate";
 import { Button, ButtonVariant, Spinner } from "@atoms/index";
-import { useGetUserByIdQuery } from "@redux/api/userApi";
 import { Link } from "react-router-dom";
+import { authUserSelector } from "@redux/selectors/authSelectors";
 
 export const AccountPage: React.FC = () => {
-  const { data, isLoading } = useGetUserByIdQuery("339433633");
+  const authUser = useSelector(authUserSelector);
   return (
     <>
-      {!isLoading && data ? (
+      {authUser ? (
         <UserTemplate
-          user={data}
+          user={authUser}
           button={
             <Link to="/profile/edit">
               <Button variant={ButtonVariant.OUTLINED}>Edit</Button>
