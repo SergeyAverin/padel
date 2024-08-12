@@ -1,5 +1,5 @@
 import { baseApi } from "../baseApi";
-import { IUserStats } from "@schemas/user";
+import { IUser, IUserStats } from "@schemas/user";
 
 export const UserApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,7 +12,16 @@ export const UserApi = baseApi.injectEndpoints({
       },
       providesTags: [],
     }),
+    getUserById: builder.query<IUser, string>({
+      query(userId) {
+        return {
+          url: `/user/${userId}`,
+          method: "GET",
+        };
+      },
+      providesTags: [],
+    }),
   }),
 });
 
-export const { useGetUserStatsQuery } = UserApi;
+export const { useGetUserStatsQuery, useGetUserByIdQuery } = UserApi;

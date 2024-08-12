@@ -2,6 +2,8 @@ import React from "react";
 
 import UserTemplate from "@templates/user/UserTemplate";
 import { Hand, Position } from "@schemas/user";
+import { Button, ButtonVariant, Spinner } from "@atoms/index";
+import { useGetUserByIdQuery } from "@redux/api/userApi";
 
 const testUser = {
   age: 21,
@@ -20,9 +22,17 @@ const testUser = {
   username: "PrettyStreet",
 };
 export const AccountPage: React.FC = () => {
+  const { data, isLoading } = useGetUserByIdQuery("339433633");
   return (
     <>
-      <UserTemplate user={testUser} />
+      {!isLoading && data ? (
+        <UserTemplate
+          user={data}
+          button={<Button variant={ButtonVariant.OUTLINED}>Edit</Button>}
+        />
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };
