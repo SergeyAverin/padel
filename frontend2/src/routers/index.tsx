@@ -4,7 +4,7 @@ import AccountPage from "@pages/user/AccountPage";
 
 // import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 // import BlankList from "@organisms/matches/BlankList";
-// import Navigation from "@organisms/core/Navigation";
+import Navigation from "@organisms/core/Navigation";
 // import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
 // import ProfilePage from "@pages/accounts/ProfilePage";
 // import EditProfilePage from "@pages/accounts/EditProfilePage";
@@ -37,7 +37,7 @@ const MainRouter: React.FC = () => {
         <Route path="/edit/club/:clubId" element={<EditClubPage />} />
         <Route path="/user/:userId" element={<UserPage />} /> */}
       </Routes>
-      {/* <Navigation /> */}
+      <Navigation />
     </>
   );
 };

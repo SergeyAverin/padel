@@ -30,7 +30,7 @@ export const UserTemplate: React.FC<IUserTemplateProps> = ({
         <Heading variant={HeadingVariant.H2}>Stats:</Heading>
         <UserStats />
       </div>
-      <div>Matches</div>
+      <div className="mt-[80px] mb-[80px]">Matches</div>
     </>
   );
 };

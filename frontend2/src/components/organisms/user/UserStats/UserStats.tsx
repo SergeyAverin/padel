@@ -10,7 +10,7 @@ import classNames from "classnames";
 
 export const UserStats: React.FC = () => {
   // const { userId } = useParams();
-  const userId = "339433633";
+  const userId = "";
   const { data, isLoading } = useGetUserStatsQuery(userId as string);
   return (
     <>
