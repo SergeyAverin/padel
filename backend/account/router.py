@@ -23,7 +23,10 @@ async def change_lvl(
     user: UserDTO = Depends(get_current_user),
     lvl: int = Body()
 ):
-    return await user_service.change_lvl(user, lvl)
+    if user.is_first_open:
+        return await user_service.change_lvl(user, lvl)
+    else:
+        return user
 
 
 @profile_router.get('/stats/{telegram_user_id}')

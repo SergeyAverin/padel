@@ -40,6 +40,7 @@ class UserService:
     async def change_lvl(self, user: UserDTO, lvl: int) -> UserDTO:
         user = await User.get_or_none(telegram_user_id=user.telegram_user_id)
         user.lvl = lvl
+        user.is_first_open = False
         await user.save()
         return user
 

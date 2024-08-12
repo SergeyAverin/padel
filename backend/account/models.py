@@ -53,6 +53,7 @@ class User(Model):
     country = fields.CharField(max_length=255, default='')
 
     lvl = fields.IntField(default=0)
+    is_first_open = fields.BooleanField(default=True)
 
     def __str__(self):
         return self.first_name
