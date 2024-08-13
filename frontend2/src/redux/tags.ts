@@ -4,4 +4,5 @@ export const TAGS = {
   FRIENDS: "friend",
   FRIEND_REQUEST: "friend_requset",
   TAG: "tag",
+  CLUB: "club",
 };

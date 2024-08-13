@@ -8,7 +8,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from account.service import user_service
 from account.schemas import UserDTO
-from authentication.utils import decode_jwt
+# from authentication.utils import decode_jwt
 from core.config.bot_settings import bot_settings
 
 

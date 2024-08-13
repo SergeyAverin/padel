@@ -30,6 +30,7 @@ import {
   useGetOuterFriendRequestQuery,
 } from "@redux/api/friendRequestApi";
 import MatchesPage from "@pages/matches/MatchesPage";
+import CreatClubPage from "@pages/clubs/CreatClubPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -58,11 +59,11 @@ const MainRouter: React.FC = () => {
         <Route path="/user/:userId" element={<UserPage />} />
         <Route path="/friends" element={<FriendPage />} />
         <Route path="/matches" element={<MatchesPage />} />
+        <Route path="/create/club" element={<CreatClubPage />} />
         {/* 
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/clubs/:clubId" element={<ClubPage />} />
         <Route path="/create/match" element={<CreateMatchPage />} />
-        <Route path="/create/club" element={<CreateClubPage />} />
         <Route path="/edit/club/:clubId" element={<EditClubPage />} />
         */}
       </Routes>

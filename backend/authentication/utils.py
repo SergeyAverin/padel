@@ -2,7 +2,7 @@ from typing import Any, Union, Dict
 from logging import getLogger
 from datetime import datetime, timedelta
 
-from jose import jwt
+# from jose import jwt
 
 from core.config.auth_settings import auth_setting
 
@@ -26,34 +26,35 @@ def encode_jwt(
     Return:
      Строка с jwt токеном
     '''
-    payload = payload.copy()
-    now = datetime.now()
-    expire = now + timedelta(minutes=expire_minutes)
-    ito = now.isoformat()
-    expire = expire.isoformat()
+#     payload = payload.copy()
+#     now = datetime.now()
+#     expire = now + timedelta(minutes=expire_minutes)
+#     ito = now.isoformat()
+#     expire = expire.isoformat()
 
-    payload.update(ito=ito, expire=expire)
+#     payload.update(ito=ito, expire=expire)
 
-    encoded = jwt.encode(payload, private_key, algorithm=algorithm)
+#     encoded = jwt.encode(payload, private_key, algorithm=algorithm)
 
-    return encoded
+#     return encoded
 
 
-def decode_jwt(
-    jwt_token: Union[str, bytes],
-    public_key: str = '3',
-    algorithm: str = 'HS256'
-) -> Dict[str, Any]:
-    ''' 
-    Декодирует jwt токен.
-    Parameters:
-     :param jwt_token: jwt токен 
-     :param public_key: публичный ключ шифрования
-     :param algorithm: алгоритм шифрования jwt токена, значение по умолчанию HS256
-    Return:
-     Возвращает dict с данными из jwt токена
-    '''
+# def decode_jwt(
+#     jwt_token: Union[str, bytes],
+#     public_key: str = '3',
+#     algorithm: str = 'HS256'
+# ) -> Dict[str, Any]:
+#     '''
+#     Декодирует jwt токен.
+#     Parameters:
+#      :param jwt_token: jwt токен
+#      :param public_key: публичный ключ шифрования
+#      :param algorithm: алгоритм шифрования jwt токена, значение по умолчанию HS256
+#     Return:
+#      Возвращает dict с данными из jwt токена
+#     '''
 
-    decoded = jwt.decode(jwt_token, public_key, algorithms=algorithm)
+#     decoded = jwt.decode(jwt_token, public_key, algorithms=algorithm)
 
-    return decoded
+#     return decoded
+    return {}

@@ -25,7 +25,7 @@ async def get_all_clubs(
     return await club_service.filter_club(name, city)
 
 
-@club_routes.post('/')
+@club_routes.post('')
 async def create_club(
     club_data: CreateClubDTO,
     user: UserDTO = Depends(get_current_user)
