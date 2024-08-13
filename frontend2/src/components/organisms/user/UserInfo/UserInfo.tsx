@@ -4,6 +4,7 @@ import { Info } from "./Info";
 import UserPhoto from "@molecules/user/UserPhoto";
 import { IUser } from "@schemas/user";
 import { shortenString } from "@utils/shoringString";
+import { Country } from "country-state-city";
 
 interface IUserInfoProps {
   user: IUser;
@@ -59,8 +60,11 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user }) => {
           <div className="mt-[25px]">
             <Info infoValue={user.email} infoKey="email" />
             <Info infoValue={user.age} infoKey="age" />
+            <Info
+              infoValue={Country.getCountryByCode(user.country)?.name}
+              infoKey="country"
+            />
             <Info infoValue={user.city} infoKey="city" />
-            <Info infoValue={user.country} infoKey="country" />
           </div>
         )}
       </div>

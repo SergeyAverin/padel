@@ -10,10 +10,12 @@ import { useAuthUser } from "@hooks/useAuthUser";
 interface ISelectCityProps {
   setCity: React.Dispatch<React.SetStateAction<string>>;
   selectedCountry: string;
+  city: string | undefined;
 }
 
 export const SelectCity: React.FC<ISelectCityProps> = ({
   setCity,
+  city,
   selectedCountry,
 }) => {
   const [selectedCity, setSelectedCity] = useState<null | Option>(null);
@@ -30,12 +32,16 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
           };
         });
         setCityOptions(mapedOptions);
+        const c = cityOption.find((i) => i.value == city);
+        if (c) {
+          setSelectedCity(c);
+        }
       }
     }
-  }, [selectedCountry]);
+  }, [selectedCountry, city]);
   useEffect(() => {
     if (selectedCity) {
-      setCity(selectedCity.value);
+      setCity(selectedCity.label);
     }
   }, [selectedCity]);
   const authUser = useAuthUser();
@@ -51,6 +57,7 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
       }
     }
   }, [authUser]);
+
   return (
     <>
       <Label>Select City</Label>

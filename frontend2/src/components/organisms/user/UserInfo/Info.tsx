@@ -2,7 +2,7 @@ import { shortenString } from "@utils/shoringString";
 
 interface IInfo {
   infoKey: string;
-  infoValue: string | number;
+  infoValue: string | number | undefined;
 }
 
 export const Info: React.FC<IInfo> = ({ infoKey, infoValue }) => {

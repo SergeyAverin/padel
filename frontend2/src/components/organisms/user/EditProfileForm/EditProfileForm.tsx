@@ -20,13 +20,16 @@ export const EditProfileForm: React.FC = () => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   useEffect(() => {
     setFormValue(getInitState(user));
+    if (user) {
+      setCity(user.city);
+      setCountry(user.country);
+    }
   }, [user]);
-
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
 
   const navigate = useNavigate();
   const [updateUser] = useUpdateUserInfoMutation();
@@ -39,11 +42,6 @@ export const EditProfileForm: React.FC = () => {
       country
     ) {
       if (user) {
-        // UserStore.updateUser(AuthStore.authUser.telegram_user_id, {
-        //
-        //   city: selectedCity.label,
-        //   country: selectedCountry.label,
-        // });
         updateUser({
           userData: {
             ...formValue,
@@ -78,11 +76,15 @@ export const EditProfileForm: React.FC = () => {
         ))}
 
         <div className="mt-5">
-          <SelectCountry setCountry={setCountry} />
+          <SelectCountry setCountry={setCountry} country={user?.country} />
         </div>
 
         <div className="mt-5">
-          <SelectCity setCity={setCity} selectedCountry={country} />
+          <SelectCity
+            setCity={setCity}
+            selectedCountry={country}
+            city={user?.city}
+          />
         </div>
 
         <div className="mt-5">

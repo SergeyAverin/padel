@@ -7,11 +7,13 @@ import Select from "@atoms/Select";
 import { useAuthUser } from "@hooks/useAuthUser";
 
 interface ISelectCountryProps {
+  country: string | undefined;
   setCountry: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const SelectCountry: React.FC<ISelectCountryProps> = ({
   setCountry,
+  country,
 }) => {
   const [selectedCountry, setSelectedCountry] = useState<null | Option>(null);
   const countryOptions = Country.getAllCountries().map((country) => ({
@@ -23,6 +25,13 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
       setCountry(selectedCountry.value);
     }
   }, [selectedCountry]);
+  useEffect(() => {
+    console.log(country);
+    const c = countryOptions.find((i) => i.value == country);
+    if (c) {
+      setSelectedCountry(c);
+    }
+  }, [country]);
   const authUser = useAuthUser();
   useEffect(() => {
     if (authUser) {
