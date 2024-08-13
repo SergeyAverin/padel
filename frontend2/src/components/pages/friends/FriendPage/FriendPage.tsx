@@ -1,5 +1,8 @@
 import Tabs from "@molecules/core/Tabs";
+import FindUserForm from "@organisms/friends/FindUserForm";
 import FriendsTemplate from "@templates/friends/FriendsTemplate";
+import InnerFriendRequestsTemplate from "@templates/friends/InnerFriendRequestsTemplate";
+import OuterFriendRequestsTemplate from "@templates/friends/OuterFriendRequestsTemplate";
 import React from "react";
 
 export const FriendPage: React.FC = () => {
@@ -12,25 +15,17 @@ export const FriendPage: React.FC = () => {
     {
       to: "#innerFriendRequests",
       text: "Inner",
-      content: (
-        <>
-          <div>123</div>
-        </>
-      ),
+      content: <InnerFriendRequestsTemplate />,
     },
     {
       to: "#outerFriendRequests",
       text: "Outer",
-      content: (
-        <>
-          <div>123</div>
-        </>
-      ),
+      content: <OuterFriendRequestsTemplate />,
     },
     {
       to: "#findUser",
       text: "Find",
-      content: <div>123</div>,
+      content: <FindUserForm />,
     },
   ];
   return (
