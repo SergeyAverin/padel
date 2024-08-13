@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import LoadPlaceholder from "@atoms/LoadPlaceholder";
 import Stat from "@molecules/user/Stat";

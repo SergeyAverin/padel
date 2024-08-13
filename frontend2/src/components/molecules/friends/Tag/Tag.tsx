@@ -15,7 +15,7 @@ interface ITagProps {
 export const Tag: React.FC<ITagProps> = ({
   text,
   isAdd = false,
-  id,
+  // id,
   userId,
 }) => {
   const addTag = () => {

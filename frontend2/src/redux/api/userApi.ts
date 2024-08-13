@@ -36,7 +36,7 @@ export const UserApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(setAuthUser(data));

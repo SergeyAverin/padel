@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import Tag from "@molecules/friends/Tag";
+// import Tag from "@molecules/friends/Tag";
 import UserPhoto from "@molecules/user/UserPhoto";
 import { IUser } from "@schemas/user";
-import { ITag } from "@schemas/tags";
+// import { ITag } from "@schemas/tags";
 import { shortenString } from "@utils/shoringString";
 import { Link } from "react-router-dom";
 import UnFriend from "@molecules/friends/UnFriend";

@@ -14,7 +14,7 @@ import { shortenString } from "@utils/shoringString";
 import Bookmark from "@molecules/clubs/Bookmark";
 import { Link, useParams } from "react-router-dom";
 import Tabs from "@molecules/core/Tabs";
-import { useAuthUser } from "@hooks/useAuthUser";
+// import { useAuthUser } from "@hooks/useAuthUser";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
 import { Country } from "country-state-city";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
@@ -38,7 +38,7 @@ export const ClubTemplate: React.FC = () => {
       ),
     },
   ];
-  const authUser = useAuthUser;
+  // const authUser = useAuthUser;
   const permission = true;
   // authUser?.id == ClubStore.openedClub?.owner_id ||
   // authUser?.status == "super_admin";
