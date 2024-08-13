@@ -22,6 +22,7 @@ import { useGetUserProfileQuery } from "@redux/api/userApi";
 // import UserPage from "@pages/accounts/UserPage";
 import { setAuthUser } from "@redux/features/authSlice";
 import { UserPage } from "@pages/user/UserPage/UserPage";
+import FriendPage from "@pages/friends/FriendPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -42,8 +43,8 @@ const MainRouter: React.FC = () => {
         <Route path="/profile" element={<AccountPage />} />
         <Route path="/profile/edit" element={<EditAccountPage />} />
         <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/friends" element={<FriendPage />} />
         {/* 
-        <Route path="/friends" element={<FriendsPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/clubs/:clubId" element={<ClubPage />} />
         <Route path="/matches" element={<MatchPage />} />
