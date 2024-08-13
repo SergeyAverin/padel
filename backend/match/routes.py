@@ -1,8 +1,9 @@
 from logging import getLogger
 
 from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi_pagination import Page, paginate
 
-from match.schemas import MatchCreateDTO
+from match.schemas import MatchCreateDTO, MatchDTO
 from match.services import match_service
 from match.models import StatusEnum
 from account.service import user_service
@@ -144,32 +145,36 @@ async def change_match_status(
 async def get_match_by_user_id(
     user_id: str,
     user: UserDTO = Depends(get_current_user)
-):
-    return await match_service.get_match_by_user(user_id)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_match_by_user(user_id)
+    return paginate(matches)
 
 
 @match_router.get('/club/{club_id}/matches', tags=['club'])
 async def get_match_by_club_id(
     club_id: int,
     user: UserDTO = Depends(get_current_user)
-):
-    return await match_service.get_match_by_club(club_id)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_match_by_club(club_id)
+    return paginate(matches)
 
 
 @match_router.get('/friends/{user_id}/matches', tags=['friends'])
 async def get_matches_by_user_friends(
     user_id: int,
     user: UserDTO = Depends(get_current_user)
-):
-    return await match_service.get_match_by_friends(user_id)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_match_by_friends(user_id)
+    return paginate(matches)
 
 
 @match_router.get('/bookmark/{user_id}/matches', tags=['bookmark'])
 async def get_matches_by_club_bookmarks(
     user_id: int,
     user: UserDTO = Depends(get_current_user)
-):
-    return await match_service.get_matches_by_club_bookmarks(user_id)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_matches_by_club_bookmarks(user_id)
+    return paginate(matches)
 
 
 @match_router.get('/matches/{match_id}/users_for_match')
