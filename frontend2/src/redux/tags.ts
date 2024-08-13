@@ -6,4 +6,5 @@ export const TAGS = {
   TAG: "tag",
   CLUB: "club",
   BOOKMARK: "bookmark",
+  CLUB_IMAGE: "club_image",
 };

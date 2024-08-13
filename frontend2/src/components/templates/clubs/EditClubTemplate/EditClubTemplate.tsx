@@ -1,7 +1,13 @@
 import Tabs from "@molecules/core/Tabs";
+import DeleteClubForm from "@organisms/clubs/DeleteClubForm";
+import { useGetClubByIdQuery } from "@redux/api/clubApi";
+import { IClub } from "@schemas/club";
 import React from "react";
+import { useParams } from "react-router-dom";
 
 export const EditClubTemplate: React.FC = () => {
+  const { clubId } = useParams();
+  const { data, isLoading } = useGetClubByIdQuery(clubId as string);
   const tabs = [
     {
       to: "#edit_club",
@@ -21,7 +27,7 @@ export const EditClubTemplate: React.FC = () => {
     {
       to: "#delete_club",
       text: "Delete",
-      content: 1123,
+      content: <DeleteClubForm club={data as IClub} />,
     },
     {
       to: "#edit_courts",
@@ -29,9 +35,5 @@ export const EditClubTemplate: React.FC = () => {
       content: 123,
     },
   ];
-  return (
-    <>
-      <Tabs subTab={tabs} />
-    </>
-  );
+  return <>{data && <Tabs subTab={tabs} />}</>;
 };

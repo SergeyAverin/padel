@@ -77,7 +77,16 @@ export const clubApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      providesTags: [TAGS.CLUB_IMAGE],
+    }),
+    deleteClub: builder.mutation<void, number>({
+      query(clubId) {
+        return {
+          url: `/club/${clubId}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: [TAGS.CLUB],
     }),
   }),
 });
@@ -91,4 +100,5 @@ export const {
   useGetClubByIdQuery,
   useGetBookmarkStatusQuery,
   useGetGalaryQuery,
+  useDeleteClubMutation,
 } = clubApi;
