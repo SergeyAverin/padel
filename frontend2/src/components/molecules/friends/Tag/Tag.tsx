@@ -1,4 +1,4 @@
-import TagStore from "@store/friends/tags";
+// import TagStore from "@store/friends/tags";
 
 import TrashIcon from "@assets/TrashIcon.svg?react";
 import CloseIcon from "@assets/CloseIcon.svg?react";
@@ -20,16 +20,16 @@ export const Tag: React.FC<ITagProps> = ({
 }) => {
   const addTag = () => {
     if (userId) {
-      TagStore.addTag(userId, id);
+      // TagStore.addTag(userId, id);
     }
   };
   const removeTag = () => {
     if (userId) {
-      TagStore.removeTag(userId, id);
+      // TagStore.removeTag(userId, id);
     }
   };
   const deleteTag = () => {
-    TagStore.deleteTag(id);
+    // TagStore.deleteTag(id);
   };
   return (
     <div className="bg-highlight p-1 font-bold rounded-full  text-bg text-[12px] flex justify-between items-center pl-3 pr-3 select-none">

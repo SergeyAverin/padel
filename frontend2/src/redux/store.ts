@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { baseApi } from "./baseApi";
 import { authSlice } from "./features/authSlice";
+import { clubFilterSlice } from "./features/clubFilterSlice";
 
 export const store = configureStore({
   reducer: {
     authSlice: authSlice.reducer,
+    clubFilterSlice: clubFilterSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",
