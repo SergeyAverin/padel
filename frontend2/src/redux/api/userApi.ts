@@ -1,6 +1,12 @@
 import { TAGS } from "@redux/tags";
 import { baseApi } from "../baseApi";
-import { Hand, IUpdateUserData, IUser, IUserStats } from "@schemas/user";
+import {
+  Hand,
+  IUpdateUserData,
+  IUser,
+  IUserStats,
+  Position,
+} from "@schemas/user";
 import { setAuthUser } from "@redux/features/authSlice";
 
 export const UserApi = baseApi.injectEndpoints({
@@ -70,6 +76,22 @@ export const UserApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.PROFILE],
     }),
+    chagePosition: builder.mutation<
+      IUser,
+      {
+        userId: string;
+        position: Position;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/user/${data.userId}/position`,
+          method: "PATCH",
+          body: data.position,
+        };
+      },
+      invalidatesTags: [TAGS.PROFILE],
+    }),
   }),
 });
 
@@ -79,4 +101,5 @@ export const {
   useGetUserProfileQuery,
   useUpdateUserInfoMutation,
   useChageHandMutation,
+  useChagePositionMutation,
 } = UserApi;

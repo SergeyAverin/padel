@@ -3,6 +3,7 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import EditProfileForm from "@organisms/user/EditProfileForm";
 import SelectHand from "@organisms/user/SelectHand";
+import SelectPosition from "@organisms/user/SelectPosition";
 import React from "react";
 
 export const EditAccountTemplate: React.FC = () => {
@@ -24,6 +25,7 @@ export const EditAccountTemplate: React.FC = () => {
         <>
           <div>
             <SelectHand />
+            <SelectPosition />
           </div>
         </>
       ),
