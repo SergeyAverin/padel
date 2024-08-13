@@ -13,7 +13,15 @@ export const friendsApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.FRIENDS],
     }),
+    unfriend: builder.mutation<void, string>({
+      query(userId) {
+        return {
+          url: `/user/friend/${userId}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetFriendsQuery } = friendsApi;
+export const { useGetFriendsQuery, useUnfriendMutation } = friendsApi;

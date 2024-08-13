@@ -6,6 +6,7 @@ import { IUser } from "@schemas/user";
 import { ITag } from "@schemas/tags";
 import { shortenString } from "@utils/shoringString";
 import { Link } from "react-router-dom";
+import UnFriend from "@molecules/friends/UnFriend";
 
 interface IFriendCardProps {
   user: IUser;
@@ -59,7 +60,7 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
               </div>
             </Link>
             <div className="w-[100px]">
-              {/* <UnFriend friendId={user.telegram_user_id} /> */}
+              <UnFriend friendId={user.telegram_user_id} />
             </div>
           </div>
           <div className="mt-5 grid gap-2  grid-cols-3">
