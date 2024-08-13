@@ -31,6 +31,7 @@ import {
 } from "@redux/api/friendRequestApi";
 import MatchesPage from "@pages/matches/MatchesPage";
 import CreatClubPage from "@pages/clubs/CreatClubPage";
+import ClubListPage from "@pages/clubs/ClubListPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -60,8 +61,8 @@ const MainRouter: React.FC = () => {
         <Route path="/friends" element={<FriendPage />} />
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/create/club" element={<CreatClubPage />} />
+        <Route path="/clubs" element={<ClubListPage />} />
         {/* 
-        <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/clubs/:clubId" element={<ClubPage />} />
         <Route path="/create/match" element={<CreateMatchPage />} />
         <Route path="/edit/club/:clubId" element={<EditClubPage />} />

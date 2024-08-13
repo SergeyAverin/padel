@@ -14,7 +14,16 @@ export const clubApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.PROFILE],
     }),
+    getBookmarkedClubs: builder.query<Array<IClub>, void>({
+      query() {
+        return {
+          url: `/club/bookmarks`,
+          method: "GET",
+        };
+      },
+      providesTags: [TAGS.BOOKMARK],
+    }),
   }),
 });
 
-export const { useCreateClubMutation } = clubApi;
+export const { useCreateClubMutation, useGetBookmarkedClubsQuery } = clubApi;
