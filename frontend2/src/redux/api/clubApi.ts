@@ -23,7 +23,20 @@ export const clubApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.BOOKMARK],
     }),
+    getClubs: builder.query<Array<IClub>, string>({
+      query(fillters) {
+        return {
+          url: `/club/clubs${fillters}`,
+          method: "GET",
+        };
+      },
+      providesTags: [TAGS.CLUB],
+    }),
   }),
 });
 
-export const { useCreateClubMutation, useGetBookmarkedClubsQuery } = clubApi;
+export const {
+  useCreateClubMutation,
+  useGetBookmarkedClubsQuery,
+  useGetClubsQuery,
+} = clubApi;
