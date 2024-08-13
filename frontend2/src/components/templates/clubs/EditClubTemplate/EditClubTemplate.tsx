@@ -1,5 +1,6 @@
 import Tabs from "@molecules/core/Tabs";
 import DeleteClubForm from "@organisms/clubs/DeleteClubForm";
+import UpdateClubForm from "@organisms/clubs/UpdateClubForm";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
 import { IClub } from "@schemas/club";
 import React from "react";
@@ -7,12 +8,12 @@ import { useParams } from "react-router-dom";
 
 export const EditClubTemplate: React.FC = () => {
   const { clubId } = useParams();
-  const { data, isLoading } = useGetClubByIdQuery(clubId as string);
+  const { data } = useGetClubByIdQuery(clubId as string);
   const tabs = [
     {
       to: "#edit_club",
       text: "Data",
-      content: 123,
+      content: <UpdateClubForm club={data as IClub} />,
     },
     {
       to: "#edit_club_avatar",

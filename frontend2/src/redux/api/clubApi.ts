@@ -88,6 +88,16 @@ export const clubApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.CLUB],
     }),
+    updateClub: builder.mutation<IClub, { club: ICreateClub; clubId: number }>({
+      query(club) {
+        return {
+          url: `/club/${club.clubId}`,
+          method: "PATCH",
+          body: club.club,
+        };
+      },
+      invalidatesTags: [TAGS.CLUB],
+    }),
   }),
 });
 
@@ -101,4 +111,5 @@ export const {
   useGetBookmarkStatusQuery,
   useGetGalaryQuery,
   useDeleteClubMutation,
+  useUpdateClubMutation,
 } = clubApi;
