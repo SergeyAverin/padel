@@ -8,6 +8,7 @@ import style from "./Club.module.sass";
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import { Link } from "react-router-dom";
 import { shortenString } from "@utils/shoringString";
+import Bookmark from "@molecules/clubs/Bookmark";
 
 interface IClubProps {
   club: IClub;
@@ -34,7 +35,9 @@ export const Club: React.FC<IClubProps> = observer(({ club }) => {
             {shortenString(club.city, 20)}
           </div>
         </div>
-        <div>{/* <Bookmark clubId={club.id} /> */}</div>
+        <div>
+          <Bookmark clubId={club.id} />{" "}
+        </div>
       </div>
       <div className="p-3">
         <Link to={`/clubs/${club.id}`}>

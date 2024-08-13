@@ -32,6 +32,35 @@ export const clubApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.CLUB],
     }),
+    getBookmarkStatus: builder.query<{ is_bookmark: boolean }, number>({
+      query(clubId) {
+        return {
+          url: `/club/${clubId}/is_bookmark`,
+          method: "GET",
+        };
+      },
+      providesTags: [TAGS.BOOKMARK],
+    }),
+    addBookmark: builder.mutation<void, number>({
+      query(clubId) {
+        return {
+          url: `/club/bookmarks`,
+          method: "POST",
+          body: clubId,
+        };
+      },
+      invalidatesTags: [TAGS.BOOKMARK],
+    }),
+    deleteBookmark: builder.mutation<void, number>({
+      query(clubId) {
+        return {
+          url: `/club/bookmarks`,
+          method: "DELETE",
+          body: clubId,
+        };
+      },
+      invalidatesTags: [TAGS.BOOKMARK],
+    }),
   }),
 });
 
@@ -39,4 +68,7 @@ export const {
   useCreateClubMutation,
   useGetBookmarkedClubsQuery,
   useGetClubsQuery,
+  useAddBookmarkMutation,
+  useDeleteBookmarkMutation,
+  useGetBookmarkStatusQuery,
 } = clubApi;
