@@ -2,6 +2,7 @@ import { Spinner } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import EditProfileForm from "@organisms/user/EditProfileForm";
+import SelectHand from "@organisms/user/SelectHand";
 import React from "react";
 
 export const EditAccountTemplate: React.FC = () => {
@@ -21,7 +22,9 @@ export const EditAccountTemplate: React.FC = () => {
       text: "Padel",
       content: (
         <>
-          <div>Edit</div>
+          <div>
+            <SelectHand />
+          </div>
         </>
       ),
     },
