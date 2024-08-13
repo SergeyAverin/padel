@@ -17,6 +17,7 @@ import Tabs from "@molecules/core/Tabs";
 import { useAuthUser } from "@hooks/useAuthUser";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
 import { Country } from "country-state-city";
+import ClubPhotos from "@organisms/clubs/ClubPhotos";
 
 export const ClubTemplate: React.FC = () => {
   const { clubId } = useParams();
@@ -30,7 +31,11 @@ export const ClubTemplate: React.FC = () => {
     {
       to: "#photos",
       text: "Photos",
-      content: <div className="pt-[50px]">{/* <ClubPhotos /> */}</div>,
+      content: (
+        <div className="pt-[50px]">
+          <ClubPhotos clubId={clubId as string} />
+        </div>
+      ),
     },
   ];
   const authUser = useAuthUser;

@@ -1,4 +1,4 @@
-import { IClub, ICreateClub } from "@schemas/club";
+import { IClub, IClubPhoto, ICreateClub } from "@schemas/club";
 import { baseApi } from "../baseApi";
 import { TAGS } from "@redux/tags";
 
@@ -70,6 +70,15 @@ export const clubApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.CLUB],
     }),
+    getGalary: builder.query<Array<IClubPhoto>, string>({
+      query(clubId) {
+        return {
+          url: `/club/${clubId}/images`,
+          method: "GET",
+        };
+      },
+      providesTags: [],
+    }),
   }),
 });
 
@@ -81,4 +90,5 @@ export const {
   useDeleteBookmarkMutation,
   useGetClubByIdQuery,
   useGetBookmarkStatusQuery,
+  useGetGalaryQuery,
 } = clubApi;
