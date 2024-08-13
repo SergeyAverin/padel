@@ -61,6 +61,15 @@ export const clubApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.BOOKMARK],
     }),
+    getClubById: builder.query<IClub, string>({
+      query(clubId) {
+        return {
+          url: `/club/${clubId}`,
+          method: "GET",
+        };
+      },
+      providesTags: [TAGS.CLUB],
+    }),
   }),
 });
 
@@ -70,5 +79,6 @@ export const {
   useGetClubsQuery,
   useAddBookmarkMutation,
   useDeleteBookmarkMutation,
+  useGetClubByIdQuery,
   useGetBookmarkStatusQuery,
 } = clubApi;

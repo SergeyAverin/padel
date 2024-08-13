@@ -32,6 +32,7 @@ import {
 import MatchesPage from "@pages/matches/MatchesPage";
 import CreatClubPage from "@pages/clubs/CreatClubPage";
 import ClubListPage from "@pages/clubs/ClubListPage";
+import ClubPage from "@pages/clubs/ClubPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -62,8 +63,8 @@ const MainRouter: React.FC = () => {
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/create/club" element={<CreatClubPage />} />
         <Route path="/clubs" element={<ClubListPage />} />
-        {/* 
         <Route path="/clubs/:clubId" element={<ClubPage />} />
+        {/* 
         <Route path="/create/match" element={<CreateMatchPage />} />
         <Route path="/edit/club/:clubId" element={<EditClubPage />} />
         */}
