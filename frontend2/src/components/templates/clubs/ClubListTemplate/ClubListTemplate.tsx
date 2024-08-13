@@ -1,4 +1,4 @@
-import { Heading, HeadingVariant, Spinner } from "@atoms/index";
+import { Heading, HeadingVariant, Loading, Spinner } from "@atoms/index";
 import Tag from "@molecules/friends/Tag";
 import Club from "@organisms/clubs/Club";
 import { ClubFilters } from "@organisms/clubs/ClubFilter/ClubFilter";
@@ -10,25 +10,48 @@ import {
 } from "@redux/api/clubApi";
 import {
   setCity,
+  setIsAwaitSearch,
   setIsOpenPanel,
   setName,
 } from "@redux/features/clubFilterSlice";
 import {
   citySelector,
-  isOpenPanelSelector,
+  isAwaitSearchSelector,
   nameSelector,
 } from "@redux/selectors/clubFilterSelectors";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterIcon from "@assets/FilterIcon.svg?react";
 
 export const ClubListTemplate: React.FC = () => {
   const bookarkedClubs = useGetBookmarkedClubsQuery();
-  const loadClubs = useGetClubsQuery("");
-  const dispatch = useDispatch();
+  const isAwaitSearch = useSelector(isAwaitSearchSelector);
+
   const city = useSelector(citySelector);
   const name = useSelector(nameSelector);
+  let flag = true;
+  let filter = "";
+  if (name != "") {
+    filter += `${flag ? "?" : "&"}name=${name}`;
+    flag = false;
+  }
+  if (city != "") {
+    filter += `${flag ? "?" : "&"}city=${city}`;
+    flag = false;
+  }
+  const loadClubs = useGetClubsQuery(filter);
+  useEffect(() => {
+    if (!loadClubs.isLoading) {
+      dispatch(setIsAwaitSearch(false));
+    }
+  }, [loadClubs.isLoading]);
+
+  const dispatch = useDispatch();
+
+  const isLoading =
+    (bookarkedClubs.isLoading || loadClubs.isLoading) && !isAwaitSearch;
+
   return (
     <>
       <Heading variant={HeadingVariant.H1}>Clubs</Heading>
@@ -71,6 +94,7 @@ export const ClubListTemplate: React.FC = () => {
             <div
               className="mr-2"
               onClick={async () => {
+                dispatch(setIsAwaitSearch(true));
                 dispatch(setName(""));
               }}
             >
@@ -81,6 +105,7 @@ export const ClubListTemplate: React.FC = () => {
             <div
               className="mr-2"
               onClick={async () => {
+                dispatch(setIsAwaitSearch(true));
                 dispatch(setCity(""));
               }}
             >
@@ -104,8 +129,13 @@ export const ClubListTemplate: React.FC = () => {
           </div>
         </>
       )}
+      {isAwaitSearch && (
+        <div className="mt-5">
+          <Loading />
+        </div>
+      )}
 
-      {bookarkedClubs.isLoading || (loadClubs.isLoading && <Spinner />)}
+      {isLoading && !isAwaitSearch && <Spinner />}
     </>
   );
 };

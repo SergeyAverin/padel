@@ -8,6 +8,7 @@ import CloseIcon from "@assets/CloseIcon.svg?react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCity,
+  setIsAwaitSearch,
   setIsOpenPanel,
   setName,
 } from "@redux/features/clubFilterSlice";
@@ -51,9 +52,10 @@ const ClubFiltersComponent: React.FC = () => {
               name="name"
               value={name}
               requirement={false}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setName(e.target.value))
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setIsAwaitSearch(true));
+                dispatch(setName(e.target.value));
+              }}
             />
           </div>
           <div className="mt-5">
@@ -62,9 +64,10 @@ const ClubFiltersComponent: React.FC = () => {
               name="city"
               value={city}
               requirement={false}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setCity(e.target.value))
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setCity(e.target.value));
+                dispatch(setIsAwaitSearch(true));
+              }}
             />
           </div>
           <div className="mt-5">

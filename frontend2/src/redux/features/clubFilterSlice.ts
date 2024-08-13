@@ -3,12 +3,14 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface IClubFilterState {
   isOpenPanel: boolean;
+  isAwaitSearch: boolean;
   city: string;
   name: string;
 }
 
 const initialState: IClubFilterState = {
   isOpenPanel: false,
+  isAwaitSearch: false,
   city: "",
   name: "",
 };
@@ -23,10 +25,14 @@ export const clubFilterSlice = createSlice({
     setName(state, actions: PayloadAction<string>) {
       state.name = actions.payload;
     },
+    setIsAwaitSearch(state, actions: PayloadAction<boolean>) {
+      state.isAwaitSearch = actions.payload;
+    },
     setCity(state, actions: PayloadAction<string>) {
       state.city = actions.payload;
     },
   },
 });
 
-export const { setCity, setIsOpenPanel, setName } = clubFilterSlice.actions;
+export const { setCity, setIsOpenPanel, setName, setIsAwaitSearch } =
+  clubFilterSlice.actions;
