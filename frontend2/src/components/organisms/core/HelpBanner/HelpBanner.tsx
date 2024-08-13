@@ -13,20 +13,33 @@ export const HelpBanner: React.FC<IHelpBanner> = ({
   children,
   isInNavigation = false,
 }) => {
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState(true);
+  const [isDisable, setIsDisable] = useState(true);
   useEffect(() => {
     if (!localStorage.getItem(localStorageKey)) {
-      setIsShow(true);
+      setIsDisable(false);
     }
   }, []);
   const onClose = () => {
     setIsShow(false);
     localStorage.setItem(localStorageKey, "true");
   };
+  useEffect(() => {
+    if (!isShow) {
+      setTimeout(() => {
+        setIsDisable(true);
+      }, 200);
+    }
+  }, [isShow]);
   return (
     <>
-      {isShow && (
-        <div className="flex justify-center items-center">
+      {!isDisable && (
+        <div
+          className={classNames("flex justify-center items-center", {
+            "transition-opacity duration-200 opacity-100": isShow,
+            "transition-opacity duration-200 opacity-0": !isShow,
+          })}
+        >
           <div
             className={classNames("p-5 mt-5 bg-primary rounded-2xl shadow-md", {
               "relative w-full mx-auto": !isInNavigation,
