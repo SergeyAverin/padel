@@ -39,7 +39,7 @@ export const ClubTemplate: React.FC = () => {
     },
   ];
   const authUser = useAuthUser;
-  const permission = false;
+  const permission = true;
   // authUser?.id == ClubStore.openedClub?.owner_id ||
   // authUser?.status == "super_admin";
   return (
