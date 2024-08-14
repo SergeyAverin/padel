@@ -28,8 +28,5 @@ export const clubPhotosApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetClubPhotosQuery,
-  useAddClubPhotoMutation,
-  useDeleteClubPhotoMutation,
-} = clubPhotosApi;
+export const { useAddClubPhotoMutation, useDeleteClubPhotoMutation } =
+  clubPhotosApi;
