@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import NavigationButton from "@molecules/core/NavigationButton";
@@ -11,10 +11,13 @@ import MatchIcon from "@assets/MatchIcon.svg?react";
 import FriendsIcon from "@assets/FriendsIcon.svg?react";
 import ProfileIcon from "@assets/ProfileIcon.svg?react";
 import AddIcon from "@assets/AddIcon.svg?react";
+import classNames from "classnames";
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const onClick = () => {
+    setIsDisable(true);
+
     setIsOpen((prev) => !prev);
     navigator.vibrate(30);
   };
@@ -25,6 +28,15 @@ export const Navigation: React.FC = () => {
   //   AuthStore.authUser?.status == "club_admin" ||
   //   AuthStore.authUser?.status == "super_admin";
   const permission = true;
+
+  const [isDisable, setIsDisable] = useState(false);
+  useEffect(() => {
+    if (!isOpen) {
+      setTimeout(() => {
+        setIsDisable(false);
+      }, 200);
+    }
+  }, [isOpen]);
 
   return (
     <div className="bg-primary p-5 z-20 flex items-center justify-center fixed bottom-0 left-0 w-full shadow-md">
@@ -44,8 +56,16 @@ export const Navigation: React.FC = () => {
           onClick={onClick}
           ref={ref}
         >
-          {isOpen && (
-            <div className="absolute mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500">
+          {isDisable && (
+            <div
+              className={classNames(
+                "absolute animate-fade-in mb-5 bottom-[100%] left-1/2 -translate-x-1/2 bg-amber-500",
+                {
+                  "transition-opacity duration-200 opacity-100": isOpen,
+                  "transition-opacity duration-200 opacity-0": !isOpen,
+                }
+              )}
+            >
               {permission && (
                 <Link to={"/create/club"}>
                   <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center shadow-md">
