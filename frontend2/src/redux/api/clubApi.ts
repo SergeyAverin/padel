@@ -12,7 +12,7 @@ export const clubApi = baseApi.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags: [TAGS.PROFILE],
+      invalidatesTags: [TAGS.CLUB],
     }),
     getBookmarkedClubs: builder.query<Array<IClub>, void>({
       query() {
@@ -107,6 +107,22 @@ export const clubApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.CLUB],
     }),
+    updateClubPhoto: builder.mutation<
+      void,
+      {
+        clubId: number;
+        body: FormData;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/club/${data.clubId}/images`,
+          method: "POST",
+          body: data.body,
+        };
+      },
+      invalidatesTags: [TAGS.CLUB],
+    }),
   }),
 });
 
@@ -121,4 +137,5 @@ export const {
   useGetGalaryQuery,
   useDeleteClubMutation,
   useUpdateClubMutation,
+  useUpdateClubPhotoMutation,
 } = clubApi;
