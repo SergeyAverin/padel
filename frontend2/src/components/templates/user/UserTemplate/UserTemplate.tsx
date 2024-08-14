@@ -28,7 +28,7 @@ export const UserTemplate: React.FC<IUserTemplateProps> = ({
 
       <div className="mt-3">
         <Heading variant={HeadingVariant.H2}>Stats:</Heading>
-        <UserStats />
+        <UserStats userId={user.telegram_user_id} />
       </div>
       <div className="mt-[80px] mb-[80px]">Matches</div>
     </>

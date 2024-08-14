@@ -8,9 +8,11 @@ import { useGetUserStatsQuery } from "@redux/api/userApi";
 import style from "./style.module.css";
 import classNames from "classnames";
 
-export const UserStats: React.FC = () => {
-  // const { userId } = useParams();
-  const userId = "";
+interface IUserStatsProps {
+  userId: string;
+}
+
+export const UserStats: React.FC<IUserStatsProps> = ({ userId }) => {
   const { data, isLoading } = useGetUserStatsQuery(userId as string);
   return (
     <>
