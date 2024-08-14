@@ -4,6 +4,7 @@ import Tabs from "@molecules/core/Tabs";
 import EditProfileForm from "@organisms/user/EditProfileForm";
 import SelectHand from "@organisms/user/SelectHand";
 import SelectPosition from "@organisms/user/SelectPosition";
+import UploadPhotoForm from "@organisms/user/UploadPhotoForm";
 import React from "react";
 
 export const EditAccountTemplate: React.FC = () => {
@@ -16,7 +17,7 @@ export const EditAccountTemplate: React.FC = () => {
     {
       to: "#upload_avatar",
       text: "Avatar",
-      content: <div>Edit</div>,
+      content: <UploadPhotoForm />,
     },
     {
       to: "#edit_padel_data",
