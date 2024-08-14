@@ -25,6 +25,19 @@ class ClubDTO(BaseModel):
     closing: str
 
 
+class ClubPaginationDTO(BaseModel):
+    id: int
+    name: str
+    address: str
+    registration_address: str
+    city: str
+    country: str
+    avatar: str
+    owner_id: int
+    opening: str
+    closing: str
+
+
 class CourtDTO(BaseModel):
     name: str
     club_court: int

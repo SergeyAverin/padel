@@ -23,12 +23,21 @@ export const clubApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.BOOKMARK],
     }),
-    getClubs: builder.query<Array<IClub>, string>({
+    getClubs: builder.query<{ items: Array<IClub> }, string>({
       query(fillters) {
         return {
           url: `/club/clubs${fillters}`,
           method: "GET",
         };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.items.push(...newItems.items);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
       },
       providesTags: [TAGS.CLUB],
     }),

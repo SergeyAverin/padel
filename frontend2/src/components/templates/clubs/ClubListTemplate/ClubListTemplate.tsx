@@ -19,28 +19,36 @@ import {
   isAwaitSearchSelector,
   nameSelector,
 } from "@redux/selectors/clubFilterSelectors";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterIcon from "@assets/FilterIcon.svg?react";
+import { useInfinityScroll } from "@hooks/useInfinityScroll";
+import { IClub } from "@schemas/club";
 
 export const ClubListTemplate: React.FC = () => {
   const bookarkedClubs = useGetBookmarkedClubsQuery();
   const isAwaitSearch = useSelector(isAwaitSearchSelector);
 
+  const [page, setPage] = useState(1);
   const city = useSelector(citySelector);
   const name = useSelector(nameSelector);
-  let flag = true;
-  let filter = "";
+  let filter = `?page=${page}&size=4`;
   if (name != "") {
-    filter += `${flag ? "?" : "&"}name=${name}`;
-    flag = false;
+    filter += `&name=${name}`;
   }
   if (city != "") {
-    filter += `${flag ? "?" : "&"}city=${city}`;
-    flag = false;
+    filter += `&city=${city}`;
   }
   const loadClubs = useGetClubsQuery(filter);
+
+  const clubs = useInfinityScroll<IClub>(
+    page,
+    setPage,
+    loadClubs.data,
+    loadClubs.isFetching
+  );
+
   useEffect(() => {
     if (!loadClubs.isLoading) {
       dispatch(setIsAwaitSearch(false));
@@ -117,19 +125,19 @@ export const ClubListTemplate: React.FC = () => {
 
       {!loadClubs.isLoading && loadClubs.data && (
         <>
-          {loadClubs.data.length == 0 && (
+          {clubs.length == 0 && (
             <div className="pt-5 pb-[200px]">
               <EmptyBanner text="Clubs not found" />
             </div>
           )}
           <div className="grid grid-cols-2 gap-2 mt-5">
-            {loadClubs.data.map((club) => (
+            {clubs.map((club) => (
               <Club club={club} key={club.id} />
             ))}
           </div>
         </>
       )}
-      {isAwaitSearch && (
+      {isLoading && (
         <div className="mt-5">
           <Loading />
         </div>

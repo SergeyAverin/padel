@@ -2,8 +2,9 @@ from logging import getLogger
 
 from fastapi.responses import FileResponse
 from fastapi import APIRouter, Body, UploadFile, File, Depends
+from fastapi_pagination import Page, paginate
 
-from club.schemas import CreateClubDTO
+from club.schemas import CreateClubDTO, ClubPaginationDTO
 from club.services import club_service, club_bookmark_service, club_photo_service, court_service
 from club.models import Club
 from account.service import user_service
@@ -21,8 +22,9 @@ logger = getLogger()
 async def get_all_clubs(
     name: str | None = None,
     city: str | None = None
-):
-    return await club_service.filter_club(name, city)
+) -> Page[ClubPaginationDTO]:
+    clubs = await club_service.filter_club(name, city)
+    return paginate(clubs)
 
 
 @club_routes.post('')

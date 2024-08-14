@@ -2,6 +2,7 @@ from logging import getLogger
 
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_pagination import add_pagination
 
 from core.middleware.access_logging import access_logging_middleware
 from core.middleware.catch_exceptions import catch_exceptions_middleware
@@ -22,8 +23,8 @@ if api_setting.api_is_debug:
 
 logger = getLogger(__name__)
 
-if api_setting.api_is_debug:
-    app.middleware('http')(catch_exceptions_middleware)
+# if api_setting.api_is_debug:
+#     app.middleware('http')(catch_exceptions_middleware)
 app.middleware('http')(access_logging_middleware)
 app.add_middleware(
     CORSMiddleware,
@@ -55,5 +56,7 @@ async def startup_event():
     logger.info('Server start http://%s:%s',
                 api_setting.api_host, api_setting.api_port)
     init_db(app)
+    add_pagination(app)
+
 
 app.add_event_handler("startup", startup_event)

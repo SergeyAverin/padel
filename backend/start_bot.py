@@ -42,7 +42,8 @@ async def command_start_handler(message: Message) -> None:
             country='',
             city='',
             avatar='',
-            lvl=1
+            lvl=1,
+            is_first_open=True
         )
         url = f'https://{api_setting.api_domain}/api/v1.0/user/'
         data = user_data.model_dump()
