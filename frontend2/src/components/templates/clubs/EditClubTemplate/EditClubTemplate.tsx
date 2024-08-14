@@ -1,4 +1,5 @@
 import Tabs from "@molecules/core/Tabs";
+import Courts from "@organisms/clubs/Courts";
 import DeleteClubForm from "@organisms/clubs/DeleteClubForm";
 import UpdateClubForm from "@organisms/clubs/UpdateClubForm";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
@@ -33,7 +34,7 @@ export const EditClubTemplate: React.FC = () => {
     {
       to: "#edit_courts",
       text: "Courts",
-      content: 123,
+      content: <Courts club={data as IClub} />,
     },
   ];
   return <>{data && <Tabs subTab={tabs} />}</>;
