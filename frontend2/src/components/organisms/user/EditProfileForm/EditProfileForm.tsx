@@ -3,8 +3,8 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
-import SelectCountry from "@molecules/core/SelectCountry";
-import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
+// import SelectCountry from "@molecules/core/SelectCountry";
+// import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserInfoMutation } from "@redux/api/userApi";
 
@@ -20,15 +20,15 @@ export const EditProfileForm: React.FC = () => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [city, setCity] = useState("");
 
   useEffect(() => {
     setFormValue(getInitState(user));
-    if (user) {
-      setCity(user.city);
-      setCountry(user.country);
-    }
+    // if (user) {
+    //   setCity(user.city);
+    //   setCountry(user.country);
+    // }
   }, [user]);
 
   const navigate = useNavigate();
@@ -37,16 +37,16 @@ export const EditProfileForm: React.FC = () => {
     event.preventDefault();
     if (
       re.test(String(formValue.email)) &&
-      formValue.age > 0 &&
-      city &&
-      country
+      formValue.age > 0
+      // city &&
+      // country
     ) {
       if (user) {
         updateUser({
           userData: {
             ...formValue,
-            city: city,
-            country: country,
+            city: "city",
+            country: "country",
           },
           userId: user.telegram_user_id,
         });
@@ -75,7 +75,7 @@ export const EditProfileForm: React.FC = () => {
           </div>
         ))}
 
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={user?.country} />
         </div>
 
@@ -85,7 +85,7 @@ export const EditProfileForm: React.FC = () => {
             selectedCountry={country}
             city={user?.city}
           />
-        </div>
+        </div> */}
 
         <div className="mt-5">
           {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
@@ -93,11 +93,11 @@ export const EditProfileForm: React.FC = () => {
           {!re.test(String(formValue.email).toLowerCase()) && (
             <div className="text-error">Invalid email</div>
           )}
-          {country == "" ||
+          {/* {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
             <div className="text-error">You mast select country</div>
-          )}
+          )} */}
         </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">

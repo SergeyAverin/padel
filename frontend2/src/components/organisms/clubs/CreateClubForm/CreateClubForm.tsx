@@ -6,8 +6,8 @@ import { config, FormDataI, initialState } from "./createClubFormConfig";
 import { Button, ButtonVariant, Input, Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { getHoursInRange } from "@utils/timeUtils";
-import SelectCountry from "@molecules/core/SelectCountry";
-import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
+// import SelectCountry from "@molecules/core/SelectCountry";
+// import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 import { useCreateClubMutation } from "@redux/api/clubApi";
 interface Option {
   value: string;
@@ -32,28 +32,28 @@ export const CreateClubForm: React.FC = observer(() => {
     setFormValue((prev) => ({ ...prev, [name]: value }));
   };
 
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [city, setCity] = useState("");
 
   const navigate = useNavigate();
   const [createClub] = useCreateClubMutation();
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (city && country) {
-      createClub({
-        address: formValue.address,
-        city: city,
-        country: country,
-        name: formValue.name,
-        registration_address: "",
-        opening: selectedOpeningOption.value,
-        closing: selectedClosingOption.value,
-      })
-        .unwrap()
-        .then((data) => {
-          navigate(`/clubs/${data.id}`);
-        });
-    }
+    // if (city && country) {
+    createClub({
+      address: formValue.address,
+      city: "city",
+      country: "country",
+      name: formValue.name,
+      registration_address: "",
+      opening: selectedOpeningOption.value,
+      closing: selectedClosingOption.value,
+    })
+      .unwrap()
+      .then((data) => {
+        navigate(`/clubs/${data.id}`);
+      });
+    // }
   };
 
   return (
@@ -73,7 +73,7 @@ export const CreateClubForm: React.FC = observer(() => {
             </div>
           </div>
         ))}
-
+        {/* 
         <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={undefined} />
         </div>
@@ -84,7 +84,7 @@ export const CreateClubForm: React.FC = observer(() => {
             selectedCountry={country}
             city={undefined}
           />
-        </div>
+        </div> */}
 
         <div className="mt-5">
           <Label>Club opening at:</Label>
@@ -105,13 +105,13 @@ export const CreateClubForm: React.FC = observer(() => {
             placeholder="Club closing at"
           />
         </div>
-        <div className="mt-5">
+        {/* <div className="mt-5">
           {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
             <div className="text-error">You mast select country</div>
           )}
-        </div>
+        </div> */}
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Create
