@@ -92,6 +92,22 @@ export const UserApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.PROFILE],
     }),
+    updateAvetar: builder.mutation<
+      void,
+      {
+        userId: string;
+        body: FormData;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/user/${data.userId}/upload_photo`,
+          method: "POST",
+          body: data.body,
+        };
+      },
+      invalidatesTags: [TAGS.PROFILE],
+    }),
   }),
 });
 
@@ -102,4 +118,5 @@ export const {
   useUpdateUserInfoMutation,
   useChageHandMutation,
   useChagePositionMutation,
+  useUpdateAvetarMutation,
 } = UserApi;
