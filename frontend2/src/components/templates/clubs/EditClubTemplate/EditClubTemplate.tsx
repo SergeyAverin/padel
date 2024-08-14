@@ -1,6 +1,7 @@
 import Tabs from "@molecules/core/Tabs";
 import Courts from "@organisms/clubs/Courts";
 import DeleteClubForm from "@organisms/clubs/DeleteClubForm";
+import EditClubPhotos from "@organisms/clubs/EditClubPhotos";
 import UpdateClubForm from "@organisms/clubs/UpdateClubForm";
 import UploadClubPhotoForm from "@organisms/clubs/UploadClubPhotoForm";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
@@ -25,7 +26,7 @@ export const EditClubTemplate: React.FC = () => {
     {
       to: "#edit_photos",
       text: "Photos",
-      content: "asd",
+      content: <EditClubPhotos club={data as IClub} />,
     },
     {
       to: "#delete_club",

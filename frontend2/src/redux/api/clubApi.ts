@@ -79,7 +79,7 @@ export const clubApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.CLUB],
     }),
-    getGalary: builder.query<Array<IClubPhoto>, string>({
+    getGalary: builder.query<Array<IClubPhoto>, number>({
       query(clubId) {
         return {
           url: `/club/${clubId}/images`,
@@ -116,7 +116,7 @@ export const clubApi = baseApi.injectEndpoints({
     >({
       query(data) {
         return {
-          url: `/club/${data.clubId}/images`,
+          url: `/club/image/${data.clubId}`,
           method: "POST",
           body: data.body,
         };

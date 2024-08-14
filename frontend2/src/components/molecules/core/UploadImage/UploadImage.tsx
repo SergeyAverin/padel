@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import FileIcon from "@assets/FileIcon.svg?react";
 
 interface IUploadImageProsp {
-  defaultPhoto: string;
+  defaultPhoto?: string;
   onSubmitPhoto: (file: File | null) => void;
   title: string;
   helpText?: string | undefined;
@@ -50,10 +50,12 @@ export const UploadImage: React.FC<IUploadImageProsp> = ({
         {helpText && <div>{helpText}</div>}
         <form className="p-2 bg-primary rounded-xl" onSubmit={onSubmit}>
           <div className="flex items-center mt-3">
-            <img
-              className="object-contain w-[120px] h-[120px]"
-              src={defaultPhoto}
-            />
+            {defaultPhoto && (
+              <img
+                className="object-contain w-[120px] h-[120px]"
+                src={defaultPhoto}
+              />
+            )}
             {isLoading && (
               <div className="ml-[35px]">
                 <Loading />
