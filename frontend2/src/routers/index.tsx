@@ -3,23 +3,10 @@ import { useDispatch } from "react-redux";
 
 import AccountPage from "@pages/user/AccountPage";
 
-// import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
-// import BlankList from "@organisms/matches/BlankList";
 import Navigation from "@organisms/core/Navigation";
 import EditAccountPage from "@pages/user/EditAccountPage";
 import { useEffect } from "react";
 import { useGetUserProfileQuery } from "@redux/api/userApi";
-// import { TutorialPortal } from "@organisms/core/Tutorial/Tutorial";
-// import ProfilePage from "@pages/accounts/ProfilePage";
-// import EditProfilePage from "@pages/accounts/EditProfilePage";
-// import FriendsPage from "@pages/friends/FriendsPage";
-// import ClubsPage from "@pages/clubs/ClubsPage";
-// import ClubPage from "@pages/clubs/ClubPage";
-// import MatchPage from "@pages/matches/MatchPage";
-// import CreateMatchPage from "@pages/matches/CreateMatchPage";
-// import CreateClubPage from "@pages/clubs/CreateClubPage";
-// import EditClubPage from "@pages/clubs/EditClubPage";
-// import UserPage from "@pages/accounts/UserPage";
 import { setAuthUser } from "@redux/features/authSlice";
 import { UserPage } from "@pages/user/UserPage/UserPage";
 import FriendPage from "@pages/friends/FriendPage";
@@ -34,6 +21,7 @@ import CreatClubPage from "@pages/clubs/CreatClubPage";
 import ClubListPage from "@pages/clubs/ClubListPage";
 import ClubPage from "@pages/clubs/ClubPage";
 import { EditClubPage } from "@pages/clubs/EditClubPage/EditClubPage";
+import { CreateMatchPage } from "@pages/matches/CreateMatchPage/CreateMatchPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -66,9 +54,7 @@ const MainRouter: React.FC = () => {
         <Route path="/clubs" element={<ClubListPage />} />
         <Route path="/clubs/:clubId" element={<ClubPage />} />
         <Route path="/edit/club/:clubId" element={<EditClubPage />} />
-        {/* 
         <Route path="/create/match" element={<CreateMatchPage />} />
-        */}
       </Routes>
       <Navigation />
     </>
