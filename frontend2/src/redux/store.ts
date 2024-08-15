@@ -5,6 +5,7 @@ import { authSlice } from "./features/authSlice";
 import { clubFilterSlice } from "./features/clubFilterSlice";
 import { createMatchSlice } from "./features/creaetMatchSlice";
 import { friendFilterSlice } from "./features/friendFilterSlice";
+import { addUserInMatchSlice } from "./features/addUserInMatch";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     clubFilterSlice: clubFilterSlice.reducer,
     creaetMatchSlice: createMatchSlice.reducer,
     friendFilterSlice: friendFilterSlice.reducer,
+    addUserInMatch: addUserInMatchSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",

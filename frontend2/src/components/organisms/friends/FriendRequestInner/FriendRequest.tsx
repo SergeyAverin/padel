@@ -16,7 +16,7 @@ export const FriendRequestInner: React.FC<IFriendRequestProps> = ({
   user,
 }) => {
   return (
-    <div className="bg-primary p-5 rounded-2xl">
+    <div className="bg-primary p-5 rounded-2xl  animate-fade-in">
       <Link to={`/user/${user.telegram_user_id}`}>
         <div className="flex">
           <UserPhoto lvl={user.lvl} avatar={user.avatar} />

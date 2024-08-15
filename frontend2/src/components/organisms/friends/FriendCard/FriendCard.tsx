@@ -7,7 +7,6 @@ import { IUser } from "@schemas/user";
 import { shortenString } from "@utils/shoringString";
 import { Link } from "react-router-dom";
 import UnFriend from "@molecules/friends/UnFriend";
-import { useGetFriendTagsQuery } from "@redux/api/friendTags";
 import { useGetTagsByFriendQuery } from "@redux/api/tags";
 import Tag from "@molecules/friends/Tag";
 import AddTag from "@molecules/friends/AddTag";
@@ -45,7 +44,7 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
   return (
     <>
       {isShow && (
-        <div className="bg-primary p-5 rounded-xl">
+        <div className="bg-primary p-5 rounded-xl animate-fade-in">
           <div className="flex justify-between w-full">
             <Link to={`/user/${user.telegram_user_id}`}>
               <div className="flex">

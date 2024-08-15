@@ -22,6 +22,7 @@ import ClubListPage from "@pages/clubs/ClubListPage";
 import ClubPage from "@pages/clubs/ClubPage";
 import { EditClubPage } from "@pages/clubs/EditClubPage/EditClubPage";
 import { CreateMatchPage } from "@pages/matches/CreateMatchPage/CreateMatchPage";
+import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -41,7 +42,8 @@ const MainRouter: React.FC = () => {
 
   return (
     <>
-      {/* <AddUserPanel />
+      <AddUserPanel />
+      {/* 
       <BlankList />
       <TutorialPortal /> */}
       <Routes>
