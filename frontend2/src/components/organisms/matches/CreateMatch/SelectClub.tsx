@@ -2,7 +2,7 @@ import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
 import { useGetClubsToCreatMatchQuery } from "@redux/api/createMatchApi";
-import { selectClub } from "@redux/features/creaetMatchSlice";
+import { selectClub, setIsShowNext } from "@redux/features/creaetMatchSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -31,6 +31,9 @@ export const SelectClub: React.FC = () => {
   useEffect(() => {
     if (selectedClub) {
       dispatch(selectClub(Number(selectedClub.value)));
+      dispatch(setIsShowNext(true));
+    } else {
+      dispatch(setIsShowNext(false));
     }
   }, [selectedClub]);
   return (

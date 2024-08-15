@@ -4,6 +4,7 @@ import {
   dateSelector,
   endAtSelector,
   isPrivateSelector,
+  isShowNextSelector,
   lvlMaxSelector,
   lvlMinSelector,
   startAtSelector,
@@ -39,6 +40,8 @@ export const CreateMatch: React.FC = () => {
   const isPrivate = useSelector(isPrivateSelector);
   const tag = useSelector(tagSelector);
   const court = useSelector(courtSelector);
+  const isShowNext = useSelector(isShowNextSelector);
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
   useEffect(() => {
@@ -92,18 +95,20 @@ export const CreateMatch: React.FC = () => {
         {court}
       </div> */}
 
-      <div>
+      <div className="mt-5">
         <div className="text-right text-[18px] pr-[25px] mb-3">
           {step}/{STEP_COUNT - 1}
         </div>
-        <div className="h-[50px]">
-          <Button
-            variant={ButtonVariant.FULL_HIGHLIGHT}
-            onClick={() => dispatch(nextStep())}
-          >
-            Next
-          </Button>
-        </div>
+        {isShowNext && (
+          <div className="h-[50px]">
+            <Button
+              variant={ButtonVariant.FULL_HIGHLIGHT}
+              onClick={() => dispatch(nextStep())}
+            >
+              Next
+            </Button>
+          </div>
+        )}
         <div className="h-[50px] mt-3">
           <Button
             variant={ButtonVariant.OUTLINED}

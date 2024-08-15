@@ -2,7 +2,7 @@ import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
 import { useGetCourtsQuery } from "@redux/api/courtApi";
-import { selectCourt } from "@redux/features/creaetMatchSlice";
+import { selectCourt, setIsShowNext } from "@redux/features/creaetMatchSlice";
 import { clubIdSelector } from "@redux/selectors/createMatchSelectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,9 @@ export const SelectCourt: React.FC = () => {
   useEffect(() => {
     if (court) {
       dispatch(selectCourt(court.value));
+      dispatch(setIsShowNext(true));
+    } else {
+      dispatch(setIsShowNext(false));
     }
   }, [court]);
   return (

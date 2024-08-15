@@ -1,7 +1,7 @@
 import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
-import { selectDate } from "@redux/features/creaetMatchSlice";
+import { selectDate, setIsShowNext } from "@redux/features/creaetMatchSlice";
 import { getNext14Days } from "@utils/dateUtils";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -21,6 +21,7 @@ export const SelectDate: React.FC = () => {
   useEffect(() => {
     if (selectedDate) {
       dispatch(selectDate(selectedDate.value));
+      dispatch(setIsShowNext(true));
     }
   }, [selectedDate]);
   return (

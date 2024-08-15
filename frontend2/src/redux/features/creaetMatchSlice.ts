@@ -15,6 +15,7 @@ interface ICreateMatchState {
   lvlEnd: string | null;
   tag: string | null;
   court: string | null;
+  isShowNext: boolean;
 }
 
 const initialState: ICreateMatchState = {
@@ -30,6 +31,7 @@ const initialState: ICreateMatchState = {
   lvlStart: null,
   tag: null,
   court: null,
+  isShowNext: true,
 };
 
 export const STEP_COUNT = 6;
@@ -55,6 +57,9 @@ export const createMatchSlice = createSlice({
     },
     selectDate(state, actions: PayloadAction<string>) {
       state.date = actions.payload;
+    },
+    setIsShowNext(state, actions: PayloadAction<boolean>) {
+      state.isShowNext = actions.payload;
     },
     selectStartDate(state, actions: PayloadAction<string>) {
       state.startDate = actions.payload;
@@ -95,4 +100,5 @@ export const {
   selectIsPrivate,
   selectCourt,
   selectTag,
+  setIsShowNext,
 } = createMatchSlice.actions;

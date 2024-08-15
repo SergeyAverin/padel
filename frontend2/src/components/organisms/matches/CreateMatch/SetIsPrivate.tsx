@@ -2,12 +2,16 @@ import { Label, Toggle } from "@atoms/index";
 import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
 import { useGetFriendTagsQuery } from "@redux/api/friendTags";
-import { selectIsPrivate, selectTag } from "@redux/features/creaetMatchSlice";
+import {
+  selectIsPrivate,
+  selectTag,
+  setIsShowNext,
+} from "@redux/features/creaetMatchSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export const SetIsPrivateLvl: React.FC = () => {
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(true);
   const { data, isLoading } = useGetFriendTagsQuery();
   const options = data
     ? data.map((tag) => ({ label: tag.name, value: String(tag.id) }))
@@ -16,7 +20,15 @@ export const SetIsPrivateLvl: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(isPrivate);
+    setIsPrivate(false);
+  }, []);
+
+  useEffect(() => {
+    if (isPrivate) {
+      dispatch(setIsShowNext(false));
+    } else {
+      dispatch(setIsShowNext(true));
+    }
     dispatch(selectIsPrivate(isPrivate));
   }, [isPrivate]);
 
@@ -25,6 +37,9 @@ export const SetIsPrivateLvl: React.FC = () => {
   useEffect(() => {
     if (tag) {
       dispatch(selectTag(tag.value));
+      dispatch(setIsShowNext(true));
+    } else {
+      dispatch(setIsShowNext(false));
     }
   }, [tag]);
 
