@@ -1,6 +1,6 @@
 .spinner {
-    width: 5em;
-    height: 5em;
+    width: 2em;
+    height: 2em;
     overflow: visible;
     margin-right: 20px;
 }
@@ -16,9 +16,9 @@
 .spinner:not(:required):after {
     content: '';
     display: block;
-    font-size: 5px;
-    width: 4em;
-    height: 4em;
+    font-size: 14px;
+    width: 1%;
+    height: 1em;
     margin-top: -0.5em;
     animation: spinner 1500ms infinite linear;
     border-radius: 0.5em;
