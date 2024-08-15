@@ -8,7 +8,7 @@ from account.schemas import UserDTO
 
 
 class MatchDTO(BaseModel):
-    # club: ClubPaginationDTO
+    club: ClubPaginationDTO
     id: int
     status: StatusEnum
 
@@ -32,8 +32,10 @@ class MatchDTO(BaseModel):
 
     # is_private: bool
     # user_for_match: UserDTO
+    first_team_score: int
+    second_team_score: int
 
-    # selected_court: CourtDTO
+    # selected_court: str
 
 
 class MatchCreateDTO(BaseModel):

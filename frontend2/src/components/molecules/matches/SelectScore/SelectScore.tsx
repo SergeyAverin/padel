@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Select from "@atoms/Select";
 import { useSetScoreMutation } from "@redux/api/matchApi";
+import { Option } from "@atoms/Select/selectOption";
 
 const scores = [
   { label: "0", value: "0" },
@@ -29,21 +30,18 @@ export const SelectScore: React.FC<ISelectScoreProps> = ({
   defaultScore,
   team,
 }) => {
+  const a = scores.find((b) => Number(b.value) == defaultScore);
+  const [score, setScoreLocal] = useState<Option>(a as Option);
   const [setScore] = useSetScoreMutation();
-  const onChange = (item: { label: string; value: string }) => {
-    setScore({
-      matchId: matchId,
-      score: Number(item.value),
-      team: team,
-    });
+  const onChange = (item: Option) => {
+    if (item) {
+      setScoreLocal(item);
+      setScore({
+        matchId: matchId,
+        score: Number(item.value),
+        team: team,
+      });
+    }
   };
-  return (
-    <div className="w-[100px] h-[40px]">
-      <Select
-        onChange={onChange}
-        defaultValue={scores[defaultScore]}
-        options={scores}
-      />
-    </div>
-  );
+  return <Select onChange={onChange} defaultValue={score} options={scores} />;
 };
