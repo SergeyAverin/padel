@@ -48,7 +48,7 @@ export const friendRequestApi = baseApi.injectEndpoints({
           method: "POST",
         };
       },
-      invalidatesTags: [TAGS.FRIEND_REQUEST],
+      invalidatesTags: [TAGS.FRIEND_REQUEST, TAGS.FRIENDS],
     }),
     createFriendRequest: builder.mutation<IFriendRequest, string>({
       query(userId) {

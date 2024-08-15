@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // import Tag from "@molecules/friends/Tag";
 import UserPhoto from "@molecules/user/UserPhoto";
@@ -7,39 +7,44 @@ import { IUser } from "@schemas/user";
 import { shortenString } from "@utils/shoringString";
 import { Link } from "react-router-dom";
 import UnFriend from "@molecules/friends/UnFriend";
+import { useGetFriendTagsQuery } from "@redux/api/friendTags";
+import { useGetTagsByFriendQuery } from "@redux/api/tags";
+import Tag from "@molecules/friends/Tag";
+import AddTag from "@molecules/friends/AddTag";
+import { useSelector } from "react-redux";
+import { filterTagsSelector } from "@redux/selectors/friendFilterSelectors";
 
 interface IFriendCardProps {
   user: IUser;
 }
 
 export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
-  // useEffect(() => {
-  //   TagStore.getFriendTags(user.telegram_user_id);
-  // }, [TagStore.tags]);
-  // const [isShow, setIsShow] = useState(true);
-  // useEffect(() => {
-  //   if (TagStore.friendsWithTags.has(user.telegram_user_id)) {
-  //     const userTags = TagStore.friendsWithTags.get(
-  //       user.telegram_user_id
-  //     ) as Array<ITag>;
-  //     let flag = true;
-  //     TagStore.filterTags.forEach((tag) => {
-  //       const indexInUserTags = userTags.findIndex((i) => tag.name == i.name);
-  //       if (indexInUserTags < 0) {
-  //         flag = false;
-  //       }
-  //     });
-  //     setIsShow(flag);
-  //   }
-  // }, [
-  //   TagStore.filterTags,
-  //   TagStore.filterTags.length,
-  //   TagStore.friendsWithTags,
-  // ]);
+  const userTags = useGetTagsByFriendQuery(user.telegram_user_id);
+  const [isShow, setIsShow] = useState(true);
+  const tags = useSelector(filterTagsSelector);
+  useEffect(() => {
+    let flag = true;
+    tags.forEach((tag) => {
+      if (userTags.data) {
+        const indexInUserTags = userTags.data.findIndex(
+          (i) => tag.name == i.name
+        );
+        if (indexInUserTags < 0) {
+          flag = false;
+        }
+      }
+      if (tags.length > 0) {
+        setIsShow(flag);
+      }
+    });
+    if (tags.length == 0) {
+      setIsShow(true);
+    }
+  }, [tags, tags.length, userTags]);
 
   return (
     <>
-      {true && (
+      {isShow && (
         <div className="bg-primary p-5 rounded-xl">
           <div className="flex justify-between w-full">
             <Link to={`/user/${user.telegram_user_id}`}>
@@ -64,22 +69,20 @@ export const FriendCard: React.FC<IFriendCardProps> = ({ user }) => {
             </div>
           </div>
           <div className="mt-5 grid gap-2  grid-cols-3">
-            {/* {TagStore.friendsWithTags.has(user.telegram_user_id) &&
-              TagStore.friendsWithTags
-                .get(user.telegram_user_id)
-                ?.map((tag) => (
-                  <div className="mr-1" key={tag.id}>
-                    <Tag
-                      text={tag.name}
-                      isAdd={false}
-                      id={tag.id}
-                      userId={user.telegram_user_id}
-                    />
-                  </div>
-                ))} */}
+            {userTags.data &&
+              userTags.data.map((tag) => (
+                <div className="mr-1" key={tag.id}>
+                  <Tag
+                    text={tag.name}
+                    isAdd={false}
+                    id={tag.id}
+                    userId={user.telegram_user_id}
+                  />
+                </div>
+              ))}
           </div>
           <div className="mt-5 ">
-            {/* <AddTag userId={user.telegram_user_id} /> */}
+            <AddTag userId={user.telegram_user_id} />
           </div>
         </div>
       )}

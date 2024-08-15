@@ -4,6 +4,11 @@ import TrashIcon from "@assets/TrashIcon.svg?react";
 import CloseIcon from "@assets/CloseIcon.svg?react";
 import AddTag from "@assets/AddTagIcon.svg?react";
 import { shortenString } from "@utils/shoringString";
+import {
+  useAddTagMutation,
+  useDeleteTagMutation,
+  useRemoveTagMutation,
+} from "@redux/api/tags";
 
 interface ITagProps {
   text: string;
@@ -15,21 +20,24 @@ interface ITagProps {
 export const Tag: React.FC<ITagProps> = ({
   text,
   isAdd = false,
-  // id,
+  id,
   userId,
 }) => {
+  const [addTagMutation] = useAddTagMutation();
+  const [removeTagMutation] = useRemoveTagMutation();
+  const [deleteTagMutation] = useDeleteTagMutation();
   const addTag = () => {
     if (userId) {
-      // TagStore.addTag(userId, id);
+      addTagMutation({ tagId: id, userId: userId });
     }
   };
   const removeTag = () => {
     if (userId) {
-      // TagStore.removeTag(userId, id);
+      removeTagMutation({ tagId: id, userId: userId });
     }
   };
   const deleteTag = () => {
-    // TagStore.deleteTag(id);
+    deleteTagMutation(id);
   };
   return (
     <div className="bg-highlight p-1 font-bold rounded-full  text-bg text-[12px] flex justify-between items-center pl-3 pr-3 select-none">

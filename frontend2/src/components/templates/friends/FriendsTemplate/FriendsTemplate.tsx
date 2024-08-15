@@ -3,6 +3,7 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import HelpBanner from "@organisms/core/HelpBanner";
 import FriendCard from "@organisms/friends/FriendCard";
+import FriendsFilter from "@organisms/friends/FriendsFilter";
 import { useGetFriendsQuery } from "@redux/api/friendsApi";
 import React from "react";
 
@@ -20,7 +21,7 @@ export const FriendsTemplate: React.FC = () => {
       {!isLoading && data ? (
         <>
           {/* Filter */}
-          {/* <FriendsFilter /> */}
+          <FriendsFilter />
 
           {/* Empty banner */}
           {data.length == 0 && (

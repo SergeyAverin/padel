@@ -13,6 +13,16 @@ export const friendsApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.FRIENDS],
     }),
+    getRelationStatus: builder.query<string, string>({
+      query(userId) {
+        return {
+          url: `/user/${userId}/relation_status`,
+          method: "GET",
+        };
+      },
+      providesTags: [TAGS.FRIENDS, TAGS.FRIEND_REQUEST],
+    }),
+
     unfriend: builder.mutation<void, string>({
       query(userId) {
         return {
@@ -20,8 +30,13 @@ export const friendsApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
+      invalidatesTags: [TAGS.FRIENDS],
     }),
   }),
 });
 
-export const { useGetFriendsQuery, useUnfriendMutation } = friendsApi;
+export const {
+  useGetFriendsQuery,
+  useUnfriendMutation,
+  useGetRelationStatusQuery,
+} = friendsApi;
