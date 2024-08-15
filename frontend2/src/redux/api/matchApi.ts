@@ -1,3 +1,4 @@
+import { TAGS } from "@redux/tags";
 import { baseApi } from "../baseApi";
 
 export const matchApi = baseApi.injectEndpoints({
@@ -16,6 +17,9 @@ export const matchApi = baseApi.injectEndpoints({
           body: data.status,
         };
       },
+      invalidatesTags: (result, error, { matchId }) => [
+        { type: TAGS.MATCH, matchId },
+      ],
     }),
     setScore: builder.mutation<
       void,
@@ -35,6 +39,9 @@ export const matchApi = baseApi.injectEndpoints({
           },
         };
       },
+      invalidatesTags: (result, error, { matchId }) => [
+        { type: TAGS.MATCH, matchId },
+      ],
     }),
   }),
 });

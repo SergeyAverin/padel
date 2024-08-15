@@ -8,4 +8,5 @@ export const TAGS = {
   BOOKMARK: "bookmark",
   CLUB_IMAGE: "club_image",
   COURT: "court",
+  MATCH: "match",
 };

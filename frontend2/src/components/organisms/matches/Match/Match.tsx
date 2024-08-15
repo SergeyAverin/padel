@@ -34,7 +34,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       </div>
       {/** users */}
       <div>
-        {permission ? (
+        {permission && match.status == "done" ? (
           <SetMatchScores match={match} />
         ) : (
           <MatchScore match={match} />
