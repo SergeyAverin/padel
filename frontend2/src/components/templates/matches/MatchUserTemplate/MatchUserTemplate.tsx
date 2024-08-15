@@ -3,6 +3,7 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import HelpBanner from "@organisms/core/HelpBanner";
+import Match from "@organisms/matches/Match";
 import { useGetUserMatchesQuery } from "@redux/api/matchesApi";
 import { IMatch } from "@schemas/match";
 import { IUser } from "@schemas/user";
@@ -46,7 +47,7 @@ export const MatchUserTemplate: React.FC = () => {
             .reverse()
             .map((match) => (
               <div className="mt-3" key={match.id}>
-                {match.id}
+                <Match match={match} />
               </div>
             ))}
         </div>

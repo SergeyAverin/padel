@@ -15,13 +15,13 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match }) => {
         {"."}
         {new Date(match.start_at).getFullYear()}
         <br />
-        {new Date(match.start_at).getHours()}
-        {":"}
-        {String(new Date(match.start_at).getMinutes()).padStart(2, "0")}
-        {"-"}
         {new Date(match.end_at).getHours()}
         {":"}
         {String(new Date(match.end_at).getMinutes()).padStart(2, "0")}
+        {"-"}
+        {new Date(match.start_at).getHours()}
+        {":"}
+        {String(new Date(match.start_at).getMinutes()).padStart(2, "0")}
       </div>
     </>
   );

@@ -28,6 +28,8 @@ import { SelectMatchLvl } from "./SelectMatchLvl";
 import { SetIsPrivateLvl } from "./SetIsPrivate";
 import { SelectCourt } from "./SelectCourts";
 import { useNavigate } from "react-router-dom";
+import { useCreateMatchMutation } from "@redux/api/createMatchApi";
+import { extractDayAndMonth } from "@utils/dateUtils";
 
 export const CreateMatch: React.FC = () => {
   const step = useSelector(stepSelector);
@@ -44,9 +46,32 @@ export const CreateMatch: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
+  const [createMatch] = useCreateMatchMutation();
   useEffect(() => {
-    if (step == STEP_COUNT) {
+    if (step == STEP_COUNT && startAt && endAt && selectedDate) {
       navigation("/profile");
+      const b = extractDayAndMonth(selectedDate);
+      const [hoursStart, minutesStart] = startAt.split(":").map(Number);
+      const [hoursEnd, minutesEnd] = endAt.split(":").map(Number);
+      const now = new Date();
+      const year = now.getFullYear();
+      const startDate = new Date(
+        year,
+        b[1] - 1,
+        b[0],
+        hoursStart,
+        minutesStart
+      );
+      const endDate = new Date(year, b[1] - 1, b[0], hoursEnd, minutesEnd);
+      createMatch({
+        club_id: Number(selectedClub),
+        court_id: Number(court),
+        end_at: startDate,
+        start_at: endDate,
+        is_private: isPrivate,
+        match_lvl: `${lvlMin}-${lvlMax}`,
+        tag_id: Number(tag),
+      });
       dispatch(resetState());
     }
   }, [step]);

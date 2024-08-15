@@ -18,6 +18,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
     user.id == match.owner?.id ||
     user.id == match.club?.owner_id ||
     user.status == "super_admin";
+  console.log(match);
   return (
     <div className="bg-primary p-5 rounded-2xl animate-fade-in">
       <div className="flex justify-between items-start">
@@ -34,9 +35,9 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
       {/** users */}
       <div>
         {permission ? (
-          <MatchScore match={match} />
-        ) : (
           <SetMatchScores match={match} />
+        ) : (
+          <MatchScore match={match} />
         )}
       </div>
     </div>

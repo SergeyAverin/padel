@@ -3,12 +3,13 @@ from datetime import datetime
 from pydantic import BaseModel
 
 from match.models import StatusEnum
-from club.schemas import ClubDTO, CourtDTO
+from club.schemas import ClubDTO, CourtDTO, ClubPaginationDTO
 from account.schemas import UserDTO
 
 
 class MatchDTO(BaseModel):
-    club: ClubDTO
+    # club: ClubPaginationDTO
+    id: int
     status: StatusEnum
 
     start_at: datetime
@@ -29,10 +30,10 @@ class MatchDTO(BaseModel):
     text_user_3: str | None
     text_user_4: str | None
 
-    is_private: bool
-    user_for_match: UserDTO
+    # is_private: bool
+    # user_for_match: UserDTO
 
-    selected_court: CourtDTO
+    # selected_court: CourtDTO
 
 
 class MatchCreateDTO(BaseModel):

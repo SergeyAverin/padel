@@ -5,6 +5,7 @@ from core.config.api_settings import api_setting
 
 
 class UserDTO(BaseModel):
+    id: int
     first_name: str
     last_name: str
     username: str

@@ -1,6 +1,7 @@
 import { TAGS } from "@redux/tags";
 import { baseApi } from "../baseApi";
 import { IClub } from "@schemas/club";
+import { ICreateMatch, IMatch } from "@schemas/match";
 
 export const createMatchApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +14,17 @@ export const createMatchApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.CLUB],
     }),
+    createMatch: builder.mutation<IMatch, ICreateMatch>({
+      query(data) {
+        return {
+          url: `/matches`,
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetClubsToCreatMatchQuery } = createMatchApi;
+export const { useGetClubsToCreatMatchQuery, useCreateMatchMutation } =
+  createMatchApi;

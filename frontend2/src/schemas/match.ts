@@ -25,6 +25,16 @@ export interface IMatch {
   match_lvl: string;
 }
 
+export interface ICreateMatch {
+  start_at: Date;
+  end_at: Date;
+  club_id: number;
+  match_lvl: string;
+  court_id: number;
+  is_private: boolean;
+  tag_id: number;
+}
+
 export enum MatchStatusEnum {
   EXPECTATION = "expectation",
   PLAYED = "played",

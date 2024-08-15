@@ -25,7 +25,7 @@ export const MatchesPage: React.FC = () => {
   ];
   return (
     <>
-      <div className="p-5">
+      <div className="p-2">
         <Tabs subTab={tabs} />
 
         <HelpBanner localStorageKey="help_match" isInNavigation={true}>

@@ -38,12 +38,12 @@ export const SelectScore: React.FC<ISelectScoreProps> = ({
     });
   };
   return (
-    <>
+    <div className="w-[100px] h-[40px]">
       <Select
         onChange={onChange}
         defaultValue={scores[defaultScore]}
         options={scores}
       />
-    </>
+    </div>
   );
 };
