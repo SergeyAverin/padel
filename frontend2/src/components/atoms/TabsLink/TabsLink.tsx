@@ -11,9 +11,9 @@ export const TabsLink: React.FC<ITabsLinkProps> = ({
 }) => {
   return (
     <div
-      className={classNames(" text-[18px] border-b-2 p-3", {
-        " border-fg text-fg": !isActive,
-        "border-highlight text-highlight": isActive,
+      className={classNames("text-[18px] box-border  p-3", {
+        " border-b-2  border-bg box-border": !isActive,
+        "border-highlight border-b-2 box-border text-highlight": isActive,
       })}
     >
       {children}

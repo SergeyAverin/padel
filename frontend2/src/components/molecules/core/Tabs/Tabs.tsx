@@ -27,7 +27,6 @@ export const Tabs: React.FC<ITabsProps> = observer(({ subTab }) => {
             </TabsLink>
           </div>
         ))}
-        <div className="border-b-2 border-fg w-full"></div>
       </div>
       <div className="mt-5">{activeTab.content}</div>
     </>
