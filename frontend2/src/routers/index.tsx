@@ -24,6 +24,7 @@ import { EditClubPage } from "@pages/clubs/EditClubPage/EditClubPage";
 import { CreateMatchPage } from "@pages/matches/CreateMatchPage/CreateMatchPage";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 import { matchIdSelector } from "@redux/selectors/addUserInMatch";
+import Tutorial from "@organisms/core/Tutorial";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -44,10 +45,11 @@ const MainRouter: React.FC = () => {
 
   return (
     <>
+      <Tutorial />
       {matchId && <AddUserPanel />}
       {/* 
       <BlankList />
-      <TutorialPortal /> */}
+       */}
       <Routes>
         <Route path="/profile" element={<AccountPage />} />
         <Route path="/profile/edit" element={<EditAccountPage />} />
