@@ -45,8 +45,6 @@ export const EditProfileForm: React.FC = () => {
         updateUser({
           userData: {
             ...formValue,
-            city: "city",
-            country: "country",
           },
           userId: user.telegram_user_id,
         });

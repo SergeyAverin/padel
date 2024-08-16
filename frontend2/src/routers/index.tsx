@@ -46,7 +46,7 @@ const MainRouter: React.FC = () => {
 
   return (
     <>
-      <Tutorial />
+      {/* <Tutorial /> */}
       {matchId && <AddUserPanel />}
       <BlankList />
 

@@ -25,6 +25,14 @@ export const config: Array<IConfig> = [
     name: "email",
     placeholder: "age",
   },
+  {
+    name: "country",
+    placeholder: "country",
+  },
+  {
+    name: "city",
+    placeholder: "city",
+  },
 ];
 
 export const initialState: FormDataI = {
@@ -33,6 +41,8 @@ export const initialState: FormDataI = {
   last_name: "",
   age: 0,
   email: "",
+  city: "",
+  country: "",
 };
 
 export const getInitState = (user: IUser | null): FormDataI => {
@@ -43,6 +53,8 @@ export const getInitState = (user: IUser | null): FormDataI => {
       last_name: user.last_name,
       age: user.age,
       email: user.email,
+      city: user.city,
+      country: user.country,
     };
   } else {
     return initialState;
@@ -55,4 +67,6 @@ export type FormDataI = {
   last_name: string;
   age: number;
   email: string;
+  city: string;
+  country: string;
 };

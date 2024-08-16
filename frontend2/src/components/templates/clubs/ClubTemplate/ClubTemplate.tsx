@@ -16,7 +16,6 @@ import { Link, useParams } from "react-router-dom";
 import Tabs from "@molecules/core/Tabs";
 // import { useAuthUser } from "@hooks/useAuthUser";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
-import { Country } from "country-state-city";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
 import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { IMatch } from "@schemas/match";
@@ -91,10 +90,7 @@ export const ClubTemplate: React.FC = () => {
               <div className="flex w-full  items-center">
                 <FlagIcon />
                 <div className="text-[12px] font-medium ml-3">
-                  {shortenString(
-                    Country.getCountryByCode(data.country)?.name,
-                    54
-                  )}{" "}
+                  {shortenString(data.country, 54)}{" "}
                   {shortenString(data.city, 54)}
                 </div>
               </div>

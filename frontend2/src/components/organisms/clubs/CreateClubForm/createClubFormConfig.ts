@@ -11,6 +11,14 @@ export const config: Array<IConfig> = [
     name: "address",
     placeholder: "first_name",
   },
+  {
+    name: "city",
+    placeholder: "city",
+  },
+  {
+    name: "country",
+    placeholder: "country",
+  },
   // {
   //   name: "registration_address",
   //   placeholder: "last_name",
@@ -21,10 +29,14 @@ export const initialState: FormDataI = {
   name: "",
   address: "",
   // registration_address: "",
+  country: "",
+  city: "",
 };
 
 export type FormDataI = {
   name: string;
   address: string;
+  country: string;
+  city: string;
   // registration_address: string;
 };

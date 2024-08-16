@@ -57,8 +57,8 @@ export const UpdateClubForm: React.FC<IUpdateClubFormProps> = ({ club }) => {
         registration_address: "",
         opening: selectedOpeningOption.value,
         closing: selectedClosingOption.value,
-        city: "city",
-        country: "country",
+        city: formValue.city,
+        country: formValue.country,
       },
       clubId: club.id,
     });

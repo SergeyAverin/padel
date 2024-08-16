@@ -42,8 +42,8 @@ export const CreateClubForm: React.FC = observer(() => {
     // if (city && country) {
     createClub({
       address: formValue.address,
-      city: "city",
-      country: "country",
+      city: formValue.city,
+      country: formValue.country,
       name: formValue.name,
       registration_address: "",
       opening: selectedOpeningOption.value,
