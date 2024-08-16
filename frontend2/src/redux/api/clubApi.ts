@@ -34,6 +34,7 @@ export const clubApi = baseApi.injectEndpoints({
         return endpointName;
       },
       merge: (currentCache, newItems) => {
+        newItems.items.filter((item) => !currentCache.items.includes(item));
         currentCache.items.push(...newItems.items);
       },
       forceRefetch({ currentArg, previousArg }) {
