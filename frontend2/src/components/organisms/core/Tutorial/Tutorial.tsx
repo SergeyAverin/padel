@@ -283,7 +283,7 @@ export const Tutorial: React.FC = () => {
           {sliders[1]}
           {sliders[2]}
           {sliders[3]}
-          {step != 7 && (
+          {step != 8 && (
             <div className="flex justify-center items-center">
               <div>
                 <div className="w-[280px] mt-5">
