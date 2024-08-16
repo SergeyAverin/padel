@@ -3,8 +3,11 @@ import Select from "@atoms/Select";
 import { Option } from "@atoms/Select/selectOption";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
 import { selectEndDate } from "@redux/features/creaetMatchSlice";
-import { clubIdSelector } from "@redux/selectors/createMatchSelectors";
-import { getHoursInRange } from "@utils/timeUtils";
+import {
+  clubIdSelector,
+  startAtSelector,
+} from "@redux/selectors/createMatchSelectors";
+import { addOneAndHalfHours, getHoursInRange } from "@utils/timeUtils";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,6 +32,17 @@ export const SelectEndAt: React.FC = () => {
       dispatch(selectEndDate(selectedDate.value));
     }
   }, [selectedDate]);
+
+  const startAt = useSelector(startAtSelector);
+  useEffect(() => {
+    if (startAt) {
+      const newValue = addOneAndHalfHours(startAt);
+      const time = options.find((i) => i.value == newValue);
+      if (time) {
+        setSelectedDate(time);
+      }
+    }
+  }, [startAt]);
   return (
     <div>
       <Label>Match end at:</Label>

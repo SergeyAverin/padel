@@ -23,8 +23,27 @@ export const createMatchApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getMatchesByDate: builder.query<
+      Array<IMatch>,
+      {
+        month: number;
+        day: number;
+        clubId: number;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/matches/${data.clubId}/by_day?month=${data.month}&day=${data.day}`,
+          method: "GET",
+        };
+      },
+      providesTags: [],
+    }),
   }),
 });
 
-export const { useGetClubsToCreatMatchQuery, useCreateMatchMutation } =
-  createMatchApi;
+export const {
+  useGetClubsToCreatMatchQuery,
+  useCreateMatchMutation,
+  useGetMatchesByDateQuery,
+} = createMatchApi;

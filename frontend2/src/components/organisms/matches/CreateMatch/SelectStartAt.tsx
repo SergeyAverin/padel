@@ -18,6 +18,9 @@ export const SelectStartAt: React.FC = () => {
   const options = timeRange.map((time) => ({ value: time, label: time }));
 
   const [selectedDate, setSelectedDate] = useState<Option>(options[0]);
+  useEffect(() => {
+    setSelectedDate(options[0]);
+  }, [data]);
   const dispatch = useDispatch();
   const handleChangeDateOption = (option: Option) => {
     if (option) {

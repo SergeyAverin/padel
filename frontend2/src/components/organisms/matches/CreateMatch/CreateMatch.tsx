@@ -38,11 +38,11 @@ export const CreateMatch: React.FC = () => {
   const selectedDate = useSelector(dateSelector);
   const startAt = useSelector(startAtSelector);
   const endAt = useSelector(endAtSelector);
+  const court = useSelector(courtSelector);
   const lvlMin = useSelector(lvlMinSelector);
   const lvlMax = useSelector(lvlMaxSelector);
   const isPrivate = useSelector(isPrivateSelector);
   const tag = useSelector(tagSelector);
-  const court = useSelector(courtSelector);
   const isShowNext = useSelector(isShowNextSelector);
 
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ export const CreateMatch: React.FC = () => {
     }
   }, [step]);
   return (
-    <div className="h-[450px] flex flex-col justify-between pt-5 mb-[80px]">
+    <div className="h-[450px] flex flex-col justify-between pt-5 mb-[180px]">
       {step == 1 && <SelectClub />}
       {step == 2 && <SelectDate />}
       {step == 3 && (
@@ -134,17 +134,19 @@ export const CreateMatch: React.FC = () => {
               variant={ButtonVariant.FULL_HIGHLIGHT}
               onClick={() => dispatch(nextStep())}
             >
-              Next
+              {step + 1 == STEP_COUNT ? "Create" : "Next"}
             </Button>
           </div>
         )}
         <div className="h-[50px] mt-3">
-          <Button
-            variant={ButtonVariant.OUTLINED}
-            onClick={() => dispatch(prevStep())}
-          >
-            Prev
-          </Button>
+          {step - 1 != 0 && (
+            <Button
+              variant={ButtonVariant.OUTLINED}
+              onClick={() => dispatch(prevStep())}
+            >
+              Prev
+            </Button>
+          )}
         </div>
       </div>
     </div>

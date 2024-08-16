@@ -6,6 +6,7 @@ interface IBookingTimePointProps {
   timeStart: number;
   timeEnd: number;
   isNewMatch?: boolean;
+  isError?: boolean;
 }
 
 export const BookingTimePoint: React.FC<IBookingTimePointProps> = ({
@@ -13,18 +14,21 @@ export const BookingTimePoint: React.FC<IBookingTimePointProps> = ({
   timeEnd,
   timeStart,
   isNewMatch = false,
+  isError = false,
 }) => {
   return (
     <>
       <div
         className={classNames("rounded-sm", {
-          "bg-fg": isNewMatch,
-          "bg-error": !isNewMatch,
+          "bg-error z-10 relative": isError && isNewMatch,
+          "bg-highlight z-20 relative": isNewMatch && !isError,
+          "bg-fg z-10 relative": !isNewMatch,
         })}
         style={{
           gridColumnStart: timeStart,
           gridColumnEnd: timeEnd,
           gridRowStart: court,
+          gridRowEnd: court + 1,
         }}
       />
     </>
