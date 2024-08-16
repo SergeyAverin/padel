@@ -9,4 +9,5 @@ export const TAGS = {
   CLUB_IMAGE: "club_image",
   COURT: "court",
   MATCH: "match",
+  BLANK: "blank",
 };
