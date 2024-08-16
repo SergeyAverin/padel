@@ -17,7 +17,7 @@ export const matchApi = baseApi.injectEndpoints({
           body: data.status,
         };
       },
-      invalidatesTags: (result, error, { matchId }) => [
+      invalidatesTags: (_, __, { matchId }) => [
         { type: TAGS.MATCH, id: matchId },
       ],
     }),
@@ -39,7 +39,7 @@ export const matchApi = baseApi.injectEndpoints({
           },
         };
       },
-      invalidatesTags: (result, error, { matchId }) => [
+      invalidatesTags: (_, __, { matchId }) => [
         { type: TAGS.MATCH, id: matchId },
       ],
     }),

@@ -9,7 +9,7 @@ interface IClubPhotosProps {
 }
 
 export const ClubPhotos: React.FC<IClubPhotosProps> = ({ clubId }) => {
-  const { data, isLoading } = useGetGalaryQuery(clubId);
+  const { data, isLoading } = useGetGalaryQuery(Number(clubId));
   return (
     <div>
       {isLoading && (

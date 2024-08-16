@@ -1,5 +1,4 @@
 import { useAuthUser } from "@hooks/useAuthUser";
-import MatchInfo from "@molecules/matches/MatchInfo";
 import { MatchLinks } from "@molecules/matches/MatchLinks/MatchLinks";
 import { MatchScore } from "@molecules/matches/MatchScore/MatchScore";
 import { SetMatchScores } from "@molecules/matches/MatchScore/SetMatchScores";

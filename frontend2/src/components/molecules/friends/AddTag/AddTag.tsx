@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useState } from "react";
 
 import Tag from "../Tag";
 import CreateTag from "../CreateTag";
@@ -10,7 +9,7 @@ interface IAddTagProps {
   userId: string;
 }
 
-export const AddTag: React.FC<IAddTagProps> = observer(({ userId }) => {
+export const AddTag: React.FC<IAddTagProps> = ({ userId }) => {
   const [isOpenAddTag, setIsOpenAddTag] = useState(false);
   const toggleIsOpenAddTag = () => {
     setIsOpenAddTag((prev) => !prev);
@@ -52,4 +51,4 @@ export const AddTag: React.FC<IAddTagProps> = observer(({ userId }) => {
       )}
     </div>
   );
-});
+};

@@ -16,9 +16,8 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
   user,
   match,
   index,
-  userStore,
 }) => {
-  const onClick = useAddUserInMatch(match, index, userStore);
+  const onClick = useAddUserInMatch(match, index);
 
   return (
     <>

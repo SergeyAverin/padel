@@ -1,5 +1,4 @@
 import { Heading, HeadingVariant } from "@atoms/index";
-import { useAuthUser } from "@hooks/useAuthUser";
 import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import HelpBanner from "@organisms/core/HelpBanner";

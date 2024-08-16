@@ -3,7 +3,7 @@ import React from "react";
 import UserTemplate from "@templates/user/UserTemplate";
 import { useGetUserByIdQuery } from "@redux/api/userApi";
 import { useParams } from "react-router-dom";
-import { Button, Spinner } from "@atoms/index";
+import { Spinner } from "@atoms/index";
 import HelpBanner from "@organisms/core/HelpBanner";
 import { useGetRelationStatusQuery } from "@redux/api/friendsApi";
 import CreateFriendRequest from "@molecules/friends/CreateFriendRequest";

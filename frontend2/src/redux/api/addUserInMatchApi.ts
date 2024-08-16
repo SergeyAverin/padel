@@ -31,7 +31,7 @@ export const addUserInMatchApi = baseApi.injectEndpoints({
           },
         };
       },
-      invalidatesTags: (result, error, { match_id }) => [
+      invalidatesTags: (_, __, { match_id }) => [
         { type: TAGS.MATCH, id: match_id },
       ],
     }),
@@ -53,7 +53,7 @@ export const addUserInMatchApi = baseApi.injectEndpoints({
           },
         };
       },
-      invalidatesTags: (result, error, { match_id }) => [
+      invalidatesTags: (_, __, { match_id }) => [
         { type: TAGS.MATCH, id: match_id },
       ],
     }),
