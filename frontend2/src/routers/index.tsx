@@ -11,11 +11,6 @@ import { setAuthUser } from "@redux/features/authSlice";
 import { UserPage } from "@pages/user/UserPage/UserPage";
 import FriendPage from "@pages/friends/FriendPage";
 import { useAuthUser } from "@hooks/useAuthUser";
-import { useGetFriendsQuery } from "@redux/api/friendsApi";
-import {
-  useGetInnerFriendRequsetQuery,
-  useGetOuterFriendRequestQuery,
-} from "@redux/api/friendRequestApi";
 import MatchesPage from "@pages/matches/MatchesPage";
 import CreatClubPage from "@pages/clubs/CreatClubPage";
 import ClubListPage from "@pages/clubs/ClubListPage";
