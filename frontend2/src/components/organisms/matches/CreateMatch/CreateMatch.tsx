@@ -30,6 +30,7 @@ import { SelectCourt } from "./SelectCourts";
 import { useNavigate } from "react-router-dom";
 import { useCreateMatchMutation } from "@redux/api/createMatchApi";
 import { extractDayAndMonth } from "@utils/dateUtils";
+import { Desk } from "./Desk";
 
 export const CreateMatch: React.FC = () => {
   const step = useSelector(stepSelector);
@@ -87,6 +88,9 @@ export const CreateMatch: React.FC = () => {
           </div>
           <div className="mt-5">
             <SelectCourt />
+          </div>
+          <div className="mt-5">
+            <Desk />
           </div>
         </div>
       )}
