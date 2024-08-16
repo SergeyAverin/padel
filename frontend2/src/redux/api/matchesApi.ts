@@ -21,7 +21,9 @@ const merge = (
 ) => {
   const uniqueValues1 = new Set(currentCache.items);
 
-  newItems.items.filter((item) => !currentCache.items.includes(item));
+  newItems.items = newItems.items.filter(
+    (item) => !currentCache.items.includes(item)
+  );
 
   for (let i = 0; i < newItems.items.length; i++) {
     const value = newItems.items[i];
