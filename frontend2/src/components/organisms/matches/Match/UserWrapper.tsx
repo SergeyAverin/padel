@@ -10,6 +10,7 @@ interface IUserWrapperProps {
   userText: string | null;
   index: number;
   match: IMatch;
+  isReverse?: boolean;
 }
 
 export const UserWrapper: React.FC<IUserWrapperProps> = ({
@@ -17,7 +18,9 @@ export const UserWrapper: React.FC<IUserWrapperProps> = ({
   match,
   user,
   userText,
+  isReverse = false,
 }) => {
+  console.log(user);
   return (
     <>
       {typeof user != "string" && user && (
@@ -25,11 +28,15 @@ export const UserWrapper: React.FC<IUserWrapperProps> = ({
       )}
 
       {typeof user != "string" && !user && !userText && (
-        <AddUserInMatch index={index} match={match} />
+        <AddUserInMatch isReverse={isReverse} index={index} match={match} />
       )}
-
-      {typeof user == "string" && (
-        <TextUserInMatch text={user} index={index} match={match} />
+      {userText && (
+        <TextUserInMatch
+          isRevers={isReverse}
+          text={userText as string}
+          index={index}
+          match={match}
+        />
       )}
     </>
   );

@@ -13,7 +13,55 @@ export const addUserInMatchApi = baseApi.injectEndpoints({
       },
       providesTags: [TAGS.FRIENDS],
     }),
+    addUserInMatch: builder.mutation<
+      void,
+      {
+        user_id: string | null;
+        user_indx: number;
+        match_id: number;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/matches/${data.match_id}`,
+          method: "PUT",
+          body: {
+            user_id: data.user_id,
+            user_index: data.user_indx,
+          },
+        };
+      },
+      invalidatesTags: (result, error, { match_id }) => [
+        { type: TAGS.MATCH, id: match_id },
+      ],
+    }),
+    addTextUser: builder.mutation<
+      void,
+      {
+        user_indx: number;
+        text_user: string | null;
+        match_id: number;
+      }
+    >({
+      query(data) {
+        return {
+          url: `/matches/${data.match_id}`,
+          method: "PUT",
+          body: {
+            text_user: data.text_user,
+            user_index: data.user_indx,
+          },
+        };
+      },
+      invalidatesTags: (result, error, { match_id }) => [
+        { type: TAGS.MATCH, id: match_id },
+      ],
+    }),
   }),
 });
 
-export const { useGetUsersForMatchQuery } = addUserInMatchApi;
+export const {
+  useGetUsersForMatchQuery,
+  useAddUserInMatchMutation,
+  useAddTextUserMutation,
+} = addUserInMatchApi;

@@ -5,6 +5,7 @@ import UserInfo from "@organisms/user/UserInfo";
 import UserStats from "@organisms/user/UserStats";
 import { IUser } from "@schemas/user";
 import { Heading, HeadingVariant } from "@atoms/index";
+import MatchUserTemplate from "@templates/matches/MatchUserTemplate";
 
 interface IUserTemplateProps {
   user: IUser;
@@ -30,7 +31,9 @@ export const UserTemplate: React.FC<IUserTemplateProps> = ({
         <Heading variant={HeadingVariant.H2}>Stats:</Heading>
         <UserStats userId={user.telegram_user_id} />
       </div>
-      <div className="mt-[80px] mb-[80px]">Matches</div>
+      <div className="mt-5 mb-[80px]">
+        <MatchUserTemplate userId={user.telegram_user_id} />
+      </div>
     </>
   );
 };

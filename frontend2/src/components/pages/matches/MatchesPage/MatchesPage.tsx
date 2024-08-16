@@ -1,3 +1,4 @@
+import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import HelpBanner from "@organisms/core/HelpBanner";
 import MatchClubTemplate from "@templates/matches/MatchClubTemplate";
@@ -6,11 +7,12 @@ import MatchUserTemplate from "@templates/matches/MatchUserTemplate";
 import React from "react";
 
 export const MatchesPage: React.FC = () => {
+  const user = useAuthUser();
   const tabs = [
     {
       to: "#your",
       text: "Your",
-      content: <MatchUserTemplate />,
+      content: <MatchUserTemplate userId={user?.telegram_user_id as string} />,
     },
     {
       to: "#friends",

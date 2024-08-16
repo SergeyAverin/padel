@@ -18,7 +18,7 @@ export const matchApi = baseApi.injectEndpoints({
         };
       },
       invalidatesTags: (result, error, { matchId }) => [
-        { type: TAGS.MATCH, matchId },
+        { type: TAGS.MATCH, id: matchId },
       ],
     }),
     setScore: builder.mutation<
@@ -40,7 +40,7 @@ export const matchApi = baseApi.injectEndpoints({
         };
       },
       invalidatesTags: (result, error, { matchId }) => [
-        { type: TAGS.MATCH, matchId },
+        { type: TAGS.MATCH, id: matchId },
       ],
     }),
   }),

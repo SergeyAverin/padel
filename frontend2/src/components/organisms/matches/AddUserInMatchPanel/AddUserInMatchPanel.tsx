@@ -12,7 +12,10 @@ import {
   matchIdSelector,
 } from "@redux/selectors/addUserInMatch";
 import { closePanel } from "@redux/features/addUserInMatch";
-import { useGetUsersForMatchQuery } from "@redux/api/addUserInMatchApi";
+import {
+  useAddUserInMatchMutation,
+  useGetUsersForMatchQuery,
+} from "@redux/api/addUserInMatchApi";
 import UserPhoto from "@molecules/user/UserPhoto";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
@@ -21,12 +24,17 @@ const AddUserInMatchPanel: React.FC = observer(() => {
   const index = useSelector(indexSelector);
 
   const { data } = useGetUsersForMatchQuery(matchId as number);
+  const [addUserInMatch] = useAddUserInMatchMutation();
 
   const dispatch = useDispatch();
 
   const selectUser = (user_id: string) => {
     dispatch(closePanel());
-    // AddUserStore.setUser(user_id);
+    addUserInMatch({
+      match_id: matchId as number,
+      user_id: user_id,
+      user_indx: index as number,
+    });
   };
   return (
     <div

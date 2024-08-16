@@ -3,11 +3,29 @@ import React, { useState } from "react";
 import UserPhoto from "@molecules/user/UserPhoto";
 
 import TestPhoto from "@assets/TestPhoto.png";
+import { useAddTextUserMutation } from "@redux/api/addUserInMatchApi";
+import { useDispatch, useSelector } from "react-redux";
+import { closePanel } from "@redux/features/addUserInMatch";
+import {
+  indexSelector,
+  matchIdSelector,
+} from "@redux/selectors/addUserInMatch";
 // import AddUserStore from "@store/matches/addUserInMatch";
 
 export const AddTextUserInMatch: React.FC = () => {
   const [value, setValue] = useState("");
+  const [addUserInMatch] = useAddTextUserMutation();
+  const dispatch = useDispatch();
+  const matchId = useSelector(matchIdSelector);
+  const index = useSelector(indexSelector);
+
   const selectUser = () => {
+    dispatch(closePanel());
+    addUserInMatch({
+      match_id: matchId as number,
+      text_user: value,
+      user_indx: index as number,
+    });
     // AddUserStore.toggleIsOpen();
     // AddUserStore.setUser(value, true);
   };

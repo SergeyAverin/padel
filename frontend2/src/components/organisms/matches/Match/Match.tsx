@@ -58,6 +58,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
             index={3}
             match={match}
             userText={match.text_user_3}
+            isReverse={true}
           />
           <div className="mt-5">
             <UserWrapper
@@ -65,6 +66,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
               index={4}
               match={match}
               userText={match.text_user_4}
+              isReverse={true}
             />
           </div>
         </div>

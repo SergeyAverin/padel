@@ -19,18 +19,19 @@ const merge = (
     items: Array<IMatch>;
   }
 ) => {
-  currentCache.items = currentCache.items
-    .map((item1) => {
-      const item2 = newItems.items.find((item) => item.id === item1.id);
+  const uniqueValues1 = new Set(currentCache.items);
 
-      return item2 ? item2 : item1;
-    })
-    .reverse()
-    .concat(
-      newItems.items.filter(
-        (item2) => !currentCache.items.some((item1) => item1.id === item2.id)
-      )
-    );
+  for (let i = 0; i < newItems.items.length; i++) {
+    const value = newItems.items[i];
+    const index = currentCache.items.indexOf(value);
+    if (index !== -1) {
+      currentCache.items[index] = value;
+    } else {
+      currentCache.items.push(value);
+      uniqueValues1.add(value);
+    }
+  }
+  currentCache.items = Array.from(uniqueValues1);
 };
 
 export const MatchesApi = baseApi.injectEndpoints({

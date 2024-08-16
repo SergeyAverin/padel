@@ -9,6 +9,7 @@ export const useAddUserInMatch = (
   isFree: boolean = false
 ) => {
   const dispatch = useDispatch();
+
   const addUser = () => {
     dispatch(
       openPanel({

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AccountPage from "@pages/user/AccountPage";
 
@@ -23,6 +23,7 @@ import ClubPage from "@pages/clubs/ClubPage";
 import { EditClubPage } from "@pages/clubs/EditClubPage/EditClubPage";
 import { CreateMatchPage } from "@pages/matches/CreateMatchPage/CreateMatchPage";
 import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
+import { matchIdSelector } from "@redux/selectors/addUserInMatch";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -39,10 +40,11 @@ const MainRouter: React.FC = () => {
   useGetFriendsQuery(user?.telegram_user_id as string);
   useGetInnerFriendRequsetQuery();
   useGetOuterFriendRequestQuery();
+  const matchId = useSelector(matchIdSelector);
 
   return (
     <>
-      <AddUserPanel />
+      {matchId && <AddUserPanel />}
       {/* 
       <BlankList />
       <TutorialPortal /> */}
