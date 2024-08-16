@@ -33,7 +33,7 @@ export const ClubListTemplate: React.FC = () => {
   const [page, setPage] = useState(1);
   const city = useSelector(citySelector);
   const name = useSelector(nameSelector);
-  let filter = `?page=${page}&size=4`;
+  let filter = `?page=${page}&size=50`;
   if (name != "") {
     filter += `&name=${name}`;
   }

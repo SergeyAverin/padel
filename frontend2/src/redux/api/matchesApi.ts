@@ -40,7 +40,7 @@ export const MatchesApi = baseApi.injectEndpoints({
       { items: Array<IMatch> },
       { page: number; userId: string }
     >({
-      query: (data) => `/user/${data.userId}/matches?page=${data.page}&size=2`,
+      query: (data) => `/user/${data.userId}/matches?page=${data.page}&size=50`,
 
       serializeQueryArgs,
       merge,
@@ -53,7 +53,7 @@ export const MatchesApi = baseApi.injectEndpoints({
       { items: Array<IMatch> },
       { page: number; clubId: number }
     >({
-      query: (data) => `/club/${data.clubId}/matches?page=${data.page}&size=20`,
+      query: (data) => `/club/${data.clubId}/matches?page=${data.page}&size=50`,
 
       serializeQueryArgs,
       merge,
@@ -67,7 +67,7 @@ export const MatchesApi = baseApi.injectEndpoints({
       { page: number; userId: string }
     >({
       query: (data) =>
-        `/bookmark/${data.userId}/matches?page=${data.page}&size=20`,
+        `/bookmark/${data.userId}/matches?page=${data.page}&size=50`,
 
       serializeQueryArgs,
       merge,
@@ -81,7 +81,7 @@ export const MatchesApi = baseApi.injectEndpoints({
       { page: number; userId: string }
     >({
       query: (data) =>
-        `/friends/${data.userId}/matches?page=${data.page}&size=20`,
+        `/friends/${data.userId}/matches?page=${data.page}&size=50`,
 
       serializeQueryArgs,
       merge,
