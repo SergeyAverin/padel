@@ -39,9 +39,6 @@ const MainRouter: React.FC = () => {
   }, [isLoading]);
 
   const user = useAuthUser();
-  useGetFriendsQuery(user?.telegram_user_id as string);
-  useGetInnerFriendRequsetQuery();
-  useGetOuterFriendRequestQuery();
   const matchId = useSelector(matchIdSelector);
 
   return (
