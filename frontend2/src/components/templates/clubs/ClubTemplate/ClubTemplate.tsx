@@ -21,6 +21,8 @@ import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { IMatch } from "@schemas/match";
 import { useGetClubMatchesQuery } from "@redux/api/matchesApi";
 import Match from "@organisms/matches/Match";
+import { useAuthUser } from "@hooks/useAuthUser";
+import { IUser } from "@schemas/user";
 
 export const ClubTemplate: React.FC = () => {
   const { clubId } = useParams();
@@ -64,8 +66,8 @@ export const ClubTemplate: React.FC = () => {
       ),
     },
   ];
-  // const authUser = useAuthUser;
-  const permission = true;
+  const authUser = useAuthUser() as IUser;
+  const permission = authUser.id == data?.owner_id;
   // authUser?.id == ClubStore.openedClub?.owner_id ||
   // authUser?.status == "super_admin";
   return (
