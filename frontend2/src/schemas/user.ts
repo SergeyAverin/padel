@@ -13,6 +13,7 @@ export interface IUser {
   city: string;
   status: string;
   lvl: number;
+  is_first_open: boolean;
 }
 
 export interface IUserStats {

@@ -108,6 +108,15 @@ export const UserApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [TAGS.PROFILE],
     }),
+    setLvl: builder.mutation<void, number>({
+      query(lvl) {
+        return {
+          url: `/user/lvl`,
+          method: "PATCH",
+          body: lvl,
+        };
+      },
+    }),
   }),
 });
 
@@ -119,4 +128,5 @@ export const {
   useChageHandMutation,
   useChagePositionMutation,
   useUpdateAvetarMutation,
+  useSetLvlMutation,
 } = UserApi;
