@@ -10,4 +10,5 @@ export const TAGS = {
   COURT: "court",
   MATCH: "match",
   BLANK: "blank",
+  STATS: "stats",
 };

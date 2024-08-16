@@ -22,6 +22,7 @@ export const createMatchApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: [TAGS.MATCH],
     }),
     getMatchesByDate: builder.query<
       Array<IMatch>,
@@ -37,7 +38,7 @@ export const createMatchApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [],
+      providesTags: [TAGS.MATCH],
     }),
   }),
 });

@@ -18,7 +18,7 @@ export const UserApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: [TAGS.PROFILE],
+      providesTags: [TAGS.PROFILE, TAGS.STATS],
     }),
     getUserById: builder.query<IUser, string>({
       query(userId) {
