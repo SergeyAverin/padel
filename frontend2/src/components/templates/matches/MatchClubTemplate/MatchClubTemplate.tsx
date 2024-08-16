@@ -2,6 +2,7 @@ import { Heading, HeadingVariant } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
 import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
+import Match from "@organisms/matches/Match";
 import { useGetBookmarkedClubsMatchesQuery } from "@redux/api/matchesApi";
 import { IMatch } from "@schemas/match";
 import { IUser } from "@schemas/user";
@@ -34,7 +35,7 @@ export const MatchClubTemplate: React.FC = () => {
             .reverse()
             .map((match) => (
               <div className="mt-3" key={match.id}>
-                {match.id}
+                <Match match={match} />
               </div>
             ))}
         </div>

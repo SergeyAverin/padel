@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import FlagIcon from "@assets/ClubsIcon.svg?react";
@@ -18,15 +18,42 @@ import Tabs from "@molecules/core/Tabs";
 import { useGetClubByIdQuery } from "@redux/api/clubApi";
 import { Country } from "country-state-city";
 import ClubPhotos from "@organisms/clubs/ClubPhotos";
+import { useInfinityScroll } from "@hooks/useInfinityScroll";
+import { IMatch } from "@schemas/match";
+import { useGetClubMatchesQuery } from "@redux/api/matchesApi";
+import Match from "@organisms/matches/Match";
 
 export const ClubTemplate: React.FC = () => {
   const { clubId } = useParams();
   const { data, isLoading } = useGetClubByIdQuery(clubId as string);
+  const [page, setPage] = useState(1);
+  const loadMatches = useGetClubMatchesQuery({
+    page: page,
+    clubId: Number(clubId),
+  });
+
+  const matches = useInfinityScroll<IMatch>(
+    page,
+    setPage,
+    loadMatches.data,
+    loadMatches.isFetching
+  );
   const tabs = [
     {
       to: "#match",
       text: "match",
-      content: <div className="pt-[50px]">{/* <ClubMatches /> */}</div>,
+      content: (
+        <div>
+          {matches
+            .slice()
+            .reverse()
+            .map((match) => (
+              <div className="mt-3" key={match.id}>
+                <Match match={match} />
+              </div>
+            ))}
+        </div>
+      ),
     },
     {
       to: "#photos",

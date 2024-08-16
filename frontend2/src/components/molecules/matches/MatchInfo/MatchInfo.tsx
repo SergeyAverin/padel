@@ -8,13 +8,13 @@ interface IMatchInfoProps {
 export const MatchInfo: React.FC<IMatchInfoProps> = ({ match }) => {
   return (
     <>
-      <div className="font-light text-[14px]">
+      <div className="font-light text-[10px]">
         {new Date(match.start_at).getDate()}
         {"."}
         {new Date(match.start_at).getMonth() + 1}
         {"."}
         {new Date(match.start_at).getFullYear()}
-        <br />
+        {" | "}
         {new Date(match.end_at).getHours()}
         {":"}
         {String(new Date(match.end_at).getMinutes()).padStart(2, "0")}

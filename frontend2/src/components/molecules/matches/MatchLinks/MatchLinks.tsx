@@ -2,6 +2,7 @@ import { IMatch } from "@schemas/match";
 import { shortenString } from "@utils/shoringString";
 import React from "react";
 import { Link } from "react-router-dom";
+import MatchInfo from "../MatchInfo";
 
 interface IMatchLinksProps {
   match: IMatch;
@@ -10,6 +11,8 @@ interface IMatchLinksProps {
 export const MatchLinks: React.FC<IMatchLinksProps> = ({ match }) => {
   return (
     <>
+      <MatchInfo match={match} />
+
       {match.club && (
         <>
           <div className="font-light text-[14px] mt-3">

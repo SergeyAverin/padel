@@ -22,15 +22,14 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
   return (
     <div className="bg-primary p-5 rounded-2xl animate-fade-in">
       <div className="flex justify-between items-start">
-        <MatchInfo match={match} />
+        <div>
+          <MatchLinks match={match} />
+        </div>
         {permission ? (
           <SetMatchStatus match={match} />
         ) : (
           <div>{match.status}</div>
         )}
-      </div>
-      <div>
-        <MatchLinks match={match} />
       </div>
       <hr className="mt-5" />
       <div className="flex  justify-around items-start">

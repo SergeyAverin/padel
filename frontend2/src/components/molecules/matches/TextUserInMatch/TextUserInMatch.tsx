@@ -34,7 +34,7 @@ export const TextUserInMatch: React.FC<ITextUserInMatchProps> = ({
       <div
         className={classNames("text-[14px] mt-2", {
           "mr-1": isRevers,
-          "mrl-1": !isRevers,
+          "ml-1": !isRevers,
         })}
       >
         {shortenString(text, 12)}
