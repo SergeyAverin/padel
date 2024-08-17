@@ -1,1 +1,0 @@
-export { Booking as default } from "./Booking2";
