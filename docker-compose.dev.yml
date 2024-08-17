@@ -14,14 +14,14 @@ services:
     env_file:
       - .env.dev
 
-  padel_frontend2:
+  padel_frontend:
     build:
-      context: frontend2
+      context: frontend
       dockerfile: Dockerfile.dev
-    container_name: padel_frontend2
+    container_name: padel_frontend
     restart: always
     volumes:
-      - ./frontend2:/app
+      - ./frontend:/app
     ports:
       - 3000:3000
     env_file:
@@ -55,6 +55,6 @@ services:
     volumes:
       - ./backend:/usr/src/app
     depends_on:
-      - padel_frontend2
+      - padel_frontend
     env_file:
       - .env.dev
