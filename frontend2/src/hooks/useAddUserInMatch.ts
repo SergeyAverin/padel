@@ -38,14 +38,29 @@ export const useAddUserInMatch = (
     } else {
       if (user && match.status != "done") {
         if (
+          (match.user_1?.telegram_user_id == user.telegram_user_id &&
+            index != 1) ||
+          (match.user_2?.telegram_user_id == user.telegram_user_id &&
+            index != 2) ||
+          (match.user_3?.telegram_user_id == user.telegram_user_id &&
+            index != 3) ||
+          (match.user_4?.telegram_user_id == user.telegram_user_id &&
+            index != 4)
+        ) {
+          alert("You've already entered the match. Click on yourself to exit!");
+          return;
+        }
+        if (
           user.lvl < parseRange(match.match_lvl)[0] ||
           user.lvl > parseRange(match.match_lvl)[1]
         ) {
           alert("You lvl is Inappropriate");
         } else {
           if (isFree) {
+            alert("You've entered the match");
             joinInMatch(index);
           } else {
+            alert("You walked out of the matchClick to apply");
             addUserInMatch({
               match_id: match.id as number,
               user_id: "-1",
@@ -53,6 +68,8 @@ export const useAddUserInMatch = (
             });
           }
         }
+      } else {
+        alert("You can't enter a match that has already been completed!");
       }
       //       } else {
       //         if (isFree) {
