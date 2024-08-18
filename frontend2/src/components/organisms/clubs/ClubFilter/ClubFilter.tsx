@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 
@@ -12,20 +12,22 @@ import {
   setIsOpenPanel,
   setName,
 } from "@redux/features/clubFilterSlice";
-import {
-  citySelector,
-  isOpenPanelSelector,
-  nameSelector,
-} from "@redux/selectors/clubFilterSelectors";
+import { isOpenPanelSelector } from "@redux/selectors/clubFilterSelectors";
+import { baseApi } from "@redux/baseApi";
+import { TAGS } from "@redux/tags";
 
 const ClubFiltersComponent: React.FC = () => {
   const dispatch = useDispatch();
   const isOpenPanel = useSelector(isOpenPanelSelector);
-  const city = useSelector(citySelector);
-  const name = useSelector(nameSelector);
+  const [localCity, setLocalCity] = useState("");
+  const [localName, setLocalName] = useState("");
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    dispatch(setIsAwaitSearch(true));
+    dispatch(baseApi.util.invalidateTags([TAGS.CLUB]));
+    dispatch(setName(localName));
+    dispatch(setCity(localCity));
     dispatch(setIsOpenPanel(false));
   };
   return (
@@ -50,11 +52,10 @@ const ClubFiltersComponent: React.FC = () => {
             {/* <Label htmlFor="name">Name</Label> */}
             <Input
               name="name"
-              value={name}
+              value={localName}
               requirement={false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                dispatch(setIsAwaitSearch(true));
-                dispatch(setName(e.target.value));
+                setLocalName(e.target.value);
               }}
             />
           </div>
@@ -62,11 +63,10 @@ const ClubFiltersComponent: React.FC = () => {
             {/* <Label htmlFor="city">City</Label> */}
             <Input
               name="city"
-              value={city}
+              value={localCity}
               requirement={false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                dispatch(setCity(e.target.value));
-                dispatch(setIsAwaitSearch(true));
+                setLocalCity(e.target.value);
               }}
             />
           </div>

@@ -41,6 +41,9 @@ export const ClubListTemplate: React.FC = () => {
     filter += `&city=${city}`;
   }
   const loadClubs = useGetClubsQuery(filter);
+  useEffect(() => {
+    setClubState(clubs);
+  }, [city, name]);
 
   const clubs = useInfinityScroll<IClub>(
     page,
@@ -48,6 +51,11 @@ export const ClubListTemplate: React.FC = () => {
     loadClubs.data,
     loadClubs.isFetching
   );
+  const [clubState, setClubState] = useState<Array<IClub>>([]);
+
+  useEffect(() => {
+    setClubState(clubs);
+  }, [clubs]);
 
   useEffect(() => {
     if (!loadClubs.isLoading) {
@@ -125,13 +133,13 @@ export const ClubListTemplate: React.FC = () => {
 
       {!loadClubs.isLoading && loadClubs.data && (
         <>
-          {clubs.length == 0 && (
+          {clubState.length == 0 && (
             <div className="pt-5 pb-[200px]">
               <EmptyBanner text="Clubs not found" />
             </div>
           )}
           <div className="grid grid-cols-2 gap-2 mt-5">
-            {clubs.map((club) => (
+            {clubState.map((club) => (
               <Club club={club} key={club.id} />
             ))}
           </div>
