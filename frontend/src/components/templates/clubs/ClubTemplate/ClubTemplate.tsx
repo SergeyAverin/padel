@@ -23,6 +23,7 @@ import { useGetClubMatchesQuery } from "@redux/api/matchesApi";
 import Match from "@organisms/matches/Match";
 import { useAuthUser } from "@hooks/useAuthUser";
 import { IUser } from "@schemas/user";
+import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 
 export const ClubTemplate: React.FC = () => {
   const { clubId } = useParams();
@@ -53,6 +54,11 @@ export const ClubTemplate: React.FC = () => {
                 <Match match={match} />
               </div>
             ))}
+          <div className="pt-[30px]">
+            {matches && matches.length == 0 && (
+              <EmptyBanner text="Club have not matches" />
+            )}
+          </div>
         </div>
       ),
     },
@@ -60,7 +66,7 @@ export const ClubTemplate: React.FC = () => {
       to: "#photos",
       text: "Photos",
       content: (
-        <div className="pt-[50px]">
+        <div className="pt-[30px]">
           <ClubPhotos clubId={clubId as string} />
         </div>
       ),

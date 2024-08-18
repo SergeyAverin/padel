@@ -22,7 +22,7 @@ export const CreateClubForm: React.FC = observer(() => {
     label: "23:00",
     value: "23:00",
   });
-  const timeRange = getHoursInRange("08:00", "18:00");
+  const timeRange = getHoursInRange("00:00", "23:00");
   const options = timeRange.map((time) => ({ value: time, label: time }));
 
   const [formValue, setFormValue] = useState<FormDataI>(initialState);
