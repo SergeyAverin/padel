@@ -33,13 +33,13 @@ export const ClubListTemplate: React.FC = () => {
   const [page, setPage] = useState(1);
   const city = useSelector(citySelector);
   const name = useSelector(nameSelector);
-  let filter = `?page=${page}&size=50`;
-  if (name != "") {
-    filter += `&name=${name}`;
-  }
-  if (city != "") {
-    filter += `&city=${city}`;
-  }
+  const filter = `?page=${page}&size=50`;
+  // if (name != "") {
+  //   filter += `&name=${name}`;
+  // }
+  // if (city != "") {
+  //   filter += `&city=${city}`;
+  // }
   const loadClubs = useGetClubsQuery(filter);
   useEffect(() => {
     setClubState(clubs);
