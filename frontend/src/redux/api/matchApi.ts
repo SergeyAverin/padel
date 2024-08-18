@@ -1,5 +1,6 @@
 import { TAGS } from "@redux/tags";
 import { baseApi } from "../baseApi";
+import { IMatch } from "@schemas/match";
 
 export const matchApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -21,6 +22,16 @@ export const matchApi = baseApi.injectEndpoints({
         { type: TAGS.MATCH, id: matchId },
       ],
     }),
+    getMaatchById: builder.query<IMatch, number>({
+      query(matchId) {
+        return {
+          url: `/matches/${matchId}`,
+          method: "GET",
+        };
+      },
+      providesTags: (match) => [{ type: TAGS.MATCH, id: match?.id }],
+    }),
+
     setScore: builder.mutation<
       void,
       {
@@ -46,4 +57,8 @@ export const matchApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSetMatchStatusMutation, useSetScoreMutation } = matchApi;
+export const {
+  useSetMatchStatusMutation,
+  useSetScoreMutation,
+  useGetMaatchByIdQuery,
+} = matchApi;

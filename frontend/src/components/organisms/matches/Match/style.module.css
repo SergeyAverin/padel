@@ -1,0 +1,67 @@
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animatedBackground {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+   border-radius: 9px;
+
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+
+    background: linear-gradient(to right, #100E0E 10%, #222326 18%, #100E0E 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+.spinner {
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin-right: 20px;
+}
+
+.spinner:not(:required) {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.spinner:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 5px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    animation: spinner 1500ms infinite linear;
+    border-radius: 0.5em;
+    box-shadow: 
+        #fff 1.5em 0 0 0, 
+        #fff 1.1em 1.1em 0 0, 
+        #fff 0 1.5em 0 0, 
+        #fff -1.1em 1.1em 0 0, 
+        #fff -1.5em 0 0 0, 
+        #fff -1.1em -1.1em 0 0, 
+        #fff 0 -1.5em 0 0, 
+        #fff 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

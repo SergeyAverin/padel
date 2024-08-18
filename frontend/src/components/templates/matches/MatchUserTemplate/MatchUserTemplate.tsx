@@ -39,7 +39,7 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
 
       {matches.length != 0 && (
         <div>
-          {!isMatchPage && (
+          {isMatchPage && (
             <>
               <Heading variant={HeadingVariant.H2}>Your matches:</Heading>
               <div className="mb-3">

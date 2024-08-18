@@ -70,9 +70,9 @@ class MatchRepository:
     async def get_match_by_id(self, match_id: int):
         # match = await Match.get_or_none(id=int(match_id)).prefetch_related("user_1")
 
-        # match = await Match.filter(id=match_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').first()
+        match = await Match.filter(id=match_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').first()
         # return [self.serealize_match(m) for m in match]
-        return await Match.get_or_none(id=match_id)
+        return await match
 
     async def get_match_by_user(self, user_id: str):
         matches = await Match.filter(
