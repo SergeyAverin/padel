@@ -62,10 +62,15 @@ const LvlDescription: React.FC<LvlDescriptionProps> = ({
 
 export const Tutorial: React.FC = () => {
   const [setLvl] = useSetLvlMutation();
+  const [selectedLvl, setSelectedLvl] = useState({
+    label: "1 - initiation",
+    value: "1",
+  });
 
   const [step, setStep] = useState(1);
   const onChange = (item: { label: string; value: string }) => {
     setLvl(Number(item.value));
+    setSelectedLvl(item);
   };
   const [isOpen, setIsOpen] = useState(false);
   const next = () => {
@@ -111,15 +116,15 @@ export const Tutorial: React.FC = () => {
       step={step}
     />,
     <div>
-      <div className="flex justify-center">
-        <div className="w-[280px text-center]">
+      <div className="">
+        <div className="">
           <SelectHand />
         </div>
       </div>
     </div>,
     <div>
-      <div className="flex justify-center">
-        <div className="w-[280px text-center]">
+      <div className="">
+        <div className="">
           <SelectPosition />
         </div>
       </div>
@@ -233,9 +238,9 @@ export const Tutorial: React.FC = () => {
               I am part of the French Top 200
             </LvlDescription>
           </div>
-          <div className="w-[300px] m-auto mt-5">
+          <div className="w-[285px] m-auto mt-5">
             <Select
-              defaultValue={{ label: "1 - initiation", value: "1" }}
+              defaultValue={selectedLvl}
               onChange={onChange}
               options={[
                 { label: "1 - Initiation", value: "1" },
@@ -275,9 +280,9 @@ export const Tutorial: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col justify-between h-min-[200px]">
       {isOpen && (
-        <div className="fixed left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
+        <div className="fixed flex flex-col justify-between  left-0 top-0 overflow-y-auto bg-primary pb-5 text-fg w-full h-full z-[1000] transition-all">
           {!(step in [1, 2, 3, 4, 5]) && step > 3 && sliders[step - 1]}
           {sliders[0]}
           {sliders[1]}
@@ -305,7 +310,7 @@ export const Tutorial: React.FC = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
