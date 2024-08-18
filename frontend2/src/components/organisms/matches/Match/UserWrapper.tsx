@@ -24,7 +24,12 @@ export const UserWrapper: React.FC<IUserWrapperProps> = ({
   return (
     <>
       {typeof user != "string" && user && (
-        <UserInMatch user={user} index={index} match={match} />
+        <UserInMatch
+          user={user}
+          index={index}
+          match={match}
+          isReverse={isReverse}
+        />
       )}
 
       {typeof user != "string" && !user && !userText && (

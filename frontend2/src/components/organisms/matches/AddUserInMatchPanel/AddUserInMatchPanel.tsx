@@ -17,13 +17,15 @@ import {
   useGetUsersForMatchQuery,
 } from "@redux/api/addUserInMatchApi";
 import UserPhoto from "@molecules/user/UserPhoto";
+import { useAuthUser } from "@hooks/useAuthUser";
+import { Loading } from "@atoms/index";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   const isOpen = useSelector(isOpenSelector);
   const matchId = useSelector(matchIdSelector);
   const index = useSelector(indexSelector);
 
-  const { data } = useGetUsersForMatchQuery(matchId as number);
+  const { data, isLoading } = useGetUsersForMatchQuery(matchId as number);
   const [addUserInMatch] = useAddUserInMatchMutation();
 
   const dispatch = useDispatch();
@@ -36,10 +38,11 @@ const AddUserInMatchPanel: React.FC = observer(() => {
       user_indx: index as number,
     });
   };
+  const user = useAuthUser();
   return (
     <div
       className={classNames(
-        "fixed left-0 bg-primary text-fg w-full h-full z-10 transition-all overflow-y-auto pb-[100px]",
+        "fixed left-0 bg-primary text-fg w-full h-full z-10 overflow-y-auto pb-[100px]  transition-all ",
         {
           "top-0": isOpen,
           "top-[100%]": !isOpen,
@@ -73,6 +76,30 @@ const AddUserInMatchPanel: React.FC = observer(() => {
         <div className="mt-5 mb-5">
           <AddTextUserInMatch />
         </div>
+        {/* add you */}
+        {user && (
+          <div
+            onClick={() => selectUser(user.telegram_user_id)}
+            key={user.id}
+            className="flex bg-bg p-3 rounded-2xl mt-5 items-center"
+          >
+            <div className="w-[72px] h-[72px]">
+              <UserPhoto avatar={user.avatar} lvl={user.lvl} />
+            </div>
+            <div>
+              <div className="text-[24px] ml-3">{user.username}</div>
+              <div className="text-[14px] ml-3">{user.first_name}</div>
+              <div className="text-[14px] ml-3">
+                {user.last_name.toLowerCase() != "none" && user.last_name}
+              </div>
+            </div>
+          </div>
+        )}
+        {isLoading && (
+          <div className="mt-[30px]">
+            <Loading />
+          </div>
+        )}
         {data &&
           data.map((item) => (
             <div
