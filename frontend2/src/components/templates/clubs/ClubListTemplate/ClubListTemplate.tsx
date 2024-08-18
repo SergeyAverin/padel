@@ -54,8 +54,17 @@ export const ClubListTemplate: React.FC = () => {
   const [clubState, setClubState] = useState<Array<IClub>>([]);
 
   useEffect(() => {
-    setClubState(clubs);
-  }, [clubs]);
+    const arr = clubs.filter((i) => {
+      const matchesName = name
+        ? i.name.toLowerCase().includes(name.toLowerCase())
+        : true;
+      const matchesCity = city
+        ? i.city.toLowerCase().includes(city.toLowerCase())
+        : true;
+      return matchesName && matchesCity;
+    });
+    setClubState(arr);
+  }, [clubs, city, name]);
 
   useEffect(() => {
     if (!loadClubs.isLoading) {
