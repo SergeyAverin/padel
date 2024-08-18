@@ -12,7 +12,12 @@ export const MatchesPage: React.FC = () => {
     {
       to: "#your",
       text: "Your",
-      content: <MatchUserTemplate userId={user?.telegram_user_id as string} />,
+      content: (
+        <MatchUserTemplate
+          isMatchPage={true}
+          userId={user?.telegram_user_id as string}
+        />
+      ),
     },
     {
       to: "#friends",

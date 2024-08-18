@@ -21,6 +21,7 @@ import AddUserPanel from "@organisms/matches/AddUserInMatchPanel";
 import { matchIdSelector } from "@redux/selectors/addUserInMatch";
 import { Tutorial } from "@organisms/core/Tutorial/Tutorial";
 import BlankList from "@organisms/matches/BlankList";
+import { setCity } from "@redux/features/clubFilterSlice";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -29,7 +30,7 @@ const MainRouter: React.FC = () => {
   useEffect(() => {
     if (data) {
       dispatcher(setAuthUser(data));
-      console.log(data);
+      dispatcher(setCity(data.city));
     }
   }, [isLoading]);
 

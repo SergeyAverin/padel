@@ -32,7 +32,7 @@ export const UserTemplate: React.FC<IUserTemplateProps> = ({
         <UserStats userId={user.telegram_user_id} />
       </div>
       <div className="mt-5 mb-[80px]">
-        <MatchUserTemplate userId={user.telegram_user_id} />
+        <MatchUserTemplate isMatchPage={false} userId={user.telegram_user_id} />
       </div>
     </>
   );

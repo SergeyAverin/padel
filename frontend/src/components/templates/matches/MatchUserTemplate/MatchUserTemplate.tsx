@@ -30,13 +30,18 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
   );
   return (
     <>
-      {matches.length == 0 && <EmptyBanner text="Have not matches" />}
+      {!isMatchPage && <Heading variant={HeadingVariant.H2}>Matches:</Heading>}
+      {matches.length == 0 && (
+        <div className="mt-5">
+          <EmptyBanner text="Have not matches" />
+        </div>
+      )}
 
       {matches.length != 0 && (
         <div>
-          <Heading variant={HeadingVariant.H2}>Your match</Heading>
-          {isMatchPage && (
+          {!isMatchPage && (
             <>
+              <Heading variant={HeadingVariant.H2}>Your matches:</Heading>
               <div className="mb-3">
                 <HelpBanner localStorageKey="help_match_status">
                   If you own the match you can change the status of the match
