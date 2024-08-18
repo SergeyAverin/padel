@@ -4,7 +4,7 @@ import { IUser } from "@schemas/user";
 import { useAddUserInMatch } from "@hooks/useAddUserInMatch";
 import { IMatch } from "@schemas/match";
 import { shortenString } from "@utils/shoringString";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 interface IUserInMatchProps {
