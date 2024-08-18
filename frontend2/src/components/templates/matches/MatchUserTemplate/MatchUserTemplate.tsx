@@ -5,7 +5,7 @@ import HelpBanner from "@organisms/core/HelpBanner";
 import Match from "@organisms/matches/Match";
 import { useGetUserMatchesQuery } from "@redux/api/matchesApi";
 import { IMatch } from "@schemas/match";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IMatchUserTemplateProps {
   userId: string;
@@ -28,6 +28,9 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
     loadMatches.data,
     loadMatches.isFetching
   );
+  useEffect(() => {
+    console.log("change");
+  }, [userId]);
   return (
     <>
       {!isMatchPage && <Heading variant={HeadingVariant.H2}>Matches:</Heading>}

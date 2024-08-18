@@ -30,7 +30,7 @@ export const friendsApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
-      invalidatesTags: [TAGS.FRIENDS],
+      invalidatesTags: [TAGS.FRIENDS, TAGS.STATS],
     }),
   }),
 });

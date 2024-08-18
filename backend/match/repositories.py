@@ -75,6 +75,7 @@ class MatchRepository:
         return await match
 
     async def get_match_by_user(self, user_id: str):
+        logger.debug(user_id)
         matches = await Match.filter(
             Q(
                 Q(owner__telegram_user_id=user_id) |
@@ -85,7 +86,7 @@ class MatchRepository:
             ) &
             Q(
                 Q(is_private=False) |
-                Q(user_for_match__id=user_id) |
+                Q(user_for_match__telegram_user_id=user_id) |
                 Q(owner__telegram_user_id=user_id)
             )
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')

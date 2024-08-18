@@ -20,7 +20,6 @@ export const UserWrapper: React.FC<IUserWrapperProps> = ({
   userText,
   isReverse = false,
 }) => {
-  console.log(user);
   return (
     <>
       {typeof user != "string" && user && (
