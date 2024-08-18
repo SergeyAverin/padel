@@ -48,7 +48,9 @@ export const ClubTemplate: React.FC = () => {
     }
   }, [matches]);
   useEffect(() => {
-    setClubState([]);
+    return () => {
+      setClubState([]);
+    };
   }, []);
 
   const tabs = [
