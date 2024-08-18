@@ -19,23 +19,12 @@ const merge = (
     items: Array<IMatch>;
   }
 ) => {
-  const uniqueValues1 = new Set(currentCache.items);
-
-  newItems.items = newItems.items.filter(
-    (item) => !currentCache.items.includes(item)
-  );
-
-  for (let i = 0; i < newItems.items.length; i++) {
-    const value = newItems.items[i];
-    const index = currentCache.items.indexOf(value);
-    if (index !== -1) {
-      currentCache.items[index] = value;
-    } else {
-      currentCache.items.push(value);
-      uniqueValues1.add(value);
+  newItems.items.forEach((item) => {
+    const index = currentCache.items.findIndex((i) => item.id == i.id);
+    if (index < 0) {
+      currentCache.items.push(item);
     }
-  }
-  currentCache.items = Array.from(uniqueValues1);
+  });
 };
 
 export const MatchesApi = baseApi.injectEndpoints({
