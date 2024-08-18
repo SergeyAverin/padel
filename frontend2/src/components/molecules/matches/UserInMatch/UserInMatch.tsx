@@ -39,9 +39,9 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
             "mr-1": isReverse,
           })}
         >
-          <Link to={`/user/${user.telegram_user_id}`}>
-            {shortenString(user.username, 12)}
-          </Link>
+          {/* <Link to={`/user/${user.telegram_user_id}`}> */}
+          {shortenString(user.username, 12)}
+          {/* </Link> */}
           <div
             className={classNames(
               "p-1 bg-highlight text-bg rounded-full  w-[20px] h-[20px] text-[14px]",
