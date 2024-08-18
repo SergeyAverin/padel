@@ -10,7 +10,6 @@ import { UserWrapper } from "./UserWrapper";
 import { useGetMaatchByIdQuery } from "@redux/api/matchApi";
 import style from "./style.module.css";
 import classNames from "classnames";
-import { Loading } from "@atoms/index";
 
 interface IMatchProps {
   match: IMatch;
