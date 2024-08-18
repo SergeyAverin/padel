@@ -34,10 +34,12 @@ export const clubApi = baseApi.injectEndpoints({
         return endpointName;
       },
       merge: (currentCache, newItems) => {
-        newItems.items = newItems.items.filter(
-          (item) => !currentCache.items.includes(item)
-        );
-        currentCache.items.push(...newItems.items);
+        newItems.items.forEach((item) => {
+          const index = currentCache.items.findIndex((i) => item.id == i.id);
+          if (index < 0) {
+            currentCache.items.push(item);
+          }
+        });
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
