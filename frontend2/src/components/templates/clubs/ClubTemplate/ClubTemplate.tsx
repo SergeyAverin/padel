@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import FlagIcon from "@assets/ClubsIcon.svg?react";
@@ -33,6 +33,7 @@ export const ClubTemplate: React.FC = () => {
     page: page,
     clubId: Number(clubId),
   });
+  const [clubState, setClubState] = useState<Array<IMatch>>([]);
 
   const matches = useInfinityScroll<IMatch>(
     page,
@@ -40,13 +41,23 @@ export const ClubTemplate: React.FC = () => {
     loadMatches.data,
     loadMatches.isFetching
   );
+
+  useEffect(() => {
+    if (matches) {
+      setClubState(matches);
+    }
+  }, [matches]);
+  useEffect(() => {
+    setClubState([]);
+  }, []);
+
   const tabs = [
     {
       to: "#match",
       text: "match",
       content: (
         <div>
-          {matches
+          {clubState
             .slice()
             .reverse()
             .map((match) => (
@@ -55,7 +66,7 @@ export const ClubTemplate: React.FC = () => {
               </div>
             ))}
           <div className="pt-[30px]">
-            {matches && matches.length == 0 && (
+            {clubState && clubState.length == 0 && (
               <EmptyBanner text="Club have not matches" />
             )}
           </div>
