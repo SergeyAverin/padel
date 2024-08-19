@@ -1,4 +1,4 @@
-import { Heading, HeadingVariant, Loading, Spinner } from "@atoms/index";
+import { Heading, HeadingVariant, Spinner } from "@atoms/index";
 import Tag from "@molecules/friends/Tag";
 import Club from "@organisms/clubs/Club";
 import { ClubFilters } from "@organisms/clubs/ClubFilter/ClubFilter";
@@ -68,6 +68,8 @@ export const ClubListTemplate: React.FC = () => {
 
   useEffect(() => {
     if (!loadClubs.isLoading) {
+      dispatch(setIsAwaitSearch(false));
+    } else {
       dispatch(setIsAwaitSearch(false));
     }
   }, [loadClubs.isLoading]);
@@ -154,11 +156,11 @@ export const ClubListTemplate: React.FC = () => {
           </div>
         </>
       )}
-      {isAwaitSearch && (
-        <div className="mt-5">
+      {/* {loadClubs.isFetching && (
+        <div className="mt-5 flex justify-center">
           <Loading />
         </div>
-      )}
+      )} */}
 
       {isLoading && !isAwaitSearch && <Spinner />}
     </>
