@@ -8,6 +8,7 @@ import {
   ButtonVariant,
   Heading,
   HeadingVariant,
+  Loading,
   Spinner,
 } from "@atoms/index";
 import { shortenString } from "@utils/shoringString";
@@ -25,15 +26,15 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import { IUser } from "@schemas/user";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 
-export const ClubTemplate: React.FC = () => {
-  const { clubId } = useParams();
-  const { data, isLoading } = useGetClubByIdQuery(clubId as string);
+interface IMatchTabsProps {
+  clubId: number;
+}
+const MatchesTabs: React.FC<IMatchTabsProps> = ({ clubId }) => {
   const [page, setPage] = useState(1);
   const loadMatches = useGetClubMatchesQuery({
     page: page,
-    clubId: Number(clubId),
+    clubId: clubId,
   });
-  const [clubState, setClubState] = useState<Array<IMatch>>([]);
 
   const matches = useInfinityScroll<IMatch>(
     page,
@@ -42,24 +43,17 @@ export const ClubTemplate: React.FC = () => {
     loadMatches.isFetching
   );
 
-  useEffect(() => {
-    if (matches) {
-      setClubState(matches);
-    }
-  }, [matches]);
-  useEffect(() => {
-    return () => {
-      setClubState([]);
-    };
-  }, []);
-
-  const tabs = [
-    {
-      to: "#match",
-      text: "match",
-      content: (
-        <div>
-          {clubState
+  return (
+    <div>
+      {loadMatches.isLoading == true && (
+        <div className="mt-5">
+          loading
+          <Loading />
+        </div>
+      )}
+      {!loadMatches.isLoading && (
+        <>
+          {matches
             .slice()
             .reverse()
             .map((match) => (
@@ -68,12 +62,25 @@ export const ClubTemplate: React.FC = () => {
               </div>
             ))}
           <div className="pt-[30px]">
-            {clubState && clubState.length == 0 && (
+            {matches && matches.length == 0 && (
               <EmptyBanner text="Club have not matches" />
             )}
           </div>
-        </div>
-      ),
+        </>
+      )}
+    </div>
+  );
+};
+
+export const ClubTemplate: React.FC = () => {
+  const { clubId } = useParams();
+  const { data, isLoading } = useGetClubByIdQuery(clubId as string);
+
+  const tabs = [
+    {
+      to: "#match",
+      text: "match",
+      content: <MatchesTabs clubId={Number(clubId)} />,
     },
     {
       to: "#photos",

@@ -49,7 +49,21 @@ export const MatchesApi = baseApi.injectEndpoints({
       query: (data) => `/club/${data.clubId}/matches?page=${data.page}&size=50`,
 
       serializeQueryArgs,
-      merge,
+      merge(
+        currentCache: {
+          items: Array<IMatch>;
+        },
+        newItems: {
+          items: Array<IMatch>;
+        },
+        arg
+      ) {
+        if (arg.arg.page >= 2) {
+          merge(currentCache, newItems);
+        } else {
+          currentCache.items = newItems.items;
+        }
+      },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
