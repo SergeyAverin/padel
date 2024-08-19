@@ -60,12 +60,11 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
               </div>
             </>
           )}
-          {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 && (
+          {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 ? (
             <div className="pt-[60px] flex justify-center">
               <Loading />
             </div>
-          )}
-          {(!loadMatches.isLoading || !loadMatches.isFetching) && page != 1 && (
+          ) : (
             <>
               {matches
                 .slice()
