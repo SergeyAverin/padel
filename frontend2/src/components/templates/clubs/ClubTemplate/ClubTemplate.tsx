@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import FlagIcon from "@assets/ClubsIcon.svg?react";
