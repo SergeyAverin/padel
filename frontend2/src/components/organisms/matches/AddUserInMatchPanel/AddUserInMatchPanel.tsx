@@ -42,7 +42,7 @@ const AddUserInMatchPanel: React.FC = observer(() => {
   return (
     <div
       className={classNames(
-        "fixed left-0 bg-primary text-fg w-full h-full z-10 overflow-y-auto pb-[100px]  transition-all ",
+        "fixed left-0 bg-primary text-fg w-full h-full z-50 overflow-y-auto pb-[100px]  transition-all ",
         {
           "top-0": isOpen,
           "top-[100%]": !isOpen,
@@ -96,7 +96,7 @@ const AddUserInMatchPanel: React.FC = observer(() => {
           </div>
         )}
         {isLoading && (
-          <div className="mt-[30px]">
+          <div className="mt-[30px] flex justify-center">
             <Loading />
           </div>
         )}
