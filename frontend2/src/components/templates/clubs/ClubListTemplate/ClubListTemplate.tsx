@@ -154,7 +154,7 @@ export const ClubListTemplate: React.FC = () => {
           </div>
         </>
       )}
-      {isLoading && (
+      {isAwaitSearch && (
         <div className="mt-5">
           <Loading />
         </div>

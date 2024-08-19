@@ -42,16 +42,14 @@ const MatchesTabs: React.FC<IMatchTabsProps> = ({ clubId }) => {
     loadMatches.data,
     loadMatches.isFetching
   );
-
   return (
     <div>
-      {loadMatches.isLoading == true && (
-        <div className="mt-5">
-          loading
+      {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 && (
+        <div className="pt-[60px] flex justify-center">
           <Loading />
         </div>
       )}
-      {!loadMatches.isLoading && (
+      {(!loadMatches.isLoading || !loadMatches.isFetching) && page != 1 && (
         <>
           {matches
             .slice()

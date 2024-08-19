@@ -1,4 +1,4 @@
-import { Heading, HeadingVariant } from "@atoms/index";
+import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import HelpBanner from "@organisms/core/HelpBanner";
@@ -60,14 +60,23 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
               </div>
             </>
           )}
-          {matches
-            .slice()
-            .reverse()
-            .map((match) => (
-              <div className="mt-3" key={match.id}>
-                <Match match={match} />
-              </div>
-            ))}
+          {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 && (
+            <div className="pt-[60px] flex justify-center">
+              <Loading />
+            </div>
+          )}
+          {(!loadMatches.isLoading || !loadMatches.isFetching) && page != 1 && (
+            <>
+              {matches
+                .slice()
+                .reverse()
+                .map((match) => (
+                  <div className="mt-3" key={match.id}>
+                    <Match match={match} />
+                  </div>
+                ))}
+            </>
+          )}
         </div>
       )}
     </>
