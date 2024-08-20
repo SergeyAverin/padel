@@ -3,6 +3,7 @@ from logging import getLogger
 from blank.repositories import BlankRepository
 from blank.schemas import CreaetBlankDTO
 from account.models import User
+from account.service import user_service
 from match.models import Match
 from match.services import match_service
 
@@ -47,9 +48,15 @@ class BlankService:
 
     async def _update_user_balance(self, user, match_id: str):
         if user:
-            u = await user.values()
-            user_from_db = await User.get_or_none(id=u['id'])
+            logger.debug('--user')
+            tg_id = str(user)
+            logger.debug(tg_id)
+            logger.debug(type(tg_id))
+
+            user_from_db = await user_service.get_user_by_telegram_user_id(tg_id)
             user_numver = await self._get_user_number(match_id, user_from_db)
+            logger.debug('user_numver')
+            logger.debug(user_numver)
             if user_numver > 10:
                 user_numver = 10
             if user_numver < 0:

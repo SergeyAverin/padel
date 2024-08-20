@@ -38,13 +38,14 @@ export const Blank: React.FC<IBlankProps> = ({
   const toggleMatch = () => {
     setShowMatch((prev) => !prev);
   };
+  // grid grid-cols-2 gap-4
   return (
     <div className="p-5 flex flex-col justify-between h-[400px]">
       <div>
         {!match.user_1 && !match.user_2 && !match.user_3 && !match.user_4 && (
           <div className="mt-5 mb-5 text-[18px]">No users in match</div>
         )}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="">
           {match.user_1 && (
             <div>
               <SelectUserLvl
@@ -55,7 +56,7 @@ export const Blank: React.FC<IBlankProps> = ({
             </div>
           )}
           {match.user_2 && (
-            <div>
+            <div className="mt-3">
               <SelectUserLvl
                 value={user2}
                 title={match.user_2.username}
@@ -64,7 +65,7 @@ export const Blank: React.FC<IBlankProps> = ({
             </div>
           )}
           {match.user_3 && (
-            <div>
+            <div className="mt-3">
               <SelectUserLvl
                 value={user3}
                 title={match.user_3.username}
@@ -73,7 +74,7 @@ export const Blank: React.FC<IBlankProps> = ({
             </div>
           )}
           {match.user_4 && (
-            <div>
+            <div className="mt-3">
               <SelectUserLvl
                 title={match.user_4.username}
                 value={user4}
