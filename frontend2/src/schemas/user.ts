@@ -14,6 +14,7 @@ export interface IUser {
   status: string;
   lvl: number;
   is_first_open: boolean;
+  gender: Gender;
 }
 
 export interface IUserStats {
@@ -41,4 +42,9 @@ export enum Position {
   LEFT = "left",
   RIGHT = "right",
   BOTH = "both",
+}
+
+export enum Gender {
+  MAN = "man",
+  WOMAN = "woman",
 }

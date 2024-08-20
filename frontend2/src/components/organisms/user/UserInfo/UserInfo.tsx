@@ -61,6 +61,7 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user }) => {
             <Info infoValue={user.age} infoKey="age" />
             <Info infoValue={user.country} infoKey="country" />
             <Info infoValue={user.city} infoKey="city" />
+            <Info infoValue={user.gender} infoKey="gender" />
           </div>
         )}
       </div>
