@@ -44,7 +44,6 @@ export const blankApi = baseApi.injectEndpoints({
           },
         };
       },
-      invalidatesTags: [TAGS.BLANK],
     }),
   }),
 });

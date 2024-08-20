@@ -38,7 +38,6 @@ export const BlankList: React.FC = () => {
                 Select mark for user
               </Heading>
             </div>
-
             <>
               <Blank
                 close={() => setIsShow(false)}
@@ -47,7 +46,7 @@ export const BlankList: React.FC = () => {
                 navigate={
                   <div className="flex  justify-between items-center">
                     <div>
-                      {step + 1} /{data.length}
+                      {step + 1} / {data.length}
                     </div>
                     {/* <div className="flex">
                       <div onClick={prev} className="mr-[15px] text-[32px]">

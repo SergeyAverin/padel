@@ -1,6 +1,6 @@
 import { Button, ButtonVariant } from "@atoms/index";
 import SelectUserLvl from "@molecules/matches/SelectUserLvl";
-// import { useCreateBlankMutation } from "@redux/api/blankApi";
+import { useCreateBlankMutation } from "@redux/api/blankApi";
 import { IMatch } from "@schemas/match";
 // import Match from "@organisms/matches/Match";
 import React, { useState } from "react";
@@ -23,15 +23,15 @@ export const Blank: React.FC<IBlankProps> = ({
   const [user2, setUser2] = useState({ label: "1", value: "1" });
   const [user3, setUser3] = useState({ label: "1", value: "1" });
   const [user4, setUser4] = useState({ label: "1", value: "1" });
-  // const [createBlank] = useCreateBlankMutation();
+  const [createBlank] = useCreateBlankMutation();
   const onSubmit = () => {
-    // createBlank({
-    //   matchId: match.id,
-    //   user_1: Number(user1.value),
-    //   user_2: Number(user2.value),
-    //   user_3: Number(user3.value),
-    //   user_4: Number(user4.value),
-    // });
+    createBlank({
+      matchId: match.id,
+      user_1: Number(user1.value),
+      user_2: Number(user2.value),
+      user_3: Number(user3.value),
+      user_4: Number(user4.value),
+    });
     setNext();
   };
   const [showMatch, setShowMatch] = useState(false);
@@ -41,6 +41,9 @@ export const Blank: React.FC<IBlankProps> = ({
   return (
     <div className="p-5 flex flex-col justify-between h-[400px]">
       <div>
+        {!match.user_1 && !match.user_2 && !match.user_3 && !match.user_4 && (
+          <div className="mt-5 mb-5 text-[18px]">No users in match</div>
+        )}
         <div className="grid grid-cols-2 gap-4">
           {match.user_1 && (
             <div>
@@ -82,16 +85,24 @@ export const Blank: React.FC<IBlankProps> = ({
         <div>
           {!showMatch && (
             <>
-              <div className="text-[16px] text-highlight" onClick={toggleMatch}>
+              <div
+                className="text-[14px] text-highlight mt-3"
+                onClick={toggleMatch}
+              >
                 Show match
               </div>
-              <Match match={match} />
             </>
           )}
           {showMatch && (
-            <div className="text-[16px] text-highlight" onClick={toggleMatch}>
-              Close match
-            </div>
+            <>
+              <div
+                className="text-[14px] text-highlight mt-3"
+                onClick={toggleMatch}
+              >
+                Close match
+              </div>
+              <Match match={match} />
+            </>
           )}
         </div>
       </div>
