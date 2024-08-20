@@ -9,7 +9,7 @@ from core.dependencies.current_user import get_current_user
 blank_router = APIRouter(tags=['Blank'])
 
 
-@blank_router.get('/match_with_out_blank')
+@blank_router.get('/blank/match_with_out_blank')
 async def match_with_out_blank(
     user: UserDTO = Depends(get_current_user)
 ):
@@ -17,7 +17,7 @@ async def match_with_out_blank(
     return matches
 
 
-@blank_router.post('/match/{match_id}/blank')
+@blank_router.post('/blank/match/{match_id}/blank')
 async def create_blank(
     match_id: int,
     create_blank_data: CreaetBlankDTO = Body(),
@@ -26,7 +26,7 @@ async def create_blank(
     return await blank_service.create_blank(create_blank_data, user.telegram_user_id, match_id)
 
 
-@blank_router.get('/match/{match_id}/blank')
+@blank_router.get('/blank/match/{match_id}/blank')
 async def get_lvl_chagne(
     match_id: int,
     user: UserDTO = Depends(get_current_user)

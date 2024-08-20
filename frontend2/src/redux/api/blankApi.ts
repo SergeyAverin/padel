@@ -7,7 +7,7 @@ export const blankApi = baseApi.injectEndpoints({
     getBlanks: builder.query<Array<IMatch>, void>({
       query() {
         return {
-          url: `/match_with_our_blank`,
+          url: `/blank/match_with_out_blank`,
           method: "GET",
         };
       },
@@ -16,7 +16,7 @@ export const blankApi = baseApi.injectEndpoints({
     getMatchBlank: builder.query<number, number>({
       query(matchId) {
         return {
-          url: `/match/${matchId}/blank`,
+          url: `/blank/match/${matchId}/blank`,
           method: "GET",
         };
       },
@@ -34,7 +34,7 @@ export const blankApi = baseApi.injectEndpoints({
     >({
       query(data) {
         return {
-          url: `/match/${data.matchId}/blank`,
+          url: `/blank/match/${data.matchId}/blank`,
           method: "POST",
           body: {
             user_1: data.user_1,
@@ -44,6 +44,7 @@ export const blankApi = baseApi.injectEndpoints({
           },
         };
       },
+      invalidatesTags: [TAGS.BLANK],
     }),
   }),
 });

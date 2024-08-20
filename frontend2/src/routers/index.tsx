@@ -22,6 +22,8 @@ import { matchIdSelector } from "@redux/selectors/addUserInMatch";
 import { Tutorial } from "@organisms/core/Tutorial/Tutorial";
 import BlankList from "@organisms/matches/BlankList";
 import { setCity } from "@redux/features/clubFilterSlice";
+import { useGetBlanksQuery } from "@redux/api/blankApi";
+import { Spinner } from "@atoms/index";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -36,30 +38,37 @@ const MainRouter: React.FC = () => {
 
   const user = useAuthUser();
   const matchId = useSelector(matchIdSelector);
+  const blankLoad = useGetBlanksQuery();
 
   return (
     <>
-      {user && (
+      {!blankLoad.isLoading ? (
         <>
-          {user.is_first_open && <Tutorial />}
-          <BlankList />
-        </>
-      )}
-      {matchId && <AddUserPanel />}
+          {user && (
+            <>
+              {user.is_first_open && <Tutorial />}
+              <BlankList />
+            </>
+          )}
+          {matchId && <AddUserPanel />}
 
-      <Routes>
-        <Route path="/profile" element={<AccountPage />} />
-        <Route path="/profile/edit" element={<EditAccountPage />} />
-        <Route path="/user/:userId" element={<UserPage />} />
-        <Route path="/friends" element={<FriendPage />} />
-        <Route path="/matches" element={<MatchesPage />} />
-        <Route path="/create/club" element={<CreatClubPage />} />
-        <Route path="/clubs" element={<ClubListPage />} />
-        <Route path="/clubs/:clubId" element={<ClubPage />} />
-        <Route path="/edit/club/:clubId" element={<EditClubPage />} />
-        <Route path="/create/match" element={<CreateMatchPage />} />
-      </Routes>
-      <Navigation />
+          <Routes>
+            <Route path="/profile" element={<AccountPage />} />
+            <Route path="/profile/edit" element={<EditAccountPage />} />
+            <Route path="/user/:userId" element={<UserPage />} />
+            <Route path="/friends" element={<FriendPage />} />
+            <Route path="/matches" element={<MatchesPage />} />
+            <Route path="/create/club" element={<CreatClubPage />} />
+            <Route path="/clubs" element={<ClubListPage />} />
+            <Route path="/clubs/:clubId" element={<ClubPage />} />
+            <Route path="/edit/club/:clubId" element={<EditClubPage />} />
+            <Route path="/create/match" element={<CreateMatchPage />} />
+          </Routes>
+          <Navigation />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };
