@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from account.models import Position, Hand
+from account.models import Position, Hand, Genders
 from core.config.api_settings import api_setting
 
 
@@ -34,3 +34,4 @@ class UpdateUserDTO(BaseModel):
     email: str
     city: str
     country: str
+    gender: Genders = Field(default=Genders.MAN.value)

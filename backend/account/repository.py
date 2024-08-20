@@ -2,7 +2,7 @@ from logging import getLogger
 
 from fastapi import UploadFile
 
-from account.models import User, UserStatus
+from account.models import User, UserStatus, Genders
 from account.schemas import UserDTO, UpdateUserDTO
 
 
@@ -26,7 +26,7 @@ class UserRepository:
             status=UserStatus.PLAYER.value,
             position=user_data.position.value,
             is_first_open=True,
-            lvl=1
+            lvl=1,
         )
         await user.save()
         return user
@@ -41,6 +41,7 @@ class UserRepository:
         old_user.city = new_user_data.city
         old_user.country = new_user_data.country
         old_user.is_first_open = False
+        old_user.gender = new_user_data.gender
 
         await old_user.save()
         return old_user

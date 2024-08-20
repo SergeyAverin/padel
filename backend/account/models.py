@@ -25,6 +25,11 @@ class UserStatus(str, Enum):
     PLAYER = 'player'
 
 
+class Genders(str, Enum):
+    MAN = 'man'
+    WOMAN = 'woman'
+
+
 class User(Model):
     first_name = fields.CharField(max_length=255)
     last_name = fields.CharField(max_length=255)
@@ -47,13 +52,14 @@ class User(Model):
 
     clubs = fields.ManyToManyField(
         'models.Club', on_delete=fields.CASCADE, through="clubs_bookmarks")
-    # matches
 
     city = fields.CharField(max_length=255, default='')
     country = fields.CharField(max_length=255, default='')
 
     lvl = fields.IntField(default=0)
     is_first_open = fields.BooleanField(default=True)
+
+    gender = fields.CharEnumField(Genders, default=Genders.MAN)
 
     def __str__(self):
         return self.first_name
