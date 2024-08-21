@@ -54,7 +54,24 @@ export const EditProfileForm: React.FC = () => {
       alert("Write a valid data!!!");
     }
   };
-
+  useEffect(() => {
+    if (formValue.city == "" && formValue.country == "") {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setFormValue((prev) => ({ ...prev, city: data.city } as FormDataI));
+            setFormValue(
+              (prev) => ({ ...prev, country: data.countryName } as FormDataI)
+            );
+          });
+      });
+    }
+  }, []);
   return (
     <form onSubmit={onSubmit}>
       <div className="p-5 bg-primary rounded-xl">

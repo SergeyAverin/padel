@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Heading, HeadingVariant } from "@atoms/index";
+import { Heading, HeadingVariant } from "@atoms/index";
 
 import Blank from "@organisms/matches/Blank";
 import { useGetBlanksQuery } from "@redux/api/blankApi";

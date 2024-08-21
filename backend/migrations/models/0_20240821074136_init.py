@@ -18,11 +18,13 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
     "city" VARCHAR(255) NOT NULL  DEFAULT '',
     "country" VARCHAR(255) NOT NULL  DEFAULT '',
     "lvl" INT NOT NULL  DEFAULT 0,
-    "is_first_open" BOOL NOT NULL  DEFAULT True
+    "is_first_open" BOOL NOT NULL  DEFAULT True,
+    "gender" VARCHAR(5) NOT NULL  DEFAULT 'man'
 );
 COMMENT ON COLUMN "user"."position" IS 'LEFT: left\nRIGHT: right\nBOTH: both';
 COMMENT ON COLUMN "user"."hand" IS 'LEFT_HAND: left_hand\nRIGHT_HAND: right_hand';
 COMMENT ON COLUMN "user"."status" IS 'SUPER_ADMIN: super_admin\nCLUB_ADMIN: club_admin\nPLAYER: player';
+COMMENT ON COLUMN "user"."gender" IS 'MAN: man\nWOMAN: woman';
 CREATE TABLE IF NOT EXISTS "club" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "name" VARCHAR(130) NOT NULL,
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS "match" (
     "status" VARCHAR(11) NOT NULL  DEFAULT 'expectation',
     "start_at" TIMESTAMPTZ NOT NULL,
     "end_at" TIMESTAMPTZ NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-08-17T23:49:00.184662',
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-08-21T07:41:36.274348',
     "text_user_1" VARCHAR(140),
     "text_user_2" VARCHAR(140),
     "text_user_3" VARCHAR(140),

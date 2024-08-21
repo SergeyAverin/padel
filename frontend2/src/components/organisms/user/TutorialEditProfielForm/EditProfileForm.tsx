@@ -35,7 +35,24 @@ export const TutorialEditProfielForm: React.FC<
     //   setCountry(user.country);
     // }
   }, [user]);
-
+  useEffect(() => {
+    if (formValue.city == "" && formValue.country == "") {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setFormValue((prev) => ({ ...prev, city: data.city } as FormDataI));
+            setFormValue(
+              (prev) => ({ ...prev, country: data.countryName } as FormDataI)
+            );
+          });
+      });
+    }
+  }, []);
   const navigate = useNavigate();
   const [updateUser] = useUpdateUserInfoMutation();
   const onSubmit = (event: React.FormEvent) => {
