@@ -7,6 +7,8 @@ import { useAuthUser } from "@hooks/useAuthUser";
 // import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserInfoMutation } from "@redux/api/userApi";
+import SelectGender from "@molecules/user/SelectGender";
+import { Gender } from "@schemas/user";
 
 export const EditProfileForm: React.FC = () => {
   const re =
@@ -31,6 +33,8 @@ export const EditProfileForm: React.FC = () => {
     // }
   }, [user]);
 
+  const [gender, setGender] = useState(user?.gender as Gender);
+
   const navigate = useNavigate();
   const [updateUser] = useUpdateUserInfoMutation();
   const onSubmit = (event: React.FormEvent) => {
@@ -45,11 +49,12 @@ export const EditProfileForm: React.FC = () => {
         updateUser({
           userData: {
             ...formValue,
+            gender: gender,
           },
           userId: user.telegram_user_id,
         });
       }
-      navigate("/profile");
+      navigate("/");
     } else {
       alert("Write a valid data!!!");
     }
@@ -89,6 +94,10 @@ export const EditProfileForm: React.FC = () => {
             </div>
           </div>
         ))}
+
+        <div className="mt-5">
+          <SelectGender setGender={(gender: Gender) => setGender(gender)} />
+        </div>
 
         {/* <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={user?.country} />

@@ -31,6 +31,7 @@ export interface IUpdateUserData {
   email: string;
   country: string;
   city: string;
+  gender: Gender;
 }
 
 export enum Hand {
