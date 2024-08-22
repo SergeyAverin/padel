@@ -17,11 +17,12 @@ export const OuterFriendRequestsTemplate: React.FC = observer(() => {
           )}
 
           {data.map((friendRequest) => (
-            <FriendRequestOuter
-              friendRequestId={friendRequest.id}
-              key={friendRequest.id}
-              user={friendRequest.recipient_user}
-            />
+            <div className="mb-2" key={friendRequest.id}>
+              <FriendRequestOuter
+                friendRequestId={friendRequest.id}
+                user={friendRequest.recipient_user}
+              />
+            </div>
           ))}
         </>
       ) : (

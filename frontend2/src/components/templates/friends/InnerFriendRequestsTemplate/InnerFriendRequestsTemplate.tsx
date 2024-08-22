@@ -17,11 +17,12 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
             <EmptyBanner text="Here are the friend requests that have been sent to you." />
           )}
           {data.map((friendRequest) => (
-            <FriendRequestInner
-              friendRequestId={friendRequest.id}
-              user={friendRequest.recipient_user}
-              key={friendRequest.id}
-            />
+            <div className="mb-2" key={friendRequest.id}>
+              <FriendRequestInner
+                friendRequestId={friendRequest.id}
+                user={friendRequest.recipient_user}
+              />
+            </div>
           ))}
         </>
       ) : (

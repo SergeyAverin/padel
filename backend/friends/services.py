@@ -14,10 +14,20 @@ class FriendRequestService:
         self.friend_service = FriendService()
 
     async def create_friend_request(self, sender_user_id: str, recipient_user_id: str):
-        return await self.friend_request_repository.create_friend_request(
-            sender_user_id,
-            recipient_user_id
+        sender = await FriendRequest.get_or_none(
+            sender_user__telegram_user_id=sender_user_id,
+            recipient_user__telegram_user_id=recipient_user_id
         )
+        recipient = await FriendRequest.get_or_none(
+            sender_user__telegram_user_id=recipient_user_id,
+            recipient_user__telegram_user_id=sender_user_id
+        )
+        if not recipient and not sender:
+            return await self.friend_request_repository.create_friend_request(
+                sender_user_id,
+                recipient_user_id
+            )
+        return None
 
     async def accept_friend_request(self, friend_request_id: int):
         friend_request = await self.friend_request_repository.get_friend_request_by_id(
