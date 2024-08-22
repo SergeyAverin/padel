@@ -24,6 +24,7 @@ import BlankList from "@organisms/matches/BlankList";
 import { setCity } from "@redux/features/clubFilterSlice";
 import { useGetBlanksQuery } from "@redux/api/blankApi";
 import { Spinner } from "@atoms/index";
+import { useCreateFriendRequestMutation } from "@redux/api/friendRequestApi";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -39,6 +40,19 @@ const MainRouter: React.FC = () => {
   const user = useAuthUser();
   const matchId = useSelector(matchIdSelector);
   const blankLoad = useGetBlanksQuery();
+
+  const [createFriendRequest] = useCreateFriendRequestMutation();
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const startapp = url.searchParams.get("tgWebAppStartParam");
+    if (startapp) {
+      console.log(`Create friend requset to user ${startapp}`);
+      createFriendRequest(startapp);
+    }
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.expand();
+    }
+  }, []);
 
   return (
     <>
