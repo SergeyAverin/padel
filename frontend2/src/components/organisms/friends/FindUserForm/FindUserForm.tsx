@@ -8,6 +8,7 @@ import EmptyIcon from "@assets/EmptyIcon.svg?react";
 import HelpBanner from "@organisms/core/HelpBanner";
 import { useFindUserByUserNameMutation } from "@redux/api/findUserApi";
 import { IUser } from "@schemas/user";
+import { useAuthUser } from "@hooks/useAuthUser";
 
 export const FindUserForm: React.FC = observer(() => {
   const [value, setValue] = useState("");
@@ -28,6 +29,7 @@ export const FindUserForm: React.FC = observer(() => {
       });
     setRequsetSended(true);
   };
+  const userAuth = useAuthUser();
   return (
     <>
       <div className="mb-5">
@@ -62,27 +64,31 @@ export const FindUserForm: React.FC = observer(() => {
               </div>
             )}
             {users.map((user) => (
-              <Link
-                to={`/user/${user.telegram_user_id}`}
-                key={user.telegram_user_id}
-              >
-                <div className="bg-primary p-5 rounded-xl mb-5">
-                  <div className="flex">
-                    <UserPhoto avatar={user.avatar} lvl={user.lvl} />
+              <>
+                {user.username != userAuth?.username && (
+                  <Link
+                    to={`/user/${user.telegram_user_id}`}
+                    key={user.telegram_user_id}
+                  >
+                    <div className="bg-primary p-5 rounded-xl mb-5">
+                      <div className="flex">
+                        <UserPhoto avatar={user.avatar} lvl={user.lvl} />
 
-                    <div className="ml-5">
-                      <div className="text-[16px] font-bold">
-                        {user.username}
-                      </div>
-                      <div className="text-[16px] font-medium">
-                        {user.first_name}{" "}
-                        {user.last_name.toLowerCase() != "none" &&
-                          user.last_name}
+                        <div className="ml-5">
+                          <div className="text-[16px] font-bold">
+                            {user.username}
+                          </div>
+                          <div className="text-[16px] font-medium">
+                            {user.first_name}{" "}
+                            {user.last_name.toLowerCase() != "none" &&
+                              user.last_name}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </Link>
+                  </Link>
+                )}
+              </>
             ))}
           </>
         )}
