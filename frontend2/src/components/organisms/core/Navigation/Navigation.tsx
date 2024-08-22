@@ -43,11 +43,7 @@ export const Navigation: React.FC = () => {
       {user && (
         <div className="bg-primary p-5 z-20 flex items-center justify-center animate-fade-in fixed bottom-0 left-0 w-full shadow-md">
           <div className="w-full flex justify-around items-end">
-            <NavigationButton
-              href="/profile"
-              icon={<ProfileIcon />}
-              text="Profile"
-            />
+            <NavigationButton href="/" icon={<ProfileIcon />} text="Profile" />
             <NavigationButton
               href="/friends"
               icon={<FriendsIcon />}

@@ -1,5 +1,6 @@
 import { Spinner } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
+import SharedButton from "@molecules/friends/SharedButton";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import HelpBanner from "@organisms/core/HelpBanner";
 import FriendCard from "@organisms/friends/FriendCard";
@@ -22,6 +23,10 @@ export const FriendsTemplate: React.FC = () => {
         <>
           {/* Filter */}
           <FriendsFilter />
+
+          <div className="mt-3 mb-3">
+            <SharedButton />
+          </div>
 
           {/* Empty banner */}
           {data.length == 0 && (

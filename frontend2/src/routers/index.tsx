@@ -53,7 +53,7 @@ const MainRouter: React.FC = () => {
           {matchId && <AddUserPanel />}
 
           <Routes>
-            <Route path="/profile" element={<AccountPage />} />
+            <Route path="/" element={<AccountPage />} />
             <Route path="/profile/edit" element={<EditAccountPage />} />
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/friends" element={<FriendPage />} />
