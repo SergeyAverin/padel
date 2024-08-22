@@ -8,6 +8,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from account.service import user_service
 from account.schemas import UserDTO
+from account.models import UserStatus, Hand, Position
 # from authentication.utils import decode_jwt
 from core.config.bot_settings import bot_settings
 
@@ -39,4 +40,25 @@ async def get_current_user(
         return {'status': status.HTTP_401_UNAUTHORIZED, 'message': 'fail auth'}
 
     user = await user_service.get_user_by_telegram_user_id(user_id)
+
+    if not user:
+        user_data = UserDTO(
+            first_name=str(data.user.first_name),
+            last_name=str(data.user.last_name),
+            telegram_user_id=str(data.user.id),
+            username=data.user.username,
+            age=18,
+            email='',
+            status=UserStatus.PLAYER.value,
+            hand=Hand.RIGHT_HAND,
+            position=Position.BOTH,
+            country='',
+            city='',
+            avatar='',
+            lvl=1,
+            is_first_open=True,
+            id=1
+        )
+        user = await user_service.create_user(user_data)
+        return user
     return user
