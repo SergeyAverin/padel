@@ -18,3 +18,5 @@ export const tagSelector = (state: RootState) => state.creaetMatchSlice.tag;
 export const courtSelector = (state: RootState) => state.creaetMatchSlice.court;
 export const isShowNextSelector = (state: RootState) =>
   state.creaetMatchSlice.isShowNext;
+export const genderSelector = (state: RootState) =>
+  state.creaetMatchSlice.gender;

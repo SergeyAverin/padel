@@ -48,4 +48,5 @@ export enum Position {
 export enum Gender {
   MAN = "man",
   WOMAN = "woman",
+  ANY = "ANY",
 }

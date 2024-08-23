@@ -66,10 +66,9 @@ async def get_match(
         "text_user_4": match.text_user_4,
         "selected_court": match.selected_court,
         "id": match.id,
-        "selected_court": match.selected_court,
         "first_team_score": match.first_team_score,
         "match_lvl": match.match_lvl,
-
+        "gender": match.gender
     }
 
 

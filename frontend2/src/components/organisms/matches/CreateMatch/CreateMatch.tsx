@@ -3,6 +3,7 @@ import {
   courtSelector,
   dateSelector,
   endAtSelector,
+  genderSelector,
   isPrivateSelector,
   isShowNextSelector,
   lvlMaxSelector,
@@ -31,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateMatchMutation } from "@redux/api/createMatchApi";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { Desk } from "./Desk";
+import { SelectGender } from "./SelectGender";
 
 export const CreateMatch: React.FC = () => {
   const step = useSelector(stepSelector);
@@ -44,13 +46,14 @@ export const CreateMatch: React.FC = () => {
   const isPrivate = useSelector(isPrivateSelector);
   const tag = useSelector(tagSelector);
   const isShowNext = useSelector(isShowNextSelector);
+  const gender = useSelector(genderSelector);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const [createMatch] = useCreateMatchMutation();
   useEffect(() => {
     if (step == STEP_COUNT && startAt && endAt && selectedDate) {
-      navigation("/profile");
+      navigation("/");
       const b = extractDayAndMonth(selectedDate);
       const [hoursStart, minutesStart] = startAt.split(":").map(Number);
       const [hoursEnd, minutesEnd] = endAt.split(":").map(Number);
@@ -72,6 +75,7 @@ export const CreateMatch: React.FC = () => {
         is_private: isPrivate,
         match_lvl: `${lvlMin}-${lvlMax}`,
         tag_id: Number(tag),
+        gender: gender,
       });
       dispatch(resetState());
     }
@@ -102,6 +106,12 @@ export const CreateMatch: React.FC = () => {
       {step == 5 && (
         <div>
           <SetIsPrivateLvl />
+        </div>
+      )}
+
+      {step == 6 && (
+        <div>
+          <SelectGender />
         </div>
       )}
 

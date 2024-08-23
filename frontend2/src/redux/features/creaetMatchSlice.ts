@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAction } from "@reduxjs/toolkit";
+import { Gender } from "@schemas/user";
 
 interface ICreateMatchState {
   clubId: number | null;
@@ -16,6 +17,7 @@ interface ICreateMatchState {
   tag: string | null;
   court: string | null;
   isShowNext: boolean;
+  gender: Gender;
 }
 
 const initialState: ICreateMatchState = {
@@ -32,9 +34,10 @@ const initialState: ICreateMatchState = {
   tag: null,
   court: null,
   isShowNext: true,
+  gender: Gender.ANY,
 };
 
-export const STEP_COUNT = 6;
+export const STEP_COUNT = 7;
 
 export const resetState = createAction("resetState");
 
@@ -82,6 +85,9 @@ export const createMatchSlice = createSlice({
     selectCourt(state, actions: PayloadAction<string>) {
       state.court = actions.payload;
     },
+    selectGender(state, actions: PayloadAction<Gender>) {
+      state.gender = actions.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(resetState, () => initialState);
@@ -101,4 +107,5 @@ export const {
   selectCourt,
   selectTag,
   setIsShowNext,
+  selectGender,
 } = createMatchSlice.actions;

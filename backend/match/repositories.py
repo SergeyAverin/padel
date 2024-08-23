@@ -62,6 +62,7 @@ class MatchRepository:
             "first_team_score": match.first_team_score,
             "second_team_score": match.second_team_score,
             "match_lvl": match.match_lvl,
+            "gender": match.gender,
             "id": match.id
         }
 

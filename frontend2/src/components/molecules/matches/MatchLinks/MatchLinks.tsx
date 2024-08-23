@@ -33,6 +33,12 @@ export const MatchLinks: React.FC<IMatchLinksProps> = ({ match }) => {
               </div>
             </div>
           </div>
+          <div className="mt-2">
+            <div className="font-light text-[14px] flex items-center">
+              Gender:
+              <div className="ml-2">{match.gender}</div>
+            </div>
+          </div>
         </>
       )}
     </>

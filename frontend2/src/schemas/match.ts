@@ -1,5 +1,5 @@
 import { IClub } from "./club";
-import { IUser } from "./user";
+import { Gender, IUser } from "./user";
 
 export interface IMatch {
   owner: IUser | null;
@@ -23,6 +23,8 @@ export interface IMatch {
   first_team_score: number;
   second_team_score: number;
   match_lvl: string;
+
+  gender: Gender;
 }
 
 export interface ICreateMatch {
@@ -33,6 +35,7 @@ export interface ICreateMatch {
   court_id: number;
   is_private: boolean;
   tag_id: number;
+  gender: Gender;
 }
 
 export enum MatchStatusEnum {
