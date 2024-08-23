@@ -25,6 +25,7 @@ import { setCity } from "@redux/features/clubFilterSlice";
 import { useGetBlanksQuery } from "@redux/api/blankApi";
 import { Spinner } from "@atoms/index";
 import { useCreateFriendRequestMutation } from "@redux/api/friendRequestApi";
+import MatchPage from "@pages/matches/MatchPage";
 
 /** Главный компонент маршрутизации */
 const MainRouter: React.FC = () => {
@@ -72,6 +73,7 @@ const MainRouter: React.FC = () => {
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/friends" element={<FriendPage />} />
             <Route path="/matches" element={<MatchesPage />} />
+            <Route path="/match/:matchId" element={<MatchPage />} />
             <Route path="/create/club" element={<CreatClubPage />} />
             <Route path="/clubs" element={<ClubListPage />} />
             <Route path="/clubs/:clubId" element={<ClubPage />} />
