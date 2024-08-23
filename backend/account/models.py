@@ -28,6 +28,7 @@ class UserStatus(str, Enum):
 class Genders(str, Enum):
     MAN = 'man'
     WOMAN = 'woman'
+    ANY = 'ANY'
 
 
 class User(Model):

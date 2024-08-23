@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from match.models import StatusEnum
 from club.schemas import ClubDTO, CourtDTO, ClubPaginationDTO
 from account.schemas import UserDTO
+from account.models import Genders
 
 
 class MatchDTO(BaseModel):
@@ -46,3 +47,4 @@ class MatchCreateDTO(BaseModel):
     court_id: int
     is_private: bool
     tag_id: int
+    gender: Genders

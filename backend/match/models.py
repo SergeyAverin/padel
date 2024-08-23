@@ -4,6 +4,8 @@ from datetime import datetime
 from tortoise import fields
 from tortoise.models import Model
 
+from account.models import Genders
+
 
 class StatusEnum(Enum):
     EXPECTATION = 'expectation'
@@ -46,3 +48,5 @@ class Match(Model):
 
     selected_court = fields.ForeignKeyField(
         'models.Court', related_name='selected_court')
+
+    gender = fields.CharEnumField(Genders, default=Genders.ANY)

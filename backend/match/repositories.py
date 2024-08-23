@@ -32,6 +32,7 @@ class MatchRepository:
         match.selected_court = court
         match.match_lvl = match_create_data.match_lvl
         match.is_private = match_create_data.is_private
+        match.gender = match_create_data.gender
         await match.save()
         if match.is_private:
             tag = await Tag.get_or_none(id=match_create_data.tag_id)
