@@ -1,9 +1,13 @@
+from logging import getLogger
+
 from match.schemas import MatchCreateDTO
 from match.repositories import MatchRepository
 from match.models import StatusEnum
 from club.services import club_service, court_service
-from account.models import User
+from account.models import User, Genders
 from start_bot import send_notification
+
+logger = getLogger()
 
 
 class MatchService:
@@ -37,7 +41,7 @@ class MatchService:
 
         match = await self.match_repository.create_match(match_create_data, club, user, court)
 
-        await self._send_user_for_match_notification(match.id)
+        await self._send_user_for_match_notification(match.id, match_create_data.club_id)
 
         return match
 
@@ -59,18 +63,21 @@ class MatchService:
     async def get_matches_by_club_bookmarks(self, user_id: str):
         return await self.match_repository.get_matches_by_club_bookmarks(user_id)
 
-    async def _send_user_for_match_notification(self, match_id):
+    async def _send_user_for_match_notification(self, match_id, club_id):
         match = await self.get_match_by_id(match_id)
-        users = await match.user_for_match
+        users1 = await match.user_for_match
+        users2 = await User.filter(clubs__id=club_id)
+        users = list(set(users1) | set(users2))
         for user in users:
-            await send_notification(
-                int(user.telegram_user_id),
-                'You can join in the match',
-                match.id
-            )
-
-    async def _send_notification_for_user_from_club():
-        pass
+            if user.gender == match.gender or match.gender == Genders.ANY:
+                match_lvl = match.lvl.split('-')
+                if user.lvl >= float(match_lvl[0]) and user.lvl <= float(match_lvl[1]):
+                    logger.debug(f'send notification {user.telegram_user_id}')
+                    await send_notification(
+                        int(user.telegram_user_id),
+                        'You can join in the match',
+                        match.id
+                    )
 
 
 match_service = MatchService()
