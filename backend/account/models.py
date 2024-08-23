@@ -63,7 +63,7 @@ class User(Model):
     gender = fields.CharEnumField(Genders, default=Genders.MAN)
 
     def __str__(self):
-        return self.first_name
+        return self.telegram_user_id
 
 
 User_Pydantic = pydantic_model_creator(User)
