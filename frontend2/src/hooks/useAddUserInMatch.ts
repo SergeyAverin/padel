@@ -3,6 +3,7 @@ import { IMatch } from "@schemas/match";
 import { useDispatch } from "react-redux";
 import { useAuthUser } from "./useAuthUser";
 import { useAddUserInMatchMutation } from "@redux/api/addUserInMatchApi";
+import { Gender } from "@schemas/user";
 
 export const useAddUserInMatch = (
   match: IMatch,
@@ -24,12 +25,16 @@ export const useAddUserInMatch = (
   const user = useAuthUser();
   const joinInMatch = (index: number) => {
     // AddUserInMatchStore.joinInMatch(index);
-    if (user) {
-      addUserInMatch({
-        match_id: match.id as number,
-        user_id: user.telegram_user_id,
-        user_indx: index as number,
-      });
+    if (match.gender == Gender.ANY || user?.gender == match.gender) {
+      if (user) {
+        addUserInMatch({
+          match_id: match.id as number,
+          user_id: user.telegram_user_id,
+          user_indx: index as number,
+        });
+      }
+    } else {
+      alert(`This match is just for ${match.gender}`);
     }
   };
   const onClick = () => {
