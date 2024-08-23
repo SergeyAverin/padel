@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddressIcon from "@assets/AddressIcon.svg?react";
 import FlagIcon from "@assets/ClubsIcon.svg?react";
@@ -30,41 +30,46 @@ interface IMatchTabsProps {
   clubId: number;
 }
 const MatchesTabs: React.FC<IMatchTabsProps> = ({ clubId }) => {
+  useEffect(() => {
+    if (loadMatches.isLoading == false) {
+      matches = [];
+    }
+  }, []);
   const [page, setPage] = useState(1);
   const loadMatches = useGetClubMatchesQuery({
     page: page,
     clubId: clubId,
   });
 
-  const matches = useInfinityScroll<IMatch>(
+  let matches = useInfinityScroll<IMatch>(
     page,
     setPage,
     loadMatches.data,
     loadMatches.isFetching
   );
+
   return (
     <div>
-      {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 ? (
+      {loadMatches.isLoading && (
         <div className="pt-[60px] flex justify-center">
           <Loading />
         </div>
-      ) : (
-        <>
-          {matches
-            .slice()
-            .reverse()
-            .map((match) => (
-              <div className="mt-3" key={match.id}>
-                <Match match={match} />
-              </div>
-            ))}
-          <div className="pt-[30px]">
-            {matches && matches.length == 0 && (
-              <EmptyBanner text="Club have not matches" />
-            )}
-          </div>
-        </>
       )}
+      <>
+        {matches
+          .slice()
+          .reverse()
+          .map((match) => (
+            <div className="mt-3" key={match.id}>
+              <Match match={match} />
+            </div>
+          ))}
+        <div className="pt-[30px]">
+          {matches && !loadMatches.isLoading && matches.length == 0 && (
+            <EmptyBanner text="Club have not matches" />
+          )}
+        </div>
+      </>
     </div>
   );
 };

@@ -22,19 +22,24 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
     userId: userId,
   });
 
-  const matches = useInfinityScroll<IMatch>(
+  let matches = useInfinityScroll<IMatch>(
     page,
     setPage,
     loadMatches.data,
     loadMatches.isFetching
   );
   useEffect(() => {
+    if (loadMatches.isLoading == false) {
+      matches = [];
+    }
+  }, []);
+  useEffect(() => {
     console.log("change");
   }, [userId]);
   return (
     <>
       {!isMatchPage && <Heading variant={HeadingVariant.H2}>Matches:</Heading>}
-      {matches.length == 0 && (
+      {!loadMatches.isLoading && matches.length == 0 && (
         <div className="mt-5">
           <EmptyBanner text="Have not matches" />
         </div>
@@ -60,22 +65,21 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
               </div>
             </>
           )}
-          {(loadMatches.isLoading || loadMatches.isFetching) && page == 1 ? (
+          {loadMatches.isLoading && (
             <div className="pt-[60px] flex justify-center">
               <Loading />
             </div>
-          ) : (
-            <>
-              {matches
-                .slice()
-                .reverse()
-                .map((match) => (
-                  <div className="mt-3" key={match.id}>
-                    <Match match={match} />
-                  </div>
-                ))}
-            </>
           )}
+          <>
+            {matches
+              .slice()
+              .reverse()
+              .map((match) => (
+                <div className="mt-3" key={match.id}>
+                  <Match match={match} />
+                </div>
+              ))}
+          </>
         </div>
       )}
     </>
