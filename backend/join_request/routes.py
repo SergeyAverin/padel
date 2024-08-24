@@ -16,8 +16,9 @@ logger = getLogger()
 async def create_join_requset(data: CreateJoinRequset):
     join_requset = await JoinRequst.get_or_none(
         join_request_user__telegram_user_id=data.join_request_user_tg,
-        join_request_match__id=data.join_request_match.id
+        join_request_match__id=data.join_request_match
     )
+    logger.debug(join_requset)
     if not join_requset:
         match = await match_service.get_match_by_id(data.join_request_match)
         user = await user_service.get_user_by_telegram_user_id(data.join_request_user_tg)
