@@ -14,22 +14,27 @@ logger = getLogger()
 
 @join_requset_api.post('/join_request')
 async def create_join_requset(data: CreateJoinRequset):
-    match = await match_service.get_match_by_id(data.join_request_match)
-    user = await user_service.get_user_by_telegram_user_id(data.join_request_user_tg)
-    join_request = JoinRequst()
-    join_request.join_request_match = match
-    join_request.join_request_user = user
-    join_request.index = data.index
-    await join_request.save()
-
-    # match_owner = await match.owner.first()
-    await send_notification(
-        int(match.owner.telegram_user_id),
-        'New requst on join  in match',
-        match.id
+    join_requset = await JoinRequst.get_or_none(
+        join_request_user__telegram_user_id=data.join_request_user_tg,
+        join_request_match__id=data.join_request_match.id
     )
+    if not join_requset:
+        match = await match_service.get_match_by_id(data.join_request_match)
+        user = await user_service.get_user_by_telegram_user_id(data.join_request_user_tg)
+        join_request = JoinRequst()
+        join_request.join_request_match = match
+        join_request.join_request_user = user
+        join_request.index = data.index
+        await join_request.save()
 
-    return join_request
+        # match_owner = await match.owner.first()
+        await send_notification(
+            int(match.owner.telegram_user_id),
+            'New requst on join  in match',
+            match.id
+        )
+
+        return join_request
 
 
 @join_requset_api.get('/join_requsets/match/{match_id}')
