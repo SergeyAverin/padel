@@ -69,7 +69,7 @@ export const useAddUserInMatch = (
           alert("You lvl is Inappropriate");
         } else {
           if (isFree) {
-            alert("You've entered the match");
+            alert("You send request on entered the match");
             joinInMatch(index);
           } else {
             alert("You walked out of the matchClick to apply");

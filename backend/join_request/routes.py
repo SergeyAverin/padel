@@ -6,6 +6,7 @@ from join_request.schema import CreateJoinRequset
 from join_request.models import JoinRequst
 from match.services import match_service
 from account.service import user_service
+from start_bot import send_notification
 
 join_requset_api = APIRouter()
 logger = getLogger()
@@ -20,6 +21,14 @@ async def create_join_requset(data: CreateJoinRequset):
     join_request.join_request_user = user
     join_request.index = data.index
     await join_request.save()
+
+    # match_owner = await match.owner.first()
+    await send_notification(
+        int(match.owner.telegram_user_id),
+        'New requst on join  in match',
+        match.id
+    )
+
     return join_request
 
 
