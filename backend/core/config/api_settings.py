@@ -22,7 +22,8 @@ class ApiSettings(BaseSettings):
             f"http://{self.api_host}:{self.api_port}",
             f"http://{self.api_domain}:{self.api_port}",
             self.api_frontend_domain,
-            'http://127.0.0.1:3000'
+            'http://127.0.0.1:3000',
+            "https://padel-sand.vercel.app"
         ]
         return origins
 

@@ -36,7 +36,7 @@ class User(Model):
     last_name = fields.CharField(max_length=255)
     username = fields.CharField(max_length=255)
     avatar = fields.CharField(
-        max_length=255, default=f"https://{api_setting.api_domain}/api/v1.0/user/image/default.png")
+        max_length=255, default=f"https://{api_setting.api_domain}/padel_backend/api/v1.0/user/image/default.png")
 
     age = fields.SmallIntField()
 

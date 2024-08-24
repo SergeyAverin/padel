@@ -47,7 +47,7 @@ class UserService:
     async def upload_user_photo(self, user_id: str, photo: UploadFile):
         user = await user_service.get_user_by_telegram_user_id(user_id)
         await self.photo_repository.save_photo(user_id, photo)
-        user.avatar = f"http://{api_setting.api_domain}/api/v1.0/user/image/{user_id}_{photo.filename}"
+        user.avatar = f"https://{api_setting.api_domain}/padel_backend/api/v1.0/user/image/{user_id}_{photo.filename}"
         await user.save()
         return user.avatar
 

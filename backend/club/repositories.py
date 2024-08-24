@@ -99,7 +99,7 @@ class ClubPhotoRepository:
         return await ClubPhoto.filter(photo_club__id=club_id)
 
     async def add_club_image(self, club_id: int, file: UploadFile):
-        path = f"http://{api_setting.api_domain}/api/v1.0/club/image/{club_id}_{file.filename}"
+        path = f"https://{api_setting.api_domain}/padel_backend/api/v1.0/club/image/{club_id}_{file.filename}"
         image = ClubPhoto()
         image.alt = 'image'
         image.photo = path
@@ -114,7 +114,7 @@ class ClubPhotoRepository:
         await image.save()
 
     async def change_avatar(self, club_id: int, file: UploadFile):
-        path = f"http://{api_setting.api_domain}/api/v1.0/club/image/{club_id}_{file.filename}"
+        path = f"https://{api_setting.api_domain}/padel_backend/api/v1.0/club/image/{club_id}_{file.filename}"
         club = await Club.get_or_none(id=club_id)
         club.avatar = path
         await club.save()

@@ -11,7 +11,7 @@ class Club(Model):
     city = fields.CharField(max_length=130)
     country = fields.CharField(max_length=130)
     avatar = fields.CharField(
-        max_length=255, default=f"http://{api_setting.api_domain}/api/v1.0/club/image/default.png")
+        max_length=255, default=f"https://{api_setting.api_domain}/padel_backend/api/v1.0/club/image/default.png")
 
     owner = fields.ForeignKeyField('models.User', related_name='club_owner')
 

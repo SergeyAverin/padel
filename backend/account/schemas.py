@@ -18,7 +18,7 @@ class UserDTO(BaseModel):
     is_first_open: bool
 
     avatar: str = Field(
-        default=f"http://{api_setting.api_domain}/api/v1.0/user/image/default.png")
+        default=f"https://{api_setting.api_domain}/padel_backend/api/v1.0/user/image/default.png")
 
     position: Position = Field(default=Position.BOTH.value)
     hand: Hand = Field(default=Hand.RIGHT_HAND.value)
