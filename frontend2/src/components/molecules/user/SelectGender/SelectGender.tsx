@@ -18,20 +18,18 @@ export const SelectGender: React.FC<SelectGenderProps> = ({ setGender }) => {
   return (
     <>
       <div className="text-[18px]">Select gender:</div>
-      <div className="flex mt-3">
+      <div className="flex mt-3 items-center">
         <div
-          className={classNames("text-[16px]", {
-            "text-highlight border-b-2 border-highlight":
-              selectedGender == Gender.MAN,
+          className={classNames("text-[16px] p-3", {
+            "bg-highlight rounded-2xl text-bg": selectedGender == Gender.MAN,
           })}
           onClick={() => onClick(Gender.MAN)}
         >
           Man
         </div>
         <div
-          className={classNames("ml-5 text-[16px]", {
-            "text-highlight border-b-2 border-highlight":
-              selectedGender == Gender.WOMAN,
+          className={classNames("ml-5 text-[16px] p-3", {
+            "bg-highlight rounded-2xl text-bg": selectedGender == Gender.WOMAN,
           })}
           onClick={() => onClick(Gender.WOMAN)}
         >
