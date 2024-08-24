@@ -12,6 +12,7 @@ MODELS = [
     "club.models",
     'match.models',
     "blank.models",
+    'join_request.models',
     "aerich.models"
 ]
 

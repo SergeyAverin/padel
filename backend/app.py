@@ -14,6 +14,7 @@ from club.routes import club_routes
 from match.routes import match_router
 from authentication.routers import auth_router
 from blank.routes import blank_router
+from join_request.routes import join_requset_api
 from database import init_db
 
 app = FastAPI()
@@ -41,6 +42,7 @@ api_router.include_router(club_routes)
 api_router.include_router(match_router)
 api_router.include_router(auth_router)
 api_router.include_router(blank_router)
+api_router.include_router(join_requset_api)
 
 
 @api_router.get('/hello')

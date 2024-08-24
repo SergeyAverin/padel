@@ -102,7 +102,7 @@ export const ClubTemplate: React.FC = () => {
     <>
       {isLoading && <Spinner />}
       {!isLoading && data ? (
-        <div className="p-5 pb-[350px]">
+        <div className="p-1 pb-[350px]">
           <div className="mb-5">
             <Heading variant={HeadingVariant.H1}>
               {shortenString(data.name, 24)}

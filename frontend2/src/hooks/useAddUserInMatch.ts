@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { useAuthUser } from "./useAuthUser";
 import { useAddUserInMatchMutation } from "@redux/api/addUserInMatchApi";
 import { Gender } from "@schemas/user";
+import { useCreateJoinRequestMutation } from "@redux/api/joinRequestApi";
 
 export const useAddUserInMatch = (
   match: IMatch,
   index: number,
   isFree: boolean = false
 ) => {
+  const [createJoinRequset] = useCreateJoinRequestMutation();
   const dispatch = useDispatch();
 
   const addUser = () => {
@@ -27,10 +29,15 @@ export const useAddUserInMatch = (
     // AddUserInMatchStore.joinInMatch(index);
     if (match.gender == Gender.ANY || user?.gender == match.gender) {
       if (user) {
-        addUserInMatch({
-          match_id: match.id as number,
-          user_id: user.telegram_user_id,
-          user_indx: index as number,
+        // addUserInMatch({
+        //   match_id: match.id as number,
+        //   user_id: user.telegram_user_id,
+        //   user_indx: index as number,
+        // });
+        createJoinRequset({
+          index: index,
+          join_request_match: match.id as number,
+          join_request_user_tg: user.telegram_user_id,
         });
       }
     } else {

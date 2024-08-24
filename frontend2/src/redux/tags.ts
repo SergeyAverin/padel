@@ -11,4 +11,5 @@ export const TAGS = {
   MATCH: "match",
   BLANK: "blank",
   STATS: "stats",
+  JOIN_REQUEST: "join_requset",
 };
