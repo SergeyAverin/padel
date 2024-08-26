@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Country } from "country-state-city";
+import { countries } from "./countries";
 
 import { Option } from "@atoms/Select/selectOption";
 import { Label } from "@atoms/index";
@@ -16,9 +16,10 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
   country,
 }) => {
   const [selectedCountry, setSelectedCountry] = useState<null | Option>(null);
-  const countryOptions = Country.getAllCountries().map((country) => ({
-    label: country.name,
-    value: country.isoCode,
+  const keys = Object.keys(countries);
+  const countryOptions = keys.map((country) => ({
+    label: country,
+    value: country,
   }));
   useEffect(() => {
     if (selectedCountry) {
@@ -46,6 +47,35 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
       }
     }
   }, [authUser]);
+  useEffect(() => {
+    // country == ""
+    if (country == "") {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const countryFromLocation: string = data.countryName.split(" ")[0];
+            const optionFromLocation = countryOptions.find((i) => {
+              if (
+                i.value
+                  .toLowerCase()
+                  .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
+              ) {
+                return true;
+              }
+            });
+            console.log(optionFromLocation);
+            if (optionFromLocation) {
+              setSelectedCountry(optionFromLocation);
+            }
+          });
+      });
+    }
+  }, []);
   return (
     <>
       <Label>Select country</Label>

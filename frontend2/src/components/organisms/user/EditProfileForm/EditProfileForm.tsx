@@ -3,12 +3,12 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { config, FormDataI, getInitState } from "./editProfileConfig";
 import { Button, ButtonVariant, Input } from "@atoms/index";
 import { useAuthUser } from "@hooks/useAuthUser";
-// import SelectCountry from "@molecules/core/SelectCountry";
-// import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
+import SelectCountry from "@molecules/core/SelectCountry";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserInfoMutation } from "@redux/api/userApi";
 import SelectGender from "@molecules/user/SelectGender";
 import { Gender } from "@schemas/user";
+import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 
 export const EditProfileForm: React.FC = () => {
   const re =
@@ -22,8 +22,8 @@ export const EditProfileForm: React.FC = () => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
-  // const [country, setCountry] = useState("");
-  // const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   useEffect(() => {
     setFormValue(getInitState(user));
@@ -41,15 +41,17 @@ export const EditProfileForm: React.FC = () => {
     event.preventDefault();
     if (
       re.test(String(formValue.email)) &&
-      formValue.age > 0
-      // city &&
-      // country
+      formValue.age > 0 &&
+      city &&
+      country
     ) {
       if (user) {
         updateUser({
           userData: {
             ...formValue,
             gender: gender,
+            city: city,
+            country: country,
           },
           userId: user.telegram_user_id,
         });
@@ -59,24 +61,6 @@ export const EditProfileForm: React.FC = () => {
       alert("Write a valid data!!!");
     }
   };
-  useEffect(() => {
-    if (formValue.city == "" && formValue.country == "") {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            setFormValue((prev) => ({ ...prev, city: data.city } as FormDataI));
-            setFormValue(
-              (prev) => ({ ...prev, country: data.countryName } as FormDataI)
-            );
-          });
-      });
-    }
-  }, []);
   return (
     <form onSubmit={onSubmit}>
       <div className="p-5 bg-primary rounded-xl">
@@ -84,7 +68,6 @@ export const EditProfileForm: React.FC = () => {
 
         {config.map((item) => (
           <div className="mt-[35px]" key={item.name}>
-            {/* <Label>{item.name}</Label> */}
             <div className="mt-[8px]">
               <Input
                 name={item.name}
@@ -99,7 +82,7 @@ export const EditProfileForm: React.FC = () => {
           <SelectGender setGender={(gender: Gender) => setGender(gender)} />
         </div>
 
-        {/* <div className="mt-5">
+        <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={user?.country} />
         </div>
 
@@ -109,7 +92,7 @@ export const EditProfileForm: React.FC = () => {
             selectedCountry={country}
             city={user?.city}
           />
-        </div> */}
+        </div>
 
         <div className="mt-5">
           {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
@@ -117,11 +100,11 @@ export const EditProfileForm: React.FC = () => {
           {!re.test(String(formValue.email).toLowerCase()) && (
             <div className="text-error">Invalid email</div>
           )}
-          {/* {country == "" ||
+          {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
             <div className="text-error">You mast select country</div>
-          )} */}
+          )}
         </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">

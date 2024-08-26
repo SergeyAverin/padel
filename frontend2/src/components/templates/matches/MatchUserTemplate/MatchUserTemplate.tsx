@@ -33,9 +33,6 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
       matches = [];
     }
   }, []);
-  useEffect(() => {
-    console.log("change");
-  }, [userId]);
   return (
     <>
       {!isMatchPage && <Heading variant={HeadingVariant.H2}>Matches:</Heading>}

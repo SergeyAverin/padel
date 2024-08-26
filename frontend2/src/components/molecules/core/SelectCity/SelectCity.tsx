@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { City } from "country-state-city";
+import { countries } from "../SelectCountry/countries";
 
 import { Option } from "@atoms/Select/selectOption";
 import { Label } from "@atoms/index";
@@ -23,11 +23,12 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
 
   useEffect(() => {
     if (selectedCountry) {
-      const options = City.getCitiesOfCountry(selectedCountry);
+      const options =
+        selectedCountry in countries ? countries[selectedCountry] : [];
       if (options) {
         const mapedOptions = options.map((city) => {
           return {
-            label: city.name,
+            label: city,
             value: generateRandomString(10),
           };
         });
@@ -39,6 +40,13 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
       }
     }
   }, [selectedCountry, city]);
+  useEffect(() => {
+    const c = cityOption.find((i) => i.label == city);
+    console.log(123123123123);
+    if (c) {
+      setSelectedCity(c);
+    }
+  }, [cityOption]);
   useEffect(() => {
     if (selectedCity) {
       setCity(selectedCity.label);
@@ -57,6 +65,40 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
       }
     }
   }, [authUser]);
+
+  useEffect(() => {
+    // country == ""
+    if (city == "") {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data.city");
+            console.log(data.city);
+            const countryFromLocation: string = data.city.split(" ")[0];
+            console.log(data.city.split(" ")[0]);
+            const optionFromLocation = cityOption.find((i) => {
+              if (
+                i.label
+                  .toLowerCase()
+                  .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
+              ) {
+                return true;
+              }
+            });
+            console.log("optionFromLocation");
+            console.log(optionFromLocation);
+            if (optionFromLocation) {
+              setSelectedCity(optionFromLocation);
+            }
+          });
+      });
+    }
+  }, [cityOption]);
 
   return (
     <>
