@@ -42,7 +42,6 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
   }, [selectedCountry, city]);
   useEffect(() => {
     const c = cityOption.find((i) => i.label == city);
-    console.log(123123123123);
     if (c) {
       setSelectedCity(c);
     }
@@ -68,7 +67,7 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
 
   useEffect(() => {
     // country == ""
-    if (city == "") {
+    if (!city || city == "") {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;

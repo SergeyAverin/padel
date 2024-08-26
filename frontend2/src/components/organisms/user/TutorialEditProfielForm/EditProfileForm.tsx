@@ -27,34 +27,12 @@ export const TutorialEditProfielForm: React.FC<
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value.trim() }));
   };
-  // const [country, setCountry] = useState("");
-  // const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   useEffect(() => {
     setFormValue(getInitState(user));
-    // if (user) {
-    //   setCity(user.city);
-    //   setCountry(user.country);
-    // }
   }, [user]);
-  useEffect(() => {
-    if (formValue.city == "" && formValue.country == "") {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            setFormValue((prev) => ({ ...prev, city: data.city } as FormDataI));
-            setFormValue(
-              (prev) => ({ ...prev, country: data.countryName } as FormDataI)
-            );
-          });
-      });
-    }
-  }, []);
   const [gender, setGender] = useState(user?.gender as Gender);
 
   const navigate = useNavigate();
@@ -63,15 +41,17 @@ export const TutorialEditProfielForm: React.FC<
     event.preventDefault();
     if (
       re.test(String(formValue.email)) &&
-      formValue.age > 0
-      // city &&
-      // country
+      formValue.age > 0 &&
+      city &&
+      country
     ) {
       if (user) {
         updateUser({
           userData: {
             ...formValue,
             gender: gender,
+            city: city,
+            country: country,
           },
           userId: user.telegram_user_id,
         });
@@ -103,7 +83,7 @@ export const TutorialEditProfielForm: React.FC<
         <div className="mt-5">
           <SelectGender setGender={(gender: Gender) => setGender(gender)} />
         </div>
-        {/* <div className="mt-5">
+        <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={user?.country} />
         </div>
 
@@ -113,7 +93,7 @@ export const TutorialEditProfielForm: React.FC<
             selectedCountry={country}
             city={user?.city}
           />
-        </div> */}
+        </div>
 
         <div className="mt-5">
           {formValue.age <= 0 && <div className="text-error">Invalid age</div>}
@@ -128,11 +108,11 @@ export const TutorialEditProfielForm: React.FC<
             <div className="text-error">Invalid city</div>
           )}
 
-          {/* {country == "" ||
+          {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
             <div className="text-error">You mast select country</div>
-          )} */}
+          )}
         </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">

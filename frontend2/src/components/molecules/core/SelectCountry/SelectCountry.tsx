@@ -49,7 +49,7 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
   }, [authUser]);
   useEffect(() => {
     // country == ""
-    if (country == "") {
+    if (!country || country == "") {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;

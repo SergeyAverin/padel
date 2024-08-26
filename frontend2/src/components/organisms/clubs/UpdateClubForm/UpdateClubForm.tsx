@@ -13,6 +13,8 @@ import Select from "@atoms/Select";
 // import { IUser } from "@schemas/user";
 import { IClub } from "@schemas/club";
 import { useUpdateClubMutation } from "@redux/api/clubApi";
+import SelectCountry from "@molecules/core/SelectCountry";
+import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 interface Option {
   value: string;
   label: string;
@@ -42,28 +44,28 @@ export const UpdateClubForm: React.FC<IUpdateClubFormProps> = ({ club }) => {
     const value = e.target.value;
     setFormValue((prev) => ({ ...prev, [name]: value }));
   };
-  // const [country, setCountry] = useState("");
-  // const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   const navigate = useNavigate();
   const [updateClub] = useUpdateClubMutation();
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // if (club && country && city) {
-    updateClub({
-      club: {
-        address: formValue.address,
-        name: formValue.name,
-        registration_address: "",
-        opening: selectedOpeningOption.value,
-        closing: selectedClosingOption.value,
-        city: formValue.city,
-        country: formValue.country,
-      },
-      clubId: club.id,
-    });
-    navigate(`/clubs/${club.id}`);
-    // }
+    if (club && country && city) {
+      updateClub({
+        club: {
+          address: formValue.address,
+          name: formValue.name,
+          registration_address: "",
+          opening: selectedOpeningOption.value,
+          closing: selectedClosingOption.value,
+          city: city,
+          country: country,
+        },
+        clubId: club.id,
+      });
+      navigate(`/clubs/${club.id}`);
+    }
   };
 
   return (
@@ -84,7 +86,7 @@ export const UpdateClubForm: React.FC<IUpdateClubFormProps> = ({ club }) => {
           </div>
         ))}
 
-        {/* <div className="mt-5">
+        <div className="mt-5">
           <SelectCountry setCountry={setCountry} country={undefined} />
         </div>
 
@@ -94,7 +96,7 @@ export const UpdateClubForm: React.FC<IUpdateClubFormProps> = ({ club }) => {
             selectedCountry={country}
             city={undefined}
           />
-        </div> */}
+        </div>
 
         <div className="mt-5">
           <Label>Club opening at:</Label>
@@ -115,13 +117,13 @@ export const UpdateClubForm: React.FC<IUpdateClubFormProps> = ({ club }) => {
             placeholder="Club closing at"
           />
         </div>
-        {/* <div className="mt-5">
+        <div className="mt-5">
           {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
             <div className="text-error">You mast select country</div>
           )}
-        </div> */}
+        </div>
         <div className="mt-5">
           <Button variant={ButtonVariant.FULL_HIGHLIGHT} type="submit">
             Create
