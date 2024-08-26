@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useUpdateUserInfoMutation } from "@redux/api/userApi";
 import SelectGender from "@molecules/user/SelectGender";
 import { Gender } from "@schemas/user";
+import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
+import SelectCountry from "@molecules/core/SelectCountry";
 interface TutorialEditProfielFormProps {
   next: () => void;
   prev: () => void;
@@ -101,13 +103,6 @@ export const TutorialEditProfielForm: React.FC<
           {!re.test(String(formValue.email).toLowerCase()) && (
             <div className="text-error">Invalid email</div>
           )}
-          {String(formValue.country) == "" && (
-            <div className="text-error">Invalid country</div>
-          )}
-          {String(formValue.city) == "" && (
-            <div className="text-error">Invalid city</div>
-          )}
-
           {country == "" ||
             (!city && <div className="text-error">You mast select city</div>)}
           {country == "" && (
