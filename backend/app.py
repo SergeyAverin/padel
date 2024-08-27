@@ -35,7 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-api_router = APIRouter(prefix='/api/v1.0')
+api_router = APIRouter(prefix='/padel_backend/api/v1.0')
 api_router.include_router(profile_router)
 api_router.include_router(friend_router)
 api_router.include_router(club_routes)
