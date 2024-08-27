@@ -5,9 +5,11 @@ import FriendRequestInner from "@organisms/friends/FriendRequestInner";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import { Spinner } from "@atoms/index";
 import { useGetInnerFriendRequsetQuery } from "@redux/api/friendRequestApi";
+import { useAuthUser } from "@hooks/useAuthUser";
 
 export const InnerFriendRequestsTemplate: React.FC = observer(() => {
   const { data, isLoading } = useGetInnerFriendRequsetQuery();
+  const authUser = useAuthUser();
 
   return (
     <div>
@@ -17,11 +19,16 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
             <EmptyBanner text="Here are the friend requests that have been sent to you." />
           )}
           {data.map((friendRequest) => (
-            <div className="mb-2" key={friendRequest.id}>
-              <FriendRequestInner
-                friendRequestId={friendRequest.id}
-                user={friendRequest.recipient_user}
-              />
+            <div key={friendRequest.id}>
+              {authUser &&
+                friendRequest.recipient_user.username != authUser.username && (
+                  <div className="mb-2">
+                    <FriendRequestInner
+                      friendRequestId={friendRequest.id}
+                      user={friendRequest.recipient_user}
+                    />
+                  </div>
+                )}
             </div>
           ))}
         </>
