@@ -48,7 +48,7 @@ async def command_start_handler(message: Message) -> None:
         )
         url = f'https://{api_setting.api_domain}/padel_backend/api/v1.0/user/'
         data = user_data.model_dump()
-        # requests.post(url, json=data)
+        requests.post(url, json=data)
 
     url = bot_settings.bot_web_app
     keyboard = InlineKeyboardBuilder()
