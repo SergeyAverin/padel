@@ -91,7 +91,7 @@ const MainRouter: React.FC = () => {
   }, [isLoading]);
   const authUser = useAuthUser();
 
-  return <>{authUser && <AfterAuth />}</>;
+  return <>{authUser ? <AfterAuth /> : <Spinner />}</>;
 };
 
 // export default withLoginRequire(MainRouter);
