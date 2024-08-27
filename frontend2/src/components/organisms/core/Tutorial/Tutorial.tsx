@@ -261,7 +261,7 @@ export const Tutorial: React.FC = () => {
     </div>,
     <div>
       <div className="">
-        <div className="text-center">
+        <div className="">
           <TutorialEditProfielForm next={next} prev={prev} />
         </div>
       </div>

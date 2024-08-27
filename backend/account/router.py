@@ -22,6 +22,8 @@ async def find_user(username: str, user: UserDTO = Depends(get_current_user)):
 def get_profile(
     user: UserDTO = Depends(get_current_user)
 ):
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
     return user
 
 

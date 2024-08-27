@@ -5,7 +5,7 @@ import AccountPage from "@pages/user/AccountPage";
 
 import Navigation from "@organisms/core/Navigation";
 import EditAccountPage from "@pages/user/EditAccountPage";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useGetUserProfileQuery } from "@redux/api/userApi";
 import { setAuthUser } from "@redux/features/authSlice";
 import { UserPage } from "@pages/user/UserPage/UserPage";
@@ -27,17 +27,7 @@ import { Spinner } from "@atoms/index";
 import { useCreateFriendRequestMutation } from "@redux/api/friendRequestApi";
 import MatchPage from "@pages/matches/MatchPage";
 
-/** Главный компонент маршрутизации */
-const MainRouter: React.FC = () => {
-  const { data, isLoading } = useGetUserProfileQuery();
-  const dispatcher = useDispatch();
-  useEffect(() => {
-    if (data) {
-      dispatcher(setAuthUser(data));
-      dispatcher(setCity(data.city));
-    }
-  }, [isLoading]);
-
+const AfterAuth: React.FC = () => {
   const user = useAuthUser();
   const matchId = useSelector(matchIdSelector);
   const blankLoad = useGetBlanksQuery();
@@ -87,6 +77,21 @@ const MainRouter: React.FC = () => {
       )}
     </>
   );
+};
+
+/** Главный компонент маршрутизации */
+const MainRouter: React.FC = () => {
+  const { data, isLoading } = useGetUserProfileQuery();
+  const dispatcher = useDispatch();
+  useEffect(() => {
+    if (data) {
+      dispatcher(setAuthUser(data));
+      dispatcher(setCity(data.city));
+    }
+  }, [isLoading]);
+  const authUser = useAuthUser();
+
+  return <>{authUser && <AfterAuth />}</>;
 };
 
 // export default withLoginRequire(MainRouter);
