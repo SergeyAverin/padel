@@ -34,7 +34,7 @@ export const MatchScore: React.FC<IMatchScoreProps> = ({ match }) => {
       >
         {!isShow ? "Show" : "Close"} match set score
       </div>
-      {!isLoading && data && (
+      {!isLoading && isShow && data && (
         <>
           {data.map((scores, index) => (
             <div key={scores.id} className="relative">
