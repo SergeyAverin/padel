@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Select from "@atoms/Select";
 import { useSetScoreMutation } from "@redux/api/matchApi";
 import { Option } from "@atoms/Select/selectOption";
+import { useChangeMatchScoreMutation } from "@redux/api/matchScoreApi";
 
 const scores = [
   { label: "0", value: "0" },
@@ -23,21 +24,32 @@ interface ISelectScoreProps {
   matchId: number;
   defaultScore: number;
   team: number;
+  isScoreSet?: boolean;
 }
 
 export const SelectScore: React.FC<ISelectScoreProps> = ({
   matchId,
   defaultScore,
   team,
+  isScoreSet = false,
 }) => {
   const a = scores.find((b) => Number(b.value) == defaultScore);
   const [score, setScoreLocal] = useState<Option>(a as Option);
   const [setScore] = useSetScoreMutation();
+  const [changeMatchSecScore] = useChangeMatchScoreMutation();
   const onChange = (item: Option) => {
-    if (item) {
-      setScoreLocal(item);
-      setScore({
-        matchId: matchId,
+    if (!isScoreSet) {
+      if (item) {
+        setScoreLocal(item);
+        setScore({
+          matchId: matchId,
+          score: Number(item.value),
+          team: team,
+        });
+      }
+    } else {
+      changeMatchSecScore({
+        match_score_id: matchId,
         score: Number(item.value),
         team: team,
       });

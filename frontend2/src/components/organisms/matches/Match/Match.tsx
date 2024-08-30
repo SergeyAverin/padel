@@ -26,7 +26,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
     <div className="animate-fade-in">
       <div
         className={classNames(
-          "bg-primary p-5 rounded-2xl h-[400px]",
+          "bg-primary p-5 rounded-2xl min-h-[400px]",
           `${isLoading && style.animatedBackground}`
         )}
       >

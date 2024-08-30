@@ -13,6 +13,7 @@ MODELS = [
     'match.models',
     "blank.models",
     'join_request.models',
+    "match_score.models",
     "aerich.models"
 ]
 

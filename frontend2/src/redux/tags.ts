@@ -12,4 +12,5 @@ export const TAGS = {
   BLANK: "blank",
   STATS: "stats",
   JOIN_REQUEST: "join_requset",
+  MATHC_SCORE: "match_score",
 };
