@@ -106,6 +106,7 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
         options={cityOption}
         defaultValue={selectedCity}
         onChange={(option) => setSelectedCity(option)}
+        haveSearch={true}
       />
     </>
   );

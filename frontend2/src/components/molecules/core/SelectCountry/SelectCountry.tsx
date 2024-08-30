@@ -83,6 +83,7 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
         options={countryOptions}
         defaultValue={selectedCountry}
         onChange={(option) => setSelectedCountry(option)}
+        haveSearch={true}
       />
     </>
   );
