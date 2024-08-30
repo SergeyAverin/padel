@@ -114,7 +114,7 @@ export const Select: React.FC<ISelectProps> = ({
           className={classNames(
             "w-full border-2 border-highlight shadow-md max-h-[250px] overflow-y-auto",
             "pt-5 pb-5",
-            "z-30 bg-primary rounded-xl",
+            "z-10 bg-primary rounded-xl",
             "absolute top-[110%]",
             "cursor-pointer select-none "
           )}
