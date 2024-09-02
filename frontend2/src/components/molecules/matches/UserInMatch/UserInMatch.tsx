@@ -40,7 +40,7 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
           })}
         >
           {/* <Link to={`/user/${user.telegram_user_id}`}> */}
-          {shortenString(user.username, 12)}
+          {shortenString(user.username, 30)}
           {/* </Link> */}
           <div
             className={classNames(

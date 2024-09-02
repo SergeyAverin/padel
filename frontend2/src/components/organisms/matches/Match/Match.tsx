@@ -47,8 +47,12 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
                 </div>
               </div>
             </div>
-            <hr className="mt-5" />
-            <div className="flex  justify-around items-start">
+            <div>
+              <hr className="mt-5" />
+            </div>
+            <div className="flex flex-col  justify-around items-start">
+              <h2 className="mt-3 text-[18px]">First team:</h2>
+
               <div className="w-[50%] mt-4 mb-4">
                 <UserWrapper
                   user={data.user_1}
@@ -66,14 +70,15 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
                 </div>
               </div>
 
-              <div className="w-[1px] h-[140px] bg-fg"></div>
-              <div className="w-[50%] mt-4 mb-4 ml-2">
+              <div className="w-full h-[1px] bg-fg"></div>
+              <h2 className="mt-3 text-[18px]">Second team:</h2>
+              <div className="w-[50%] mt-4 mb-4">
                 <UserWrapper
                   user={data.user_3}
                   index={3}
                   match={data}
                   userText={data.text_user_3}
-                  isReverse={true}
+                  isReverse={false}
                 />
                 <div className="mt-5">
                   <UserWrapper
@@ -81,7 +86,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
                     index={4}
                     match={data}
                     userText={data.text_user_4}
-                    isReverse={true}
+                    isReverse={false}
                   />
                 </div>
               </div>

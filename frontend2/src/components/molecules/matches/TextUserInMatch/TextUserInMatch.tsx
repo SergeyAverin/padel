@@ -37,7 +37,7 @@ export const TextUserInMatch: React.FC<ITextUserInMatchProps> = ({
           "ml-1": !isRevers,
         })}
       >
-        {shortenString(text, 12)}
+        {shortenString(text, 30)}
       </div>
     </div>
   );
