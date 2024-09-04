@@ -20,15 +20,14 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
           )}
           {data.map((friendRequest) => (
             <div key={friendRequest.id}>
-              {authUser &&
-                friendRequest.recipient_user.username != authUser.username && (
+   
                   <div className="mb-2">
                     <FriendRequestInner
                       friendRequestId={friendRequest.id}
                       user={friendRequest.recipient_user}
                     />
                   </div>
-                )}
+  
             </div>
           ))}
         </>
@@ -38,3 +37,7 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
     </div>
   );
 });
+/**
+{authUser &&
+                friendRequest.recipient_user.username != authUser.username && (
+*/
