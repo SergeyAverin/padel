@@ -5,11 +5,9 @@ import FriendRequestInner from "@organisms/friends/FriendRequestInner";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import { Spinner } from "@atoms/index";
 import { useGetInnerFriendRequsetQuery } from "@redux/api/friendRequestApi";
-import { useAuthUser } from "@hooks/useAuthUser";
 
 export const InnerFriendRequestsTemplate: React.FC = observer(() => {
   const { data, isLoading } = useGetInnerFriendRequsetQuery();
-  const authUser = useAuthUser();
 
   return (
     <div>
