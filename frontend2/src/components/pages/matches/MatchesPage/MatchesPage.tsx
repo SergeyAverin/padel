@@ -10,8 +10,13 @@ export const MatchesPage: React.FC = () => {
   const user = useAuthUser();
   const tabs = [
     {
+      to: "#all",
+      text: "All",
+      content: <div>all</div>,
+    },
+    {
       to: "#your",
-      text: "Your",
+      text: "My games",
       content: (
         <MatchUserTemplate
           isMatchPage={true}
@@ -26,7 +31,7 @@ export const MatchesPage: React.FC = () => {
     },
     {
       to: "#clubs",
-      text: "Clubs",
+      text: "by Clubs",
       content: <MatchClubTemplate />,
     },
   ];
