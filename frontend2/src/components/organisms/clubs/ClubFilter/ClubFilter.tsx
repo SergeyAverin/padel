@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 
@@ -15,6 +15,8 @@ import {
 import { isOpenPanelSelector } from "@redux/selectors/clubFilterSelectors";
 import { baseApi } from "@redux/baseApi";
 import { TAGS } from "@redux/tags";
+import SelectCountry from "@molecules/core/SelectCountry";
+import { SelectCity } from "@molecules/core/SelectCity/SelectCity";
 
 const ClubFiltersComponent: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,9 @@ const ClubFiltersComponent: React.FC = () => {
     dispatch(setCity(localCity));
     dispatch(setIsOpenPanel(false));
   };
+
+  const [country, setCountry] = useState("");
+
   return (
     <div
       className={classNames(
@@ -60,15 +65,23 @@ const ClubFiltersComponent: React.FC = () => {
             />
           </div>
           <div className="mt-5">
+            <SelectCountry country={country} setCountry={setCountry} />
+          </div>
+          <div className="mt-5">
+            <SelectCity
+              city={localCity}
+              selectedCountry={country}
+              setCity={setLocalCity}
+            />
             {/* <Label htmlFor="city">City</Label> */}
-            <Input
+            {/* <Input
               name="city"
               value={localCity}
               requirement={false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setLocalCity(e.target.value);
               }}
-            />
+            /> */}
           </div>
           <div className="mt-5">
             <Button variant={ButtonVariant.OUTLINED} type="submit">
