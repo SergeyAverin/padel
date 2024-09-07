@@ -29,10 +29,10 @@ export const SetMatchStatus: React.FC<ISetMatchStatusProps> = ({ match }) => {
         defaultValue={selectedOption}
         onChange={handleChange}
         options={[
-          { value: MatchStatusEnum.DONE, label: "Done" },
+          { value: MatchStatusEnum.DONE, label: "Closed" },
           {
             value: MatchStatusEnum.EXPECTATION,
-            label: "Expectation",
+            label: "Pending",
           },
         ]}
       />
