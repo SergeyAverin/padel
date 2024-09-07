@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS "match" (
     "status" VARCHAR(11) NOT NULL  DEFAULT 'expectation',
     "start_at" TIMESTAMPTZ NOT NULL,
     "end_at" TIMESTAMPTZ NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-08-30T06:27:13.347397',
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT '2024-09-07T07:32:20.954771',
     "text_user_1" VARCHAR(140),
     "text_user_2" VARCHAR(140),
     "text_user_3" VARCHAR(140),

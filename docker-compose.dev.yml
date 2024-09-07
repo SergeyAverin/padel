@@ -16,7 +16,7 @@ services:
 
   padel_frontend2:
     build:
-      context: frontend
+      context: frontend2
       dockerfile: Dockerfile.dev
     container_name: padel_frontend2
     restart: always
