@@ -26,7 +26,14 @@ export const SetMatchStatus: React.FC<ISetMatchStatusProps> = ({ match }) => {
   return (
     <>
       <Select
-        defaultValue={selectedOption}
+        defaultValue={
+          selectedOption.value == MatchStatusEnum.DONE
+            ? { value: MatchStatusEnum.DONE, label: "Closed" }
+            : {
+                value: MatchStatusEnum.EXPECTATION,
+                label: "Pending",
+              }
+        }
         onChange={handleChange}
         options={[
           { value: MatchStatusEnum.DONE, label: "Closed" },
