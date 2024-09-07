@@ -91,12 +91,12 @@ class MatchRepository:
                 Q(user_for_match__telegram_user_id=user_id) |
                 Q(owner__telegram_user_id=user_id)
             )
-        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
 
         return [self.serealize_match(m) for m in matches]
 
     async def get_match_by_club(self, club_id: str):
-        match = await Match.filter(club_id=club_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        match = await Match.filter(club_id=club_id).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
         return [self.serealize_match(m) for m in match]
 
     async def get_match_by_friends(self, user_id: str):
@@ -113,7 +113,7 @@ class MatchRepository:
                 Q(is_private=False) |
                 Q(user_for_match__id=user_id)
             )
-        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
         # ).distinct()
@@ -128,7 +128,7 @@ class MatchRepository:
                 Q(is_private=False) |
                 Q(user_for_match__id=user_id)
             )
-        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('created_at')
+        ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
 
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
