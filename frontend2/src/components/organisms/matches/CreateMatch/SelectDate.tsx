@@ -26,7 +26,7 @@ export const SelectDate: React.FC = () => {
   }, [selectedDate]);
   return (
     <div>
-      <Label>Select the date when to create the match:</Label>
+      <Label>Select the date when to create the game:</Label>
 
       <Select
         defaultValue={selectedDate}

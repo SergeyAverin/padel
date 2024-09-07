@@ -73,7 +73,7 @@ export const Navigation: React.FC = () => {
                   )}
                   <Link to={"/create/match"}>
                     <div className="bg-primary p-5 rounded-2xl mb-3 w-[160px] text-center shadow-md">
-                      Add match
+                      Add game
                     </div>
                   </Link>
                 </div>
@@ -83,7 +83,7 @@ export const Navigation: React.FC = () => {
             <NavigationButton
               href="/matches"
               icon={<MatchIcon />}
-              text="Matches"
+              text="Games"
             />
             <NavigationButton href="/clubs" icon={<ClubIcon />} text="Clubs" />
           </div>

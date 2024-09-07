@@ -39,7 +39,7 @@ export const SelectCourt: React.FC = () => {
     <div>
       {data && data.length != 0 && !isLoading && (
         <>
-          <Label>Choose a club where to create a match :</Label>
+          <Label>Choose a club where to create a game :</Label>
           <Select
             defaultValue={court}
             onChange={handleChagneCourt}

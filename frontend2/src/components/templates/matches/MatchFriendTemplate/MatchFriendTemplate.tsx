@@ -25,23 +25,21 @@ export const MatchFriendTemplate: React.FC = () => {
   );
   return (
     <>
-      {matches.length == 0 && <EmptyBanner text="You have not matches" />}
+      {matches.length == 0 && <EmptyBanner text="You have not games" />}
       {matches.length != 0 && (
         <div>
-          <Heading variant={HeadingVariant.H2}>
-            Matches from your friends
-          </Heading>
+          <Heading variant={HeadingVariant.H2}>Games from your friends</Heading>
           <div className="mb-3">
             <HelpBanner localStorageKey="help_match_status">
-              If you own the match you can change the status of the match and if
-              the match is completed you can change the match score. And you can
-              choose the users who will be in your match.
+              If you own the game you can change the status of the game and if
+              the game is completed you can change the game score. And you can
+              choose the users who will be in your game.
             </HelpBanner>
           </div>
           <div className="mb-3">
             <HelpBanner localStorageKey="help_match_join">
-              You can enter open matches if your level matches the level of the
-              match.
+              You can enter open games if your level games the level of the
+              game.
             </HelpBanner>
           </div>
           {matches

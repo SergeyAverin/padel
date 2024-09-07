@@ -43,7 +43,7 @@ export const Blank: React.FC<IBlankProps> = ({
     <div className="p-5 flex flex-col justify-between h-[400px]">
       <div>
         {!match.user_1 && !match.user_2 && !match.user_3 && !match.user_4 && (
-          <div className="mt-5 mb-5 text-[18px]">No users in match</div>
+          <div className="mt-5 mb-5 text-[18px]">No users in game</div>
         )}
         <div className="">
           {match.user_1 && (
@@ -90,7 +90,7 @@ export const Blank: React.FC<IBlankProps> = ({
                 className="text-[14px] text-highlight mt-3"
                 onClick={toggleMatch}
               >
-                Show match
+                Show game
               </div>
             </>
           )}
@@ -100,7 +100,7 @@ export const Blank: React.FC<IBlankProps> = ({
                 className="text-[14px] text-highlight mt-3"
                 onClick={toggleMatch}
               >
-                Close match
+                Close game
               </div>
               <Match match={match} />
             </>

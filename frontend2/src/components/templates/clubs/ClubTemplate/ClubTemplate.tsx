@@ -66,7 +66,7 @@ const MatchesTabs: React.FC<IMatchTabsProps> = ({ clubId }) => {
           ))}
         <div className="pt-[30px]">
           {matches && !loadMatches.isLoading && matches.length == 0 && (
-            <EmptyBanner text="Club have not matches" />
+            <EmptyBanner text="Club have not games" />
           )}
         </div>
       </>
@@ -81,7 +81,7 @@ export const ClubTemplate: React.FC = () => {
   const tabs = [
     {
       to: "#match",
-      text: "match",
+      text: "Games",
       content: <MatchesTabs clubId={Number(clubId)} />,
     },
     {

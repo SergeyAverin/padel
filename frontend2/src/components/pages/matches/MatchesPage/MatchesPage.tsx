@@ -41,8 +41,8 @@ export const MatchesPage: React.FC = () => {
         <Tabs subTab={tabs} />
 
         <HelpBanner localStorageKey="help_match" isInNavigation={true}>
-          On this page will be displayed matches in which you, your friends or
-          matches of clubs from your bookmarks
+          On this page will be displayed games in which you, your friends or
+          games of clubs from your bookmarks
         </HelpBanner>
       </div>
     </>

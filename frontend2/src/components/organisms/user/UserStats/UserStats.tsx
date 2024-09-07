@@ -25,7 +25,7 @@ export const UserStats: React.FC<IUserStatsProps> = ({ userId }) => {
         {!isLoading && data ? (
           <>
             <Stat count={data.friends_count} text="Friends" />
-            <Stat count={data.matches_count} text="Match" />
+            <Stat count={data.matches_count} text="Games" />
             <Stat count={data.clubs_count} text="Clubs" />
           </>
         ) : (

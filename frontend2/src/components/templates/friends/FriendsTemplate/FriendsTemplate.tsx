@@ -16,7 +16,7 @@ export const FriendsTemplate: React.FC = () => {
   return (
     <div>
       <HelpBanner localStorageKey="help_tag" isInNavigation={true}>
-        You can group friends by tag. You can create private matches for a
+        You can group friends by tag. You can create private games for a
         selected category of friends.
       </HelpBanner>
       {!isLoading && data ? (

@@ -38,7 +38,7 @@ export const Courts: React.FC<ICourtsProps> = ({ club }) => {
           <div>
             <HelpBanner isInNavigation={true} localStorageKey="help_add_court">
               Here you can add the court of your club so that users can add
-              matches in the discarded court
+              games in the discarded court
             </HelpBanner>
             <form onSubmit={onCreateCourt}>
               <div className="mt-5">

@@ -27,7 +27,7 @@ export const MatchLinks: React.FC<IMatchLinksProps> = ({ match }) => {
           </div>
           <div className="mt-2">
             <div className="font-light text-[14px] flex items-center">
-              Match lvl:
+              Game lvl:
               <div className="p-1 rounded-full ml-2 font-bold text-[14px] bg-highlight text-center w-[60px] text-bg">
                 {match.match_lvl}
               </div>

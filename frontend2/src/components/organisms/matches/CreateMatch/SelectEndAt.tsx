@@ -45,13 +45,13 @@ export const SelectEndAt: React.FC = () => {
   }, [startAt]);
   return (
     <div>
-      <Label>Match end at:</Label>
+      <Label>Game end at:</Label>
 
       <Select
         defaultValue={selectedDate}
         onChange={handleChangeDateOption}
         options={options}
-        placeholder="Match start at"
+        placeholder="Game start at"
         isLoading={isLoading}
       />
     </div>

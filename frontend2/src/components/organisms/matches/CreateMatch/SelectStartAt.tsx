@@ -34,13 +34,13 @@ export const SelectStartAt: React.FC = () => {
   }, [selectedDate]);
   return (
     <div>
-      <Label>Match start at:</Label>
+      <Label>Game start at:</Label>
 
       <Select
         defaultValue={selectedDate}
         onChange={handleChangeDateOption}
         options={options}
-        placeholder="Match start at"
+        placeholder="Game start at"
         isLoading={isLoading}
       />
     </div>

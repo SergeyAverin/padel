@@ -104,14 +104,14 @@ export const Tutorial: React.FC = () => {
     <Slide
       animation="/WinAnimation.json"
       title="Clubs"
-      text="Search for padel clubs in your city. And you see the matches of this club."
+      text="Search for padel clubs in your city. And you see the games of this club."
       index={3}
       step={step}
     />,
     <Slide
       animation="/MedalAnimation.json"
       title="Profile"
-      text="All users can see your match history and information about what position and what hand you play in padel."
+      text="All users can see your game history and information about what position and what hand you play in padel."
       index={4}
       step={step}
     />,
@@ -197,7 +197,7 @@ export const Tutorial: React.FC = () => {
             </LvlDescription>
 
             <LvlDescription lvl="7" title="ADVANCED+">
-              I win several matches during the approved tournaments
+              I win several games during the approved tournaments
               <br />
               === Atack === <br />
               I master the different forms of smashes (vibora and bandeja)

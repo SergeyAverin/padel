@@ -51,11 +51,11 @@ export const SetIsPrivateLvl: React.FC = () => {
   return (
     <>
       <div className="mt-5">
-        You can make a match private only for a selected group of friends.
+        You can make a game private only for a selected group of friends.
       </div>
       <div className="mt-5">
         <div className="mb-3">
-          <Label>Make the match private:</Label>
+          <Label>Make the game private:</Label>
         </div>
         <Toggle
           defaultValue={isPrivate}
@@ -66,7 +66,7 @@ export const SetIsPrivateLvl: React.FC = () => {
       {isPrivate && (
         <div className="mt-5">
           <div className="mb-3">
-            <Label>Select user group how can join in match</Label>
+            <Label>Select user group how can join in game</Label>
           </div>
           <Select
             options={options}

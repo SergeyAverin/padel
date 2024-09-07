@@ -24,11 +24,11 @@ export const MatchClubTemplate: React.FC = () => {
   );
   return (
     <>
-      {matches.length == 0 && <EmptyBanner text="You have not matches" />}
+      {matches.length == 0 && <EmptyBanner text="You have not games" />}
       {matches.length != 0 && (
         <div>
           <Heading variant={HeadingVariant.H2}>
-            Matches from your bookmarked clubs
+            Games from your bookmarked clubs
           </Heading>
           {matches
             .slice()

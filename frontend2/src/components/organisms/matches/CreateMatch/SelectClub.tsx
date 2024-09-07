@@ -38,7 +38,7 @@ export const SelectClub: React.FC = () => {
   }, [selectedClub]);
   return (
     <div>
-      <Label>Choose a club where to create a match :</Label>
+      <Label>Choose a club where to create a game :</Label>
 
       <Select
         options={options}

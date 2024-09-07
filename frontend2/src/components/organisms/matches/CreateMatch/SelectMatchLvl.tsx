@@ -77,7 +77,7 @@ export const SelectMatchLvl: React.FC = observer(() => {
   return (
     <div className="mt-5">
       <>
-        <Label>Select the level of the match:</Label>
+        <Label>Select the level of the game:</Label>
 
         <div className="flex  mt-2">
           <Select
@@ -95,8 +95,8 @@ export const SelectMatchLvl: React.FC = observer(() => {
           />
         </div>
         <div className="mt-5">
-          The match level determines what level a user must have to participate
-          in a match. The default match level is ±0.5 of your level, but you can
+          The game level determines what level a user must have to participate
+          in a game. The default game level is ±0.5 of your level, but you can
           specify a different range.
         </div>
       </>

@@ -46,7 +46,7 @@ export const UserPage: React.FC = () => {
           />
           <HelpBanner localStorageKey="help_profile" isInNavigation={true}>
             This is your profile, it displays information about you and the
-            matches you participate in. You can edit your information.
+            games you participate in. You can edit your information.
           </HelpBanner>
         </>
       ) : (

@@ -35,10 +35,10 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
   }, []);
   return (
     <>
-      {!isMatchPage && <Heading variant={HeadingVariant.H2}>Matches:</Heading>}
+      {!isMatchPage && <Heading variant={HeadingVariant.H2}>Games:</Heading>}
       {!loadMatches.isLoading && matches.length == 0 && (
         <div className="mt-5">
-          <EmptyBanner text="Have not matches" />
+          <EmptyBanner text="Have not games" />
         </div>
       )}
 
@@ -46,18 +46,18 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
         <div>
           {isMatchPage && (
             <>
-              <Heading variant={HeadingVariant.H2}>Your matches:</Heading>
+              <Heading variant={HeadingVariant.H2}>Your games:</Heading>
               <div className="mb-3">
                 <HelpBanner localStorageKey="help_match_status">
-                  If you own the match you can change the status of the match
-                  and if the match is completed you can change the match score.
-                  And you can choose the users who will be in your match.
+                  If you own the game you can change the status of the game and
+                  if the game is completed you can change the game score. And
+                  you can choose the users who will be in your game.
                 </HelpBanner>
               </div>
               <div className="mb-3">
                 <HelpBanner localStorageKey="help_match_join">
-                  You can enter open matches if your level matches the level of
-                  the match.
+                  You can enter open games if your level games the level of the
+                  game.
                 </HelpBanner>
               </div>
             </>
