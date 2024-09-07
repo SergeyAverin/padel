@@ -184,6 +184,14 @@ async def get_matches_by_club_bookmarks(
     return paginate(matches)
 
 
+@match_router.get('/all_games', tags=['bookmark'])
+async def get_all_games(
+    user: UserDTO = Depends(get_current_user)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_all_games(user.telegram_user_id)
+    return paginate(matches)
+
+
 @match_router.get('/matches/{match_id}/users_for_match')
 async def get_user_for_match(
     match_id: int,

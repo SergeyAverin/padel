@@ -1,6 +1,7 @@
 import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import HelpBanner from "@organisms/core/HelpBanner";
+import AllGamesTemplate from "@templates/matches/AllGamesTemplate";
 import MatchClubTemplate from "@templates/matches/MatchClubTemplate";
 import MatchFriendTemplate from "@templates/matches/MatchFriendTemplate";
 import MatchUserTemplate from "@templates/matches/MatchUserTemplate";
@@ -12,7 +13,7 @@ export const MatchesPage: React.FC = () => {
     {
       to: "#all",
       text: "All",
-      content: <div>all</div>,
+      content: <AllGamesTemplate />,
     },
     {
       to: "#your",
