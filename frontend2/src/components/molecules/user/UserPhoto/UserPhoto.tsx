@@ -19,7 +19,7 @@ export const UserPhoto: React.FC<IUserPhotoProps> = ({
       <div className="relative">
         <img
           src={avatar}
-          className={classNames("rounded-full ", {
+          className={classNames("rounded-full object-cover", {
             "w-[92px] h-[92px]": isProfile,
             "w-[72px] h-[72px]": !isProfile,
           })}

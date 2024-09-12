@@ -32,7 +32,10 @@ export const UserInMatch: React.FC<IUserInMatchProps> = ({
           onClick();
         }}
       >
-        <img className="w-[42px] h-[42px] rounded-full" src={user.avatar} />
+        <img
+          className="w-[42px] h-[42px] rounded-full object-cover"
+          src={user.avatar}
+        />
         <div
           className={classNames("text-[14px] relative", {
             "ml-1": !isReverse,
