@@ -63,22 +63,24 @@ const AddUserInMatchPanel: React.FC = observer(() => {
           Here you can choose the user who will be added to your game, if the
           user is not in our application you can enter his name manually.
         </HelpBanner>
-        {!joinRequset.isLoading && data && data?.length > 0 && (
-          <div className="mb-5">
-            {joinRequset.data?.length != 0 && (
-              <Heading variant={HeadingVariant.H2}>
-                Request on join in game:
-              </Heading>
-            )}
-            {joinRequset.data && (
-              <div>
-                {joinRequset.data.map((i) => (
-                  <JoinRequst joinRequst={i} />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        {!joinRequset.isLoading &&
+          joinRequset.data &&
+          joinRequset.data?.length > 0 && (
+            <div className="mb-5">
+              {joinRequset.data?.length != 0 && (
+                <Heading variant={HeadingVariant.H2}>
+                  Request on join in game:
+                </Heading>
+              )}
+              {joinRequset.data && (
+                <div>
+                  {joinRequset.data.map((i) => (
+                    <JoinRequst joinRequst={i} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         {!isLoading && (
           <>
             <Heading variant={HeadingVariant.H2}>Add user:</Heading>

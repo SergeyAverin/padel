@@ -37,7 +37,7 @@ export const useAddUserInMatch = (
         createJoinRequset({
           index: index,
           join_request_match: match.id as number,
-          join_request_user: user.telegram_user_id,
+          join_request_user_tg: user.telegram_user_id,
         });
       }
     } else {

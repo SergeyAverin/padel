@@ -10,6 +10,6 @@ export interface IJoinRequest {
 
 export interface ICreateJoinRequest {
   join_request_match: number;
-  join_request_user: string;
+  join_request_user_tg: string;
   index: number;
 }
