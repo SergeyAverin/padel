@@ -10,22 +10,44 @@ import {
   indexSelector,
   matchIdSelector,
 } from "@redux/selectors/addUserInMatch";
+import {
+  changeIsOpenPanel,
+  changeUserIndex,
+  setUserInMatch,
+} from "@redux/features/creaetMatchSlice";
+import { userIndexSelector } from "@redux/selectors/createMatchSelectors";
 // import AddUserStore from "@store/matches/addUserInMatch";
 
-export const AddTextUserInMatch: React.FC = () => {
+interface IAddTextUserInMatchProps {
+  isMatchCreator?: boolean;
+}
+
+export const AddTextUserInMatch: React.FC<IAddTextUserInMatchProps> = ({
+  isMatchCreator = false,
+}) => {
   const [value, setValue] = useState("");
   const [addUserInMatch] = useAddTextUserMutation();
   const dispatch = useDispatch();
   const matchId = useSelector(matchIdSelector);
-  const index = useSelector(indexSelector);
+  const index = useSelector(isMatchCreator ? userIndexSelector : indexSelector);
 
   const selectUser = () => {
-    dispatch(closePanel());
-    addUserInMatch({
-      match_id: matchId as number,
-      text_user: value,
-      user_indx: index as number,
-    });
+    if (isMatchCreator == false) {
+      dispatch(closePanel());
+      addUserInMatch({
+        match_id: matchId as number,
+        text_user: value,
+        user_indx: index as number,
+      });
+    } else {
+      dispatch(changeIsOpenPanel(false));
+      dispatch(
+        setUserInMatch({
+          index: index as number,
+          value: value,
+        })
+      );
+    }
     // AddUserStore.toggleIsOpen();
     // AddUserStore.setUser(value, true);
   };

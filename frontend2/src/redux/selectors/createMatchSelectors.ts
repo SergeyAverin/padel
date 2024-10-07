@@ -20,3 +20,12 @@ export const isShowNextSelector = (state: RootState) =>
   state.creaetMatchSlice.isShowNext;
 export const genderSelector = (state: RootState) =>
   state.creaetMatchSlice.gender;
+
+export const user1Selector = (state: RootState) => state.creaetMatchSlice.user1;
+export const user2Selector = (state: RootState) => state.creaetMatchSlice.user2;
+export const user3Selector = (state: RootState) => state.creaetMatchSlice.user3;
+export const user4Selector = (state: RootState) => state.creaetMatchSlice.user4;
+export const isOpenSelector = (state: RootState) =>
+  state.creaetMatchSlice.isOpenPanel;
+export const userIndexSelector = (state: RootState) =>
+  state.creaetMatchSlice.userIndex;

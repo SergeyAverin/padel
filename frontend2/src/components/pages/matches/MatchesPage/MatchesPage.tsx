@@ -2,6 +2,7 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import Tabs from "@molecules/core/Tabs";
 import HelpBanner from "@organisms/core/HelpBanner";
 import AllGamesTemplate from "@templates/matches/AllGamesTemplate";
+import GameToJoin from "@templates/matches/GameToJoin";
 import MatchClubTemplate from "@templates/matches/MatchClubTemplate";
 import MatchFriendTemplate from "@templates/matches/MatchFriendTemplate";
 import MatchUserTemplate from "@templates/matches/MatchUserTemplate";
@@ -10,6 +11,11 @@ import React from "react";
 export const MatchesPage: React.FC = () => {
   const user = useAuthUser();
   const tabs = [
+    {
+      to: "#Join",
+      text: "Games",
+      content: <GameToJoin />,
+    },
     {
       to: "#all",
       text: "All",

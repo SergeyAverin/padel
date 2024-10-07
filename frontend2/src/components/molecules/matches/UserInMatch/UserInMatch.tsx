@@ -9,7 +9,7 @@ import classNames from "classnames";
 
 interface IUserInMatchProps {
   user: IUser;
-  match: IMatch;
+  match: IMatch | null;
   index: number;
   isReverse?: boolean;
 }

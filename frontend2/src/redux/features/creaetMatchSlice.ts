@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAction } from "@reduxjs/toolkit";
-import { Gender } from "@schemas/user";
+import { Gender, IUser } from "@schemas/user";
 
 interface ICreateMatchState {
   clubId: number | null;
@@ -18,6 +18,12 @@ interface ICreateMatchState {
   court: string | null;
   isShowNext: boolean;
   gender: Gender;
+  user1: IUser | string | null;
+  user2: IUser | string | null;
+  user3: IUser | string | null;
+  user4: IUser | string | null;
+  isOpenPanel: boolean;
+  userIndex: number | null;
 }
 
 const initialState: ICreateMatchState = {
@@ -35,9 +41,15 @@ const initialState: ICreateMatchState = {
   court: null,
   isShowNext: true,
   gender: Gender.ANY,
+  user1: null,
+  user2: null,
+  user3: null,
+  user4: null,
+  isOpenPanel: false,
+  userIndex: null,
 };
 
-export const STEP_COUNT = 7;
+export const STEP_COUNT = 8;
 
 export const resetState = createAction("resetState");
 
@@ -88,6 +100,31 @@ export const createMatchSlice = createSlice({
     selectGender(state, actions: PayloadAction<Gender>) {
       state.gender = actions.payload;
     },
+    setUserInMatch(
+      state,
+      action: PayloadAction<{ index: number; value: string | IUser | null }>
+    ) {
+      switch (action.payload.index) {
+        case 1:
+          state.user1 = action.payload.value;
+          break;
+        case 2:
+          state.user2 = action.payload.value;
+          break;
+        case 3:
+          state.user3 = action.payload.value;
+          break;
+        case 4:
+          state.user4 = action.payload.value;
+          break;
+      }
+    },
+    changeIsOpenPanel(state, action: PayloadAction<boolean>) {
+      state.isOpenPanel = action.payload;
+    },
+    changeUserIndex(state, action: PayloadAction<number>) {
+      state.userIndex = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(resetState, () => initialState);
@@ -108,4 +145,7 @@ export const {
   selectTag,
   setIsShowNext,
   selectGender,
+  setUserInMatch,
+  changeIsOpenPanel,
+  changeUserIndex,
 } = createMatchSlice.actions;

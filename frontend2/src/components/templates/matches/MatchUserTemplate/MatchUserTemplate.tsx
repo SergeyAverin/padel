@@ -46,7 +46,7 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
         <div>
           {isMatchPage && (
             <>
-              <Heading variant={HeadingVariant.H2}>Your games:</Heading>
+              <Heading variant={HeadingVariant.H2}>Archived:</Heading>
               <div className="mb-3">
                 <HelpBanner localStorageKey="help_match_status">
                   If you own the game you can change the status of the game and

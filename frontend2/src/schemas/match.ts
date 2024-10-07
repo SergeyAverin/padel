@@ -36,10 +36,16 @@ export interface ICreateMatch {
   is_private: boolean;
   tag_id: number;
   gender: Gender;
+
+  user_1: IUser | null | string;
+  user_2: IUser | null | string;
+  user_3: IUser | null | string;
+  user_4: IUser | null | string;
 }
 
 export enum MatchStatusEnum {
   EXPECTATION = "expectation",
   PLAYED = "played",
   DONE = "done",
+  CANCEL = "cancel",
 }

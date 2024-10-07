@@ -5,7 +5,7 @@ import classNames from "classnames";
 import React from "react";
 
 interface IAddUserInMatchProps {
-  match: IMatch;
+  match: IMatch | null;
   index: number;
   isReverse?: boolean;
 }

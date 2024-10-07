@@ -23,23 +23,32 @@ export const SetMatchStatus: React.FC<ISetMatchStatusProps> = ({ match }) => {
     }
     setSelectedOption(option);
   };
+  interface IMatchStatusMap {
+    [key: string]: Option;
+  }
+  const matchStatusMap: IMatchStatusMap = {
+    done: { value: MatchStatusEnum.DONE, label: "Closed" },
+    expectation: {
+      value: MatchStatusEnum.EXPECTATION,
+      label: "Pending",
+    },
+    cancel: { value: MatchStatusEnum.CANCEL, label: "Cancel" },
+  };
+  const default2 = matchStatusMap[selectedOption?.value as string];
   return (
     <>
       <Select
-        defaultValue={
-          selectedOption.value == MatchStatusEnum.DONE
-            ? { value: MatchStatusEnum.DONE, label: "Closed" }
-            : {
-                value: MatchStatusEnum.EXPECTATION,
-                label: "Pending",
-              }
-        }
+        defaultValue={default2}
         onChange={handleChange}
         options={[
           { value: MatchStatusEnum.DONE, label: "Closed" },
           {
             value: MatchStatusEnum.EXPECTATION,
             label: "Pending",
+          },
+          {
+            value: MatchStatusEnum.CANCEL,
+            label: "Cancel",
           },
         ]}
       />

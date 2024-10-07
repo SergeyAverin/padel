@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 interface ITextUserInMatchProps {
   text: string;
-  match: IMatch;
+  match: IMatch | null;
   index: number;
   isRevers: boolean;
 }

@@ -11,6 +11,10 @@ import {
   startAtSelector,
   stepSelector,
   tagSelector,
+  user1Selector,
+  user2Selector,
+  user3Selector,
+  user4Selector,
 } from "@redux/selectors/createMatchSelectors";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +37,7 @@ import { useCreateMatchMutation } from "@redux/api/createMatchApi";
 import { extractDayAndMonth } from "@utils/dateUtils";
 import { Desk } from "./Desk";
 import { SelectGender } from "./SelectGender";
+import { SelectUsers } from "./SelectUsers";
 
 export const CreateMatch: React.FC = () => {
   const step = useSelector(stepSelector);
@@ -47,6 +52,11 @@ export const CreateMatch: React.FC = () => {
   const tag = useSelector(tagSelector);
   const isShowNext = useSelector(isShowNextSelector);
   const gender = useSelector(genderSelector);
+
+  const user1 = useSelector(user1Selector);
+  const user2 = useSelector(user2Selector);
+  const user3 = useSelector(user3Selector);
+  const user4 = useSelector(user4Selector);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -76,6 +86,11 @@ export const CreateMatch: React.FC = () => {
         match_lvl: `${lvlMin}-${lvlMax}`,
         tag_id: Number(tag),
         gender: gender,
+
+        user_1: user1,
+        user_2: user2,
+        user_3: user3,
+        user_4: user4,
       });
       dispatch(resetState());
     }
@@ -112,6 +127,12 @@ export const CreateMatch: React.FC = () => {
       {step == 6 && (
         <div>
           <SelectGender />
+        </div>
+      )}
+
+      {step == 7 && (
+        <div>
+          <SelectUsers />
         </div>
       )}
 

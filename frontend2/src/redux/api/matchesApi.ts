@@ -125,6 +125,19 @@ export const MatchesApi = baseApi.injectEndpoints({
       },
       providesTags: getProvidesTags,
     }),
+    getJoinGame: builder.query<
+      { items: Array<IMatch> },
+      { page: number; userId: string }
+    >({
+      query: (data) => `/join_to_game?page=${data.page}&size=50`,
+
+      serializeQueryArgs,
+      merge,
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+      providesTags: getProvidesTags,
+    }),
   }),
 });
 
@@ -133,5 +146,6 @@ export const {
   useGetBookmarkedClubsMatchesQuery,
   useGetFriendsMathchesQuery,
   useGetClubMatchesQuery,
+  useGetJoinGameQuery,
   useGetAllMatchesQuery,
 } = MatchesApi;
