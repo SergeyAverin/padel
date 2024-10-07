@@ -17,8 +17,8 @@ export const MatchesPage: React.FC = () => {
       content: <GameToJoin />,
     },
     {
-      to: "#all",
-      text: "All",
+      to: "#Archived",
+      text: "Archived",
       content: <AllGamesTemplate />,
     },
     {
