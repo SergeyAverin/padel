@@ -32,9 +32,13 @@ export const GameToJoin: React.FC = () => {
             .slice()
             .reverse()
             .map((match) => (
-              <div className="mt-3" key={match.id}>
-                <Match match={match} />
-              </div>
+              <>
+                {Number(match.match_lvl.split("-")[0]) >= user.lvl &&
+                  Number(match.match_lvl.split("-")[1]) <= user.lvl}
+                <div className="mt-3" key={match.id}>
+                  <Match match={match} />
+                </div>
+              </>
             ))}
         </div>
       )}
