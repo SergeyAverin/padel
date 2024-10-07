@@ -12,7 +12,6 @@ import {
 } from "@redux/selectors/addUserInMatch";
 import {
   changeIsOpenPanel,
-  changeUserIndex,
   setUserInMatch,
 } from "@redux/features/creaetMatchSlice";
 import { userIndexSelector } from "@redux/selectors/createMatchSelectors";

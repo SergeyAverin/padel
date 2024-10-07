@@ -35,8 +35,7 @@ export const AddUserInMatchCreatorPanel: React.FC = observer(() => {
     //   user_id: user_id,
     //   user_indx: index as number,
     // });
-    console.log("value");
-    console.log(value);
+    console.log(user_id);
     dispatch(
       setUserInMatch({
         index: index as number,
