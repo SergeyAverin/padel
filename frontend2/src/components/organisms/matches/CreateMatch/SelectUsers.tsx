@@ -38,7 +38,6 @@ export const SelectUsers: React.FC = () => {
           <UserWrapper isReverse={true} user={user4} index={4} />
         </div>
       </div>
-      {isOpen.toString()}
       {isOpen && <AddUserInMatchCreatorPanel />}
     </div>
   );
