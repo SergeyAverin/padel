@@ -23,6 +23,9 @@ class MatchService:
     async def get_all_games(self, user_id: str):
         return await self.match_repository.get_all_match(user_id)
 
+    async def get_matches_to_join_in_match(self, user_id: str):
+        return await self.match_repository.get_matches_to_join_in_match(user_id)
+
     async def change_match_status(self, match_id: int, status: StatusEnum):
         match = await self.match_repository.get_match_by_id(match_id)
         match.status = status.value
@@ -43,8 +46,53 @@ class MatchService:
         court = await court_service.get_court_by_id(match_create_data.court_id)
 
         match = await self.match_repository.create_match(match_create_data, club, user, court)
+        # if match.is_private:
+        #     await self._send_user_for_match_notification(match.id, match_create_data.club_id)
+        # else:
+        #     await self._send_notify_for_club_subscribers(
+        #         club.id, club.name, match.id)
 
-        await self._send_user_for_match_notification(match.id, match_create_data.club_id)
+        if match_create_data.user_1:
+            if type(match_create_data.user_1) == str:
+                match.user_1 = None
+                match.text_user_1 = match_create_data.user_1
+            else:
+                match.user_1 = match_create_data.user_1
+                match.text_user_1 = None
+        else:
+            match.user_1 = None
+
+        if match_create_data.user_2:
+            if type(match_create_data.user_2) == str:
+                match.user_2 = None
+                match.text_user_2 = match_create_data.user_2
+            else:
+                match.user_2 = match_create_data.user_2
+                match.text_user_2 = None
+        else:
+            match.user_2 = None
+
+        if match_create_data.user_3:
+            if type(match_create_data.user_3) == str:
+                match.user_3 = None
+                match.text_user_3 = match_create_data.user_3
+            else:
+                match.user_3 = match_create_data.user_3
+                match.text_user_3 = None
+        else:
+            match.user_3 = None
+
+        if match_create_data.user_4:
+            if type(match_create_data.user_4) == str:
+                match.user_4 = None
+                match.text_user_4 = match_create_data.user_4
+            else:
+                match.user_4 = match_create_data.user_4
+                match.text_user_4 = None
+        else:
+            match.user_4 = None
+
+        await match.save()
 
         return match
 
@@ -81,6 +129,15 @@ class MatchService:
                         'You can join in the match',
                         match.id
                     )
+
+    async def _send_notify_for_club_subscribers(self, club_id, club_name: str, match_id: int):
+        users_in_club = await User.filter(clubs__id=club_id).prefetch_related("clubs")
+        match = await self.get_match_by_id(match_id)
+        match_lvl = match.lvl.split('-')
+        for user in users_in_club:
+            if user.lvl >= float(match_lvl[0]) and user.lvl <= float(match_lvl[1]):
+                send_notification(user.telegram_user_id,
+                                  f'New game in {club_name} club', match_id)
 
 
 match_service = MatchService()

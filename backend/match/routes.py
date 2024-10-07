@@ -1,4 +1,6 @@
+from datetime import datetime, timedelta
 from logging import getLogger
+from datetime import datetime
 
 from fastapi import APIRouter, Body, Depends, HTTPException
 from fastapi_pagination import Page, paginate
@@ -49,6 +51,21 @@ async def get_match(
     user: UserDTO = Depends(get_current_user)
 ):
     match = await match_service.get_match_by_id(match_id)
+
+    time_now = datetime.now()
+    t2 = datetime(
+        year=match.end_at.year,
+        day=match.end_at.day,
+        month=match.end_at.month,
+        hour=match.end_at.hour,
+        minute=match.end_at.minute,
+    )
+    t3 = t2 - time_now
+    time_delta = timedelta(minutes=30)
+    if t3 < time_delta:
+        match.status = StatusEnum.CANCEL.value
+        await match.save()
+
     return {
         "club": match.club,
         "status": match.status,
@@ -189,6 +206,14 @@ async def get_all_games(
     user: UserDTO = Depends(get_current_user)
 ) -> Page[MatchDTO]:
     matches = await match_service.get_all_games(user.telegram_user_id)
+    return paginate(matches)
+
+
+@match_router.get('/join_to_game', tags=['bookmark'])
+async def join_to_game(
+    user: UserDTO = Depends(get_current_user)
+) -> Page[MatchDTO]:
+    matches = await match_service.get_matches_to_join_in_match(user.telegram_user_id)
     return paginate(matches)
 
 

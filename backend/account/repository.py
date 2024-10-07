@@ -1,3 +1,4 @@
+import aiofiles
 from logging import getLogger
 
 from fastapi import UploadFile
@@ -49,6 +50,7 @@ class UserRepository:
 
 class UserPhotoRepository:
     async def save_photo(self, user_id: str, content: UploadFile):
-        with open(f'upload/users/{user_id}_{content.filename}', "wb") as f:
+        file_path = f'upload/users/{user_id}_{content.filename}'
+        async with aiofiles.open(file_path, "wb") as f:
             contents = await content.read()
-            f.write(contents)
+            await f.write(contents)

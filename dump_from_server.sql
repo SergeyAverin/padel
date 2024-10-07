@@ -106,4 +106,3 @@ COPY public.user_friends (user_rel_id, user_id) FROM stdin;
 3       5
 \.
 
-

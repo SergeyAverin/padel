@@ -48,3 +48,8 @@ class MatchCreateDTO(BaseModel):
     is_private: bool
     tag_id: int
     gender: Genders
+
+    user_1: UserDTO | None | str
+    user_2: UserDTO | None | str
+    user_3: UserDTO | None | str
+    user_4: UserDTO | None | str
