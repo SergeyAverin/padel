@@ -21,6 +21,7 @@ import { useAuthUser } from "@hooks/useAuthUser";
 import { Heading, HeadingVariant, Loading } from "@atoms/index";
 import { useGetJoinRequsetQuery } from "@redux/api/joinRequestApi";
 import JoinRequst from "@molecules/matches/JoinRequst";
+import { useGetMaatchByIdQuery } from "@redux/api/matchApi";
 
 const AddUserInMatchPanel: React.FC = observer(() => {
   const isOpen = useSelector(isOpenSelector);
@@ -29,11 +30,23 @@ const AddUserInMatchPanel: React.FC = observer(() => {
 
   const { data, isLoading } = useGetUsersForMatchQuery(matchId as number);
   const [addUserInMatch] = useAddUserInMatchMutation();
+  const match = useGetMaatchByIdQuery(matchId as number);
 
   const dispatch = useDispatch();
 
   const selectUser = (user_id: string) => {
     dispatch(closePanel());
+    if (match.data) {
+      if (
+        (match.data.user_1?.telegram_user_id == user_id && index != 1) ||
+        (match.data.user_2?.telegram_user_id == user_id && index != 2) ||
+        (match.data.user_3?.telegram_user_id == user_id && index != 3) ||
+        (match.data.user_4?.telegram_user_id == user_id && index != 4)
+      ) {
+        alert("You can only add a user for one position in a match!");
+        return;
+      }
+    }
     addUserInMatch({
       match_id: matchId as number,
       user_id: user_id,

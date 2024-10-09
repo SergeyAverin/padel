@@ -8,6 +8,10 @@ import HelpBanner from "@organisms/core/HelpBanner";
 import { useDispatch, useSelector } from "react-redux";
 import {
   isOpenSelector,
+  user1Selector,
+  user2Selector,
+  user3Selector,
+  user4Selector,
   userIndexSelector,
 } from "@redux/selectors/createMatchSelectors";
 import {
@@ -28,6 +32,11 @@ export const AddUserInMatchCreatorPanel: React.FC = observer(() => {
 
   const dispatch = useDispatch();
 
+  const user1 = useSelector(user1Selector);
+  const user2 = useSelector(user2Selector);
+  const user3 = useSelector(user3Selector);
+  const user4 = useSelector(user4Selector);
+
   const selectUser = (user_id: string, value: null | IUser | string) => {
     dispatch(changeIsOpenPanel(false));
     // addUserInMatch({
@@ -35,7 +44,17 @@ export const AddUserInMatchCreatorPanel: React.FC = observer(() => {
     //   user_id: user_id,
     //   user_indx: index as number,
     // });
-    console.log(user_id);
+
+    if (
+      (user1 == user_id && index != 1) ||
+      (user2 == user_id && index != 2) ||
+      (user3 == user_id && index != 3) ||
+      (user4 == user_id && index != 4)
+    ) {
+      alert("You can only add a user for one position in a match!");
+      return;
+    }
+
     dispatch(
       setUserInMatch({
         index: index as number,
