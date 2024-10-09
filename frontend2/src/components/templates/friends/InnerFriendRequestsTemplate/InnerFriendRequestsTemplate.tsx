@@ -18,14 +18,12 @@ export const InnerFriendRequestsTemplate: React.FC = observer(() => {
           )}
           {data.map((friendRequest) => (
             <div key={friendRequest.id}>
-   
-                  <div className="mb-2">
-                    <FriendRequestInner
-                      friendRequestId={friendRequest.id}
-                      user={friendRequest.recipient_user}
-                    />
-                  </div>
-  
+              <div className="mb-2">
+                <FriendRequestInner
+                  friendRequestId={friendRequest.id}
+                  user={friendRequest.sender_user}
+                />
+              </div>
             </div>
           ))}
         </>
