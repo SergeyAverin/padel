@@ -14,12 +14,12 @@ export const FriendPage: React.FC = () => {
     },
     {
       to: "#innerFriendRequests",
-      text: "Inner",
+      text: "Inbox ",
       content: <InnerFriendRequestsTemplate />,
     },
     {
       to: "#outerFriendRequests",
-      text: "Outer",
+      text: "Outbox",
       content: <OuterFriendRequestsTemplate />,
     },
     {
