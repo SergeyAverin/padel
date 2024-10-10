@@ -2,6 +2,7 @@ import classNames from "classnames";
 
 import { ButtonVariant } from "./ButtonVariant";
 import React from "react";
+import style from "./Button.module.css";
 
 interface IButtonProps extends React.PropsWithChildren {
   /** Функция вызываемая при клике на кнопку */
@@ -15,6 +16,8 @@ interface IButtonProps extends React.PropsWithChildren {
 
   /** Тип кнопки */
   type?: "button" | "submit" | "reset" | undefined;
+
+  isLoading?: boolean | null;
 }
 
 /** Компонент кнопки вызывающий функцию при клике на неё */
@@ -24,12 +27,13 @@ export const Button: React.FC<IButtonProps> = ({
   icon,
   variant,
   type,
+  isLoading = false,
 }) => {
   return (
     <button
       type={type ? type : "button"}
       className={classNames(
-        "w-full",
+        "w-full relative",
         "h-full",
         "p-3 rounded-3xl select-none cursor-pointer text-center font-montserrat font-bold",
         "flex items-center justify-center",
@@ -54,6 +58,18 @@ export const Button: React.FC<IButtonProps> = ({
     >
       {/** Отображает иконку в левой части кнопки */}
       {icon && <div className="w-[18px] h-[18px] mr-[8px]">{icon}</div>}
+
+      {isLoading && (
+        <div
+          className={`absolute left-[25px] ${
+            variant != ButtonVariant.FULL_HIGHLIGHT
+              ? style.spinnerWhite
+              : style.spinnerBg
+          }`}
+        >
+          Loading&#8230;
+        </div>
+      )}
 
       <div>{children}</div>
     </button>

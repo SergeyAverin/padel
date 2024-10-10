@@ -10,9 +10,13 @@ interface ICancelFriendRequestProps {
 export const CancelFriendRequest: React.FC<ICancelFriendRequestProps> = ({
   requestId,
 }) => {
-  const [cancel] = useCancelFriendRequsetMutation();
+  const [cancel, { isLoading }] = useCancelFriendRequsetMutation();
   return (
-    <Button variant={ButtonVariant.OUTLINED} onClick={() => cancel(requestId)}>
+    <Button
+      variant={ButtonVariant.OUTLINED}
+      onClick={() => cancel(requestId)}
+      isLoading={isLoading}
+    >
       Cancel
     </Button>
   );

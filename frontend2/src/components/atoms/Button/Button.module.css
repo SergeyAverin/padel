@@ -1,0 +1,89 @@
+.spinnerWhite {
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin-right: 20px;
+}
+
+.spinnerWhite:not(:required) {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.spinnerWhite:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 5px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    animation: spinnerWhite 1500ms infinite linear;
+    border-radius: 0.5em;
+    box-shadow: 
+        #97E7E1 1.5em 0 0 0, 
+        #97E7E1 1.1em 1.1em 0 0, 
+        #97E7E1 0 1.5em 0 0, 
+        #97E7E1 -1.1em 1.1em 0 0, 
+        #97E7E1 -1.5em 0 0 0, 
+        #97E7E1 -1.1em -1.1em 0 0, 
+        #97E7E1 0 -1.5em 0 0, 
+        #97E7E1 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+@keyframes spinnerWhite {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinnerBg {
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin-right: 20px;
+}
+
+.spinnerBg:not(:required) {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.spinnerBg:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 5px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    animation: spinnerBg 1500ms infinite linear;
+    border-radius: 0.5em;
+    box-shadow: 
+        #151515 1.5em 0 0 0, 
+        #151515 1.1em 1.1em 0 0, 
+        #151515 0 1.5em 0 0, 
+        #151515 -1.1em 1.1em 0 0, 
+        #151515 -1.5em 0 0 0, 
+        #151515 -1.1em -1.1em 0 0, 
+        #151515 0 -1.5em 0 0, 
+        #151515 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+@keyframes spinnerBg {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

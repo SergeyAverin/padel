@@ -9,9 +9,13 @@ interface IRejectFriendRequestProps {
 export const RejectFriendRequest: React.FC<IRejectFriendRequestProps> = ({
   userId,
 }) => {
-  const [reject] = useRejectFriendRequsetMutation();
+  const [reject, { isLoading }] = useRejectFriendRequsetMutation();
   return (
-    <Button variant={ButtonVariant.OUTLINED} onClick={() => reject(userId)}>
+    <Button
+      variant={ButtonVariant.OUTLINED}
+      onClick={() => reject(userId)}
+      isLoading={isLoading}
+    >
       Reject
     </Button>
   );

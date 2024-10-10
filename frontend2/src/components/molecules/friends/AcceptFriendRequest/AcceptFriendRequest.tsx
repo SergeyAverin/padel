@@ -10,11 +10,12 @@ interface IAcceptFriendRequestProps {
 export const AcceptFriendRequest: React.FC<IAcceptFriendRequestProps> = ({
   requestId,
 }) => {
-  const [accept] = useAcceptFriendRequsetMutation();
+  const [accept, { isLoading }] = useAcceptFriendRequsetMutation();
   return (
     <Button
       variant={ButtonVariant.FULL_HIGHLIGHT}
       onClick={() => accept(requestId)}
+      isLoading={isLoading}
     >
       Accept
     </Button>
