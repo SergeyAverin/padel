@@ -96,7 +96,7 @@ export const CreateMatch: React.FC = () => {
     }
   }, [step]);
   return (
-    <div className="h-[450px] flex flex-col justify-between pt-5 mb-[380px]">
+    <div className="min-h-[450px] flex flex-col justify-between pt-5">
       {step == 1 && <SelectClub />}
       {step == 2 && <SelectDate />}
       {step == 3 && (
