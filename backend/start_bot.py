@@ -67,7 +67,22 @@ async def send_notification(user_id: str, comment: str, story_id: str):
     button = types.InlineKeyboardButton(
         text='Open match', web_app=web_app_info
     )
+    keyboard.add(button)
+    await bot.send_message(
+        user_id,
+        comment,
+        reply_markup=keyboard.as_markup()
+    )
 
+
+async def send_notification_with_out_button(user_id: str, comment: str):
+    url = api_setting.api_frontend_domain
+    base_webapp_url = f'{url}/friends'
+    keyboard = InlineKeyboardBuilder()
+    web_app_info = WebAppInfo(url=base_webapp_url)
+    button = types.InlineKeyboardButton(
+        text='Open', web_app=web_app_info
+    )
     keyboard.add(button)
     await bot.send_message(
         user_id,

@@ -8,6 +8,7 @@ from account.service import user_service
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
 
+from start_bot import send_notification_with_out_button
 
 friend_router = APIRouter(tags=['friend'])
 logger = getLogger()
@@ -38,6 +39,7 @@ async def create_friend_request(
     # ToDo: Защита от повторного создание
     # ToDo: Добавление в друзья если получатель тоже отправил запрос
     request = await friend_request_service.create_friend_request(sender_user_id, recipient_user_id)
+    await send_notification_with_out_button(recipient_user_id, 'New friend request!')
     return request
 
 
