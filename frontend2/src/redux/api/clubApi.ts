@@ -63,7 +63,7 @@ export const clubApi = baseApi.injectEndpoints({
           body: clubId,
         };
       },
-      invalidatesTags: [TAGS.BOOKMARK, TAGS.STATS],
+      invalidatesTags: [TAGS.BOOKMARK, TAGS.STATS, TAGS.CLUB],
     }),
     deleteBookmark: builder.mutation<void, number>({
       query(clubId) {
@@ -73,7 +73,7 @@ export const clubApi = baseApi.injectEndpoints({
           body: clubId,
         };
       },
-      invalidatesTags: [TAGS.BOOKMARK, TAGS.STATS],
+      invalidatesTags: [TAGS.BOOKMARK, TAGS.STATS, TAGS.CLUB],
     }),
     getClubById: builder.query<IClub, string>({
       query(clubId) {
