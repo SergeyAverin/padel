@@ -6,6 +6,8 @@ import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { generateRandomString } from "@utils/codeGenerate";
 import { useAuthUser } from "@hooks/useAuthUser";
+import { useSelector } from "react-redux";
+import { latSelector, lonSelector } from "@redux/selectors/geoSelectors";
 
 interface ISelectCityProps {
   setCity: React.Dispatch<React.SetStateAction<string>>;
@@ -64,38 +66,36 @@ export const SelectCity: React.FC<ISelectCityProps> = ({
       }
     }
   }, [authUser]);
+  const lat = useSelector(latSelector);
+  const lon = useSelector(lonSelector);
 
   useEffect(() => {
     // country == ""
     if (!city || city == "") {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("data.city");
-            console.log(data.city);
-            const countryFromLocation: string = data.city.split(" ")[0];
-            console.log(data.city.split(" ")[0]);
-            const optionFromLocation = cityOption.find((i) => {
-              if (
-                i.label
-                  .toLowerCase()
-                  .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
-              ) {
-                return true;
-              }
-            });
-            console.log("optionFromLocation");
-            console.log(optionFromLocation);
-            if (optionFromLocation) {
-              setSelectedCity(optionFromLocation);
+      fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data.city");
+          console.log(data.city);
+          const countryFromLocation: string = data.city.split(" ")[0];
+          console.log(data.city.split(" ")[0]);
+          const optionFromLocation = cityOption.find((i) => {
+            if (
+              i.label
+                .toLowerCase()
+                .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
+            ) {
+              return true;
             }
           });
-      });
+          console.log("optionFromLocation");
+          console.log(optionFromLocation);
+          if (optionFromLocation) {
+            setSelectedCity(optionFromLocation);
+          }
+        });
     }
   }, [cityOption]);
 

@@ -5,6 +5,8 @@ import { Option } from "@atoms/Select/selectOption";
 import { Label } from "@atoms/index";
 import Select from "@atoms/Select";
 import { useAuthUser } from "@hooks/useAuthUser";
+import { useSelector } from "react-redux";
+import { latSelector, lonSelector } from "@redux/selectors/geoSelectors";
 
 interface ISelectCountryProps {
   country: string | undefined;
@@ -47,33 +49,31 @@ export const SelectCountry: React.FC<ISelectCountryProps> = ({
       }
     }
   }, [authUser]);
+  const lat = useSelector(latSelector);
+  const lon = useSelector(lonSelector);
   useEffect(() => {
     // country == ""
     if (!country || country == "") {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            const countryFromLocation: string = data.countryName.split(" ")[0];
-            const optionFromLocation = countryOptions.find((i) => {
-              if (
-                i.value
-                  .toLowerCase()
-                  .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
-              ) {
-                return true;
-              }
-            });
-            console.log(optionFromLocation);
-            if (optionFromLocation) {
-              setSelectedCountry(optionFromLocation);
+      fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const countryFromLocation: string = data.countryName.split(" ")[0];
+          const optionFromLocation = countryOptions.find((i) => {
+            if (
+              i.value
+                .toLowerCase()
+                .startsWith(countryFromLocation.toLowerCase().substring(0, 3))
+            ) {
+              return true;
             }
           });
-      });
+          console.log(optionFromLocation);
+          if (optionFromLocation) {
+            setSelectedCountry(optionFromLocation);
+          }
+        });
     }
   }, []);
   return (

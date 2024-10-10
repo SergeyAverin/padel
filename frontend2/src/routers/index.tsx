@@ -26,6 +26,7 @@ import { useGetBlanksQuery } from "@redux/api/blankApi";
 import { Spinner } from "@atoms/index";
 import { useCreateFriendRequestMutation } from "@redux/api/friendRequestApi";
 import MatchPage from "@pages/matches/MatchPage";
+import { setGeo } from "@redux/features/geoSlice";
 
 const AfterAuth: React.FC = () => {
   const user = useAuthUser();
@@ -85,6 +86,7 @@ const MainRouter: React.FC = () => {
   const dispatcher = useDispatch();
   useEffect(() => {
     if (data) {
+      dispatcher(setGeo());
       dispatcher(setAuthUser(data));
       dispatcher(setCity(data.city));
     }
