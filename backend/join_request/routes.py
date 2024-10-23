@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Depends
 
 from join_request.schema import CreateJoinRequset
 from join_request.models import JoinRequst
@@ -8,6 +8,8 @@ from join_request.notification import create_join_request_notification, send_joi
 from match.services import match_service
 from account.service import user_service
 from start_bot import send_notification
+from core.dependencies.current_user import get_current_user
+from account.schemas import UserDTO
 
 join_requset_api = APIRouter()
 logger = getLogger()
@@ -91,3 +93,24 @@ async def accept_join_requset(
         match.text_user_1 = None
 
     await match.save()
+
+
+@join_requset_api.get('/join_request/by_match/{match_id}')
+async def get_user_join_request_by_match(match_id: int, user: UserDTO = Depends(get_current_user)):
+    join_requset = await JoinRequst.get_or_none(
+        join_request_user__telegram_user_id=user.telegram_user_id,
+        join_request_match__id=match_id
+    )
+    return join_requset
+
+
+@join_requset_api.delete('/join_request/by_match/{match_id}')
+async def cancel_join_request_by_user(match_id: int, user: UserDTO = Depends(get_current_user)):
+    join_requset = await JoinRequst.get_or_none(
+        join_request_user__telegram_user_id=user.telegram_user_id,
+        join_request_match__id=match_id
+    )
+    logger.debug('join_requset')
+    logger.debug(join_requset)
+    if join_requset:
+        await join_requset.delete()

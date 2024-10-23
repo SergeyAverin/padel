@@ -1,6 +1,6 @@
 import { IMatch } from "@schemas/match";
 import { shortenString } from "@utils/shoringString";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import MatchInfo from "../MatchInfo";
 import {

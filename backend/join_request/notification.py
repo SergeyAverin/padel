@@ -12,8 +12,10 @@ async def create_join_request_notification(match):
 
 
 async def send_join_request_feedback(match, feedback: str):
+    tg_id = await match.owner.first()
+    tg_id = tg_id.telegram_user_id
     await send_notification(
-        int(match.owner.telegram_user_id),
+        int(tg_id),
         feedback,
         match.id
     )
