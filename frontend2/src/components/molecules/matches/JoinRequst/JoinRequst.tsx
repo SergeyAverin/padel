@@ -5,19 +5,37 @@ import {
   useDeleteJoinRequestMutation,
 } from "@redux/api/joinRequestApi";
 import { IJoinRequest } from "@schemas/joinRequest";
+import classNames from "classnames";
 import React from "react";
 
 interface IJoinRequstProps {
   joinRequst: IJoinRequest;
+  isBlack?: boolean;
 }
 
-export const JoinRequst: React.FC<IJoinRequstProps> = ({ joinRequst }) => {
+export const JoinRequst: React.FC<IJoinRequstProps> = ({
+  joinRequst,
+  isBlack = false,
+}) => {
   const [deleteJoinRequest] = useDeleteJoinRequestMutation();
   const [acceptRequest] = useAcceptJoinRequsetMutation();
   return (
-    <div className="bg-bg p-3 rounded-2xl mt-5">
+    <div
+      className={classNames("p-3 rounded-2xl mt-5", {
+        "bg-bg ": !isBlack,
+        "bg-primary ": !isBlack,
+      })}
+    >
       <div>
-        <div className="flex bg-bg p-3 rounded-2xl mt-5 items-center">
+        <div
+          className={classNames(
+            "flex bg-bg p-3 rounded-2xl mt-5 items-center",
+            {
+              "bg-bg ": !isBlack,
+              "bg-primary ": !isBlack,
+            }
+          )}
+        >
           <div className="w-[72px] h-[72px]">
             <UserPhoto
               avatar={joinRequst.join_request_user.avatar}

@@ -1,14 +1,21 @@
 import { IMatch } from "@schemas/match";
 import { shortenString } from "@utils/shoringString";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import MatchInfo from "../MatchInfo";
+import {
+  useCancelMatchRequestByUserMutation,
+  useGetMatchRequestByUserQuery,
+} from "@redux/api/userMatchRequestApi";
+import { Button, ButtonVariant } from "@atoms/index";
 
 interface IMatchLinksProps {
   match: IMatch;
 }
 
 export const MatchLinks: React.FC<IMatchLinksProps> = ({ match }) => {
+  const { data, isLoading } = useGetMatchRequestByUserQuery(match.id);
+  const [cancelRequest] = useCancelMatchRequestByUserMutation();
   return (
     <>
       <MatchInfo match={match} />
@@ -39,6 +46,25 @@ export const MatchLinks: React.FC<IMatchLinksProps> = ({ match }) => {
               <div className="ml-2">{match.gender}</div>
             </div>
           </div>
+
+          {/* Send request info */}
+          {!isLoading && data && (
+            <div className="mt-2">
+              <div className="font-light text-[14px] flex items-center">
+                <div className="">
+                  You have sent a request to enter the match:
+                </div>
+              </div>
+              <div className="mt-2">
+                <Button
+                  variant={ButtonVariant.FULL_HIGHLIGHT}
+                  onClick={() => cancelRequest(match.id)}
+                >
+                  Cancel join request
+                </Button>
+              </div>
+            </div>
+          )}
         </>
       )}
     </>
