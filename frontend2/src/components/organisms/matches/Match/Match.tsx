@@ -30,7 +30,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
           `${isLoading && style.animatedBackground}`
         )}
       >
-        {match.id}
+        {/* {match.id} */}
         {!isLoading && data && (
           <>
             <div className="flex justify-between items-start">
