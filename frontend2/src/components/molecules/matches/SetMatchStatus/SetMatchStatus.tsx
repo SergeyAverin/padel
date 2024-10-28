@@ -54,7 +54,9 @@ export const SetMatchStatus: React.FC<ISetMatchStatusProps> = ({ match }) => {
           ]}
         />
       ) : (
-        <div>{match.status}</div>
+        <div>
+          {match.status == MatchStatusEnum.CANCEL ? "Cancelled" : match.status}
+        </div>
       )}
     </>
   );
