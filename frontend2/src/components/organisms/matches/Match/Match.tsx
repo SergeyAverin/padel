@@ -3,7 +3,7 @@ import { MatchLinks } from "@molecules/matches/MatchLinks/MatchLinks";
 import { MatchScore } from "@molecules/matches/MatchScore/MatchScore";
 import { SetMatchScores } from "@molecules/matches/MatchScore/SetMatchScores";
 import SetMatchStatus from "@molecules/matches/SetMatchStatus";
-import { IMatch } from "@schemas/match";
+import { IMatch, MatchStatusEnum } from "@schemas/match";
 import { IUser } from "@schemas/user";
 import React from "react";
 import { UserWrapper } from "./UserWrapper";
@@ -41,7 +41,11 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
                 {permission ? (
                   <SetMatchStatus match={data} />
                 ) : (
-                  <div>{data.status}</div>
+                  <div>
+                    {data.status == MatchStatusEnum.CANCEL
+                      ? "Cancelled"
+                      : data.status}
+                  </div>
                 )}
                 <div className="mt-5">
                   {isFetching && <div className={style.spinner}>Update</div>}
