@@ -24,6 +24,7 @@ export const AllGamesTemplate: React.FC = () => {
   );
   return (
     <>
+      {/* archive */}
       {matches.length == 0 && <EmptyBanner text="You have not games" />}
       {matches.length != 0 && (
         <div>

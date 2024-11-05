@@ -4,7 +4,7 @@ import { useInfinityScroll } from "@hooks/useInfinityScroll";
 import { EmptyBanner } from "@organisms/core/EmptyBanner/EmptyBanner";
 import Match from "@organisms/matches/Match";
 import { useGetJoinGameQuery } from "@redux/api/matchesApi";
-import { IMatch } from "@schemas/match";
+import { IMatch, MatchStatusEnum } from "@schemas/match";
 import { IUser } from "@schemas/user";
 import React, { useState } from "react";
 
@@ -16,14 +16,44 @@ export const GameToJoin: React.FC = () => {
     userId: user.telegram_user_id,
   });
 
-  const matches = useInfinityScroll<IMatch>(
+  let matches = useInfinityScroll<IMatch>(
     page,
     setPage,
     loadMatches.data,
     loadMatches.isFetching
   );
+
+  const authUser = useAuthUser() as IUser;
+
+  matches = matches.filter((match) => {
+    function parseRange(range: string): [number, number] {
+      // Разделяем строку по символу '-'
+      const parts = range.split("-");
+
+      // Преобразуем каждую часть в число
+      const num1 = parseFloat(parts[0]);
+      const num2 = parseFloat(parts[1]);
+
+      // Возвращаем кортеж с двумя числами
+      return [num1, num2];
+    }
+    const isCanceled = match.status == MatchStatusEnum.CANCEL;
+    console.log("match.gender");
+    console.log(match);
+    // const isInvalidGender =
+    //   match.gender != Gender.ANY && match.gender != authUser.gender;
+    const isInvalidLvl =
+      authUser.lvl < parseRange(match.match_lvl)[0] ||
+      authUser.lvl > parseRange(match.match_lvl)[1];
+    if (isCanceled || isInvalidLvl || false) {
+      return false;
+    } else {
+      return true;
+    }
+  });
   return (
     <>
+      {/* games */}
       {matches.length == 0 && <EmptyBanner text="You have not games" />}
       {matches.length != 0 && (
         <div>
