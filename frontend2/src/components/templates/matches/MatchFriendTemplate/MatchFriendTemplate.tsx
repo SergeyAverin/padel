@@ -45,7 +45,12 @@ export const MatchFriendTemplate: React.FC = () => {
     const isInvalidLvl =
       authUser.lvl < parseRange(match.match_lvl)[0] ||
       authUser.lvl > parseRange(match.match_lvl)[1];
-    if (isCanceled || isInvalidLvl || false) {
+    const isUserInMatch =
+      match.user_1?.telegram_user_id == user.telegram_user_id ||
+      match.user_2?.telegram_user_id == user.telegram_user_id ||
+      match.user_3?.telegram_user_id == user.telegram_user_id ||
+      match.user_4?.telegram_user_id == user.telegram_user_id;
+    if (isCanceled || isInvalidLvl || isUserInMatch) {
       return false;
     } else {
       return true;

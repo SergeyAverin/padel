@@ -51,13 +51,16 @@ export const MatchUserTemplate: React.FC<IMatchUserTemplateProps> = ({
     }
     if (isMatchPage) {
       const isCanceled = match.status == MatchStatusEnum.CANCEL;
-      console.log(match.gender);
-      console.log(match);
       // const isInvalidGender =
       //   match.gender != Gender.ANY && match.gender != authUser.gender;
       const isInvalidLvl =
         authUser.lvl < parseRange(match.match_lvl)[0] ||
         authUser.lvl > parseRange(match.match_lvl)[1];
+      // const isUserInMatch =
+      //   match.user_1?.telegram_user_id == authUser.telegram_user_id ||
+      //   match.user_2?.telegram_user_id == authUser.telegram_user_id ||
+      //   match.user_3?.telegram_user_id == authUser.telegram_user_id ||
+      //   match.user_4?.telegram_user_id == authUser.telegram_user_id;
       if (isCanceled || isInvalidLvl || false) {
         return false;
       } else {
