@@ -15,8 +15,8 @@ from match.routes import match_router
 from authentication.routers import auth_router
 from blank.routes import blank_router
 from join_request.routes import join_requset_api
-from match_score.routes import match_score_router
 from database import init_db
+from match_score.routes import match_score_router
 
 app = FastAPI()
 
@@ -45,7 +45,6 @@ api_router.include_router(auth_router)
 api_router.include_router(blank_router)
 api_router.include_router(join_requset_api)
 api_router.include_router(match_score_router)
-
 
 @api_router.get('/hello')
 def hello_word():

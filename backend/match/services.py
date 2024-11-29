@@ -46,11 +46,11 @@ class MatchService:
         court = await court_service.get_court_by_id(match_create_data.court_id)
 
         match = await self.match_repository.create_match(match_create_data, club, user, court)
-        # if match.is_private:
-        #     await self._send_user_for_match_notification(match.id, match_create_data.club_id)
-        # else:
-        #     await self._send_notify_for_club_subscribers(
-        #         club.id, club.name, match.id)
+        if match.is_private:
+            await self._send_user_for_match_notification(match.id, match_create_data.club_id)
+        else:
+             await self._send_notify_for_club_subscribers(
+                 club.id, club.name, match.id)
 
         if match_create_data.user_1:
             if type(match_create_data.user_1) == str:
@@ -121,7 +121,7 @@ class MatchService:
         users = list(set(users1) | set(users2))
         for user in users:
             if user.gender == match.gender or match.gender == Genders.ANY:
-                match_lvl = match.lvl.split('-')
+                match_lvl = match.match_lvl.split('-')
                 if user.lvl >= float(match_lvl[0]) and user.lvl <= float(match_lvl[1]):
                     logger.debug(f'send notification {user.telegram_user_id}')
                     await send_notification(
@@ -133,10 +133,16 @@ class MatchService:
     async def _send_notify_for_club_subscribers(self, club_id, club_name: str, match_id: int):
         users_in_club = await User.filter(clubs__id=club_id).prefetch_related("clubs")
         match = await self.get_match_by_id(match_id)
-        match_lvl = match.lvl.split('-')
+        match_lvl = match.match_lvl.split('-')
+        #logger.error('0-0-0-0-0-0-0-0')
+        #logger.error(club_id)
+        #logger.error(match_lvl)
+        #logger.error(users_in_club)
         for user in users_in_club:
+            #logger.error( user.lvl >= float(match_lvl[0]))
+            #logger.error( user.lvl <= float(match_lvl[1]))
             if user.lvl >= float(match_lvl[0]) and user.lvl <= float(match_lvl[1]):
-                send_notification(user.telegram_user_id,
+                await send_notification(user.telegram_user_id,
                                   f'New game in {club_name} club', match_id)
 
 

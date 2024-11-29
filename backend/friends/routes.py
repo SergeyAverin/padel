@@ -7,7 +7,6 @@ from friends.models import FriendRequest
 from account.service import user_service
 from account.schemas import UserDTO
 from core.dependencies.current_user import get_current_user
-
 from start_bot import send_notification_with_out_button
 
 friend_router = APIRouter(tags=['friend'])
@@ -35,6 +34,8 @@ async def create_friend_request(
     recipient_user_id: str = Body(),
     user: UserDTO = Depends(get_current_user)
 ):
+    logger.error('sasdfsf user')
+    logger.error(user)
     sender_user_id = user.telegram_user_id
     # ToDo: Защита от повторного создание
     # ToDo: Добавление в друзья если получатель тоже отправил запрос

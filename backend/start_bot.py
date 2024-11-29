@@ -33,7 +33,7 @@ async def command_start_handler(message: Message) -> None:
             first_name=str(message.from_user.first_name),
             last_name=str(message.from_user.last_name),
             telegram_user_id=str(message.from_user.id),
-            username=message.from_user.username,
+            username=str(message.from_user.username),
             age=18,
             email='',
             status=UserStatus.PLAYER.value,
@@ -67,6 +67,7 @@ async def send_notification(user_id: str, comment: str, story_id: str):
     button = types.InlineKeyboardButton(
         text='Open match', web_app=web_app_info
     )
+
     keyboard.add(button)
     await bot.send_message(
         user_id,
@@ -74,6 +75,9 @@ async def send_notification(user_id: str, comment: str, story_id: str):
         reply_markup=keyboard.as_markup()
     )
 
+
+async def main() -> None:
+    await dp.start_polling(bot)
 
 async def send_notification_with_out_button(user_id: str, comment: str):
     url = api_setting.api_frontend_domain
@@ -89,11 +93,6 @@ async def send_notification_with_out_button(user_id: str, comment: str):
         comment,
         reply_markup=keyboard.as_markup()
     )
-
-
-async def main() -> None:
-    await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)

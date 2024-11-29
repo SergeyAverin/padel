@@ -77,45 +77,55 @@ class MatchRepository:
         return await match
 
     async def get_all_match(self, user_id: str):
-        bookmarks = await club_bookmark_service.get_bookmarked_clubs(user_id)
-        friends = await friend_service.get_user_friends(user_id)
+        #bookmarks = await club_bookmark_service.get_bookmarked_clubs(user_id)
+        #friends = await friend_service.get_user_friends(user_id)
+        #matches = await Match.filter(
+        #    Q(  # My games
+        #        Q(
+        #            Q(owner__telegram_user_id=user_id) |
+        #            Q(user_1__telegram_user_id=user_id) |
+        #            Q(user_2__telegram_user_id=user_id) |
+        #            Q(user_3__telegram_user_id=user_id) |
+        #            Q(user_4__telegram_user_id=user_id)
+        #        ) &
+        #        Q(
+        #            Q(is_private=False) |
+        #            Q(user_for_match__telegram_user_id=user_id) |
+        #            Q(owner__telegram_user_id=user_id)
+        #        )
+        #    ) |
+        #    Q(  # By friends
+        #        Q(
+        #            Q(owner__id__in=[friend.id for friend in friends]) |
+        #            Q(user_1__id__in=[friend.id for friend in friends]) |
+        #            Q(user_2__id__in=[friend.id for friend in friends]) |
+        #            Q(user_3__id__in=[friend.id for friend in friends]) |
+        #            Q(user_4__id__in=[friend.id for friend in friends])
+        #        ) &
+        #        Q(
+        #            Q(is_private=False) |
+        #            Q(user_for_match__id=user_id)
+        #        )
+        #    ) |
+        #    Q(  # By Clubs
+        #        Q(club__id__in=[bookmark.id for bookmark in bookmarks]) &
+        #        Q(
+        #            Q(is_private=False) |
+        #            Q(user_for_match__id=user_id)
+        #        )
+        #    )
+        #).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
+        logger.error('---------')
+        logger.error(user_id)
         matches = await Match.filter(
-            Q(  # My games
-                Q(
-                    Q(owner__telegram_user_id=user_id) |
-                    Q(user_1__telegram_user_id=user_id) |
-                    Q(user_2__telegram_user_id=user_id) |
-                    Q(user_3__telegram_user_id=user_id) |
-                    Q(user_4__telegram_user_id=user_id)
-                ) &
-                Q(
-                    Q(is_private=False) |
-                    Q(user_for_match__telegram_user_id=user_id) |
-                    Q(owner__telegram_user_id=user_id)
-                )
-            ) |
-            Q(  # By friends
-                Q(
-                    Q(owner__id__in=[friend.id for friend in friends]) |
-                    Q(user_1__id__in=[friend.id for friend in friends]) |
-                    Q(user_2__id__in=[friend.id for friend in friends]) |
-                    Q(user_3__id__in=[friend.id for friend in friends]) |
-                    Q(user_4__id__in=[friend.id for friend in friends])
-                ) &
-                Q(
-                    Q(is_private=False) |
-                    Q(user_for_match__id=user_id)
-                )
-            ) |
-            Q(  # By Clubs
-                Q(club__id__in=[bookmark.id for bookmark in bookmarks]) &
-                Q(
-                    Q(is_private=False) |
-                    Q(user_for_match__id=user_id)
-                )
-            )
+            
+                Q(owner__telegram_user_id=user_id) |
+                Q(user_1__telegram_user_id=user_id) |
+                Q(user_2__telegram_user_id=user_id) |
+                Q(user_3__telegram_user_id=user_id) |
+                Q(user_4__telegram_user_id=user_id)
+            
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
-
         return [self.serealize_match(m) for m in matches]
 
     async def get_match_by_user(self, user_id: str):
@@ -153,7 +163,7 @@ class MatchRepository:
             Q(
                 Q(is_private=False) |
                 Q(user_for_match__id=user_id)
-            )
+            ) & Q(status=StatusEnum.EXPECTATION)
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
         # matches = Match.filter(
         #     Q(match_owner__in=friends) | Q(participants__in=friends)
@@ -168,7 +178,7 @@ class MatchRepository:
             Q(
                 Q(is_private=False) |
                 Q(user_for_match__id=user_id)
-            )
+            ) & Q(status=StatusEnum.EXPECTATION)
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
 
         # matches = Match.filter(
@@ -181,20 +191,6 @@ class MatchRepository:
         bookmarks = await club_bookmark_service.get_bookmarked_clubs(user_id)
         friends = await friend_service.get_user_friends(user_id)
         matches = await Match.filter(
-            Q(  # My games
-                Q(
-                    Q(owner__telegram_user_id=user_id) |
-                    Q(user_1__telegram_user_id=user_id) |
-                    Q(user_2__telegram_user_id=user_id) |
-                    Q(user_3__telegram_user_id=user_id) |
-                    Q(user_4__telegram_user_id=user_id)
-                ) &
-                Q(
-                    Q(is_private=False) |
-                    Q(user_for_match__telegram_user_id=user_id) |
-                    Q(owner__telegram_user_id=user_id)
-                )
-            ) |
             Q(  # By friends
                 Q(
                     Q(owner__id__in=[friend.id for friend in friends]) |
@@ -214,15 +210,13 @@ class MatchRepository:
                     Q(is_private=False) |
                     Q(user_for_match__id=user_id)
                 )
-            ).exclude(
-                # Q(owner__telegram_user_id=user_id) &
-                Q(
-                    Q(user_1__telegram_user_id=user_id) |
-                    Q(user_2__telegram_user_id=user_id) |
-                    Q(user_3__telegram_user_id=user_id) |
-                    Q(user_4__telegram_user_id=user_id)
-                )
-            )
+            ) 
+            & Q(status=StatusEnum.EXPECTATION)
+        #).exclude(
+        #            Q(user_1__telegram_user_id=user_id) |
+        #            Q(user_2__telegram_user_id=user_id) |
+        #            Q(user_3__telegram_user_id=user_id) |
+        #            Q(user_4__telegram_user_id=user_id)
         ).prefetch_related('user_1', 'user_2', 'user_3', 'user_4', 'club', 'owner', 'selected_court').order_by('start_at')
 
         return [self.serealize_match(m) for m in matches]

@@ -31,14 +31,17 @@ async def get_current_user(
     '''
     token = credentials.credentials
     user_id = json.loads(token)
-
+    logger.error('token')
+    logger.error(token)
+    logger.error(user_id)
     try:
         data = safe_parse_webapp_init_data(
             token=bot_settings.bot_token, init_data=user_id['tgWebAppData'])
         user_id = str(data.user.id)
     except ValueError:
         return {'status': status.HTTP_401_UNAUTHORIZED, 'message': 'fail auth'}
-
+    logger.error('uawe id')
+    logger.error(user_id)
     user = await user_service.get_user_by_telegram_user_id(user_id)
 
     if not user:
@@ -60,5 +63,6 @@ async def get_current_user(
             id=1
         )
         user = await user_service.create_user(user_data)
+        user = await user_service.get_user_by_telegram_user_id(user_id)
         return user
     return user

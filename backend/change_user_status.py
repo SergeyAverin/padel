@@ -42,6 +42,7 @@ async def set_super_user():
         }
         selected_status = input('Selected status: ')
         user.status = status[selected_status]
+        user.lvl = 6
         await user.save()
         print('user status updated')
     else:
