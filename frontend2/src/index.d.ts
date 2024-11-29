@@ -7,8 +7,16 @@ export declare namespace TelegramWebApps {
    * Available app events.
    */
   type EventType = "themeChanged" | "viewportChanged" | "mainButtonClicked";
+  interface ILocationData {
+    latitude: number;
+    longitude: number;
+  }
 
   interface WebApp {
+    LocationManager: {
+      init: () => void;
+      getLocation: () => null | ILocationData;
+    };
     /**
      * A string with raw data transferred to the Web App, convenient for validating data.
      * WARNING: Validate data from this field before using it on the bot's server.

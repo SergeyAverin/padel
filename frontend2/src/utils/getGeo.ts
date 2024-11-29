@@ -28,25 +28,28 @@ export const getGeo = () => {
         });
     });
   } else {
+    // @ts-ignore
     window.Telegram.WebApp.LocationManager.init(() => {
+      // @ts-ignore
       window.Telegram.WebApp.LocationManager.getLocation(
         (data: null | ILocationData) => {
-          alert(data.latitude);
-          const lat = data.latitude;
-          const lon = data.longitude;
-          alert(lat);
-          alert(lon);
-          fetch(
-            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(`Город: ${data.city}, Страна: ${data.countryName}`);
-              return {
-                country: data.countryName,
-                city: data.city,
-              };
-            });
+          if (data) {
+            const lat = data.latitude;
+            const lon = data.longitude;
+            alert(lat);
+            alert(lon);
+            fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(`Город: ${data.city}, Страна: ${data.countryName}`);
+                return {
+                  country: data.countryName,
+                  city: data.city,
+                };
+              });
+          }
         }
       );
     });
