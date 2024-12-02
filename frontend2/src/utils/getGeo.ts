@@ -36,8 +36,6 @@ export const getGeo = () => {
           if (data) {
             const lat = data.latitude;
             const lon = data.longitude;
-            alert(lat);
-            alert(lon);
             fetch(
               `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
             )
