@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     // @ts-ignore
     window.Telegram.WebApp.addToHomeScreen();
-    window.Telegram.WebApp.checkHomeScreenStatus((status: string) => alert(status);
+    window.Telegram.WebApp.checkHomeScreenStatus((status: string) => alert(status));
   }, []);
   return (
     <div className="text-fg p-2 pb-[150px]">
