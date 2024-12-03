@@ -1,9 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+// import { BrowserRouter } from "react-router-dom";
+// import { Provider } from "react-redux";
 //import { useEffect } from "react";
 
-import MainRouter from "./routers";
-import { store } from "@redux/store";
+// import MainRouter from "./routers";
+// import { store } from "@redux/store";
 
 const App = () => {
   //useEffect(() => {
@@ -13,11 +13,13 @@ const App = () => {
   //}, []);
   return (
     <div className="text-fg p-2 pb-[150px]">
-      <Provider store={store}>
+      test
+      
+{/*       <Provider store={store}>
         <BrowserRouter>
           <MainRouter />
         </BrowserRouter>
-      </Provider>
+      </Provider> */}
     </div>
   );
 };
