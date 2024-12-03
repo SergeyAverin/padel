@@ -1,10 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { useEffect } from "react";
 
 import MainRouter from "./routers";
 import { store } from "@redux/store";
 
 const App = () => {
+  useEffect(() => {
+    // @ts-ignore
+    window.Telegram.WebApp.addToHomeScreen();
+  }, []);
   return (
     <div className="text-fg p-2 pb-[150px]">
       <Provider store={store}>
