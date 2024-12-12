@@ -133,109 +133,93 @@ export const Tutorial: React.FC = () => {
       <div className="flex justify-center">
         <div className="w-full p-5">
           <Heading variant={HeadingVariant.H1}>
-            How would you rate your level of padel play?
+            On a scale from 1 to 10, how would you rate your padel level? Please refer to the equivalences below (Spanish scale 1-7 and A-D scale):
           </Heading>
           <div className="overflow-y-scroll h-[300px] ">
-            <LvlDescription lvl="1" title="Initiation">
-              I'm staring to play
-              <br />I am interested in the rule
+            <LvlDescription lvl="1" title="Beginner (Level 1 / D-)">
+              <ul>
+                <li>Learning the basic rules of the game.</li>
+                <li>Practicing fundamental strokes (forehand, backhand, volley).</li>
+                <li>Short points, few exchanges.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="2" title="Beginner">
-              I'm starting to learn the basic moves <br />
-              I know the rules
-              <br />
-              The game is slow, the games are short
+            <LvlDescription lvl="2" title="Beginner (Level 1.5 / D)">
+              <ul>
+                <li>Learning to control the ball with more stability.</li>
+                <li>Understanding ball trajectories.</li>
+                <li>First simple rallies.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="3" title="Beginner+">
-              I play 1 time a month <br />
-              I'm starting to pull off a few lobs
-              <br />
-              I'm starting to play with the windows
+            <LvlDescription lvl="3" title="Beginner+ (Level 2 / D+)">
+               <ul>
+                <li>Playing more regularly with short rallies.</li>
+                <li>Basic use of the walls (rebounds) and lobs.</li>
+                <li>Starting to develop precision in strokes.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="4" title="Intermediate">
-              I play several times a month
-              <br />
-              I am starting the competition as an amateur
-              <br />
-              === Atack === <br />
-              I climb on the fly after a lob
-              <br />
-              I make volleys of forehand and backhand
-              <br />
-              === Defense === <br />
-              I let the ball pass and wait for the rebound. <br />I pass my lobs
-              1fols out of 2
+            <LvlDescription lvl="4" title="Intermediate (Level 3 / C)">
+               <ul>
+                <li>Improving precision with basic strokes (forehand, backhand, volley).</li>
+                <li>Understanding basic tactics (placement, lobs).</li>
+                <li>First team play (communication with partner).</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="5" title="Intermediate+">
-              I play at least 1 time a week <br />
-              I'm starting to do approved tournaments <br />
-              === Atack === <br />
-              I finish points on the fly
-              <br />
-              Jo finishes points by smashing flat
-              <br />
-              === Defense === <br />
-              I vary between returns in the feet and the lob <br />
-              I'm starting to defend the double windows
+            <LvlDescription lvl="5" title="Intermediate+ (Level 3.75 / C+ B-)">
+              <ul>
+                <li>More accurate volleys and shots.</li>
+                <li>Improving court movement and positioning.</li>
+                <li>Better use of the walls to vary the ball’s trajectory.</li>
+                <li>Participating in amateur tournaments.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="6" title="ADVANCED">
-              I regularly do approved tournaments
-              <br />
-              === Atack === <br />
-              I finish points in a facelifted smash
-              <br />
-              I vary the zones and the speeds of my flights
-              <br />
-              === Defense === <br />
-              I manage to slow down or speed up the game <br />I counterattack
-              the opponent's smashes
+            <LvlDescription lvl="6" title="Intermediate++ (Level 4.25 / B)">
+              <ul>
+                <li>Ability to finish points more often.</li>
+                <li>Stronger defense, especially using the double walls.</li>
+                <li>Improving smash power and precision.</li>
+                <li>Better management of match rhythm.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="7" title="ADVANCED+">
-              I win several games during the approved tournaments
-              <br />
-              === Atack === <br />
-              I master the different forms of smashes (vibora and bandeja)
-              <br />
-              I finish points by getting the ball out
-              <br />
-              === Defense === <br />
-              I manage to defend by turning around the ball
-              <br />I make comebacks, in the feet or lobes
+            <LvlDescription lvl="7" title="Advanced (Level 4.75 / B+)">
+              <ul>
+                <li>Mastering defensive and attacking shots (lob, smash, volley).</li>
+                <li>Advanced use of the walls for angled shots.</li>
+                <li>Ability to attack quickly after a lob or return.</li>
+                <li>Anticipating the opponent’s moves and adjusting strategy.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="8" title="Expert">
-              I am reaching the final stages approved tournaments
-              <br />
-              === Atack === <br />
-              I master all the attack moves I vary the different smashes
-              according to of the opponent's game
-              <br />
-              I finish points by getting the ball out
-              <br />
-              === Defense === <br />I counterattack by varying the blows I
-              master the double windows
+            <LvlDescription lvl="8" title="Advanced+ (Level 5.25/ A-)">
+              <ul>
+                <li>Mastering complex shots like vibora and bandeja.</li>
+                <li>Better control over shot speed and placement.</li>
+                <li>Developing mental strength to perform under pressure.</li>
+                <li>Increasing tactical shot variation.</li>
+              </ul>
             </LvlDescription>
 
-            <LvlDescription lvl="9" title="Expert+">
-              I am classified between 400 and 200 French
-              <br />
-              === Atack === <br />
-              I master all the attack moves I will finish the point as soon as
-              the opportunity presents itself
-              <br />
-              I finish points by getting the ball out
-              <br />
-              === Defense === <br />I master all the defense moves
-              <br />I master all the counterattack moves
+            <LvlDescription lvl="9" title="Expert (Level 6 / A)">
+              <ul>
+                <li>Mastering all smashes (flat, vibora, bandeja) and shot variations.</li>
+                <li>Excellent court positioning, anticipating opponent’s shots.</li>
+                <li>Solid defense with quick, accurate counterattacks.</li>
+                <li>Finishing points consistently after rallies.</li>
+              </ul>
             </LvlDescription>
-            <LvlDescription lvl="10" title="Elit">
-              I am part of the French Top 200
+            <LvlDescription lvl="10" title="Elite (Level 7 / A+)">
+              <ul>
+                <li>World-class level of play with highly sophisticated strategies.</li>
+                <li>Mastery of all match situations, adapting to any opponent.</li>
+                <li>Dominating the rhythm and seamlessly transitioning between attack and
+defense.</li>
+                <li>Flawless execution of advanced shots.</li>
+              </ul>
             </LvlDescription>
           </div>
           <div className="w-[285px] m-auto mt-5">
