@@ -89,29 +89,29 @@ export const Tutorial: React.FC = () => {
   const sliders = [
     <Slide
       animation="/FindFriendsAnimation.json"
-      title="Find frinds"
-      text="Look for padel playmates who are equal in strength to you."
+      title="Connect with Players"
+      text="Look for padel partners who share your skill and passion."
       index={1}
       step={step}
     />,
     <Slide
       animation="/ScoreAnimation.json"
-      title="Lvl"
-      text="All users have lvl, which shows their current level of play in padel."
+      title="Padel Level"
+      text="Join Padel games according to your level."
       index={2}
       step={step}
     />,
     <Slide
       animation="/WinAnimation.json"
-      title="Clubs"
-      text="Search for padel clubs in your city. And you see the games of this club."
+      title="Padel Clubs Near You"
+      text="Find clubs in your city and stay updated on their games."
       index={3}
       step={step}
     />,
     <Slide
       animation="/MedalAnimation.json"
-      title="Profile"
-      text="All users can see your game history and information about what position and what hand you play in padel."
+      title="Player Profile"
+      text="Share your padel stats, including game history, playing position, and which hand you play with."
       index={4}
       step={step}
     />,
