@@ -8,11 +8,12 @@ interface IRepostButtonProps {
 }
 
 export const RepostButton: React.FC<IRepostButtonProps> = ({ mathId }) => {
+  const text = `I invite you to a padel match\nhttps://api.whatsapp.com/send?text=${API_WEBAPP_LINK}?startapp=open_match_${mathId}`
   return (
     <div className="flex justify-end  mt-5">
       <a
         target="_blank"
-        href={`https://api.whatsapp.com/send?text=${API_WEBAPP_LINK}?startapp=open_match_${mathId}`}
+        href={text}
       >
         <div className="flex items-center">
           <RepostIcon />
