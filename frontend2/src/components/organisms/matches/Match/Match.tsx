@@ -10,6 +10,7 @@ import { UserWrapper } from "./UserWrapper";
 import { useGetMaatchByIdQuery } from "@redux/api/matchApi";
 import style from "./style.module.css";
 import classNames from "classnames";
+import { RepostButton } from "@molecules/RepostButton/RepostButton";
 
 interface IMatchProps {
   match: IMatch;
@@ -104,6 +105,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
             </div>
           </>
         )}
+        {!isLoading && data && <RepostButton mathId={match.id} />}
       </div>
     </div>
   );

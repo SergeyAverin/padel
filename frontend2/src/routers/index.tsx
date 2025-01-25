@@ -38,8 +38,13 @@ const AfterAuth: React.FC = () => {
     const url = new URL(window.location.href);
     const startapp = url.searchParams.get("tgWebAppStartParam");
     if (startapp) {
-      console.log(`Create friend requset to user ${startapp}`);
-      createFriendRequest(startapp);
+      if (startapp.startsWith("open_match_")) {
+        const match = startapp.replace("open_match_", "");
+        window.location.href = `/match/${match}`;
+      } else {
+        console.log(`Create friend requset to user ${startapp}`);
+        createFriendRequest(startapp);
+      }
     }
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.expand();
