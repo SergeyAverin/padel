@@ -23,7 +23,7 @@ export const UserTemplate: React.FC<IUserTemplateProps> = ({
       <div className="mt-3 mb-3 w-[50%] h-[50px]">{button}</div>
 
       <div className="mt-3">
-        <Heading variant={HeadingVariant.H2}>test Padel info:</Heading>
+        <Heading variant={HeadingVariant.H2}>Padel info:</Heading>
         <PadelInfo user={user} />
       </div>
 
