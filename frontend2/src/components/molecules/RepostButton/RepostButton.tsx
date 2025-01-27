@@ -35,7 +35,7 @@ export const RepostButton: React.FC<IRepostButtonProps> = ({ math }) => {
   if (!math.user_4) {
     count += 1;
   }
-  const text = `${count}  players needed\n
+  const text = `${count}  players needed\n\n${" "}
 Date: ${new Date(math.start_at).getDate()}${" "}
 ${monthNames[new Date(math.start_at).getMonth()]}
 ${" "}${new Date(math.start_at).getFullYear()}
@@ -45,9 +45,9 @@ ${new Date(math.end_at).getHours()}:${String(
   ).padStart(2, "0")}-${new Date(math.start_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}\n
-
+\n${" "}
 Level: ${math.match_lvl}\n
-
+\n${" "}
 Type: ${math.gender ? math.gender : "All"}`;
   const url = `https://api.whatsapp.com/send?text=${text}\n ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
