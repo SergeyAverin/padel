@@ -46,6 +46,14 @@ ${new Date(math.end_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}
 %0A
+Tile:%0A
+First team:%0A
+${math.user_1 ? `${math.user_1.username}` : ""}%0A
+${math.user_2 ? `${math.user_2.username}` : ""}%0A
+Second team:%0A
+${math.user_3 ? `${math.user_3.username}` : ""}%0A
+${math.user_4 ? `${math.user_4.username}` : ""}
+%0A
 Level: ${math.match_lvl}
 %0A
 Type: ${math.gender ? math.gender : "All"}`;
