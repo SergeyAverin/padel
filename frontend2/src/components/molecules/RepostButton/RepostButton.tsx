@@ -50,15 +50,15 @@ Tile:%0A
 ${
   math.user_1 || math.user_2
     ? `First team:%0A
-${math.user_1 ? `${math.user_1.username} (${math.user_1.lvl})%0A` : ""}
-${math.user_2 ? `${math.user_2.username} (${math.user_2.lvl})%0A` : ""}`
+${math.user_1 ? `${math.user_1.username} (${math.user_1.lvl})lvl%0A` : ""}
+${math.user_2 ? `${math.user_2.username} (${math.user_2.lvl})lvl%0A` : ""}`
     : ""
 }
 ${
   math.user_3 || math.user_4
     ? `Second team:%0A
-${math.user_3 ? `${math.user_3.username} (${math.user_3.lvl})%0A` : ""}
-${math.user_4 ? `${math.user_4.username} (${math.user_4.lvl})` : ""}`
+${math.user_3 ? `${math.user_3.username} (${math.user_3.lvl})lvl%0A` : ""}
+${math.user_4 ? `${math.user_4.username} (${math.user_4.lvl})lvl` : ""}`
     : ""
 }
 %0A
