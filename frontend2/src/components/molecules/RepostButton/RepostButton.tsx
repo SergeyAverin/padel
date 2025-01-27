@@ -22,8 +22,7 @@ const monthNames: string[] = [
   "December",
 ];
 export const RepostButton: React.FC<IRepostButtonProps> = ({ math }) => {
-  const text = `
-2  players needed
+  const text = `2  players needed
 Date: ${new Date(math.start_at).getDate()}{" "}
 ${monthNames[new Date(math.start_at).getMonth()]}{" "}
 ${new Date(math.start_at).getFullYear()}
@@ -34,13 +33,11 @@ ${new Date(math.end_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}
 Level: ${math.match_lvl}
-Type: ${math.gender}
-https://api.whatsapp.com/send?text=I invite you to a padel match\n ${API_WEBAPP_LINK}?startapp=open_match_${
-    math.id
-  }`;
+Type: ${math.gender}`;
+  const url = `https://api.whatsapp.com/send?text=${text}\n ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
     <div className="flex justify-end  mt-5">
-      <a target="_blank" href={text}>
+      <a target="_blank" href={url}>
         <div className="flex items-center">
           <RepostIcon />
           Repost
