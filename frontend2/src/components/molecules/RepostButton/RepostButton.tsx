@@ -22,18 +22,31 @@ const monthNames: string[] = [
   "December",
 ];
 export const RepostButton: React.FC<IRepostButtonProps> = ({ math }) => {
-  const text = `2  players needed
-Date: ${new Date(math.start_at).getDate()}{" "}
-${monthNames[new Date(math.start_at).getMonth()]}{" "}
+  let count = 0;
+  if (!math.user_1) {
+    count += 1;
+  }
+  if (!math.user_2) {
+    count += 1;
+  }
+  if (!math.user_3) {
+    count += 1;
+  }
+  if (!math.user_4) {
+    count += 1;
+  }
+  const text = `${count}  players needed
+Date: ${new Date(math.start_at).getDate()}\n
+${monthNames[new Date(math.start_at).getMonth()]}
 ${new Date(math.start_at).getFullYear()}
-
+\n
 ${new Date(math.end_at).getHours()}:${String(
     new Date(math.end_at).getMinutes()
   ).padStart(2, "0")}-${new Date(math.start_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
-  ).padStart(2, "0")}
-Level: ${math.match_lvl}
-Type: ${math.gender}`;
+  ).padStart(2, "0")}\n
+Level: ${math.match_lvl}\n
+Type: ${math.gender ? math.gender : "All"}`;
   const url = `https://api.whatsapp.com/send?text=${text}\n ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
     <div className="flex justify-end  mt-5">
