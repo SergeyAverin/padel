@@ -105,7 +105,7 @@ export const Match: React.FC<IMatchProps> = ({ match }) => {
             </div>
           </>
         )}
-        {!isLoading && data && <RepostButton mathId={match.id} />}
+        {!isLoading && data && <RepostButton math={match} />}
       </div>
     </div>
   );
