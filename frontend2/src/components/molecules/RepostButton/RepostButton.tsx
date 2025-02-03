@@ -46,7 +46,6 @@ ${new Date(math.end_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}
 %0A
-Tile:%0A
 ${
   math.user_1 || math.user_2
     ? `First team:%0A
