@@ -36,34 +36,22 @@ export const RepostButton: React.FC<IRepostButtonProps> = ({ math }) => {
     count += 1;
   }
   const text = `${count}  players needed%0A
-Date: ${new Date(math.start_at).getDate()}
+Date of the game ${new Date(math.start_at).getDate()}
 ${monthNames[new Date(math.start_at).getMonth()]}
 ${" "}${new Date(math.start_at).getFullYear()}
-${" "}
+${"%0ATime of the game "}
 ${new Date(math.end_at).getHours()}:${String(
     new Date(math.end_at).getMinutes()
   ).padStart(2, "0")}-${new Date(math.start_at).getHours()}:${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}
 %0A
-${
-  math.user_1 || math.user_2
-    ? `First team:%0A
-${math.user_1 ? `${math.user_1.username} (${math.user_1.lvl})lvl%0A` : ""}
-${math.user_2 ? `${math.user_2.username} (${math.user_2.lvl})lvl%0A` : ""}`
-    : ""
-}
-${
-  math.user_3 || math.user_4
-    ? `Second team:%0A
-${math.user_3 ? `${math.user_3.username} (${math.user_3.lvl})lvl%0A` : ""}
-${math.user_4 ? `${math.user_4.username} (${math.user_4.lvl})lvl` : ""}`
-    : ""
-}
+${"Place of the game "}
+${math.club.address}
 %0A
-Level: ${math.match_lvl}
+Level of the game ${math.match_lvl}
 %0A
-Type: ${math.gender ? math.gender : "All"}`;
+Type: ${math.gender ? math.gender : "mixte"}`;
   const url = `https://api.whatsapp.com/send?text=${text}%0A%0A ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
     <div className="flex justify-end  mt-5">
