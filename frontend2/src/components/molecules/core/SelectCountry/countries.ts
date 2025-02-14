@@ -14536,7 +14536,6 @@ export const countries: CountryOptions  = {
     "Ypaejae",
   ],
   France: [
-    "Créteil",
     "Sablons-sur-Huisne",
     "Creteil",
     "Aast",
