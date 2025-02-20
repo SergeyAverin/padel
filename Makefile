@@ -16,3 +16,7 @@ prod:
 # # Открывает командную оболочку фронтенда
 prodfrontshell:
 	sudo docker exec -it bubble_frontend_prod /bin/bash
+
+init-db:
+	sudo docker exec -it padel_backend aerich init -t database.TORTOISE_ORM
+	sudo docker exec -it padel_backend aerich init-db
