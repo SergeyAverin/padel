@@ -35,23 +35,24 @@ export const RepostButton: React.FC<IRepostButtonProps> = ({ math }) => {
   if (!math.user_4) {
     count += 1;
   }
-  const text = `${count}  players needed%0A
-Date of the game ${new Date(math.start_at).getDate()}
+  const text = `📅 ${new Date(math.start_at).getDate()}
 ${monthNames[new Date(math.start_at).getMonth()]}
 ${" "}${new Date(math.start_at).getFullYear()}
-${"%0ATime of the game "}
-${new Date(math.end_at).getHours()}:${String(
+${"%0A🕛 "}
+${new Date(math.end_at).getHours()}.${String(
     new Date(math.end_at).getMinutes()
-  ).padStart(2, "0")}-${new Date(math.start_at).getHours()}:${String(
+  ).padStart(2, "0")}-${new Date(math.start_at).getHours()}.${String(
     new Date(math.start_at).getMinutes()
   ).padStart(2, "0")}
 %0A
-${"Place of the game "}
+${"📍 "}
 ${math.club.address}
 %0A
-Level of the game ${math.match_lvl}
+📈 ${math.match_lvl}
 %0A
-Type: ${math.gender ? math.gender : "mixte"}`;
+%0A
+${count}  players needed%0A
+Type: ${math.gender ? math.gender : "mixt"}`;
   const url = `https://api.whatsapp.com/send?text=${text}%0A%0A ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
     <div className="flex justify-end  mt-5">
