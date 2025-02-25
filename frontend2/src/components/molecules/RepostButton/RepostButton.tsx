@@ -1,5 +1,5 @@
 import React from "react";
-import RepostIcon from "@assets/RepostIcon.svg?react";
+import WhatsAppIcon from "@assets/WhatsAppIcon.svg?react";
 import { IMatch } from "@schemas/match";
 
 const API_WEBAPP_LINK = import.meta.env.VITE_API_WEBAPP_LINK;
@@ -57,7 +57,7 @@ Type: ${math.gender ? math.gender : "mixte"}`;
     <div className="flex justify-end  mt-5">
       <a target="_blank" href={url}>
         <div className="flex items-center">
-          <RepostIcon />
+          <WhatsAppIcon />
           Repost
         </div>
       </a>
