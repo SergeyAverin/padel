@@ -46,13 +46,13 @@ ${new Date(math.end_at).getHours()}.${String(
   ).padStart(2, "0")}
 %0A
 ${"📍 "}
-${math.club.address}
+${math.club.name}
 %0A
 📈 ${math.match_lvl}
 %0A
 %0A
 ${count}  players needed%0A
-Type: ${math.gender ? math.gender : "mixt"}`;
+${math.gender ? math.gender : "mixt"}`;
   const url = `https://api.whatsapp.com/send?text=${text}%0A%0A ${API_WEBAPP_LINK}?startapp=open_match_${math.id}`;
   return (
     <div className="flex justify-end  mt-5">
