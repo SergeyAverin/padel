@@ -134,7 +134,7 @@ export const Tutorial: React.FC = () => {
       <div className="flex justify-center">
         <div className="w-full p-5">
           <Heading variant={HeadingVariant.H1}>
-            <div className="text-[24px]">
+            <div className="text-[24px] font-[24px]">
               On a scale from 1 to 10, how would you rate your padel level?
               Please refer to the equivalences below (Spanish scale 1-7 and A-D
               scale):
