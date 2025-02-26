@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import TutorialEditProfielForm from "@organisms/user/TutorialEditProfielForm";
 import classNames from "classnames";
 import { useSetLvlMutation } from "@redux/api/userApi";
+import { useAuthUser } from "@hooks/useAuthUser";
 
 interface ISlideProps {
   title: string;
@@ -133,13 +134,19 @@ export const Tutorial: React.FC = () => {
       <div className="flex justify-center">
         <div className="w-full p-5">
           <Heading variant={HeadingVariant.H1}>
-            On a scale from 1 to 10, how would you rate your padel level? Please refer to the equivalences below (Spanish scale 1-7 and A-D scale):
+            <div className="text-[24px]">
+              On a scale from 1 to 10, how would you rate your padel level?
+              Please refer to the equivalences below (Spanish scale 1-7 and A-D
+              scale):
+            </div>
           </Heading>
           <div className="overflow-y-scroll h-[300px] ">
             <LvlDescription lvl="1" title="Beginner (Level 1 / D-)">
               <ul>
                 <li>Learning the basic rules of the game.</li>
-                <li>Practicing fundamental strokes (forehand, backhand, volley).</li>
+                <li>
+                  Practicing fundamental strokes (forehand, backhand, volley).
+                </li>
                 <li>Short points, few exchanges.</li>
               </ul>
             </LvlDescription>
@@ -153,7 +160,7 @@ export const Tutorial: React.FC = () => {
             </LvlDescription>
 
             <LvlDescription lvl="3" title="Beginner+ (Level 2 / D+)">
-               <ul>
+              <ul>
                 <li>Playing more regularly with short rallies.</li>
                 <li>Basic use of the walls (rebounds) and lobs.</li>
                 <li>Starting to develop precision in strokes.</li>
@@ -161,8 +168,11 @@ export const Tutorial: React.FC = () => {
             </LvlDescription>
 
             <LvlDescription lvl="4" title="Intermediate (Level 3 / C)">
-               <ul>
-                <li>Improving precision with basic strokes (forehand, backhand, volley).</li>
+              <ul>
+                <li>
+                  Improving precision with basic strokes (forehand, backhand,
+                  volley).
+                </li>
                 <li>Understanding basic tactics (placement, lobs).</li>
                 <li>First team play (communication with partner).</li>
               </ul>
@@ -188,10 +198,14 @@ export const Tutorial: React.FC = () => {
 
             <LvlDescription lvl="7" title="Advanced (Level 4.75 / B+)">
               <ul>
-                <li>Mastering defensive and attacking shots (lob, smash, volley).</li>
+                <li>
+                  Mastering defensive and attacking shots (lob, smash, volley).
+                </li>
                 <li>Advanced use of the walls for angled shots.</li>
                 <li>Ability to attack quickly after a lob or return.</li>
-                <li>Anticipating the opponent’s moves and adjusting strategy.</li>
+                <li>
+                  Anticipating the opponent’s moves and adjusting strategy.
+                </li>
               </ul>
             </LvlDescription>
 
@@ -206,18 +220,30 @@ export const Tutorial: React.FC = () => {
 
             <LvlDescription lvl="9" title="Expert (Level 6 / A)">
               <ul>
-                <li>Mastering all smashes (flat, vibora, bandeja) and shot variations.</li>
-                <li>Excellent court positioning, anticipating opponent’s shots.</li>
+                <li>
+                  Mastering all smashes (flat, vibora, bandeja) and shot
+                  variations.
+                </li>
+                <li>
+                  Excellent court positioning, anticipating opponent’s shots.
+                </li>
                 <li>Solid defense with quick, accurate counterattacks.</li>
                 <li>Finishing points consistently after rallies.</li>
               </ul>
             </LvlDescription>
             <LvlDescription lvl="10" title="Elite (Level 7 / A+)">
               <ul>
-                <li>World-class level of play with highly sophisticated strategies.</li>
-                <li>Mastery of all match situations, adapting to any opponent.</li>
-                <li>Dominating the rhythm and seamlessly transitioning between attack and
-defense.</li>
+                <li>
+                  World-class level of play with highly sophisticated
+                  strategies.
+                </li>
+                <li>
+                  Mastery of all match situations, adapting to any opponent.
+                </li>
+                <li>
+                  Dominating the rhythm and seamlessly transitioning between
+                  attack and defense.
+                </li>
                 <li>Flawless execution of advanced shots.</li>
               </ul>
             </LvlDescription>
@@ -252,16 +278,19 @@ defense.</li>
     </div>,
   ];
 
+  const authUser = useAuthUser();
   useEffect(() => {
-    if (localStorage.getItem("isOpen") == null) {
-      localStorage.setItem("isOpen", "true");
+    if (authUser) {
+      if (authUser.is_first_open == null) {
+        localStorage.setItem("isOpen", "true");
+      }
+      if (authUser.is_first_open == false) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
     }
-    if (localStorage.getItem("isOpen") == "false") {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  }, []);
+  }, [authUser]);
 
   return (
     <div className="flex flex-col justify-between h-min-[200px]">
